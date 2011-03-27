@@ -62,8 +62,6 @@ namespace PowerStudio.Language
             
         }
 
-        #region TextSpan Conversion
-
         public TextSpan TextSpan( int startLine, int startIndex, int endIndex )
         {
             return TextSpan( startLine, startIndex, startLine, endIndex );
@@ -78,7 +76,5 @@ namespace PowerStudio.Language
             ts.iEndIndex = endIndex;
             return ts;
         }
-
-        #endregion
     }
 }
