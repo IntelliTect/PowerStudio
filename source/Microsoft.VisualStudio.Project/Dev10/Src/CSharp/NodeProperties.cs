@@ -354,6 +354,17 @@ namespace Microsoft.VisualStudio.Project
 			}
 		}
 
+        [SRCategoryAttribute(SR.Misc)]
+        [LocDisplayName("URL")]
+        [SRDescriptionAttribute("")]
+        public string URL
+        {
+            get
+            {
+                return this.Node.Url;
+            }
+        }
+
 		#region non-browsable properties - used for automation only
 		[Browsable(false)]
 		public string Extension
