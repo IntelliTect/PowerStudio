@@ -10,7 +10,7 @@
     <License>LICENSE.txt</License>
     <GettingStartedGuide>https://github.com/ingenius/PowerStudio/wiki</GettingStartedGuide>
     <Icon>ProjectIcon.ico</Icon>
-    <PreviewImage>FileIcon.png</PreviewImage>
+    <PreviewImage>ProjectIcon.ico</PreviewImage>
     <InstalledByMsi>false</InstalledByMsi>
     <SupportedProducts>
       <VisualStudio Version="10.0">

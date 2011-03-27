@@ -14,7 +14,11 @@ namespace PowerStudio.VsExtension
     public static class PsConstants
     {
         public const string PsProjExtension = "psproj";
+#if DEBUG
+        public const string DefaultRegistryRoot = "Software\\Microsoft\\VisualStudio\\10.0Exp";
+#else
         public const string DefaultRegistryRoot = "Software\\Microsoft\\VisualStudio\\10.0";
+#endif
 
         public const string PsLanuageServiceGuidString = "4C8462B0-F114-44F4-852B-1E293174F7CB";
         public const string ProjectFactoryGuidString = "462EF34C-3AB7-4409-8CE7-544ED75AADAC";

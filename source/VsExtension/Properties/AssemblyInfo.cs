@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("PowerStudio.VsExtension")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Ingey")]
+[assembly: AssemblyCompany("Ingenius")]
 [assembly: AssemblyProduct("PowerStudio.VsExtension")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
