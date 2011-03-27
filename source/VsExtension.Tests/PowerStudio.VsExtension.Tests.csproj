@@ -57,6 +57,10 @@
     <Compile Include="PackageTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj">
+      <Project>{CACB60A9-1E76-4F92-8831-B134A658C695}</Project>
+      <Name>Microsoft.VisualStudio.Project</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VsExtension\PowerStudio.VsExtension.csproj">
       <Project>{AF6CE392-FFA9-49CB-AA08-E361A7352D55}</Project>
       <Name>PowerStudio.VsExtension</Name>

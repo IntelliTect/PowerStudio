@@ -124,291 +124,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\AssemblyReferenceNode.cs">
-      <Link>ProjectBase\AssemblyReferenceNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Attributes.cs">
-      <Link>ProjectBase\Attributes.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\AutomationScope.cs">
-      <Link>ProjectBase\Automation\AutomationScope.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OAFileItem.cs">
-      <Link>ProjectBase\Automation\OAFileItem.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OAFolderItem.cs">
-      <Link>ProjectBase\Automation\OAFolderItem.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OANavigableProjectItems.cs">
-      <Link>ProjectBase\Automation\OANavigableProjectItems.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OANestedProjectItem.cs">
-      <Link>ProjectBase\Automation\OANestedProjectItem.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OANullProperty.cs">
-      <Link>ProjectBase\Automation\OANullProperty.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OAProject.cs">
-      <Link>ProjectBase\Automation\OAProject.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OAProjectItem.cs">
-      <Link>ProjectBase\Automation\OAProjectItem.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OAProjectItems.cs">
-      <Link>ProjectBase\Automation\OAProjectItems.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OAProperties.cs">
-      <Link>ProjectBase\Automation\OAProperties.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OAProperty.cs">
-      <Link>ProjectBase\Automation\OAProperty.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OAReferenceFolderItem.cs">
-      <Link>ProjectBase\Automation\OAReferenceFolderItem.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OAReferenceItem.cs">
-      <Link>ProjectBase\Automation\OAReferenceItem.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\OASolutionFolder.cs">
-      <Link>ProjectBase\Automation\OASolutionFolder.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\VSProject\OAAssemblyReference.cs">
-      <Link>ProjectBase\Automation\VSProject\OAAssemblyReference.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\VSProject\OABuildManager.cs">
-      <Link>ProjectBase\Automation\VSProject\OABuildManager.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\VSProject\OAComReference.cs">
-      <Link>ProjectBase\Automation\VSProject\OAComReference.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\VSProject\OAProjectReference.cs">
-      <Link>ProjectBase\Automation\VSProject\OAProjectReference.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\VSProject\OAReferenceBase.cs">
-      <Link>ProjectBase\Automation\VSProject\OAReferenceBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\VSProject\OAReferences.cs">
-      <Link>ProjectBase\Automation\VSProject\OAReferences.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\VSProject\OAVSProject.cs">
-      <Link>ProjectBase\Automation\VSProject\OAVSProject.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Automation\VSProject\OAVSProjectItem.cs">
-      <Link>ProjectBase\Automation\VSProject\OAVSProjectItem.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\BuildDependency.cs">
-      <Link>ProjectBase\BuildDependency.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\BuildPropertyPage.cs">
-      <Link>ProjectBase\BuildPropertyPage.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\BuildStatus.cs">
-      <Link>ProjectBase\BuildStatus.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ComReferenceNode.cs">
-      <Link>ProjectBase\ComReferenceNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ConfigProvider.cs">
-      <Link>ProjectBase\ConfigProvider.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ConfigurationProperties.cs">
-      <Link>ProjectBase\ConfigurationProperties.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\DataObject.cs">
-      <Link>ProjectBase\DataObject.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\DependentFileNode.cs">
-      <Link>ProjectBase\DependentFileNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\DesignPropertyDescriptor.cs">
-      <Link>ProjectBase\DesignPropertyDescriptor.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\DesignTimeAssemblyResolution.cs">
-      <Link>ProjectBase\DesignTimeAssemblyResolution.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\DocumentManager.cs">
-      <Link>ProjectBase\DocumentManager.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\EnumDependencies.cs">
-      <Link>ProjectBase\EnumDependencies.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\FileChangeManager.cs">
-      <Link>ProjectBase\FileChangeManager.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\FileDocumentManager.cs">
-      <Link>ProjectBase\FileDocumentManager.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\FileNode.cs">
-      <Link>ProjectBase\FileNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\FolderNode.cs">
-      <Link>ProjectBase\FolderNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\GlobalSuppressions.cs">
-      <Link>ProjectBase\GlobalSuppressions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\HierarchyNode.cs">
-      <Link>ProjectBase\HierarchyNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\IDEBuildLogger.cs">
-      <Link>ProjectBase\IDEBuildLogger.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ImageHandler.cs">
-      <Link>ProjectBase\ImageHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Interfaces.cs">
-      <Link>ProjectBase\Interfaces.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\LocalizableProperties.cs">
-      <Link>ProjectBase\LocalizableProperties.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Misc\ConnectionPointContainer.cs">
-      <Link>ProjectBase\Misc\ConnectionPointContainer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Misc\ExternDll.cs">
-      <Link>ProjectBase\Misc\ExternDll.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Misc\NativeMethods.cs">
-      <Link>ProjectBase\Misc\NativeMethods.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Misc\UnsafeNativeMethods.cs">
-      <Link>ProjectBase\Misc\UnsafeNativeMethods.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\NestedProjectBuildDependency.cs">
-      <Link>ProjectBase\NestedProjectBuildDependency.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\NestedProjectNode.cs">
-      <Link>ProjectBase\NestedProjectNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\NodeProperties.cs">
-      <Link>ProjectBase\NodeProperties.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\OleServiceProvider.cs">
-      <Link>ProjectBase\OleServiceProvider.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Output.cs">
-      <Link>ProjectBase\Output.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\OutputGroup.cs">
-      <Link>ProjectBase\OutputGroup.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectConfig.cs">
-      <Link>ProjectBase\ProjectConfig.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectContainerNode.cs">
-      <Link>ProjectBase\ProjectContainerNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectDesignerDocumentManager.cs">
-      <Link>ProjectBase\ProjectDesignerDocumentManager.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectDocumentsListener.cs">
-      <Link>ProjectBase\ProjectDocumentsListener.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectElement.cs">
-      <Link>ProjectBase\ProjectElement.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectFactory.cs">
-      <Link>ProjectBase\ProjectFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectFileConstants.cs">
-      <Link>ProjectBase\ProjectFileConstants.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectNode.CopyPaste.cs">
-      <Link>ProjectBase\ProjectNode.CopyPaste.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectNode.cs">
-      <Link>ProjectBase\ProjectNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectNode.Events.cs">
-      <Link>ProjectBase\ProjectNode.Events.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectOptions.cs">
-      <Link>ProjectBase\ProjectOptions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectPackage.cs">
-      <Link>ProjectBase\ProjectPackage.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ProjectReferenceNode.cs">
-      <Link>ProjectBase\ProjectReferenceNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\PropertiesEditorLauncher.cs">
-      <Link>ProjectBase\PropertiesEditorLauncher.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ReferenceContainerNode.cs">
-      <Link>ProjectBase\ReferenceContainerNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\ReferenceNode.cs">
-      <Link>ProjectBase\ReferenceNode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\RegisteredProjectType.cs">
-      <Link>ProjectBase\RegisteredProjectType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\SelectionListener.cs">
-      <Link>ProjectBase\SelectionListener.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\SettingsPage.cs">
-      <Link>ProjectBase\SettingsPage.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\SingleFileGenerator.cs">
-      <Link>ProjectBase\SingleFileGenerator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\SingleFileGeneratorFactory.cs">
-      <Link>ProjectBase\SingleFileGeneratorFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\SolutionListener.cs">
-      <Link>ProjectBase\SolutionListener.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\SolutionListenerForBuildDependencyUpdate.cs">
-      <Link>ProjectBase\SolutionListenerForBuildDependencyUpdate.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\SolutionListenerForProjectEvents.cs">
-      <Link>ProjectBase\SolutionListenerForProjectEvents.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\SolutionListenerForProjectOpen.cs">
-      <Link>ProjectBase\SolutionListenerForProjectOpen.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\SolutionListenerForProjectReferenceUpdate.cs">
-      <Link>ProjectBase\SolutionListenerForProjectReferenceUpdate.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\StructuresEnums.cs">
-      <Link>ProjectBase\StructuresEnums.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\SuspendFileChanges.cs">
-      <Link>ProjectBase\SuspendFileChanges.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\TokenProcessor.cs">
-      <Link>ProjectBase\TokenProcessor.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Tracing.cs">
-      <Link>ProjectBase\Tracing.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\TrackDocumentsHelper.cs">
-      <Link>ProjectBase\TrackDocumentsHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\TypeConverters.cs">
-      <Link>ProjectBase\TypeConverters.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\UIThread.cs">
-      <Link>ProjectBase\UIThread.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\UpdateSolutionEventsListener.cs">
-      <Link>ProjectBase\UpdateSolutionEventsListener.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Url.cs">
-      <Link>ProjectBase\Url.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Utilities.cs">
-      <Link>ProjectBase\Utilities.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\VisualStudio.Project.cs">
-      <Link>ProjectBase\VisualStudio.Project.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\VsCommands.cs">
-      <Link>ProjectBase\VsCommands.cs</Link>
-    </Compile>
-    <Compile Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\VSShellUtilities.cs">
-      <Link>ProjectBase\VSShellUtilities.cs</Link>
-    </Compile>
     <Compile Include="Parsing\AuthoringScope.cs" />
     <Compile Include="Parsing\ColorableItem.cs" />
     <Compile Include="Parsing\Configuration.cs" />
@@ -440,11 +155,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\VisualStudio.Project.resx">
-      <Link>VisualStudio.Project.resx</Link>
-      <Visible>true</Visible>
-      <LogicalName>Microsoft.VisualStudio.Project.resources</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -464,22 +174,8 @@
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
-    <EmbeddedResource Include="..\..\lib\MPF for Projects\Dev10\Src\CSharp\Resources\imagelis.bmp">
-      <Link>Resources\imagelis.bmp</Link>
-      <Visible>true</Visible>
-      <LogicalName>Microsoft.VisualStudio.Project.Resources.imagelis.bmp</LogicalName>
-    </EmbeddedResource>
-    <None Include="Resources\FileIcon.png" />
     <None Include="Resources\ProjectIcon.ico" />
-    <Content Include="FileIcon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
     <Content Include="LICENSE.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="ProjectIcon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
@@ -509,6 +205,10 @@
     <ProjectReference Include="..\Language\PowerStudio.Language.csproj">
       <Project>{886B4467-D6A5-4601-845F-1E16572C0F80}</Project>
       <Name>PowerStudio.Language</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj">
+      <Project>{CACB60A9-1E76-4F92-8831-B134A658C695}</Project>
+      <Name>Microsoft.VisualStudio.Project</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
