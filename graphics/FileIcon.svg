@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="512"
+   height="512"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.1 "
+   sodipodi:docname="New document 1">
+  <title
+     id="title3881">PowerShell File Icon</title>
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 256 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="512 : 256 : 1"
+       inkscape:persp3d-origin="256 : 170.66667 : 1"
+       id="perspective3865" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3778">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop3780" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop3782" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3762"
+       osb:paint="gradient">
+      <stop
+         style="stop-color:#0000ff;stop-opacity:1;"
+         offset="0"
+         id="stop3764" />
+      <stop
+         style="stop-color:#0000ff;stop-opacity:0;"
+         offset="1"
+         id="stop3766" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3778"
+       id="linearGradient3784"
+       x1="77.371429"
+       y1="303.79077"
+       x2="528.3429"
+       y2="303.79077"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.73230622,0,0,1,-231.06992,86.632647)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3778"
+       id="linearGradient3821"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.51781869,0.51781869,0.70710678,0.70710678,224.64964,-102.13258)"
+       x1="77.371429"
+       y1="303.79077"
+       x2="528.3429"
+       y2="303.79077" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3778"
+       id="linearGradient3824"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.51781869,0.51781869,0.70710678,0.70710678,25.181902,422.45348)"
+       x1="77.371429"
+       y1="303.79077"
+       x2="528.3429"
+       y2="303.79077" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3778-9"
+       id="linearGradient3824-0"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.51781869,0.51781869,0.70710678,0.70710678,27.506783,-90.704009)"
+       x1="77.371429"
+       y1="303.79077"
+       x2="528.3429"
+       y2="303.79077" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3778-9">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop3780-7" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop3782-3" />
+    </linearGradient>
+    <linearGradient
+       y2="303.79077"
+       x2="528.3429"
+       y1="303.79077"
+       x1="77.371429"
+       gradientTransform="matrix(-0.73230621,0,0,1,518.35734,40.856877)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3841"
+       xlink:href="#linearGradient3778-9"
+       inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3778-9"
+       id="linearGradient3863"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.85634951,0,0,1,630.18487,554.01437)"
+       x1="77.371429"
+       y1="303.79077"
+       x2="528.3429"
+       y2="303.79077" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="-578.43941"
+     inkscape:cy="399.91031"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>PowerShell File Icon</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-540.36215)">
+    <path
+       style="fill:none;stroke:url(#linearGradient3824);stroke-width:19.16877556;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 83.001012,572.02356 -15.03125,15.0625 205.531248,205.53125 -206.874998,206.875 16.6875,16.68749 L 305.25101,794.24231 83.001012,572.02356 z"
+       id="rect2992"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:url(#linearGradient3863);stroke-width:20.72877121;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 187.30012,991.34499 0,23.59371 249.59109,0 0,-23.59371 -249.59109,0 z"
+       id="rect2992-0"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
