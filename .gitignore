@@ -8,3 +8,4 @@ dist
 *.user
 *.cache
 MSBuildOutput.txt
+TestResults
