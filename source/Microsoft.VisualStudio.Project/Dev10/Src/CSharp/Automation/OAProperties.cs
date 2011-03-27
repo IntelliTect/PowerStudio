@@ -151,6 +151,12 @@ namespace Microsoft.VisualStudio.Project.Automation
 			if(index is string)
 			{
 				string indexAsString = (string)index;
+				if (indexAsString.StartsWith("SDEProjectExtender") || indexAsString.StartsWith("WebSiteType"))
+				{
+					// "SDEProjectExtender" for Smart Device projects of Visual Studio 2005. This is not supported in VS2010+
+					// we aren't creating web sites either.
+				return null; // this will eventually bubble into a property not found result.
+				}
 				if(this.properties.ContainsKey(indexAsString))
 				{
 					return (EnvDTE.Property)this.properties[indexAsString];
