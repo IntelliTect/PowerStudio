@@ -9,3 +9,5 @@ dist
 *.cache
 MSBuildOutput.txt
 TestResults
+parser.lst
+parser.report.html

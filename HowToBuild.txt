@@ -1,0 +1,3 @@
+If you are not using Visual Studio 2010 to build the VSIX package, you can use the psake build scripts.
+
+Double click on the build.bat file to build a debug VSIX package. Releases are not yet supported.

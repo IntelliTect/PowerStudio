@@ -68,7 +68,65 @@
 %%
 
 Program
-	: /* empty */
+	: statementListRule
+	| /* empty */
+	;
+
+statementListRule
+	: statementRule STATEMENTSEPARATOR statementListRule
+	| /* empty */
+	;
+
+statementRule
+	: statementRule_
+	;
+
+statementRule_
+	: IF ParenExprAlways statementBlockRule ifSuffixRule
+	| statementBlockRule
+	;
+
+ifSuffixRule
+	: ELSEIF statementBlockRule ifSuffixRule
+	| ELSE statementBlockRule
+	| /* empty */
+	;
+
+statementBlockRule
+	: OpenBlock CloseBlock      { Match(@1, @2); }
+	| OpenBlock statementListRule CloseBlock
+								{ Match(@1, @3); }
+	| OpenBlock statementListRule error 
+								{ HandleError("missing '}'", @3); }
+	| OpenBlock error CloseBlock
+								{ Match(@1, @3); }
+	;
+
+OpenBlock
+	: '{'                       { /*  */ }
+	;
+
+CloseBlock
+	: '}'                       { /*  */ }
+	;
+
+ParenExprAlways
+	: ParenExpr
+	| error ')'                 { HandleError("error in expr", @1); }
+	| error                     { HandleError("error in expr", @1); }
+	;
+
+ParenExpr
+	: '(' Expr ')'              { Match(@1, @3); }
+	| '(' Expr error            { HandleError("unmatched parentheses", @3); }
+	;
+
+Expr
+	: BoolOp 
+	;
+
+BoolOp
+	: AMPAMP | BARBAR 
 	;
 
 %%
