@@ -30,6 +30,16 @@ namespace PowerStudio.VsExtension.Parsing
 			_CommentInfo.LineStart = "#";
 			_CommentInfo.UseLineComments = true;
 
+            // TODO: Pull colors from the VS settings: http://msdn.microsoft.com/en-us/library/bb166382.aspx
+            // IronLanguages\Tools\IronStudio\IronPythonTools\IronPythonTools\Editor\LanguagePreferences.cs
+            // IronLanguages\Tools\IronStudio\IronPythonTools\IronPythonTools\Navigation\PythonLanguageInfo.cs
+            //           This says that there is a new coloring api that we might want to use instead of MPF
+            // IronLanguages\Tools\IronStudio\IronPythonTools\IronPythonToolsPackage.cs
+            //           look at ProvideLanguageService values.
+            // IronLanguages\Tools\IronStudio\IronRubyTools\IronRubyTools\Navigation\RubyLanguageInfo.cs
+            // C:\Development\IronLanguages\Tools\IronStudio\IronStudio\IronStudio\Repl\VsReplWindow.cs
+            //           look at VsReplWindowImpl
+
 			// default colors - currently, these need to be declared
 			CreateColor("Keyword", COLORINDEX.CI_BLUE, COLORINDEX.CI_USERTEXT_BK);
 			CreateColor("Comment", COLORINDEX.CI_DARKGREEN, COLORINDEX.CI_USERTEXT_BK);
