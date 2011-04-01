@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Management.Automation;
 using System.Text;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
-using PowerStudio.Language;
 
 namespace PowerStudio.VsExtension.Tagging
 {
     public class PowerShellTokenTagger : ITagger<PowerShellTokenTag>
     {
-        public PowerShellTokenTagger()
-        {
-            lexer = new Scanner();
-        }
-
-        protected Scanner lexer { get; set; }
-
         #region Implementation of ITagger<out PowerShellTokenTag>
 
         /// <summary>
@@ -40,16 +34,14 @@ namespace PowerStudio.VsExtension.Tagging
             foreach (SnapshotSpan currentSpan in spans)
             {
                 string text = currentSpan.GetText();
-                int start, end;
-                lexer.SetSource( text, 0 );
-                int state = 0;
-                while (true)
+                Collection<PSParseError> errors;
+                Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
+                foreach ( var token in tokens )
                 {
-                    int result = lexer.GetNext( ref state, out start, out end );
-                    Tokens resultToken = (Tokens) result;
+                    var tokenSpan = new SnapshotSpan(currentSpan.Snapshot, new Span(token.StartColumn, token.Length));
+                    yield return new TagSpan<PowerShellTokenTag>( tokenSpan, new PowerShellTokenTag() {TokenType = token.Type} );
                 }
             }
-            yield return new TagSpan<PowerShellTokenTag>( new SnapshotSpan(), new PowerShellTokenTag() );
         }
 
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
