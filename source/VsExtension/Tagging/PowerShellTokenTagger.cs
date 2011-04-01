@@ -33,12 +33,14 @@ namespace PowerStudio.VsExtension.Tagging
         {
             foreach (SnapshotSpan currentSpan in spans)
             {
-                string text = currentSpan.GetText();
+                ITextSnapshotLine containingLine = currentSpan.Start.GetContainingLine();
+                int curLoc = containingLine.Start.Position;
+                string text = containingLine.GetText();
                 Collection<PSParseError> errors;
                 Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
                 foreach ( var token in tokens )
                 {
-                    var tokenSpan = new SnapshotSpan(currentSpan.Snapshot, new Span(token.StartColumn, token.Length));
+                    var tokenSpan = new SnapshotSpan(currentSpan.Snapshot, new Span(token.Start + curLoc, token.Length));
                     yield return new TagSpan<PowerShellTokenTag>( tokenSpan, new PowerShellTokenTag() {TokenType = token.Type} );
                 }
             }

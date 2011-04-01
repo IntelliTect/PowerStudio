@@ -109,13 +109,17 @@ namespace PowerStudio.VsExtension.Tagging
         /// </remarks>
         public IEnumerable<ITagSpan<ClassificationTag>> GetTags( NormalizedSnapshotSpanCollection spans )
         {
-            foreach ( var tagSpan in Aggregator.GetTags( spans ) )
+            foreach ( var span in spans )
             {
-                NormalizedSnapshotSpanCollection tagSpans = tagSpan.Span.GetSpans( spans[0].Snapshot );
-                yield return
-                        new TagSpan<ClassificationTag>( tagSpans[0],
-                                                        new ClassificationTag(
-                                                                TokenClassificationMapping[tagSpan.Tag.TokenType] ) );
+                foreach (var tagSpan in Aggregator.GetTags(span))
+                {
+                    var tokenSpan = tagSpan.Span.GetSpans( span.Snapshot );
+
+                    yield return
+                            new TagSpan<ClassificationTag>(tokenSpan[0],
+                                                            new ClassificationTag(
+                                                                    TokenClassificationMapping[tagSpan.Tag.TokenType]));
+                }
             }
         }
 
