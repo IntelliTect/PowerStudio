@@ -33,9 +33,8 @@ namespace PowerStudio.VsExtension.Tagging
         {
             foreach (SnapshotSpan currentSpan in spans)
             {
-                ITextSnapshotLine containingLine = currentSpan.Start.GetContainingLine();
-                int curLoc = containingLine.Start.Position;
-                string text = containingLine.GetText();
+                int curLoc = currentSpan.Start.Position;
+                string text = currentSpan.GetText();
                 Collection<PSParseError> errors;
                 Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
                 foreach ( var token in tokens )
