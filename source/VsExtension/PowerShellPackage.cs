@@ -61,7 +61,7 @@ namespace PowerStudio.VsExtension
             NewProjectRequireNewFolderVsTemplate = false )]
     [ProvideProjectItem( typeof (PowerShellProjectFactory), "PowerShell", @"Templates\ProjectItems\PsProject", 500 )]
     [Guid( PsConstants.PsProjectPackageGuidString )]
-    public sealed class PowerShellPackage : ProjectPackage //, IOleComponent
+    public sealed class PowerShellPackage : ProjectPackage, IOleComponent
     {
         private uint _ComponentId;
 
@@ -84,107 +84,64 @@ namespace PowerStudio.VsExtension
             get { return "PowerShellProj"; }
         }
 
-        //#region IOleComponent Members
+        #region IOleComponent Members
 
-        //public int FContinueMessageLoop( uint uReason, IntPtr pvLoopData, MSG[] pMsgPeeked )
-        //{
-        //    return 1;
-        //}
+        public int FContinueMessageLoop(uint uReason, IntPtr pvLoopData, MSG[] pMsgPeeked)
+        {
+            return 1;
+        }
 
-        //public int FDoIdle( uint grfidlef )
-        //{
-        //    var ls = GetService( typeof (PowerShellLanguageService) ) as PowerShellLanguageService;
+        public int FDoIdle(uint grfidlef)
+        {
+            return 0;
+        }
 
-        //    //if ( ls != null )
-        //    //{
-        //    //    ls.OnIdle( ( grfidlef & (uint) _OLEIDLEF.oleidlefPeriodic ) != 0 );
-        //    //}
+        public int FPreTranslateMessage(MSG[] pMsg)
+        {
+            return 0;
+        }
 
-        //    return 0;
-        //}
+        public int FQueryTerminate(int fPromptUser)
+        {
+            return 1;
+        }
 
-        //public int FPreTranslateMessage( MSG[] pMsg )
-        //{
-        //    return 0;
-        //}
+        public int FReserved1(uint dwReserved, uint message, IntPtr wParam, IntPtr lParam)
+        {
+            return 1;
+        }
 
-        //public int FQueryTerminate( int fPromptUser )
-        //{
-        //    return 1;
-        //}
+        public IntPtr HwndGetWindow(uint dwWhich, uint dwReserved)
+        {
+            return IntPtr.Zero;
+        }
 
-        //public int FReserved1( uint dwReserved, uint message, IntPtr wParam, IntPtr lParam )
-        //{
-        //    return 1;
-        //}
+        public void OnActivationChange(IOleComponent pic,
+                                        int fSameComponent,
+                                        OLECRINFO[] pcrinfo,
+                                        int fHostIsActivating,
+                                        OLECHOSTINFO[] pchostinfo,
+                                        uint dwReserved)
+        {
+        }
 
-        //public IntPtr HwndGetWindow( uint dwWhich, uint dwReserved )
-        //{
-        //    return IntPtr.Zero;
-        //}
+        public void OnAppActivate(int fActive, uint dwOtherThreadID)
+        {
+        }
 
-        //public void OnActivationChange( IOleComponent pic,
-        //                                int fSameComponent,
-        //                                OLECRINFO[] pcrinfo,
-        //                                int fHostIsActivating,
-        //                                OLECHOSTINFO[] pchostinfo,
-        //                                uint dwReserved )
-        //{
-        //}
+        public void OnEnterState(uint uStateID, int fEnter)
+        {
+        }
 
-        //public void OnAppActivate( int fActive, uint dwOtherThreadID )
-        //{
-        //}
+        public void OnLoseActivation()
+        {
+        }
 
-        //public void OnEnterState( uint uStateID, int fEnter )
-        //{
-        //}
+        public void Terminate()
+        {
+        }
 
-        //public void OnLoseActivation()
-        //{
-        //}
-
-        //public void Terminate()
-        //{
-        //}
-
-        //#endregion
-
-        //[ComVisible( true )]
-        //public object CreateService( IServiceContainer container, Type serviceType )
-        //{
-        //    if ( typeof (PowerShellLanguageService) != serviceType )
-        //    {
-        //        return null;
-        //    }
-        //    return CreateLanguageService();
-        //}
-
-        //private PowerShellLanguageService CreateLanguageService()
-        //{
-        //    var powerShellLanguage = new PowerShellLanguageService();
-        //    // powerShellLanguage.SetSite( this );
-
-        //    // register for idle time callbacks
-        //    var mgr =
-        //            GetService( typeof (SOleComponentManager) ) as
-        //            IOleComponentManager;
-        //    if ( _ComponentId == 0 &&
-        //         mgr != null )
-        //    {
-        //        var crinfo = new OLECRINFO[1];
-        //        crinfo[0].cbSize = (uint) Marshal.SizeOf( typeof (OLECRINFO) );
-        //        crinfo[0].grfcrf = (uint) _OLECRF.olecrfNeedIdleTime |
-        //                           (uint) _OLECRF.olecrfNeedPeriodicIdleTime;
-        //        crinfo[0].grfcadvf = (uint) _OLECADVF.olecadvfModal |
-        //                             (uint) _OLECADVF.olecadvfRedrawOff |
-        //                             (uint) _OLECADVF.olecadvfWarningsOff;
-        //        crinfo[0].uIdleTimeInterval = 1000;
-        //        int hr = mgr.FRegisterComponent( this, crinfo, out _ComponentId );
-        //    }
-
-        //    return powerShellLanguage;
-        //}
+        #endregion
 
         /// <summary>
         /// Initialization of the package; this method is called right after the package is sited, so this is the place
