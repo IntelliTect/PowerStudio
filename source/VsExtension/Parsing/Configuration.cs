@@ -10,8 +10,10 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 ***************************************************************************/
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Package;
 using Microsoft.VisualStudio.TextManager.Interop;
+using Microsoft.VisualStudio.Utilities;
 using PowerStudio.Language;
 
 namespace PowerStudio.VsExtension.Parsing
@@ -19,6 +21,18 @@ namespace PowerStudio.VsExtension.Parsing
 	public static partial class Configuration
 	{
 		public const string Name = "PowerShell";
+
+	    public const string BaseDefinitionName = "code";
+
+        [Export]
+        [Name(Name)]
+        [BaseDefinition(BaseDefinitionName)]
+        internal static ContentTypeDefinition PowerShellContentTypeDefinition = null;
+
+        [Export]
+        [FileExtension(".ps1")]
+        [ContentType(Name)]
+        internal static FileExtensionToContentTypeDefinition PowerShellFileExtensionDefinition;
 
 		static CommentInfo _CommentInfo;
 		public static CommentInfo CommentInfo { get { return _CommentInfo; } }

@@ -19,155 +19,60 @@ using ErrorHandler = PowerStudio.Language.ErrorHandler;
 namespace PowerStudio.VsExtension.Parsing
 {
     [Guid( "4841FFB1-678C-4F50-9ADB-600638A4F731" )]
-    public class PowerShellLanguageService : LanguageService
+    public class PowerShellLanguageService : IVsLanguageInfo
     {
-        public override string Name
+        #region Implementation of IVsLanguageInfo
+
+        /// <summary>
+        /// Returns the name of the programming language.
+        /// </summary>
+        /// <returns>
+        /// If the method succeeds, it returns <see cref="F:Microsoft.VisualStudio.VSConstants.S_OK"/>. If it fails, it returns an error code.
+        /// </returns>
+        /// <param name="bstrName">[out] Returns a BSTR that contains the language name.</param>
+        public int GetLanguageName( out string bstrName )
         {
-            get { return Configuration.Name; }
-        }
-
-        public override string GetFormatFilterList()
-        {
-            return "PowerShell File (*.ps1)\n*.ps1";
-        }
-
-        public override void OnIdle( bool periodic )
-        {
-            // from IronPythonLanguage sample
-            // this appears to be necessary to get a parse request with ParseReason = Check?
-            var src = (PsSource) GetSource( LastActiveTextView );
-            if ( src != null &&
-                 src.LastParseTime >= Int32.MaxValue >> 12 )
-            {
-                src.LastParseTime = 0;
-            }
-            base.OnIdle( periodic );
-        }
-
-
-        public override Microsoft.VisualStudio.Package.AuthoringScope ParseSource( ParseRequest req )
-        {
-            var source = (PsSource) GetSource( req.FileName );
-            bool yyparseResult = false;
-
-            // req.DirtySpan seems to be set even though no changes have occurred
-            // source.IsDirty also behaves strangely
-            // might be possible to use source.ChangeCount to sync instead
-
-            if ( req.DirtySpan.iStartIndex != req.DirtySpan.iEndIndex
-                 ||
-                 req.DirtySpan.iStartLine != req.DirtySpan.iEndLine )
-            {
-                var handler = new ErrorHandler();
-                var scanner = new Scanner(); // string interface
-                var parser = new PowerShellParser( scanner ); // use noarg constructor
-
-                parser.SetHandler( handler );
-                scanner.SetSource( req.Text, 0 );
-
-                parser.MBWInit( req );
-                yyparseResult = parser.Parse();
-
-                // store the parse results
-                // source.ParseResult = aast;
-                source.ParseResult = null;
-                source.Braces = parser.Braces;
-
-                // for the time being, just pull errors back from the error handler
-                if ( handler.NumberOfErrors > 0 )
-                {
-                    foreach ( Error error in handler.SortedErrorList() )
-                    {
-                        var span = new TextSpan();
-                        span.iStartLine = span.iEndLine = error.Line - 1;
-                        span.iStartIndex = error.Column;
-                        span.iEndIndex = error.Column + error.Length;
-                        req.Sink.AddError( req.FileName, error.Message, span, Severity.Error );
-                    }
-                }
-            }
-
-            switch ( req.Reason )
-            {
-                case ParseReason.Check:
-                case ParseReason.HighlightBraces:
-                case ParseReason.MatchBraces:
-                case ParseReason.MemberSelectAndHighlightBraces:
-                    // send matches to sink
-                    // this should (probably?) be filtered on req.Line / col
-                    if ( source.Braces != null )
-                    {
-                        foreach ( var brace in source.Braces )
-                        {
-                            if ( brace.Length == 2 )
-                            {
-                                req.Sink.MatchPair( brace[0], brace[1], 1 );
-                            }
-                            else if ( brace.Length >= 3 )
-                            {
-                                req.Sink.MatchTriple( brace[0], brace[1], brace[2], 1 );
-                            }
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            return new Parsing.AuthoringScope( source.ParseResult );
-        }
-
-        #region Custom Colors
-
-        public override int GetColorableItem( int index, out IVsColorableItem item )
-        {
-            if ( index <= Configuration.ColorableItems.Count )
-            {
-                item = Configuration.ColorableItems[index - 1];
-                return VSConstants.S_OK;
-            }
-            throw new ArgumentNullException( "index" );
-        }
-
-        public override int GetItemCount( out int count )
-        {
-            count = Configuration.ColorableItems.Count;
+            bstrName = Configuration.Name;
             return VSConstants.S_OK;
         }
 
-        #endregion
-
-        #region MPF Accessor and Factory specialisation
-
-        private LanguagePreferences preferences;
-        private IScanner scanner;
-
-        public override LanguagePreferences GetLanguagePreferences()
+        /// <summary>
+        /// Returns the file extensions belonging to this language.
+        /// </summary>
+        /// <returns>
+        /// If the method succeeds, it returns <see cref="F:Microsoft.VisualStudio.VSConstants.S_OK"/>. If it fails, it returns an error code.
+        /// </returns>
+        /// <param name="pbstrExtensions">[out] Returns a BSTR that contains the requested file extensions.</param>
+        public int GetFileExtensions( out string pbstrExtensions )
         {
-            if ( preferences == null )
-            {
-                preferences = new LanguagePreferences( Site,
-                                                       typeof (PowerShellLanguageService).GUID,
-                                                       Name );
-                preferences.Init();
-            }
-
-            return preferences;
+            pbstrExtensions = ".ps1";
+            return VSConstants.S_OK;
         }
 
-        public override Source CreateSource( IVsTextLines buffer )
+        /// <summary>
+        /// Returns the colorizer.
+        /// </summary>
+        /// <returns>
+        /// If the method succeeds, it returns <see cref="F:Microsoft.VisualStudio.VSConstants.S_OK"/>. If it fails, it returns an error code.
+        /// </returns>
+        /// <param name="pBuffer">[in] The <see cref="T:Microsoft.VisualStudio.TextManager.Interop.IVsTextLines"/> interface for the requested colorizer.</param><param name="ppColorizer">[out] Returns an <see cref="T:Microsoft.VisualStudio.TextManager.Interop.IVsColorizer"/> object.</param>
+        public int GetColorizer( IVsTextLines pBuffer, out IVsColorizer ppColorizer )
         {
-            return new PsSource( this, buffer, GetColorizer( buffer ) );
+            ppColorizer = null;
+            return VSConstants.E_FAIL;
         }
 
-        public override IScanner GetScanner( IVsTextLines buffer )
+        /// <summary>
+        /// Allows a language to add adornments to a code editor.
+        /// </summary>
+        /// <returns>
+        /// If the method succeeds, it returns <see cref="F:Microsoft.VisualStudio.VSConstants.S_OK"/>. If it fails, it returns an error code.
+        /// </returns>
+        /// <param name="pCodeWin">[in] The <see cref="T:Microsoft.VisualStudio.TextManager.Interop.IVsCodeWindow"/> interface for the requested code editor manager.</param><param name="ppCodeWinMgr">[out] Returns an <see cref="T:Microsoft.VisualStudio.TextManager.Interop.IVsCodeWindowManager"/> object.</param>
+        public int GetCodeWindowManager( IVsCodeWindow pCodeWin, out IVsCodeWindowManager ppCodeWinMgr )
         {
-            if ( scanner == null )
-            {
-                scanner = new LineScanner();
-            }
-
-            return scanner;
+            ppCodeWinMgr = null;
+            return VSConstants.E_FAIL;
         }
 
         #endregion

@@ -97,10 +97,10 @@ namespace PowerStudio.VsExtension
         {
             var ls = GetService( typeof (PowerShellLanguageService) ) as PowerShellLanguageService;
 
-            if ( ls != null )
-            {
-                ls.OnIdle( ( grfidlef & (uint) _OLEIDLEF.oleidlefPeriodic ) != 0 );
-            }
+            //if ( ls != null )
+            //{
+            //    ls.OnIdle( ( grfidlef & (uint) _OLEIDLEF.oleidlefPeriodic ) != 0 );
+            //}
 
             return 0;
         }
@@ -165,7 +165,7 @@ namespace PowerStudio.VsExtension
         private PowerShellLanguageService CreateLanguageService()
         {
             var powerShellLanguage = new PowerShellLanguageService();
-            powerShellLanguage.SetSite( this );
+            // powerShellLanguage.SetSite( this );
 
             // register for idle time callbacks
             var mgr =

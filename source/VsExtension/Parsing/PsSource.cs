@@ -15,20 +15,20 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace PowerStudio.VsExtension.Parsing
 {
-    public class PsSource : Source
-    {
-        public PsSource( PowerShellLanguageService service, IVsTextLines textLines, Colorizer colorizer )
-                : base( service, textLines, colorizer )
-        {
-        }
+    //public class PsSource : Source
+    //{
+    //    public PsSource( PowerShellLanguageService service, IVsTextLines textLines, Colorizer colorizer )
+    //            : base( service, textLines, colorizer )
+    //    {
+    //    }
 
-        public object ParseResult { get; set; }
+    //    public object ParseResult { get; set; }
 
-        public IList<TextSpan[]> Braces { get; set; }
+    //    public IList<TextSpan[]> Braces { get; set; }
 
-        public override CommentInfo GetCommentFormat()
-        {
-            return Configuration.CommentInfo;
-        }
-    }
+    //    public override CommentInfo GetCommentFormat()
+    //    {
+    //        return Configuration.CommentInfo;
+    //    }
+    //}
 }
