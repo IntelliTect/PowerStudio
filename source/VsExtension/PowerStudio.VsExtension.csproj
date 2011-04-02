@@ -139,20 +139,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parsing\AuthoringScope.cs" />
     <Compile Include="Parsing\ColorableItem.cs" />
     <Compile Include="Parsing\Configuration.cs" />
-    <Compile Include="Parsing\Declaration.cs" />
-    <Compile Include="Parsing\Declarations.cs" />
-    <Compile Include="Parsing\IAstResolver.cs" />
-    <Compile Include="Parsing\LineScanner.cs" />
-    <Compile Include="Parsing\Method.cs" />
-    <Compile Include="Parsing\Methods.cs" />
-    <Compile Include="Parsing\Parameter.cs" />
     <Compile Include="Parsing\Parser.cs" />
     <Compile Include="Parsing\PowerShellLanguageService.cs" />
-    <Compile Include="Parsing\PsSource.cs" />
-    <Compile Include="Parsing\Resolver.cs" />
     <Compile Include="PowerShellPackage.cs" />
     <Compile Include="Project\GeneralPropertyPage.cs" />
     <Compile Include="Project\OAPsProject.cs" />
