@@ -1,4 +1,15 @@
-﻿using System;
+﻿#region License
+
+// 
+// Copyright (c) 2011, PowerStudio Project Contributors
+// 
+// Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
+// See the file LICENSE.txt for details.
+// 
+
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Language.StandardClassification;
@@ -109,16 +120,17 @@ namespace PowerStudio.VsExtension.Tagging
         /// </remarks>
         public IEnumerable<ITagSpan<ClassificationTag>> GetTags( NormalizedSnapshotSpanCollection spans )
         {
-            foreach ( var span in spans )
+            foreach ( SnapshotSpan span in spans )
             {
-                foreach (var tagSpan in Aggregator.GetTags(span))
+                foreach ( var tagSpan in Aggregator.GetTags( span ) )
                 {
-                    var tokenSpan = tagSpan.Span.GetSpans( span.Snapshot );
+                    NormalizedSnapshotSpanCollection tokenSpan = tagSpan.Span.GetSpans( span.Snapshot );
 
                     yield return
-                            new TagSpan<ClassificationTag>(tokenSpan[0],
+                            new TagSpan<ClassificationTag>( tokenSpan[0],
                                                             new ClassificationTag(
-                                                                    TokenClassificationMapping[tagSpan.Tag.TokenType]));
+                                                                    TokenClassificationMapping[tagSpan.Tag.TokenType] ) )
+                            ;
                 }
             }
         }

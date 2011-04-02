@@ -1,9 +1,18 @@
-﻿using System;
+﻿#region License
+
+// 
+// Copyright (c) 2011, PowerStudio Project Contributors
+// 
+// Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
+// See the file LICENSE.txt for details.
+// 
+
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Management.Automation;
-using System.Text;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
 
@@ -31,16 +40,19 @@ namespace PowerStudio.VsExtension.Tagging
         /// </remarks>
         public virtual IEnumerable<ITagSpan<PowerShellTokenTag>> GetTags( NormalizedSnapshotSpanCollection spans )
         {
-            foreach (SnapshotSpan currentSpan in spans)
+            foreach ( SnapshotSpan currentSpan in spans )
             {
                 int curLoc = currentSpan.Start.Position;
                 string text = currentSpan.GetText();
                 Collection<PSParseError> errors;
                 Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
-                foreach ( var token in tokens )
+                foreach ( PSToken token in tokens )
                 {
-                    var tokenSpan = new SnapshotSpan(currentSpan.Snapshot, new Span(token.Start + curLoc, token.Length));
-                    yield return new TagSpan<PowerShellTokenTag>( tokenSpan, new PowerShellTokenTag() {TokenType = token.Type} );
+                    var tokenSpan = new SnapshotSpan( currentSpan.Snapshot,
+                                                      new Span( token.Start + curLoc, token.Length ) );
+                    yield return
+                            new TagSpan<PowerShellTokenTag>( tokenSpan,
+                                                             new PowerShellTokenTag { TokenType = token.Type } );
                 }
             }
         }
