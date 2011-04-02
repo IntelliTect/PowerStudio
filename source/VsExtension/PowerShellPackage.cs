@@ -33,7 +33,7 @@ namespace PowerStudio.VsExtension
     [PackageRegistration( UseManagedResourcesOnly = true )]
     [DefaultRegistryRoot( PsConstants.DefaultRegistryRoot )]
     [ProvideService( typeof (PowerShellLanguageService) )]
-    [ProvideLanguageService( typeof (PowerShellLanguageService), Configuration.Name, 0,
+    [ProvideLanguageService(typeof(PowerShellLanguageService), LanguageConfiguration.Name, 0,
             CodeSense = true,
             EnableCommenting = true,
             MatchBraces = true,

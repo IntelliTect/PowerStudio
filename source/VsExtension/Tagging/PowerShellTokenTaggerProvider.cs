@@ -18,7 +18,7 @@ using PowerStudio.VsExtension.Parsing;
 namespace PowerStudio.VsExtension.Tagging
 {
     [Export( typeof (ITaggerProvider) )]
-    [ContentType( Configuration.Name )]
+    [ContentType( LanguageConfiguration.Name )]
     [TagType( typeof (PowerShellTokenTag) )]
     public class PowerShellTokenTaggerProvider : ITaggerProvider
     {

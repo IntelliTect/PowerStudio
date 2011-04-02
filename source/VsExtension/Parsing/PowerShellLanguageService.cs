@@ -29,7 +29,7 @@ namespace PowerStudio.VsExtension.Parsing
         /// <param name="bstrName">[out] Returns a BSTR that contains the language name.</param>
         public int GetLanguageName( out string bstrName )
         {
-            bstrName = Configuration.Name;
+            bstrName = LanguageConfiguration.Name;
             return VSConstants.S_OK;
         }
 
