@@ -155,11 +155,13 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tagging\ITokenClassification.cs" />
     <Compile Include="Tagging\PowerShellClassificationTagger.cs" />
     <Compile Include="Tagging\PowerShellClassificationTaggerProvider.cs" />
     <Compile Include="Tagging\PowerShellTokenTag.cs" />
     <Compile Include="Tagging\PowerShellTokenTagger.cs" />
     <Compile Include="Tagging\PowerShellTokenTaggerProvider.cs" />
+    <Compile Include="Tagging\TokenClassification.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
@@ -201,6 +203,7 @@
     </Content>
     <None Include="Templates\Projects\PsProject\PowerShellProject.psproj" />
     <None Include="Templates\Projects\PowerShellProject.zip" />
+    <None Include="Test.ps1" />
     <VSTemplate Include="Templates\Projects\PsProject\PowerShellProject.vstemplate">
       <SubType>Designer</SubType>
     </VSTemplate>

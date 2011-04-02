@@ -23,82 +23,16 @@ namespace PowerStudio.VsExtension.Tagging
     {
         public PowerShellClassificationTagger( ITextBuffer buffer,
                                                ITagAggregator<PowerShellTokenTag> aggregator,
-                                               IClassificationTypeRegistryService registryService )
+                                               ITokenClassification tokenClassification)
         {
             Buffer = buffer;
             Aggregator = aggregator;
-            RegistryService = registryService;
-            TokenClassificationMapping = new Dictionary<PSTokenType, IClassificationType>();
-            LoadTokenClassificationMappings();
+            TokenClassification = tokenClassification;
         }
 
-        public Dictionary<PSTokenType, IClassificationType> TokenClassificationMapping { get; set; }
         public ITextBuffer Buffer { get; set; }
         public ITagAggregator<PowerShellTokenTag> Aggregator { get; set; }
-        public IClassificationTypeRegistryService RegistryService { get; set; }
-
-        private void LoadTokenClassificationMappings()
-        {
-            TokenClassificationMapping[PSTokenType.Unknown] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Other );
-
-            TokenClassificationMapping[PSTokenType.Command] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Other );
-
-            TokenClassificationMapping[PSTokenType.CommandParameter] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Identifier );
-
-            TokenClassificationMapping[PSTokenType.CommandArgument] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Identifier );
-
-            TokenClassificationMapping[PSTokenType.Number] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Number );
-
-            TokenClassificationMapping[PSTokenType.String] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.String );
-
-            TokenClassificationMapping[PSTokenType.Variable] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Identifier );
-
-            TokenClassificationMapping[PSTokenType.Member] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Identifier );
-
-            TokenClassificationMapping[PSTokenType.LoopLabel] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Identifier );
-
-            TokenClassificationMapping[PSTokenType.Attribute] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Operator );
-
-            TokenClassificationMapping[PSTokenType.Type] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Identifier );
-
-            TokenClassificationMapping[PSTokenType.Operator] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Operator );
-
-            TokenClassificationMapping[PSTokenType.GroupStart] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Other );
-
-            TokenClassificationMapping[PSTokenType.GroupEnd] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Other );
-
-            TokenClassificationMapping[PSTokenType.Keyword] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Keyword );
-
-            TokenClassificationMapping[PSTokenType.Comment] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Comment );
-
-            TokenClassificationMapping[PSTokenType.StatementSeparator] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Other );
-
-            TokenClassificationMapping[PSTokenType.NewLine] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.WhiteSpace );
-
-            TokenClassificationMapping[PSTokenType.LineContinuation] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Other );
-
-            TokenClassificationMapping[PSTokenType.Position] =
-                    RegistryService.GetClassificationType( PredefinedClassificationTypeNames.Other );
-        }
+        public ITokenClassification TokenClassification { get; set; }
 
         #region Implementation of ITagger<out ClassificationTag>
 
@@ -129,7 +63,7 @@ namespace PowerStudio.VsExtension.Tagging
                     yield return
                             new TagSpan<ClassificationTag>( tokenSpan[0],
                                                             new ClassificationTag(
-                                                                    TokenClassificationMapping[tagSpan.Tag.TokenType] ) )
+                                                                    TokenClassification[tagSpan.Tag.TokenType] ) )
                             ;
                 }
             }

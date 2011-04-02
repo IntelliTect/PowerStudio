@@ -35,7 +35,11 @@ namespace PowerStudio.VsExtension.Tagging
         {
             ITagAggregator<PowerShellTokenTag> tagAggregator =
                     AggregatorFactory.CreateTagAggregator<PowerShellTokenTag>( buffer );
-            return (ITagger<T>) new PowerShellClassificationTagger( buffer, tagAggregator, ClassificationTypeRegistry );
+            return
+                    (ITagger<T>)
+                    new PowerShellClassificationTagger( buffer,
+                                                        tagAggregator,
+                                                        new TokenClassification( ClassificationTypeRegistry ) );
         }
 
         #endregion
