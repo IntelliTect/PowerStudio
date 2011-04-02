@@ -199,7 +199,7 @@ namespace Microsoft.VisualStudio.Project
 
 		private static ProjectReferenceNode GetProjectReferenceOnNodeForHierarchy(IList<ReferenceNode> references, IVsHierarchy inputHierarchy)
 		{
-			if(references == null)
+			if(references == null || references.Count == 0)
 			{
 				return null;
 			}
