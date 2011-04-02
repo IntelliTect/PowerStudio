@@ -33,11 +33,6 @@ namespace PowerStudio.VsExtension
     [PackageRegistration( UseManagedResourcesOnly = true )]
     [DefaultRegistryRoot( PsConstants.DefaultRegistryRoot )]
     [ProvideService( typeof (PowerShellLanguageService) )]
-    //[ProvideLanguageExtension( typeof (PowerShellLanguageService), ".ps1" )]
-    //[ProvideLanguageExtension( typeof (PowerShellLanguageService), ".psc1" )]
-    //[ProvideLanguageExtension( typeof (PowerShellLanguageService), ".psd1" )]
-    //[ProvideLanguageExtension( typeof (PowerShellLanguageService), ".psm1" )]
-    //[ProvideLanguageExtension( typeof (PowerShellLanguageService), ".ps1xml" )]
     [ProvideLanguageService( typeof (PowerShellLanguageService), Configuration.Name, 0,
             CodeSense = true,
             EnableCommenting = true,

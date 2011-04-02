@@ -1,24 +1,21 @@
-/***************************************************************************
+#region License
 
-Copyright (c) Microsoft Corporation. All rights reserved.
-This code is licensed under the Visual Studio SDK license terms.
-THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
-ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
-IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
-PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+// 
+// Copyright (c) 2011, PowerStudio Project Contributors
+// 
+// Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
+// See the file LICENSE.txt for details.
+// 
 
-***************************************************************************/
-using System;
+#endregion
+
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Package;
 using Microsoft.VisualStudio.TextManager.Interop;
-using PowerStudio.Language;
-using ErrorHandler = PowerStudio.Language.ErrorHandler;
 
 namespace PowerStudio.VsExtension.Parsing
 {
-    [Guid( "4841FFB1-678C-4F50-9ADB-600638A4F731" )]
+    [Guid( PsConstants.PsLanuageServiceGuidString )]
     public class PowerShellLanguageService : IVsLanguageInfo
     {
         #region Implementation of IVsLanguageInfo
@@ -45,7 +42,7 @@ namespace PowerStudio.VsExtension.Parsing
         /// <param name="pbstrExtensions">[out] Returns a BSTR that contains the requested file extensions.</param>
         public int GetFileExtensions( out string pbstrExtensions )
         {
-            pbstrExtensions = ".ps1";
+            pbstrExtensions = ".ps1;.psc1;.psd1;.psm1;.ps1xml";
             return VSConstants.S_OK;
         }
 
