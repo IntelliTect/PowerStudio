@@ -31,15 +31,18 @@ namespace PowerStudio.VsExtension.Tagging
 
         #region Implementation of ITaggerProvider
 
+        /// <summary>
+        /// Creates the tagger.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="buffer">The buffer.</param>
+        /// <returns></returns>
         public ITagger<T> CreateTagger<T>( ITextBuffer buffer ) where T : ITag
         {
             ITagAggregator<PowerShellTokenTag> tagAggregator =
                     AggregatorFactory.CreateTagAggregator<PowerShellTokenTag>( buffer );
-            return
-                    (ITagger<T>)
-                    new PowerShellClassificationTagger( buffer,
-                                                        tagAggregator,
-                                                        new TokenClassification( ClassificationTypeRegistry ) );
+            var tokenClassification = new TokenClassification( ClassificationTypeRegistry );
+            return (ITagger<T>) new PowerShellClassificationTagger( buffer, tagAggregator, tokenClassification );
         }
 
         #endregion

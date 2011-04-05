@@ -11,19 +11,22 @@
 
 using System;
 using System.Collections.Generic;
-using System.Management.Automation;
-using Microsoft.VisualStudio.Language.StandardClassification;
 using Microsoft.VisualStudio.Text;
-using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.VsExtension.Tagging
 {
     public class PowerShellClassificationTagger : ITagger<ClassificationTag>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PowerShellClassificationTagger"/> class.
+        /// </summary>
+        /// <param name="buffer">The buffer.</param>
+        /// <param name="aggregator">The aggregator.</param>
+        /// <param name="tokenClassification">The token classification.</param>
         public PowerShellClassificationTagger( ITextBuffer buffer,
                                                ITagAggregator<PowerShellTokenTag> aggregator,
-                                               ITokenClassification tokenClassification)
+                                               ITokenClassification tokenClassification )
         {
             Buffer = buffer;
             Aggregator = aggregator;
@@ -60,11 +63,8 @@ namespace PowerStudio.VsExtension.Tagging
                 {
                     NormalizedSnapshotSpanCollection tokenSpan = tagSpan.Span.GetSpans( span.Snapshot );
 
-                    yield return
-                            new TagSpan<ClassificationTag>( tokenSpan[0],
-                                                            new ClassificationTag(
-                                                                    TokenClassification[tagSpan.Tag.TokenType] ) )
-                            ;
+                    var classificationTag = new ClassificationTag( TokenClassification[tagSpan.Tag.TokenType] );
+                    yield return new TagSpan<ClassificationTag>( tokenSpan[0], classificationTag );
                 }
             }
         }

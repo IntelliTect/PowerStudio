@@ -50,9 +50,8 @@ namespace PowerStudio.VsExtension.Tagging
                 {
                     var tokenSpan = new SnapshotSpan( currentSpan.Snapshot,
                                                       new Span( token.Start + curLoc, token.Length ) );
-                    yield return
-                            new TagSpan<PowerShellTokenTag>( tokenSpan,
-                                                             new PowerShellTokenTag { TokenType = token.Type } );
+                    var tokenTag = new PowerShellTokenTag { TokenType = token.Type };
+                    yield return new TagSpan<PowerShellTokenTag>( tokenSpan, tokenTag );
                 }
             }
         }
