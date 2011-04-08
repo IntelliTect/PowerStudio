@@ -61,55 +61,40 @@ namespace PowerStudio.VsExtension.Intellisense
                                              IList<object> quickInfoContent,
                                              out ITrackingSpan applicableToSpan )
         {
-            try
+            if ( _Disposed )
+            {
+                throw new ObjectDisposedException( "TestQuickInfoSource" );
+            }
+
+            var triggerPoint = (SnapshotPoint) session.GetTriggerPoint( _Buffer.CurrentSnapshot );
+
+            if ( triggerPoint == default( SnapshotPoint ) )
             {
                 applicableToSpan = null;
+                return;
+            }
 
-                if (_Disposed)
+            foreach (
+                    IMappingTagSpan<ErrorTag> tagSpan in
+                            _Aggregator.GetTags( new SnapshotSpan( _Buffer.CurrentSnapshot,
+                                                                   0,
+                                                                   _Buffer.CurrentSnapshot.Length ) ) )
+            {
+                foreach ( SnapshotSpan span in tagSpan.Span.GetSpans( _Buffer ) )
                 {
-                    throw new ObjectDisposedException("TestQuickInfoSource");
-                }
-
-                var triggerPoint = (SnapshotPoint)session.GetTriggerPoint(_Buffer.CurrentSnapshot);
-
-                if (triggerPoint == default(SnapshotPoint))
-                {
-                    return;
-                }
-
-                foreach (
-                        IMappingTagSpan<ErrorTag> tagSpan in
-                                _Aggregator.GetTags(new SnapshotSpan(_Buffer.CurrentSnapshot,
-                                                                       0,
-                                                                       _Buffer.CurrentSnapshot.Length)))
-                {
-                    foreach (SnapshotSpan span in tagSpan.Span.GetSpans(_Buffer))
+                    if ( !span.Contains( triggerPoint ) )
                     {
-                        if (span.Contains(triggerPoint))
-                        {
-                            applicableToSpan = _Buffer.CurrentSnapshot.CreateTrackingSpan(span,
-                                                                                           SpanTrackingMode.
-                                                                                                   EdgeExclusive);
-                            quickInfoContent.Add(tagSpan.Tag.ToolTipContent);
-                            return;
-                        }
+                        continue;
                     }
 
-                    //SnapshotSpan span = tagSpan.Span.GetSpans( _buffer ).First();
-                    //if (span.Contains(triggerPoint))
-                    //{
-
-                    //    applicableToSpan = _buffer.CurrentSnapshot.CreateTrackingSpan( span, SpanTrackingMode.EdgeExclusive );
-                    //    quickInfoContent.Add( tagSpan.Tag.ToolTipContent );
-                    //    return;
-                    //}
+                    applicableToSpan = _Buffer.CurrentSnapshot.CreateTrackingSpan( span,
+                                                                                   SpanTrackingMode.
+                                                                                           EdgeExclusive );
+                    quickInfoContent.Add( tagSpan.Tag.ToolTipContent );
+                    return;
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                applicableToSpan = null;
-            }
+            applicableToSpan = null;
         }
 
         /// <summary>
