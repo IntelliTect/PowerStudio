@@ -9,8 +9,12 @@
 
 #endregion
 
+#region Using Directives
+
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Utilities;
+
+#endregion
 
 namespace PowerStudio.VsExtension.Parsing
 {

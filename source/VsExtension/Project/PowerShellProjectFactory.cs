@@ -9,10 +9,14 @@
 
 #endregion
 
+#region Using Directives
+
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Project;
 using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
+
+#endregion
 
 namespace PowerStudio.VsExtension.Project
 {

@@ -9,10 +9,14 @@
 
 #endregion
 
+#region Using Directives
+
 using System.Collections.Generic;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
+
+#endregion
 
 namespace PowerStudio.VsExtension.Intellisense
 {
@@ -26,14 +30,14 @@ namespace PowerStudio.VsExtension.Intellisense
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PowerShellQuickInfoController"/> class.
+        ///   Initializes a new instance of the <see cref = "PowerShellQuickInfoController" /> class.
         /// </summary>
-        /// <param name="textView">The text view.</param>
-        /// <param name="subjectBuffers">The subject buffers.</param>
-        /// <param name="componentContext">The component context.</param>
+        /// <param name = "textView">The text view.</param>
+        /// <param name = "subjectBuffers">The subject buffers.</param>
+        /// <param name = "componentContext">The component context.</param>
         internal PowerShellQuickInfoController( ITextView textView,
-                                              IList<ITextBuffer> subjectBuffers,
-                                              PowerShellQuickInfoControllerProvider componentContext )
+                                                IList<ITextBuffer> subjectBuffers,
+                                                PowerShellQuickInfoControllerProvider componentContext )
         {
             _TextView = textView;
             _SubjectBuffers = subjectBuffers;
@@ -45,31 +49,31 @@ namespace PowerStudio.VsExtension.Intellisense
         #region IIntellisenseController Members
 
         /// <summary>
-        /// Called when a new subject <see cref="T:Microsoft.VisualStudio.Text.ITextBuffer"/> appears in the graph of buffers associated with
-        /// the <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>, due to a change in projection or content type.
+        ///   Called when a new subject <see cref = "T:Microsoft.VisualStudio.Text.ITextBuffer" /> appears in the graph of buffers associated with
+        ///   the <see cref = "T:Microsoft.VisualStudio.Text.Editor.ITextView" />, due to a change in projection or content type.
         /// </summary>
-        /// <param name="subjectBuffer">The newly-connected text buffer.</param>
+        /// <param name = "subjectBuffer">The newly-connected text buffer.</param>
         public void ConnectSubjectBuffer( ITextBuffer subjectBuffer )
         {
         }
 
         /// <summary>
-        /// Called when a subject <see cref="T:Microsoft.VisualStudio.Text.ITextBuffer"/> is removed from the graph of buffers associated with
-        /// the <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>, due to a change in projection or content type.
+        ///   Called when a subject <see cref = "T:Microsoft.VisualStudio.Text.ITextBuffer" /> is removed from the graph of buffers associated with
+        ///   the <see cref = "T:Microsoft.VisualStudio.Text.Editor.ITextView" />, due to a change in projection or content type.
         /// </summary>
-        /// <param name="subjectBuffer">The disconnected text buffer.</param>
+        /// <param name = "subjectBuffer">The disconnected text buffer.</param>
         /// <remarks>
-        /// It is not guaranteed that
-        /// the subject buffer was previously connected to this controller.
+        ///   It is not guaranteed that
+        ///   the subject buffer was previously connected to this controller.
         /// </remarks>
         public void DisconnectSubjectBuffer( ITextBuffer subjectBuffer )
         {
         }
 
         /// <summary>
-        /// Detaches the controller from the specified <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/>.
+        ///   Detaches the controller from the specified <see cref = "T:Microsoft.VisualStudio.Text.Editor.ITextView" />.
         /// </summary>
-        /// <param name="textView">The <see cref="T:Microsoft.VisualStudio.Text.Editor.ITextView"/> from which the controller should detach.</param>
+        /// <param name = "textView">The <see cref = "T:Microsoft.VisualStudio.Text.Editor.ITextView" /> from which the controller should detach.</param>
         public void Detach( ITextView textView )
         {
             if ( _TextView == textView )
@@ -82,10 +86,10 @@ namespace PowerStudio.VsExtension.Intellisense
         #endregion
 
         /// <summary>
-        /// Called when [text view mouse hover].
+        ///   Called when [text view mouse hover].
         /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Microsoft.VisualStudio.Text.Editor.MouseHoverEventArgs"/> instance containing the event data.</param>
+        /// <param name = "sender">The sender.</param>
+        /// <param name = "e">The <see cref = "Microsoft.VisualStudio.Text.Editor.MouseHoverEventArgs" /> instance containing the event data.</param>
         private void OnTextViewMouseHover( object sender, MouseHoverEventArgs e )
         {
             SnapshotPoint? point = GetMousePosition( new SnapshotPoint( _TextView.TextSnapshot, e.Position ) );
@@ -106,9 +110,9 @@ namespace PowerStudio.VsExtension.Intellisense
         }
 
         /// <summary>
-        /// Gets the mouse position.
+        ///   Gets the mouse position.
         /// </summary>
-        /// <param name="topPosition">The top position.</param>
+        /// <param name = "topPosition">The top position.</param>
         /// <returns></returns>
         private SnapshotPoint? GetMousePosition( SnapshotPoint topPosition )
         {

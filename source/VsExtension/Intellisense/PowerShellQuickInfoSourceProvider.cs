@@ -9,6 +9,8 @@
 
 #endregion
 
+#region Using Directives
+
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
@@ -16,6 +18,8 @@ using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 using PowerStudio.VsExtension.Parsing;
+
+#endregion
 
 namespace PowerStudio.VsExtension.Intellisense
 {
@@ -33,15 +37,17 @@ namespace PowerStudio.VsExtension.Intellisense
         #region IQuickInfoSourceProvider Members
 
         /// <summary>
-        /// Creates a Quick Info provider for the specified context.
+        ///   Creates a Quick Info provider for the specified context.
         /// </summary>
-        /// <param name="textBuffer">The text buffer for which to create a provider.</param>
+        /// <param name = "textBuffer">The text buffer for which to create a provider.</param>
         /// <returns>
-        /// A valid <see cref="T:Microsoft.VisualStudio.Language.Intellisense.IQuickInfoSource"/> instance, or null if none could be created.
+        ///   A valid <see cref = "T:Microsoft.VisualStudio.Language.Intellisense.IQuickInfoSource" /> instance, or null if none could be created.
         /// </returns>
         public IQuickInfoSource TryCreateQuickInfoSource( ITextBuffer textBuffer )
         {
-            return new PowerShellQuickInfoSource( textBuffer, TagAggregatorFactory.CreateTagAggregator<ErrorTag>( textBuffer ), this );
+            return new PowerShellQuickInfoSource( textBuffer,
+                                                  TagAggregatorFactory.CreateTagAggregator<ErrorTag>( textBuffer ),
+                                                  this );
         }
 
         #endregion

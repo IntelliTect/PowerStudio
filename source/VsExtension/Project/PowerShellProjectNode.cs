@@ -9,6 +9,8 @@
 
 #endregion
 
+#region Using Directives
+
 using System;
 using System.Drawing;
 using System.IO;
@@ -19,6 +21,8 @@ using EnvDTE;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
 using VSLangProj;
+
+#endregion
 
 namespace PowerStudio.VsExtension.Project
 {

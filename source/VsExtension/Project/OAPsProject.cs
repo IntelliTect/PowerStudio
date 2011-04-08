@@ -9,8 +9,12 @@
 
 #endregion
 
+#region Using Directives
+
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Project.Automation;
+
+#endregion
 
 namespace PowerStudio.VsExtension.Project
 {

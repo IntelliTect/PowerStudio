@@ -9,10 +9,14 @@
 
 #endregion
 
+#region Using Directives
+
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Shell.Interop;
+
+#endregion
 
 namespace PowerStudio.VsExtension.Project
 {
@@ -49,7 +53,7 @@ namespace PowerStudio.VsExtension.Project
         }
 
         /// <summary>
-        /// Apply Changes on project node.
+        ///   Apply Changes on project node.
         /// </summary>
         /// <returns>E_INVALIDARG if internal ProjectMgr is null, otherwise applies changes and return S_OK.</returns>
         protected override int ApplyChanges()

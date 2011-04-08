@@ -9,10 +9,14 @@
 
 #endregion
 
+#region Using Directives
+
 using System;
 using EnvDTE;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
+
+#endregion
 
 namespace PowerStudio.VsExtension.Project
 {
@@ -25,6 +29,11 @@ namespace PowerStudio.VsExtension.Project
         {
         }
 
+        internal OleServiceProvider.ServiceCreatorCallback ServiceCreator
+        {
+            get { return CreateServices; }
+        }
+
         public override object GetAutomationObject()
         {
             if ( _AutomationObject == null )
@@ -33,11 +42,6 @@ namespace PowerStudio.VsExtension.Project
             }
 
             return _AutomationObject;
-        }
-
-        internal OleServiceProvider.ServiceCreatorCallback ServiceCreator
-        {
-            get { return CreateServices; }
         }
 
         private object CreateServices( Type serviceType )

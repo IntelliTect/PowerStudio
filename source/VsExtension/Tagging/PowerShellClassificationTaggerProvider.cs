@@ -9,12 +9,16 @@
 
 #endregion
 
+#region Using Directives
+
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 using PowerStudio.VsExtension.Parsing;
+
+#endregion
 
 namespace PowerStudio.VsExtension.Tagging
 {
@@ -32,10 +36,10 @@ namespace PowerStudio.VsExtension.Tagging
         #region Implementation of ITaggerProvider
 
         /// <summary>
-        /// Creates the tagger.
+        ///   Creates the tagger.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="buffer">The buffer.</param>
+        /// <typeparam name = "T"></typeparam>
+        /// <param name = "buffer">The buffer.</param>
         /// <returns></returns>
         public ITagger<T> CreateTagger<T>( ITextBuffer buffer ) where T : ITag
         {

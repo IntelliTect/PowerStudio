@@ -9,8 +9,12 @@
 
 #endregion
 
+#region Using Directives
+
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text.Tagging;
+
+#endregion
 
 namespace PowerStudio.VsExtension.Tagging
 {

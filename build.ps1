@@ -2,7 +2,7 @@
   $solution_name = "PowerStudio"
   $base_directory = resolve-path .
   $build_directory = "$base_directory\build"
-  $build_configuration = "Debug"
+  $build_configuration = "Release"
   $tools_directory = "$base_directory\tools"
   $solution_file = "$base_directory\$solution_name.sln"
   $release_directory = "$base_directory\release"

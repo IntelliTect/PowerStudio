@@ -9,21 +9,25 @@
 
 #endregion
 
+#region Using Directives
+
 using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
+
+#endregion
 
 namespace PowerStudio.VsExtension.Tagging
 {
     public class PowerShellClassificationTagger : ITagger<ClassificationTag>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PowerShellClassificationTagger"/> class.
+        ///   Initializes a new instance of the <see cref = "PowerShellClassificationTagger" /> class.
         /// </summary>
-        /// <param name="buffer">The buffer.</param>
-        /// <param name="aggregator">The aggregator.</param>
-        /// <param name="tokenClassification">The token classification.</param>
+        /// <param name = "buffer">The buffer.</param>
+        /// <param name = "aggregator">The aggregator.</param>
+        /// <param name = "tokenClassification">The token classification.</param>
         public PowerShellClassificationTagger( ITextBuffer buffer,
                                                ITagAggregator<PowerShellTokenTag> aggregator,
                                                ITokenClassification tokenClassification )
@@ -40,26 +44,26 @@ namespace PowerStudio.VsExtension.Tagging
         #region Implementation of ITagger<out ClassificationTag>
 
         /// <summary>
-        /// Gets all the tags that overlap the <paramref name="spans"/>.
+        ///   Gets all the tags that overlap the <paramref name = "spans" />.
         /// </summary>
-        /// <param name="spans">The spans to visit.</param>
+        /// <param name = "spans">The spans to visit.</param>
         /// <returns>
-        /// A <see cref="T:Microsoft.VisualStudio.Text.Tagging.ITagSpan`1"/> for each tag.
+        ///   A <see cref = "T:Microsoft.VisualStudio.Text.Tagging.ITagSpan`1" /> for each tag.
         /// </returns>
         /// <remarks>
-        /// <para>
-        /// Taggers are not required to return their tags in any specific order.
-        /// </para>
-        /// <para>
-        /// The recommended way to implement this method is by using generators ("yield return"),
-        ///             which allows lazy evaluation of the entire tagging stack.
-        /// </para>
+        ///   <para>
+        ///     Taggers are not required to return their tags in any specific order.
+        ///   </para>
+        ///   <para>
+        ///     The recommended way to implement this method is by using generators ("yield return"),
+        ///     which allows lazy evaluation of the entire tagging stack.
+        ///   </para>
         /// </remarks>
         public IEnumerable<ITagSpan<ClassificationTag>> GetTags( NormalizedSnapshotSpanCollection spans )
         {
             foreach ( SnapshotSpan span in spans )
             {
-                foreach ( var tagSpan in Aggregator.GetTags( span ) )
+                foreach ( IMappingTagSpan<PowerShellTokenTag> tagSpan in Aggregator.GetTags( span ) )
                 {
                     NormalizedSnapshotSpanCollection tokenSpan = tagSpan.Span.GetSpans( span.Snapshot );
 

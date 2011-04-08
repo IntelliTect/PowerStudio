@@ -222,10 +222,6 @@
     <Resource Include="Project\TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Language\PowerStudio.Language.csproj">
-      <Project>{886B4467-D6A5-4601-845F-1E16572C0F80}</Project>
-      <Name>PowerStudio.Language</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj">
       <Project>{CACB60A9-1E76-4F92-8831-B134A658C695}</Project>
       <Name>Microsoft.VisualStudio.Project</Name>

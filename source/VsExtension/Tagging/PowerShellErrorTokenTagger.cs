@@ -22,16 +22,14 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public class PowerShellErrorTokenTagger : PowerShellTagger, ITagger<ErrorTag>
+    public class PowerShellErrorTokenTagger : PowerShellTagger<ErrorTag>
     {
         public PowerShellErrorTokenTagger( ITextBuffer buffer )
                 : base( buffer )
         {
         }
 
-        #region ITagger<ErrorTag> Members
-
-        public virtual IEnumerable<ITagSpan<ErrorTag>> GetTags( NormalizedSnapshotSpanCollection spans )
+        public override IEnumerable<ITagSpan<ErrorTag>> GetTags( NormalizedSnapshotSpanCollection spans )
         {
             if ( spans.Count == 0 ||
                  Buffer.CurrentSnapshot.Length == 0 )
@@ -64,7 +62,5 @@ namespace PowerStudio.VsExtension.Tagging
                 }
             }
         }
-
-        #endregion
     }
 }

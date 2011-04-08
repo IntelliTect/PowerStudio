@@ -22,14 +22,12 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public class PowerShellTokenTagger : PowerShellTagger, ITagger<PowerShellTokenTag>
+    public class PowerShellTokenTagger : PowerShellTagger<PowerShellTokenTag>
     {
         public PowerShellTokenTagger( ITextBuffer buffer )
                 : base( buffer )
         {
         }
-
-        #region ITagger<PowerShellTokenTag> Members
 
         /// <summary>
         ///   Gets all the tags that overlap the <paramref name = "spans" />.
@@ -47,7 +45,7 @@ namespace PowerStudio.VsExtension.Tagging
         ///     which allows lazy evaluation of the entire tagging stack.
         ///   </para>
         /// </remarks>
-        public virtual IEnumerable<ITagSpan<PowerShellTokenTag>> GetTags( NormalizedSnapshotSpanCollection spans )
+        public override IEnumerable<ITagSpan<PowerShellTokenTag>> GetTags( NormalizedSnapshotSpanCollection spans )
         {
             if ( spans.Count == 0 ||
                  Buffer.CurrentSnapshot.Length == 0 )
@@ -70,7 +68,5 @@ namespace PowerStudio.VsExtension.Tagging
                 }
             }
         }
-
-        #endregion
     }
 }
