@@ -137,6 +137,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Intellisense\PowerShellQuickInfoController.cs" />
+    <Compile Include="Intellisense\PowerShellQuickInfoControllerProvider.cs" />
+    <Compile Include="Intellisense\PowerShellQuickInfoSource.cs" />
+    <Compile Include="Intellisense\PowerShellQuickInfoSourceProvider.cs" />
     <Compile Include="Parsing\LanguageConfiguration.cs" />
     <Compile Include="Parsing\PowerShellLanguageService.cs" />
     <Compile Include="PowerShellPackage.cs" />
@@ -157,13 +161,12 @@
     <Compile Include="Tagging\ITokenClassification.cs" />
     <Compile Include="Tagging\PowerShellClassificationTagger.cs" />
     <Compile Include="Tagging\PowerShellClassificationTaggerProvider.cs" />
+    <Compile Include="Tagging\PowerShellErrorTokenTagger.cs" />
+    <Compile Include="Tagging\PowerShellErrorTokenTaggerProvider.cs" />
+    <Compile Include="Tagging\PowerShellTagger.cs" />
     <Compile Include="Tagging\PowerShellTokenTag.cs" />
     <Compile Include="Tagging\PowerShellTokenTagger.cs" />
     <Compile Include="Tagging\PowerShellTokenTaggerProvider.cs" />
-    <Compile Include="Tagging\PsQuickInfoSource.cs" />
-    <Compile Include="Tagging\PsQuickInfoSourceProvider.cs" />
-    <Compile Include="Tagging\TemplateQuickInfoController.cs" />
-    <Compile Include="Tagging\TemplateQuickInfoControllerProvider.cs" />
     <Compile Include="Tagging\TokenClassification.cs" />
   </ItemGroup>
   <ItemGroup>

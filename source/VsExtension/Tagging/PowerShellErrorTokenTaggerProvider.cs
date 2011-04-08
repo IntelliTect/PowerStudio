@@ -24,9 +24,9 @@ namespace PowerStudio.VsExtension.Tagging
     [Export( typeof (ITaggerProvider) )]
     [ContentType( LanguageConfiguration.Name )]
     [ContentType( "code" )]
-    [TagType( typeof (PowerShellTokenTag) )]
+    [TagType( typeof (ErrorTag) )]
     [Order( Before = "default" )]
-    public class PowerShellTokenTaggerProvider : ITaggerProvider
+    public class PowerShellErrorTokenTaggerProvider : ITaggerProvider
     {
         #region Implementation of ITaggerProvider
 
@@ -37,7 +37,7 @@ namespace PowerStudio.VsExtension.Tagging
         /// <typeparam name = "T">The type of the tag.</typeparam>
         public ITagger<T> CreateTagger<T>( ITextBuffer buffer ) where T : ITag
         {
-            return (ITagger<T>) new PowerShellTokenTagger( buffer );
+            return (ITagger<T>) new PowerShellErrorTokenTagger( buffer );
         }
 
         #endregion
