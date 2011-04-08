@@ -49,11 +49,6 @@ namespace PowerStudio.VsExtension.Tagging
 
                 foreach ( PSParseError error in errors )
                 {
-                    if ( error.Token.Type ==
-                         PSTokenType.Position )
-                    {
-                        continue;
-                    }
                     var tokenSpan = new SnapshotSpan( currentSpan.Snapshot,
                                                       new Span( error.Token.Start + curLoc, error.Token.Length ) );
                     var errorTag = new ErrorTag( PredefinedErrorTypeNames.SyntaxError, error.Message );

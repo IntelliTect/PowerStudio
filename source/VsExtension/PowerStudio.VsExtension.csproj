@@ -138,7 +138,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Parsing\LanguageConfiguration.cs" />
-    <Compile Include="Parsing\Parser.cs" />
     <Compile Include="Parsing\PowerShellLanguageService.cs" />
     <Compile Include="PowerShellPackage.cs" />
     <Compile Include="Project\GeneralPropertyPage.cs" />
