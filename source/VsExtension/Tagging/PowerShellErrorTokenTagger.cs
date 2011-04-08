@@ -48,6 +48,15 @@ namespace PowerStudio.VsExtension.Tagging
 
                 foreach ( PSParseError error in errors )
                 {
+                    // HACK: Need to figure out why we are getting false positives.
+
+                    if ( error.Token.Type == PSTokenType.Operator ||
+                         error.Token.Type == PSTokenType.Position ||
+                         error.Token.Type == PSTokenType.GroupStart ||
+                         error.Token.Type == PSTokenType.GroupEnd )
+                    {
+                        continue;
+                    }
                     var tokenSpan = new SnapshotSpan( currentSpan.Snapshot,
                                                       new Span( error.Token.Start + curLoc, error.Token.Length ) );
                     var errorTag = new ErrorTag( PredefinedErrorTypeNames.SyntaxError, error.Message );

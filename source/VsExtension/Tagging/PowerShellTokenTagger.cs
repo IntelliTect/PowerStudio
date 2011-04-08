@@ -13,6 +13,7 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
@@ -60,7 +61,7 @@ namespace PowerStudio.VsExtension.Tagging
                 string text = currentSpan.GetText();
                 Collection<PSParseError> errors;
                 Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
-                foreach ( PSToken token in tokens )
+                foreach ( PSToken token in tokens.Union( errors.Select( error => error.Token ) ) )
                 {
                     var tokenSpan = new SnapshotSpan( currentSpan.Snapshot,
                                                       new Span( token.Start + curLoc, token.Length ) );
