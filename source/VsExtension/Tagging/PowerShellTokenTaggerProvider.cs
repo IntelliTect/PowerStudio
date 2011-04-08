@@ -10,6 +10,7 @@
 #endregion
 
 using System.ComponentModel.Composition;
+using System.Linq;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
@@ -19,7 +20,10 @@ namespace PowerStudio.VsExtension.Tagging
 {
     [Export( typeof (ITaggerProvider) )]
     [ContentType( LanguageConfiguration.Name )]
+    [ContentType( "code" )]
     [TagType( typeof (PowerShellTokenTag) )]
+    [TagType( typeof (ErrorTag) )]
+    [Order( Before = "default" )]
     public class PowerShellTokenTaggerProvider : ITaggerProvider
     {
         #region Implementation of ITaggerProvider
@@ -27,12 +31,13 @@ namespace PowerStudio.VsExtension.Tagging
         /// <summary>
         /// Creates a tag provider for the specified buffer.
         /// </summary>
-        /// <param name="buffer">The <see cref="T:Microsoft.VisualStudio.Text.ITextBuffer"/>.</param><typeparam name="T">The type of the tag.</typeparam>
+        /// <param name="buffer">The <see cref="T:Microsoft.VisualStudio.Text.ITextBuffer"/>.</param>
+        /// <typeparam name="T">The type of the tag.</typeparam>
         public ITagger<T> CreateTagger<T>( ITextBuffer buffer ) where T : ITag
         {
-            return (ITagger<T>) new PowerShellTokenTagger();
+            return (ITagger<T>) new PowerShellTokenTagger( buffer );
         }
 
         #endregion
     }
-}
+My connection to m housed is sso slow, if can bare interact.return }
