@@ -23,7 +23,6 @@ namespace PowerStudio.VsExtension.Tagging
 {
     [Export( typeof (ITaggerProvider) )]
     [ContentType( LanguageConfiguration.Name )]
-    [ContentType( "code" )]
     [TagType( typeof (PowerShellTokenTag) )]
     [Order( Before = "default" )]
     public class PowerShellTokenTaggerProvider : ITaggerProvider

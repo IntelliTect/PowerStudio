@@ -23,7 +23,6 @@ namespace PowerStudio.VsExtension.Tagging
 {
     [Export( typeof (ITaggerProvider) )]
     [ContentType( LanguageConfiguration.Name )]
-    [ContentType( "code" )]
     [TagType( typeof (ErrorTag) )]
     [Order( Before = "default" )]
     public class PowerShellErrorTokenTaggerProvider : ITaggerProvider
