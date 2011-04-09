@@ -13,6 +13,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
@@ -66,30 +67,23 @@ namespace PowerStudio.VsExtension.Intellisense
                 throw new ObjectDisposedException( "TestQuickInfoSource" );
             }
 
-            var triggerPoint = (SnapshotPoint) session.GetTriggerPoint( _Buffer.CurrentSnapshot );
+            ITextSnapshot currentSnapshot = _Buffer.CurrentSnapshot;
+            var triggerPoint = session.GetTriggerPoint( currentSnapshot );
 
-            if ( triggerPoint == default( SnapshotPoint ) )
+            if (!triggerPoint.HasValue)
             {
                 applicableToSpan = null;
                 return;
             }
 
-            foreach (
-                    IMappingTagSpan<ErrorTag> tagSpan in
-                            _Aggregator.GetTags( new SnapshotSpan( _Buffer.CurrentSnapshot,
-                                                                   0,
-                                                                   _Buffer.CurrentSnapshot.Length ) ) )
+            var bufferSpan = new SnapshotSpan( currentSnapshot, 0, currentSnapshot.Length );
+            foreach ( IMappingTagSpan<ErrorTag> tagSpan in _Aggregator.GetTags( bufferSpan ) )
             {
-                foreach ( SnapshotSpan span in tagSpan.Span.GetSpans( _Buffer ) )
+                foreach ( SnapshotSpan span in tagSpan.Span
+                        .GetSpans( _Buffer )
+                        .Where( span => span.Contains( triggerPoint.Value ) ) )
                 {
-                    if ( !span.Contains( triggerPoint ) )
-                    {
-                        continue;
-                    }
-
-                    applicableToSpan = _Buffer.CurrentSnapshot.CreateTrackingSpan( span,
-                                                                                   SpanTrackingMode.
-                                                                                           EdgeExclusive );
+                    applicableToSpan = currentSnapshot.CreateTrackingSpan( span, SpanTrackingMode.EdgeExclusive );
                     quickInfoContent.Add( tagSpan.Tag.ToolTipContent );
                     return;
                 }
