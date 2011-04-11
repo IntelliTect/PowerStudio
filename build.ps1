@@ -12,6 +12,8 @@
   $compileMessage = 'Executed Compile!'
   $cleanMessage = 'Executed Clean!'
   $msbuild_logfile = 'MSBuildOutput.txt'
+  $max_cpu_count = [System.Environment]::ProcessorCount / 2
+  $build_in_parralel = $true
 }
 
 task build -depends Compile, Test
@@ -27,7 +29,7 @@ task Init -depends Clean {
 }
 
 task Compile -depends Clean {
-  exec {msbuild "/logger:FileLogger,Microsoft.Build.Engine;logfile=$msbuild_logfile" /p:Configuration="$build_configuration" /p:Platform="Any CPU" /p:OutDir="$build_directory"\\ "$solution_file"}
+  exec {msbuild /m:$max_cpu_count /p:BuildInParralel=$build_in_parralel "/logger:FileLogger,Microsoft.Build.Engine;logfile=$msbuild_logfile" /p:Configuration="$build_configuration" /p:Platform="Any CPU" /p:OutDir="$build_directory"\\ "$solution_file"}
 }
 
 task Clean { 
