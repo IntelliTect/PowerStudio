@@ -12,7 +12,6 @@
 #region Using Directives
 
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
@@ -67,18 +66,16 @@ namespace PowerStudio.VsExtension.Tagging
         {
             ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
 
-            int curLoc = 0;
-            string text = newSnapshot.GetText();
-            Collection<PSParseError> errors;
-            Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
-            List<TokenTag> tags = ( from token in tokens.Union( errors.Select( error => error.Token ) )
+            IEnumerable<PSToken> tokens = GetTokens( newSnapshot, true );
+            List<TokenTag> tags = ( from token in tokens
                                     let tokenSpan =
-                                            new SnapshotSpan( Snapshot, new Span( token.Start + curLoc, token.Length ) )
+                                            new SnapshotSpan( newSnapshot, new Span( token.Start, token.Length ) )
                                     select new TokenTag { TokenType = token.Type, Span = tokenSpan } ).ToList();
 
             Snapshot = newSnapshot;
             Tags = tags;
-            OnTagsChanged( new SnapshotSpanEventArgs( new SnapshotSpan( Snapshot, Span.FromBounds( 0, curLoc ) ) ) );
+            OnTagsChanged(
+                    new SnapshotSpanEventArgs( new SnapshotSpan( newSnapshot, Span.FromBounds( 0, Snapshot.Length ) ) ) );
         }
     }
 }

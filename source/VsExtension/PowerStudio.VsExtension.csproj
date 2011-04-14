@@ -160,6 +160,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tagging\ErrorTokenTag.cs" />
     <Compile Include="Tagging\ITokenClassification.cs" />
+    <Compile Include="Tagging\OutliningTag.cs" />
     <Compile Include="Tagging\OutliningTagger.cs" />
     <Compile Include="Tagging\OutliningTaggerProvider.cs" />
     <Compile Include="Tagging\ClassificationTagger.cs" />

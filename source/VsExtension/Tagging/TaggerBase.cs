@@ -13,6 +13,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
 
@@ -76,5 +79,17 @@ namespace PowerStudio.VsExtension.Tagging
 #pragma warning restore 0067
 
         protected abstract void ReParse();
+
+        protected virtual IEnumerable<PSToken> GetTokens( ITextSnapshot textSnapshot, bool includeErrors )
+        {
+            string text = textSnapshot.GetText();
+            Collection<PSParseError> errors;
+            Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
+            if ( includeErrors )
+            {
+                return tokens.Union( errors.Select( error => error.Token ) ).ToList();
+            }
+            return tokens;
+        }
     }
 }

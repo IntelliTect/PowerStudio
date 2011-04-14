@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
 
@@ -23,16 +24,12 @@ namespace PowerStudio.VsExtension.Tagging
 {
     public class OutliningTagger : TaggerBase<IOutliningRegionTag>
     {
-        private string ellipsis = "..."; //the characters that are displayed when the region is collapsed
-        private string endHide = "}"; //the characters that end the outlining region
-        //string hoverText = "hover text"; //the contents of the tooltip for the collapsed span
-        private List<Region> regions;
-        private string startHide = "{"; //the characters that start the outlining region
+        private List<Region> _Regions;
 
         public OutliningTagger( ITextBuffer buffer )
                 : base( buffer )
         {
-            regions = new List<Region>();
+            _Regions = new List<Region>();
             ReParse();
         }
 
@@ -60,28 +57,19 @@ namespace PowerStudio.VsExtension.Tagging
             {
                 yield break;
             }
-            List<Region> currentRegions = regions;
+            List<Region> currentRegions = _Regions;
             ITextSnapshot currentSnapshot = Snapshot;
             SnapshotSpan entire =
-                    new SnapshotSpan( spans[0].Start, spans[spans.Count - 1].End ).TranslateTo( currentSnapshot,
-                                                                                                SpanTrackingMode.
-                                                                                                        EdgeExclusive );
+                    new SnapshotSpan( spans[0].Start, spans[spans.Count - 1].End )
+                            .TranslateTo( currentSnapshot, SpanTrackingMode.EdgeExclusive );
             int startLineNumber = entire.Start.GetContainingLine().LineNumber;
             int endLineNumber = entire.End.GetContainingLine().LineNumber;
-            foreach ( Region region in currentRegions )
+            foreach ( SnapshotSpan span in from region in currentRegions
+                                           where region.StartLine <= endLineNumber && region.EndLine >= startLineNumber
+                                           select region.Span )
             {
-                if ( region.StartLine <= endLineNumber &&
-                     region.EndLine >= startLineNumber )
-                {
-                    ITextSnapshotLine startLine = currentSnapshot.GetLineFromLineNumber( region.StartLine );
-                    ITextSnapshotLine endLine = currentSnapshot.GetLineFromLineNumber( region.EndLine );
-
-                    //the region starts at the beginning of the "[", and goes until the *end* of the line that contains the "]".
-                    yield return new TagSpan<IOutliningRegionTag>(
-                            new SnapshotSpan( startLine.Start + region.StartOffset,
-                                              endLine.End ),
-                            new OutliningRegionTag( false, false, ellipsis, startLine.GetText() ) );
-                }
+                var tag = new OutliningTag( currentSnapshot, span, false );
+                yield return new TagSpan<IOutliningRegionTag>( span, tag );
             }
         }
 
@@ -89,105 +77,16 @@ namespace PowerStudio.VsExtension.Tagging
 
         protected override void ReParse()
         {
-            // TODO: Rewrite this with a stack.
-
             ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
-            var newRegions = new List<Region>();
+            List<Region> newRegions = GetNewRegions( newSnapshot );
 
-            //keep the current (deepest) partial region, which will have
-            // references to any parent partial regions.
-            PartialRegion currentRegion = null;
-
-            foreach ( ITextSnapshotLine line in newSnapshot.Lines )
-            {
-                //int regionStart = -1;
-                int startRegionStart = 0;
-                int endRegionStart = 0;
-                string text = line.GetText();
-
-                //lines that contain a "[" denote the start of a new region.
-                while ( startRegionStart != -1 &&
-                        startRegionStart < text.Length )
-                {
-                    if (
-                            ( endRegionStart =
-                              text.IndexOf( endHide,
-                                            startRegionStart == -1 ? 0 : startRegionStart,
-                                            StringComparison.Ordinal ) ) !=
-                            -1 )
-                    {
-                        int currentLevel = ( currentRegion != null ) ? currentRegion.Level : 1;
-                        int closingLevel = currentLevel;
-
-                        //the regions match
-                        if ( currentRegion != null &&
-                             currentLevel == closingLevel )
-                        {
-                            newRegions.Add( new Region
-                                            {
-                                                    Level = currentLevel,
-                                                    StartLine = currentRegion.StartLine,
-                                                    StartOffset = currentRegion.StartOffset,
-                                                    EndLine = line.LineNumber
-                                            } );
-
-                            currentRegion = currentRegion.PartialParent;
-                        }
-                    }
-
-                    if ( ( startRegionStart = text.IndexOf( startHide, startRegionStart, StringComparison.Ordinal ) ) !=
-                         -1 )
-                    {
-                        int currentLevel = ( currentRegion != null ) ? currentRegion.Level : 1;
-                        int newLevel = currentLevel + 1;
-
-                        //levels are the same and we have an existing region;
-                        //end the current region and start the next
-                        if ( currentLevel == newLevel &&
-                             currentRegion != null )
-                        {
-                            newRegions.Add( new Region
-                                            {
-                                                    Level = currentRegion.Level,
-                                                    StartLine = currentRegion.StartLine,
-                                                    StartOffset = currentRegion.StartOffset,
-                                                    EndLine = line.LineNumber
-                                            } );
-
-                            currentRegion = new PartialRegion
-                                            {
-                                                    Level = newLevel,
-                                                    StartLine = line.LineNumber,
-                                                    StartOffset = startRegionStart,
-                                                    PartialParent = currentRegion.PartialParent
-                                            };
-                        }
-                                //this is a new (sub)region
-                        else
-                        {
-                            currentRegion = new PartialRegion
-                                            {
-                                                    Level = newLevel,
-                                                    StartLine = line.LineNumber,
-                                                    StartOffset = startRegionStart,
-                                                    PartialParent = currentRegion
-                                            };
-                        }
-                    }
-                    if ( startRegionStart != -1 )
-                    {
-                        startRegionStart++;
-                    }
-                }
-            }
             //determine the changed span, and send a changed event with the new spans
             var oldSpans =
-                    new List<Span>( regions.Select( r => AsSnapshotSpan( r, Snapshot )
-                                                                 .TranslateTo( newSnapshot,
-                                                                               SpanTrackingMode.EdgeExclusive )
-                                                                 .Span ) );
+                    new List<Span>( _Regions.Select( region => region.Span.TranslateTo( newSnapshot,
+                                                                              SpanTrackingMode.EdgeExclusive )
+                                                                  .Span ) );
             var newSpans =
-                    new List<Span>( newRegions.Select( r => AsSnapshotSpan( r, newSnapshot ).Span ) );
+                    new List<Span>( newRegions.Select( region => region.Span.Span ) );
 
             var oldSpanCollection = new NormalizedSpanCollection( oldSpans );
             var newSpanCollection = new NormalizedSpanCollection( newSpans );
@@ -212,41 +111,71 @@ namespace PowerStudio.VsExtension.Tagging
             }
 
             Snapshot = newSnapshot;
-            regions = newRegions;
+            _Regions = newRegions;
 
             if ( changeStart <= changeEnd )
             {
                 OnTagsChanged(
-                        new SnapshotSpanEventArgs( new SnapshotSpan( Snapshot, Span.FromBounds( changeStart, changeEnd ) ) ) );
+                        new SnapshotSpanEventArgs( new SnapshotSpan( newSnapshot,
+                                                                     Span.FromBounds( changeStart, changeEnd ) ) ) );
             }
         }
 
-        private static SnapshotSpan AsSnapshotSpan( Region region, ITextSnapshot snapshot )
+        private List<Region> GetNewRegions( ITextSnapshot newSnapshot )
         {
-            ITextSnapshotLine startLine = snapshot.GetLineFromLineNumber( region.StartLine );
-            ITextSnapshotLine endLine = ( region.StartLine == region.EndLine )
-                                                ? startLine
-                                                : snapshot.GetLineFromLineNumber( region.EndLine );
-            return new SnapshotSpan( startLine.Start + region.StartOffset, endLine.End );
+            const int lineThreshold = 2;
+            var regions = new List<Region>();
+            var stack = new Stack<PSToken>();
+            IEnumerable<PSToken> tokens = GetTokens( newSnapshot, true );
+            foreach ( PSToken token in tokens )
+            {
+                switch ( token.Type )
+                {
+                    case PSTokenType.GroupStart:
+                    {
+                        stack.Push( token );
+                        break;
+                    }
+                    case PSTokenType.GroupEnd:
+                    {
+                        if ( stack.Count == 0 )
+                        {
+                            continue;
+                        }
+                        PSToken startToken = stack.Pop();
+                        if ( token.EndLine - startToken.StartLine < lineThreshold )
+                        {
+                            continue;
+                        }
+                        regions.Add( new Region
+                                     {
+                                             StartLine = startToken.StartLine,
+                                             EndLine = token.StartLine,
+                                             Span = AsSnapshotSpan( newSnapshot, startToken, token )
+                                     } );
+                    }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return regions;
         }
 
-        #region Nested type: PartialRegion
-
-        private class PartialRegion
+        private static SnapshotSpan AsSnapshotSpan( ITextSnapshot snapshot, PSToken startToken, PSToken endToken )
         {
-            public int StartLine { get; set; }
-            public int StartOffset { get; set; }
-            public int Level { get; set; }
-            public PartialRegion PartialParent { get; set; }
+            var startSnapshot = new SnapshotSpan( snapshot, new Span( startToken.Start, startToken.Length ) );
+            var endSnapshot = new SnapshotSpan( snapshot, new Span( endToken.Start, endToken.Length ) );
+            return new SnapshotSpan( startSnapshot.Start, endSnapshot.End );
         }
-
-        #endregion
 
         #region Nested type: Region
 
-        private class Region : PartialRegion
+        private class Region
         {
             public int EndLine { get; set; }
+            public SnapshotSpan Span { get; set; }
+            public int StartLine { get; set; }
         }
 
         #endregion
