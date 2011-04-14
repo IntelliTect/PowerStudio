@@ -22,12 +22,15 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public class PowerShellTokenTagger : PowerShellTagger<PowerShellTokenTag>
+    public class TokenTagger : TaggerBase<TokenTag>
     {
-        public PowerShellTokenTagger( ITextBuffer buffer )
+        public TokenTagger( ITextBuffer buffer )
                 : base( buffer )
         {
+            ReParse();
         }
+
+        private List<TokenTag> Tags { get; set; }
 
         /// <summary>
         ///   Gets all the tags that overlap the <paramref name = "spans" />.
@@ -45,7 +48,7 @@ namespace PowerStudio.VsExtension.Tagging
         ///     which allows lazy evaluation of the entire tagging stack.
         ///   </para>
         /// </remarks>
-        public override IEnumerable<ITagSpan<PowerShellTokenTag>> GetTags( NormalizedSnapshotSpanCollection spans )
+        public override IEnumerable<ITagSpan<TokenTag>> GetTags( NormalizedSnapshotSpanCollection spans )
         {
             if ( spans.Count == 0 ||
                  Buffer.CurrentSnapshot.Length == 0 )
@@ -53,20 +56,29 @@ namespace PowerStudio.VsExtension.Tagging
                 //there is no content in the buffer
                 yield break;
             }
-            foreach ( SnapshotSpan currentSpan in spans )
+            List<TokenTag> tags = Tags;
+            foreach ( TokenTag tokenTag in tags )
             {
-                int curLoc = currentSpan.Start.Position;
-                string text = currentSpan.GetText();
-                Collection<PSParseError> errors;
-                Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
-                foreach ( PSToken token in tokens.Union( errors.Select( error => error.Token ) ) )
-                {
-                    var tokenSpan = new SnapshotSpan( currentSpan.Snapshot,
-                                                      new Span( token.Start + curLoc, token.Length ) );
-                    var tokenTag = new PowerShellTokenTag { TokenType = token.Type };
-                    yield return new TagSpan<PowerShellTokenTag>( tokenSpan, tokenTag );
-                }
+                yield return new TagSpan<TokenTag>( tokenTag.Span, tokenTag );
             }
+        }
+
+        protected override void ReParse()
+        {
+            ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
+
+            int curLoc = 0;
+            string text = newSnapshot.GetText();
+            Collection<PSParseError> errors;
+            Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
+            List<TokenTag> tags = ( from token in tokens.Union( errors.Select( error => error.Token ) )
+                                    let tokenSpan =
+                                            new SnapshotSpan( Snapshot, new Span( token.Start + curLoc, token.Length ) )
+                                    select new TokenTag { TokenType = token.Type, Span = tokenSpan } ).ToList();
+
+            Snapshot = newSnapshot;
+            Tags = tags;
+            OnTagsChanged( new SnapshotSpanEventArgs( new SnapshotSpan( Snapshot, Span.FromBounds( 0, curLoc ) ) ) );
         }
     }
 }

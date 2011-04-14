@@ -11,6 +11,7 @@
 
 #region Using Directives
 
+using System;
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
@@ -25,7 +26,7 @@ namespace PowerStudio.VsExtension.Tagging
     [Export( typeof (ITaggerProvider) )]
     [ContentType( LanguageConfiguration.Name )]
     [TagType( typeof (ClassificationTag) )]
-    public class PowerShellClassificationTaggerProvider : ITaggerProvider
+    public class ClassificationTaggerProvider : TaggerProviderBase
     {
         [Import]
         internal IBufferTagAggregatorFactoryService AggregatorFactory;
@@ -33,22 +34,12 @@ namespace PowerStudio.VsExtension.Tagging
         [Import]
         internal IClassificationTypeRegistryService ClassificationTypeRegistry;
 
-        #region Implementation of ITaggerProvider
-
-        /// <summary>
-        ///   Creates the tagger.
-        /// </summary>
-        /// <typeparam name = "T"></typeparam>
-        /// <param name = "buffer">The buffer.</param>
-        /// <returns></returns>
-        public ITagger<T> CreateTagger<T>( ITextBuffer buffer ) where T : ITag
+        protected override Func<ITagger<T>> GetFactory<T>( ITextBuffer buffer )
         {
-            ITagAggregator<PowerShellTokenTag> tagAggregator =
-                    AggregatorFactory.CreateTagAggregator<PowerShellTokenTag>( buffer );
+            ITagAggregator<TokenTag> tagAggregator =
+                    AggregatorFactory.CreateTagAggregator<TokenTag>( buffer );
             var tokenClassification = new TokenClassification( ClassificationTypeRegistry );
-            return (ITagger<T>) new PowerShellClassificationTagger( buffer, tagAggregator, tokenClassification );
+            return () => new ClassificationTagger( buffer, tagAggregator, tokenClassification ) as ITagger<T>;
         }
-
-        #endregion
     }
 }

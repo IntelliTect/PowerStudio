@@ -20,14 +20,37 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public abstract class PowerShellTagger<T> : ITagger<T>
+    public abstract class TaggerBase<T> : ITagger<T>
             where T : ITag
     {
-        protected ITextBuffer Buffer { get; private set; }
-
-        protected PowerShellTagger( ITextBuffer buffer )
+        protected TaggerBase( ITextBuffer buffer )
         {
             Buffer = buffer;
+            Snapshot = Buffer.CurrentSnapshot;
+            Buffer.Changed += BufferChanged;
+        }
+
+        protected ITextBuffer Buffer { get; private set; }
+        protected ITextSnapshot Snapshot { get; set; }
+
+        private void BufferChanged( object sender, TextContentChangedEventArgs e )
+        {
+            // If this isn't the most up-to-date version of the buffer, then ignore it for now (we'll eventually get another change event).
+            if ( e.After !=
+                 Buffer.CurrentSnapshot )
+            {
+                return;
+            }
+            ReParse();
+        }
+
+        protected void OnTagsChanged( SnapshotSpanEventArgs args )
+        {
+            EventHandler<SnapshotSpanEventArgs> handler = TagsChanged;
+            if ( handler != null )
+            {
+                handler( this, args );
+            }
         }
 
         /// <summary>
@@ -51,5 +74,7 @@ namespace PowerStudio.VsExtension.Tagging
 #pragma warning disable 0067
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
 #pragma warning restore 0067
+
+        protected abstract void ReParse();
     }
 }

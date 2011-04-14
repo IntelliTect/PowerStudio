@@ -12,14 +12,16 @@
 #region Using Directives
 
 using System.Management.Automation;
+using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
 
 #endregion
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public class PowerShellTokenTag : ITag
+    public class TokenTag : ITag
     {
         public PSTokenType TokenType { get; set; }
+        public SnapshotSpan Span { get; set; }
     }
 }

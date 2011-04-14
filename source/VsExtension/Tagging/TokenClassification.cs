@@ -1,4 +1,15 @@
-﻿#region Using Directives
+﻿#region License
+
+// 
+// Copyright (c) 2011, PowerStudio Project Contributors
+// 
+// Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
+// See the file LICENSE.txt for details.
+// 
+
+#endregion
+
+#region Using Directives
 
 using System.Collections.Generic;
 using System.Management.Automation;
@@ -29,13 +40,13 @@ namespace PowerStudio.VsExtension.Tagging
                     registryService.GetClassificationType( PredefinedClassificationTypeNames.Other );
 
             TokenClassificationMapping[PSTokenType.Command] =
-                    registryService.GetClassificationType( PredefinedClassificationTypeNames.Other );
+                    registryService.GetClassificationType( PredefinedClassificationTypeNames.Identifier );
 
             TokenClassificationMapping[PSTokenType.CommandParameter] =
-                    registryService.GetClassificationType( PredefinedClassificationTypeNames.Identifier );
+                    registryService.GetClassificationType( PredefinedClassificationTypeNames.SymbolDefinition );
 
             TokenClassificationMapping[PSTokenType.CommandArgument] =
-                    registryService.GetClassificationType( PredefinedClassificationTypeNames.Identifier );
+                    registryService.GetClassificationType( PredefinedClassificationTypeNames.SymbolReference );
 
             TokenClassificationMapping[PSTokenType.Number] =
                     registryService.GetClassificationType( PredefinedClassificationTypeNames.Number );
@@ -44,13 +55,13 @@ namespace PowerStudio.VsExtension.Tagging
                     registryService.GetClassificationType( PredefinedClassificationTypeNames.String );
 
             TokenClassificationMapping[PSTokenType.Variable] =
-                    registryService.GetClassificationType( PredefinedClassificationTypeNames.Identifier );
+                    registryService.GetClassificationType( PredefinedClassificationTypeNames.SymbolReference );
 
             TokenClassificationMapping[PSTokenType.Member] =
                     registryService.GetClassificationType( PredefinedClassificationTypeNames.Identifier );
 
             TokenClassificationMapping[PSTokenType.LoopLabel] =
-                    registryService.GetClassificationType( PredefinedClassificationTypeNames.Identifier );
+                    registryService.GetClassificationType( PredefinedClassificationTypeNames.SymbolDefinition );
 
             TokenClassificationMapping[PSTokenType.Attribute] =
                     registryService.GetClassificationType( PredefinedClassificationTypeNames.Operator );

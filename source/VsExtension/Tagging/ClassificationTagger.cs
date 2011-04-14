@@ -20,17 +20,17 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public class PowerShellClassificationTagger : ITagger<ClassificationTag>
+    public class ClassificationTagger : ITagger<ClassificationTag>
     {
         /// <summary>
-        ///   Initializes a new instance of the <see cref = "PowerShellClassificationTagger" /> class.
+        ///   Initializes a new instance of the <see cref = "ClassificationTagger" /> class.
         /// </summary>
         /// <param name = "buffer">The buffer.</param>
         /// <param name = "aggregator">The aggregator.</param>
         /// <param name = "tokenClassification">The token classification.</param>
-        public PowerShellClassificationTagger( ITextBuffer buffer,
-                                               ITagAggregator<PowerShellTokenTag> aggregator,
-                                               ITokenClassification tokenClassification )
+        public ClassificationTagger( ITextBuffer buffer,
+                                     ITagAggregator<TokenTag> aggregator,
+                                     ITokenClassification tokenClassification )
         {
             Buffer = buffer;
             Aggregator = aggregator;
@@ -38,7 +38,7 @@ namespace PowerStudio.VsExtension.Tagging
         }
 
         public ITextBuffer Buffer { get; set; }
-        public ITagAggregator<PowerShellTokenTag> Aggregator { get; set; }
+        public ITagAggregator<TokenTag> Aggregator { get; set; }
         public ITokenClassification TokenClassification { get; set; }
 
         #region Implementation of ITagger<out ClassificationTag>
@@ -63,7 +63,7 @@ namespace PowerStudio.VsExtension.Tagging
         {
             foreach ( SnapshotSpan span in spans )
             {
-                foreach ( IMappingTagSpan<PowerShellTokenTag> tagSpan in Aggregator.GetTags( span ) )
+                foreach ( IMappingTagSpan<TokenTag> tagSpan in Aggregator.GetTags( span ) )
                 {
                     NormalizedSnapshotSpanCollection tokenSpan = tagSpan.Span.GetSpans( span.Snapshot );
 

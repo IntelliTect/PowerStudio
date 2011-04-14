@@ -11,6 +11,7 @@
 
 #region Using Directives
 
+using System;
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
@@ -23,22 +24,13 @@ namespace PowerStudio.VsExtension.Tagging
 {
     [Export( typeof (ITaggerProvider) )]
     [ContentType( LanguageConfiguration.Name )]
-    [TagType( typeof (ErrorTag) )]
+    [TagType( typeof (TokenTag) )]
     [Order( Before = "default" )]
-    public class PowerShellErrorTokenTaggerProvider : ITaggerProvider
+    public class TokenTaggerProvider : TaggerProviderBase
     {
-        #region Implementation of ITaggerProvider
-
-        /// <summary>
-        ///   Creates a tag provider for the specified buffer.
-        /// </summary>
-        /// <param name = "buffer">The <see cref = "T:Microsoft.VisualStudio.Text.ITextBuffer" />.</param>
-        /// <typeparam name = "T">The type of the tag.</typeparam>
-        public ITagger<T> CreateTagger<T>( ITextBuffer buffer ) where T : ITag
+        protected override Func<ITagger<T>> GetFactory<T>( ITextBuffer buffer )
         {
-            return (ITagger<T>) new PowerShellErrorTokenTagger( buffer );
+            return () => new TokenTagger( buffer ) as ITagger<T>;
         }
-
-        #endregion
     }
 }
