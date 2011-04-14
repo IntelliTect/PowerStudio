@@ -28,7 +28,6 @@ namespace PowerStudio.VsExtension.Intellisense
         private IQuickInfoSession _Session;
         private ITextView _TextView;
 
-
         /// <summary>
         ///   Initializes a new instance of the <see cref = "PowerShellQuickInfoController" /> class.
         /// </summary>
@@ -42,7 +41,6 @@ namespace PowerStudio.VsExtension.Intellisense
             _TextView = textView;
             _SubjectBuffers = subjectBuffers;
             _ComponentContext = componentContext;
-
             _TextView.MouseHover += OnTextViewMouseHover;
         }
 
@@ -94,18 +92,20 @@ namespace PowerStudio.VsExtension.Intellisense
         {
             SnapshotPoint? point = GetMousePosition( new SnapshotPoint( _TextView.TextSnapshot, e.Position ) );
 
-            if ( point != null )
+            if ( !point.HasValue )
             {
-                ITrackingPoint triggerPoint = point.Value.Snapshot.CreateTrackingPoint( point.Value.Position,
-                                                                                        PointTrackingMode.Positive );
+                return;
+            }
 
-                // Find the broker for this buffer
+            ITrackingPoint triggerPoint = point.Value.Snapshot.CreateTrackingPoint( point.Value.Position,
+                                                                                    PointTrackingMode.Positive );
 
-                if ( !_ComponentContext.QuickInfoBroker.IsQuickInfoActive( _TextView ) )
-                {
-                    _Session = _ComponentContext.QuickInfoBroker.CreateQuickInfoSession( _TextView, triggerPoint, true );
-                    _Session.Start();
-                }
+            // Find the broker for this buffer
+
+            if ( !_ComponentContext.QuickInfoBroker.IsQuickInfoActive( _TextView ) )
+            {
+                _Session = _ComponentContext.QuickInfoBroker.CreateQuickInfoSession( _TextView, triggerPoint, true );
+                _Session.Start();
             }
         }
 

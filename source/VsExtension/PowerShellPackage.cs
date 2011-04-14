@@ -17,7 +17,6 @@ using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Shell;
-using PowerStudio.VsExtension.Parsing;
 using PowerStudio.VsExtension.Project;
 
 #endregion

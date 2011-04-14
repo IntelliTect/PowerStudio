@@ -16,7 +16,7 @@ using Microsoft.VisualStudio.Utilities;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Parsing
+namespace PowerStudio.VsExtension
 {
     public static class LanguageConfiguration
     {

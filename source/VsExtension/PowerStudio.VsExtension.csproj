@@ -141,8 +141,8 @@
     <Compile Include="Intellisense\PowerShellQuickInfoControllerProvider.cs" />
     <Compile Include="Intellisense\PowerShellQuickInfoSource.cs" />
     <Compile Include="Intellisense\PowerShellQuickInfoSourceProvider.cs" />
-    <Compile Include="Parsing\LanguageConfiguration.cs" />
-    <Compile Include="Parsing\PowerShellLanguageService.cs" />
+    <Compile Include="LanguageConfiguration.cs" />
+    <Compile Include="PowerShellLanguageService.cs" />
     <Compile Include="PowerShellPackage.cs" />
     <Compile Include="Project\GeneralPropertyPage.cs" />
     <Compile Include="Project\OAPsProject.cs" />

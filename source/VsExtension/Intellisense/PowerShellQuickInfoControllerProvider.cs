@@ -24,7 +24,7 @@ namespace PowerStudio.VsExtension.Intellisense
 {
     [Export( typeof (IIntellisenseControllerProvider) )]
     [Name( "PowerShell QuickInfo Controller" )]
-    [ContentType( "text" )]
+    [ContentType( LanguageConfiguration.Name )]
     internal class PowerShellQuickInfoControllerProvider : IIntellisenseControllerProvider
     {
         [Import]

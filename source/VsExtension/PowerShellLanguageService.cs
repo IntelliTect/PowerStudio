@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Parsing
+namespace PowerStudio.VsExtension
 {
     [Guid( PsConstants.PsLanuageServiceGuidString )]
     public class PowerShellLanguageService : IVsLanguageInfo
