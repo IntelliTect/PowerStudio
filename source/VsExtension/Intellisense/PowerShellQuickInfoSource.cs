@@ -17,6 +17,7 @@ using System.Linq;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
+using PowerStudio.VsExtension.Tagging;
 
 #endregion
 
@@ -24,7 +25,7 @@ namespace PowerStudio.VsExtension.Intellisense
 {
     public class PowerShellQuickInfoSource : IQuickInfoSource
     {
-        private readonly ITagAggregator<ErrorTag> _Aggregator;
+        private readonly ITagAggregator<ErrorTokenTag> _Aggregator;
         private readonly ITextBuffer _Buffer;
         private readonly PowerShellQuickInfoSourceProvider _QuickInfoSourceProvider;
         private bool _Disposed;
@@ -36,7 +37,7 @@ namespace PowerStudio.VsExtension.Intellisense
         /// <param name = "aggregator">The aggregator.</param>
         /// <param name = "quickInfoSourceProvider">The quick info source provider.</param>
         public PowerShellQuickInfoSource( ITextBuffer buffer,
-                                          ITagAggregator<ErrorTag> aggregator,
+                                          ITagAggregator<ErrorTokenTag> aggregator,
                                           PowerShellQuickInfoSourceProvider quickInfoSourceProvider )
         {
             _Aggregator = aggregator;
@@ -64,20 +65,20 @@ namespace PowerStudio.VsExtension.Intellisense
         {
             if ( _Disposed )
             {
-                throw new ObjectDisposedException( "TestQuickInfoSource" );
+                throw new ObjectDisposedException( "PowerShellQuickInfoSource" );
             }
 
             ITextSnapshot currentSnapshot = _Buffer.CurrentSnapshot;
-            var triggerPoint = session.GetTriggerPoint( currentSnapshot );
+            SnapshotPoint? triggerPoint = session.GetTriggerPoint( currentSnapshot );
 
-            if (!triggerPoint.HasValue)
+            if ( !triggerPoint.HasValue )
             {
                 applicableToSpan = null;
                 return;
             }
 
             var bufferSpan = new SnapshotSpan( currentSnapshot, 0, currentSnapshot.Length );
-            foreach ( IMappingTagSpan<ErrorTag> tagSpan in _Aggregator.GetTags( bufferSpan ) )
+            foreach ( var tagSpan in _Aggregator.GetTags( bufferSpan ) )
             {
                 foreach ( SnapshotSpan span in tagSpan.Span
                         .GetSpans( _Buffer )

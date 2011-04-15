@@ -22,7 +22,7 @@ namespace PowerStudio.VsExtension.Tagging
     {
         #region ITokenTag Members
 
-        public PSTokenType TokenType { get; set; }
+        public PSToken Token { get; set; }
         public SnapshotSpan Span { get; set; }
 
         #endregion

@@ -21,7 +21,7 @@ namespace PowerStudio.VsExtension.Tagging
 {
     public interface ITokenTag : ITag
     {
-        PSTokenType TokenType { get; }
+        PSToken Token { get; }
         SnapshotSpan Span { get; }
     }
 }

@@ -37,25 +37,17 @@ namespace PowerStudio.VsExtension.Tagging
 
         public ITokenClassification TokenClassification { get; set; }
 
-        #region Implementation of ITagger<out ClassificationTag>
-
-        protected override void Parse()
+        protected override List<TokenClassificationTag> GetTags( ITextSnapshot snapshot )
         {
-            ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
-            IEnumerable<PSToken> tokens = GetTokens( newSnapshot, true );
+            IEnumerable<PSToken> tokens = GetTokens( snapshot, true );
 
             List<TokenClassificationTag> tags = ( from token in tokens
                                                   select new TokenClassificationTag( TokenClassification[token.Type] )
                                                          {
-                                                                 TokenType = token.Type,
-                                                                 Span = AsSnapshotSpan( newSnapshot, token )
+                                                                 Token = token,
+                                                                 Span = AsSnapshotSpan( snapshot, token )
                                                          } ).ToList();
-
-            Snapshot = newSnapshot;
-            Tags = tags.AsReadOnly();
-            OnTagsChanged( new SnapshotSpanEventArgs( new SnapshotSpan( newSnapshot, Span.FromBounds( 0, newSnapshot.Length ) ) ) );
+            return tags;
         }
-
-        #endregion
     }
 }

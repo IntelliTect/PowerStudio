@@ -27,22 +27,16 @@ namespace PowerStudio.VsExtension.Tagging
             Parse();
         }
 
-        protected override void Parse()
+        protected override List<ErrorTokenTag> GetTags( ITextSnapshot snapshot )
         {
-            ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
-
-            List<ErrorTokenTag> tags = ( from error in GetErrorTokens( newSnapshot )
+            List<ErrorTokenTag> tags = ( from error in GetErrorTokens( snapshot )
                                          select new ErrorTokenTag( error.Message )
                                                 {
-                                                        TokenType = error.Token.Type,
-                                                        Span = AsSnapshotSpan( newSnapshot, error.Token )
+                                                        Token = error.Token,
+                                                        Span = AsSnapshotSpan( snapshot, error.Token )
                                                 } )
                     .ToList();
-
-            Snapshot = newSnapshot;
-            Tags = tags.AsReadOnly();
-            OnTagsChanged(
-                    new SnapshotSpanEventArgs( new SnapshotSpan( newSnapshot, Span.FromBounds( 0, newSnapshot.Length ) ) ) );
+            return tags;
         }
     }
 }

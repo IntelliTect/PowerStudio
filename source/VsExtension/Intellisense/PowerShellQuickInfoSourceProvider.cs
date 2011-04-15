@@ -17,6 +17,7 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
+using PowerStudio.VsExtension.Tagging;
 
 #endregion
 
@@ -45,7 +46,7 @@ namespace PowerStudio.VsExtension.Intellisense
         public IQuickInfoSource TryCreateQuickInfoSource( ITextBuffer textBuffer )
         {
             return new PowerShellQuickInfoSource( textBuffer,
-                                                  TagAggregatorFactory.CreateTagAggregator<ErrorTag>( textBuffer ),
+                                                  TagAggregatorFactory.CreateTagAggregator<ErrorTokenTag>(textBuffer),
                                                   this );
         }
 

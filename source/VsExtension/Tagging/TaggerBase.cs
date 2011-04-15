@@ -38,25 +38,7 @@ namespace PowerStudio.VsExtension.Tagging
         protected ITextSnapshot Snapshot { get; set; }
         protected ReadOnlyCollection<T> Tags { get; set; }
 
-        private void BufferChanged( object sender, TextContentChangedEventArgs e )
-        {
-            // If this isn't the most up-to-date version of the buffer, then ignore it for now (we'll eventually get another change event).
-            if ( e.After !=
-                 Buffer.CurrentSnapshot )
-            {
-                return;
-            }
-            Parse();
-        }
-
-        protected void OnTagsChanged( SnapshotSpanEventArgs args )
-        {
-            EventHandler<SnapshotSpanEventArgs> handler = TagsChanged;
-            if ( handler != null )
-            {
-                handler( this, args );
-            }
-        }
+        #region ITagger<T> Members
 
         /// <summary>
         ///   Gets all the tags that overlap the <paramref name = "spans" />.
@@ -83,17 +65,97 @@ namespace PowerStudio.VsExtension.Tagging
                 yield break;
             }
             ReadOnlyCollection<T> tags = Tags;
-            foreach ( T tokenTag in tags )
+            ITextSnapshot currentSnapshot = Snapshot;
+            SnapshotSpan span =
+                    new SnapshotSpan( spans[0].Start, spans[spans.Count - 1].End )
+                            .TranslateTo( currentSnapshot, SpanTrackingMode.EdgeExclusive );
+
+            foreach ( T tag in from tag in tags
+                               where IsTokenInSpan( tag, currentSnapshot, span )
+                               select tag )
             {
-                yield return new TagSpan<T>( tokenTag.Span, tokenTag );
+                yield return new TagSpan<T>( tag.Span, tag );
             }
         }
 
-#pragma warning disable 0067
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
-#pragma warning restore 0067
 
-        protected abstract void Parse();
+        #endregion
+
+        private void BufferChanged( object sender, TextContentChangedEventArgs e )
+        {
+            // If this isn't the most up-to-date version of the buffer, then ignore it for now (we'll eventually get another change event).
+            if ( e.After !=
+                 Buffer.CurrentSnapshot )
+            {
+                return;
+            }
+            Parse();
+        }
+
+        protected void OnTagsChanged( SnapshotSpanEventArgs args )
+        {
+            EventHandler<SnapshotSpanEventArgs> handler = TagsChanged;
+            if ( handler != null )
+            {
+                handler( this, args );
+            }
+        }
+
+        protected virtual bool IsTokenInSpan( T tag, ITextSnapshot snapshot, SnapshotSpan span )
+        {
+            return span.Contains( tag.Span.TranslateTo( snapshot, SpanTrackingMode.EdgeExclusive ) );
+        }
+
+        protected virtual void PublishTagChanges( ITextSnapshot newSnapshot, List<T> newTags )
+        {
+            var oldSpans =
+                    new List<Span>( Tags.Select( tag => tag.Span.TranslateTo( newSnapshot,
+                                                                              SpanTrackingMode.EdgeExclusive )
+                                                                .Span ) );
+            var newSpans =
+                    new List<Span>( newTags.Select( tag => tag.Span.Span ) );
+
+            var oldSpanCollection = new NormalizedSpanCollection( oldSpans );
+            var newSpanCollection = new NormalizedSpanCollection( newSpans );
+
+            //the changed regions are regions that appear in one set or the other, but not both.
+            NormalizedSpanCollection removed =
+                    NormalizedSpanCollection.Difference( oldSpanCollection, newSpanCollection );
+
+            int changeStart = int.MaxValue;
+            int changeEnd = -1;
+
+            if ( removed.Count > 0 )
+            {
+                changeStart = removed[0].Start;
+                changeEnd = removed[removed.Count - 1].End;
+            }
+
+            if ( newSpans.Count > 0 )
+            {
+                changeStart = Math.Min( changeStart, newSpans[0].Start );
+                changeEnd = Math.Max( changeEnd, newSpans[newSpans.Count - 1].End );
+            }
+
+            Snapshot = newSnapshot;
+            Tags = newTags.AsReadOnly();
+
+            if ( changeStart <= changeEnd )
+            {
+                var snapshot = new SnapshotSpan( newSnapshot, Span.FromBounds( changeStart, changeEnd ) );
+                OnTagsChanged( new SnapshotSpanEventArgs( snapshot ) );
+            }
+        }
+
+        protected virtual void Parse()
+        {
+            ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
+            List<T> tags = GetTags( newSnapshot );
+            PublishTagChanges( newSnapshot, tags );
+        }
+
+        protected abstract List<T> GetTags( ITextSnapshot snapshot );
 
         protected virtual IEnumerable<PSToken> GetTokens( ITextSnapshot textSnapshot, bool includeErrors )
         {
