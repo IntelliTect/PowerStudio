@@ -107,6 +107,15 @@ namespace PowerStudio.VsExtension.Tagging
             return span.Contains( tag.Span.TranslateTo( snapshot, SpanTrackingMode.EdgeExclusive ) );
         }
 
+        protected virtual void Parse()
+        {
+            ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
+            List<T> tags = GetTags( newSnapshot );
+            PublishTagChanges( newSnapshot, tags );
+        }
+
+        protected abstract List<T> GetTags( ITextSnapshot snapshot );
+
         protected virtual void PublishTagChanges( ITextSnapshot newSnapshot, List<T> newTags )
         {
             var oldSpans =
@@ -147,15 +156,6 @@ namespace PowerStudio.VsExtension.Tagging
                 OnTagsChanged( new SnapshotSpanEventArgs( snapshot ) );
             }
         }
-
-        protected virtual void Parse()
-        {
-            ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
-            List<T> tags = GetTags( newSnapshot );
-            PublishTagChanges( newSnapshot, tags );
-        }
-
-        protected abstract List<T> GetTags( ITextSnapshot snapshot );
 
         protected virtual IEnumerable<PSToken> GetTokens( ITextSnapshot textSnapshot, bool includeErrors )
         {
