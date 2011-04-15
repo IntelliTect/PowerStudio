@@ -12,9 +12,7 @@
 #region Using Directives
 
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 
 #endregion
@@ -33,17 +31,18 @@ namespace PowerStudio.VsExtension.Tagging
         {
             ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
 
-            string text = newSnapshot.GetText();
-            Collection<PSParseError> errors;
-            Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
-            List<ErrorTokenTag> tags = ( from error in errors
-                                         select
-                                                 new ErrorTokenTag( error.Message )
-                                                 { TokenType = error.Token.Type, Span = AsSnapshotSpan( newSnapshot, error.Token ) } ).ToList();
+            List<ErrorTokenTag> tags = ( from error in GetErrorTokens( newSnapshot )
+                                         select new ErrorTokenTag( error.Message )
+                                                {
+                                                        TokenType = error.Token.Type,
+                                                        Span = AsSnapshotSpan( newSnapshot, error.Token )
+                                                } )
+                    .ToList();
 
             Snapshot = newSnapshot;
             Tags = tags.AsReadOnly();
-            OnTagsChanged( new SnapshotSpanEventArgs( new SnapshotSpan( newSnapshot, Span.FromBounds( 0, newSnapshot.Length ) ) ) );
+            OnTagsChanged(
+                    new SnapshotSpanEventArgs( new SnapshotSpan( newSnapshot, Span.FromBounds( 0, newSnapshot.Length ) ) ) );
         }
     }
 }

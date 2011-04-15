@@ -107,6 +107,14 @@ namespace PowerStudio.VsExtension.Tagging
             return tokens;
         }
 
+        protected virtual IEnumerable<PSParseError> GetErrorTokens(ITextSnapshot textSnapshot)
+        {
+            string text = textSnapshot.GetText();
+            Collection<PSParseError> errors;
+            PSParser.Tokenize(text, out errors);
+            return errors;
+        }
+
         protected virtual SnapshotSpan AsSnapshotSpan( ITextSnapshot snapshot, PSToken token )
         {
             return new SnapshotSpan( snapshot, new Span( token.Start, token.Length ) );
