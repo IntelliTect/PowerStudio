@@ -159,7 +159,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tagging\ErrorTokenTag.cs" />
-    <Compile Include="Tagging\ISpanningTag.cs" />
+    <Compile Include="Tagging\ITokenTag.cs" />
     <Compile Include="Tagging\ITokenClassification.cs" />
     <Compile Include="Tagging\OutliningTag.cs" />
     <Compile Include="Tagging\OutliningTagger.cs" />
@@ -172,8 +172,6 @@
     <Compile Include="Tagging\TaggerProviderBase.cs" />
     <Compile Include="Tagging\TokenClassificationTag.cs" />
     <Compile Include="Tagging\TokenTag.cs" />
-    <Compile Include="Tagging\TokenTagger.cs" />
-    <Compile Include="Tagging\TokenTaggerProvider.cs" />
     <Compile Include="Tagging\TokenClassification.cs" />
   </ItemGroup>
   <ItemGroup>

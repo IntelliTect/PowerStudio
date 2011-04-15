@@ -12,8 +12,6 @@
 #region Using Directives
 
 using System;
-using System.Management.Automation;
-using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Tagging;
 
@@ -25,7 +23,7 @@ namespace PowerStudio.VsExtension.Tagging
     /// An implementation of <see cref="T:Microsoft.VisualStudio.Text.Tagging.IClassificationTag"/>.
     /// 
     /// </summary>
-    public class TokenClassificationTag : IClassificationTag, ISpanningTag
+    public class TokenClassificationTag : TokenTag, IClassificationTag
     {
         /// <summary>
         /// Create a new tag associated with the given type of classification.
@@ -40,9 +38,6 @@ namespace PowerStudio.VsExtension.Tagging
             }
             ClassificationType = type;
         }
-
-        public PSTokenType TokenType { get; set; }
-        public SnapshotSpan Span { get; set; }
 
         #region IClassificationTag Members
 

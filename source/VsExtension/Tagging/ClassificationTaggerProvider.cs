@@ -28,17 +28,12 @@ namespace PowerStudio.VsExtension.Tagging
     public class ClassificationTaggerProvider : TaggerProviderBase
     {
         [Import]
-        internal IBufferTagAggregatorFactoryService AggregatorFactory;
-
-        [Import]
         internal IClassificationTypeRegistryService ClassificationTypeRegistry;
 
         protected override Func<ITagger<T>> GetFactory<T>( ITextBuffer buffer )
         {
-            ITagAggregator<TokenTag> tagAggregator =
-                    AggregatorFactory.CreateTagAggregator<TokenTag>( buffer );
             var tokenClassification = new TokenClassification( ClassificationTypeRegistry );
-            return () => new ClassificationTagger( buffer, tagAggregator, tokenClassification ) as ITagger<T>;
+            return () => new ClassificationTagger( buffer, tokenClassification ) as ITagger<T>;
         }
     }
 }

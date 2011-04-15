@@ -16,8 +16,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
-using Microsoft.VisualStudio.Text.Adornments;
-using Microsoft.VisualStudio.Text.Tagging;
 
 #endregion
 
@@ -28,10 +26,10 @@ namespace PowerStudio.VsExtension.Tagging
         public ErrorTokenTagger( ITextBuffer buffer )
                 : base( buffer )
         {
-            ReParse();
+            Parse();
         }
 
-        protected override void ReParse()
+        protected override void Parse()
         {
             ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
 
@@ -45,7 +43,7 @@ namespace PowerStudio.VsExtension.Tagging
                                                                    new Span( error.Token.Start + curLoc,
                                                                              error.Token.Length ) )
                                          select
-                                                 new ErrorTokenTag( PredefinedErrorTypeNames.SyntaxError, error.Message )
+                                                 new ErrorTokenTag( error.Message )
                                                  { TokenType = error.Token.Type, Span = tokenSpan } ).ToList();
 
             Snapshot = newSnapshot;

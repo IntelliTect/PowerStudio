@@ -28,7 +28,7 @@ namespace PowerStudio.VsExtension.Tagging
         public OutliningTagger( ITextBuffer buffer )
                 : base( buffer )
         {
-            ReParse();
+            Parse();
         }
 
         #region Implementation of ITagger<out IOutliningRegionTag>
@@ -49,7 +49,7 @@ namespace PowerStudio.VsExtension.Tagging
         ///     which allows lazy evaluation of the entire tagging stack.
         ///   </para>
         /// </remarks>
-        public override IEnumerable<ITagSpan<OutliningTag>> GetTags(NormalizedSnapshotSpanCollection spans)
+        public override IEnumerable<ITagSpan<OutliningTag>> GetTags( NormalizedSnapshotSpanCollection spans )
         {
             if ( spans.Count == 0 )
             {
@@ -62,9 +62,9 @@ namespace PowerStudio.VsExtension.Tagging
                             .TranslateTo( currentSnapshot, SpanTrackingMode.EdgeExclusive );
             int startLineNumber = entire.Start.GetContainingLine().LineNumber;
             int endLineNumber = entire.End.GetContainingLine().LineNumber;
-            foreach (var tag in from tag in tags
-                                where tag.StartLine <= endLineNumber && tag.EndLine >= startLineNumber
-                                select tag)
+            foreach ( OutliningTag tag in from tag in tags
+                                          where tag.StartLine <= endLineNumber && tag.EndLine >= startLineNumber
+                                          select tag )
             {
                 yield return new TagSpan<OutliningTag>( tag.Span, tag );
             }
@@ -72,16 +72,16 @@ namespace PowerStudio.VsExtension.Tagging
 
         #endregion
 
-        protected override void ReParse()
+        protected override void Parse()
         {
             ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
-            List<OutliningTag> newTags = GetNewRegions(newSnapshot);
+            List<OutliningTag> newTags = GetNewRegions( newSnapshot );
 
             //determine the changed span, and send a changed event with the new spans
             var oldSpans =
                     new List<Span>( Tags.Select( tag => tag.Span.TranslateTo( newSnapshot,
                                                                               SpanTrackingMode.EdgeExclusive )
-                                                                  .Span ) );
+                                                                .Span ) );
             var newSpans =
                     new List<Span>( newTags.Select( tag => tag.Span.Span ) );
 
@@ -118,7 +118,7 @@ namespace PowerStudio.VsExtension.Tagging
             }
         }
 
-        private List<OutliningTag> GetNewRegions(ITextSnapshot newSnapshot)
+        private List<OutliningTag> GetNewRegions( ITextSnapshot newSnapshot )
         {
             const int lineThreshold = 2;
             var regions = new List<OutliningTag>();

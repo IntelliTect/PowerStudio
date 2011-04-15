@@ -24,7 +24,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 namespace PowerStudio.VsExtension.Tagging
 {
     public abstract class TaggerBase<T> : ITagger<T>
-            where T : ISpanningTag
+            where T : ITokenTag
     {
         protected TaggerBase( ITextBuffer buffer )
         {

@@ -14,7 +14,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Management.Automation;
 using System.Text;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
@@ -23,7 +22,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public class OutliningTag : IOutliningRegionTag, ISpanningTag
+    public class OutliningTag : TokenTag, IOutliningRegionTag
     {
         private readonly bool _IsImplementation;
         private readonly ITextSnapshot _Snapshot;
@@ -131,9 +130,5 @@ namespace PowerStudio.VsExtension.Tagging
             }
             return minBufferSize;
         }
-
-        public PSTokenType TokenType { get; set; }
-
-        public SnapshotSpan Span { get; set; }
     }
 }
