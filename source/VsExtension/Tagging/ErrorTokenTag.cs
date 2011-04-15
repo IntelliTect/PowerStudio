@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public class ErrorTokenTag : ErrorTag
+    public class ErrorTokenTag : ErrorTag, ISpanningTag
     {
         public ErrorTokenTag( string errorType, string toolTipContent )
                 : base( errorType, toolTipContent )

@@ -31,23 +31,6 @@ namespace PowerStudio.VsExtension.Tagging
             ReParse();
         }
 
-        private List<ErrorTokenTag> Tags { get; set; }
-
-        public override IEnumerable<ITagSpan<ErrorTokenTag>> GetTags( NormalizedSnapshotSpanCollection spans )
-        {
-            if ( spans.Count == 0 ||
-                 Buffer.CurrentSnapshot.Length == 0 )
-            {
-                //there is no content in the buffer
-                yield break;
-            }
-            List<ErrorTokenTag> tags = Tags;
-            foreach ( ErrorTokenTag tokenTag in tags )
-            {
-                yield return new TagSpan<ErrorTokenTag>( tokenTag.Span, tokenTag );
-            }
-        }
-
         protected override void ReParse()
         {
             ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
@@ -66,7 +49,7 @@ namespace PowerStudio.VsExtension.Tagging
                                                  { TokenType = error.Token.Type, Span = tokenSpan } ).ToList();
 
             Snapshot = newSnapshot;
-            Tags = tags;
+            Tags = tags.AsReadOnly();
             OnTagsChanged( new SnapshotSpanEventArgs( new SnapshotSpan( Snapshot, Span.FromBounds( 0, curLoc ) ) ) );
         }
     }

@@ -19,9 +19,9 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public class TokenTag : ISpanningTag
+    public interface ISpanningTag : ITag
     {
-        public PSTokenType TokenType { get; set; }
-        public SnapshotSpan Span { get; set; }
+        PSTokenType TokenType { get; }
+        SnapshotSpan Span { get; }
     }
 }

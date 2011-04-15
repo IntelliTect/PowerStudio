@@ -11,8 +11,9 @@
 
 #region Using Directives
 
-using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
 
@@ -20,7 +21,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public class ClassificationTagger : ITagger<ClassificationTag>
+    public class ClassificationTagger : TaggerBase<TokenClassificationTag>
     {
         /// <summary>
         ///   Initializes a new instance of the <see cref = "ClassificationTagger" /> class.
@@ -31,52 +32,29 @@ namespace PowerStudio.VsExtension.Tagging
         public ClassificationTagger( ITextBuffer buffer,
                                      ITagAggregator<TokenTag> aggregator,
                                      ITokenClassification tokenClassification )
+                : base( buffer )
         {
-            Buffer = buffer;
             Aggregator = aggregator;
             TokenClassification = tokenClassification;
         }
 
-        public ITextBuffer Buffer { get; set; }
         public ITagAggregator<TokenTag> Aggregator { get; set; }
         public ITokenClassification TokenClassification { get; set; }
 
         #region Implementation of ITagger<out ClassificationTag>
 
-        /// <summary>
-        ///   Gets all the tags that overlap the <paramref name = "spans" />.
-        /// </summary>
-        /// <param name = "spans">The spans to visit.</param>
-        /// <returns>
-        ///   A <see cref = "T:Microsoft.VisualStudio.Text.Tagging.ITagSpan`1" /> for each tag.
-        /// </returns>
-        /// <remarks>
-        ///   <para>
-        ///     Taggers are not required to return their tags in any specific order.
-        ///   </para>
-        ///   <para>
-        ///     The recommended way to implement this method is by using generators ("yield return"),
-        ///     which allows lazy evaluation of the entire tagging stack.
-        ///   </para>
-        /// </remarks>
-        public IEnumerable<ITagSpan<ClassificationTag>> GetTags( NormalizedSnapshotSpanCollection spans )
+        protected override void ReParse()
         {
-            foreach ( SnapshotSpan span in spans )
-            {
-                foreach ( IMappingTagSpan<TokenTag> tagSpan in Aggregator.GetTags( span ) )
-                {
-                    NormalizedSnapshotSpanCollection tokenSpan = tagSpan.Span.GetSpans( span.Snapshot );
+            ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
+            IEnumerable<PSToken> tokens = GetTokens(newSnapshot, true);
 
-                    var classificationTag = new ClassificationTag( TokenClassification[tagSpan.Tag.TokenType] );
-                    yield return new TagSpan<ClassificationTag>( tokenSpan[0], classificationTag );
-                }
-            }
-        }
+            List<TokenClassificationTag> tags = ( from token in tokens
+                                                  select new TokenClassificationTag( TokenClassification[token.Type] )
+                                                          { TokenType = token.Type, Span = AsSnapshotSpan( newSnapshot, token ) } ).ToList();
 
-        public event EventHandler<SnapshotSpanEventArgs> TagsChanged
-        {
-            add { }
-            remove { }
+            Snapshot = newSnapshot;
+            Tags = tags.AsReadOnly();
+            OnTagsChanged( new SnapshotSpanEventArgs( new SnapshotSpan( Snapshot, Span.FromBounds( 0, newSnapshot.Length ) ) ) );
         }
 
         #endregion

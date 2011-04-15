@@ -22,7 +22,7 @@ using Microsoft.VisualStudio.Utilities;
 namespace PowerStudio.VsExtension.Tagging
 {
     [Export( typeof (ITaggerProvider) )]
-    [TagType( typeof (IOutliningRegionTag) )]
+    [TagType( typeof (OutliningTag) )]
     [ContentType( LanguageConfiguration.Name )]
     public class OutliningTaggerProvider : TaggerProviderBase
     {

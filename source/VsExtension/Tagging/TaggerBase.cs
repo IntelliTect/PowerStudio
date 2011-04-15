@@ -24,17 +24,19 @@ using Microsoft.VisualStudio.Text.Tagging;
 namespace PowerStudio.VsExtension.Tagging
 {
     public abstract class TaggerBase<T> : ITagger<T>
-            where T : ITag
+            where T : ISpanningTag
     {
         protected TaggerBase( ITextBuffer buffer )
         {
             Buffer = buffer;
             Snapshot = Buffer.CurrentSnapshot;
             Buffer.Changed += BufferChanged;
+            Tags = Enumerable.Empty<T>().ToList().AsReadOnly();
         }
 
         protected ITextBuffer Buffer { get; private set; }
         protected ITextSnapshot Snapshot { get; set; }
+        protected ReadOnlyCollection<T> Tags { get; set; }
 
         private void BufferChanged( object sender, TextContentChangedEventArgs e )
         {
@@ -44,7 +46,7 @@ namespace PowerStudio.VsExtension.Tagging
             {
                 return;
             }
-            ReParse();
+            Parse();
         }
 
         protected void OnTagsChanged( SnapshotSpanEventArgs args )
@@ -72,13 +74,26 @@ namespace PowerStudio.VsExtension.Tagging
         ///     which allows lazy evaluation of the entire tagging stack.
         ///   </para>
         /// </remarks>
-        public abstract IEnumerable<ITagSpan<T>> GetTags( NormalizedSnapshotSpanCollection spans );
+        public virtual IEnumerable<ITagSpan<T>> GetTags( NormalizedSnapshotSpanCollection spans )
+        {
+            if ( spans.Count == 0 ||
+                 Buffer.CurrentSnapshot.Length == 0 )
+            {
+                //there is no content in the buffer
+                yield break;
+            }
+            ReadOnlyCollection<T> tags = Tags;
+            foreach ( T tokenTag in tags )
+            {
+                yield return new TagSpan<T>( tokenTag.Span, tokenTag );
+            }
+        }
 
 #pragma warning disable 0067
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
 #pragma warning restore 0067
 
-        protected abstract void ReParse();
+        protected abstract void Parse();
 
         protected virtual IEnumerable<PSToken> GetTokens( ITextSnapshot textSnapshot, bool includeErrors )
         {
@@ -90,6 +105,18 @@ namespace PowerStudio.VsExtension.Tagging
                 return tokens.Union( errors.Select( error => error.Token ) ).ToList();
             }
             return tokens;
+        }
+
+        protected virtual SnapshotSpan AsSnapshotSpan( ITextSnapshot snapshot, PSToken token )
+        {
+            return new SnapshotSpan( snapshot, new Span( token.Start, token.Length ) );
+        }
+
+        protected virtual SnapshotSpan AsSnapshotSpan( ITextSnapshot snapshot, PSToken startToken, PSToken endToken )
+        {
+            var startSnapshot = new SnapshotSpan( snapshot, new Span( startToken.Start, startToken.Length ) );
+            var endSnapshot = new SnapshotSpan( snapshot, new Span( endToken.Start, endToken.Length ) );
+            return new SnapshotSpan( startSnapshot.Start, endSnapshot.End );
         }
     }
 }

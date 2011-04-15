@@ -13,6 +13,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
@@ -22,14 +23,11 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public class OutliningTagger : TaggerBase<IOutliningRegionTag>
+    public class OutliningTagger : TaggerBase<OutliningTag>
     {
-        private List<Region> _Regions;
-
         public OutliningTagger( ITextBuffer buffer )
                 : base( buffer )
         {
-            _Regions = new List<Region>();
             ReParse();
         }
 
@@ -51,25 +49,24 @@ namespace PowerStudio.VsExtension.Tagging
         ///     which allows lazy evaluation of the entire tagging stack.
         ///   </para>
         /// </remarks>
-        public override IEnumerable<ITagSpan<IOutliningRegionTag>> GetTags( NormalizedSnapshotSpanCollection spans )
+        public override IEnumerable<ITagSpan<OutliningTag>> GetTags(NormalizedSnapshotSpanCollection spans)
         {
             if ( spans.Count == 0 )
             {
                 yield break;
             }
-            List<Region> currentRegions = _Regions;
+            ReadOnlyCollection<OutliningTag> tags = Tags;
             ITextSnapshot currentSnapshot = Snapshot;
             SnapshotSpan entire =
                     new SnapshotSpan( spans[0].Start, spans[spans.Count - 1].End )
                             .TranslateTo( currentSnapshot, SpanTrackingMode.EdgeExclusive );
             int startLineNumber = entire.Start.GetContainingLine().LineNumber;
             int endLineNumber = entire.End.GetContainingLine().LineNumber;
-            foreach ( SnapshotSpan span in from region in currentRegions
-                                           where region.StartLine <= endLineNumber && region.EndLine >= startLineNumber
-                                           select region.Span )
+            foreach (var tag in from tag in tags
+                                where tag.StartLine <= endLineNumber && tag.EndLine >= startLineNumber
+                                select tag)
             {
-                var tag = new OutliningTag( currentSnapshot, span, false );
-                yield return new TagSpan<IOutliningRegionTag>( span, tag );
+                yield return new TagSpan<OutliningTag>( tag.Span, tag );
             }
         }
 
@@ -78,15 +75,15 @@ namespace PowerStudio.VsExtension.Tagging
         protected override void ReParse()
         {
             ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
-            List<Region> newRegions = GetNewRegions( newSnapshot );
+            List<OutliningTag> newTags = GetNewRegions(newSnapshot);
 
             //determine the changed span, and send a changed event with the new spans
             var oldSpans =
-                    new List<Span>( _Regions.Select( region => region.Span.TranslateTo( newSnapshot,
+                    new List<Span>( Tags.Select( tag => tag.Span.TranslateTo( newSnapshot,
                                                                               SpanTrackingMode.EdgeExclusive )
                                                                   .Span ) );
             var newSpans =
-                    new List<Span>( newRegions.Select( region => region.Span.Span ) );
+                    new List<Span>( newTags.Select( tag => tag.Span.Span ) );
 
             var oldSpanCollection = new NormalizedSpanCollection( oldSpans );
             var newSpanCollection = new NormalizedSpanCollection( newSpans );
@@ -111,7 +108,7 @@ namespace PowerStudio.VsExtension.Tagging
             }
 
             Snapshot = newSnapshot;
-            _Regions = newRegions;
+            Tags = newTags.AsReadOnly();
 
             if ( changeStart <= changeEnd )
             {
@@ -121,10 +118,10 @@ namespace PowerStudio.VsExtension.Tagging
             }
         }
 
-        private List<Region> GetNewRegions( ITextSnapshot newSnapshot )
+        private List<OutliningTag> GetNewRegions(ITextSnapshot newSnapshot)
         {
             const int lineThreshold = 2;
-            var regions = new List<Region>();
+            var regions = new List<OutliningTag>();
             var stack = new Stack<PSToken>();
             IEnumerable<PSToken> tokens = GetTokens( newSnapshot, true );
             foreach ( PSToken token in tokens )
@@ -147,11 +144,12 @@ namespace PowerStudio.VsExtension.Tagging
                         {
                             continue;
                         }
-                        regions.Add( new Region
+                        regions.Add( new OutliningTag( newSnapshot,
+                                                       AsSnapshotSpan( newSnapshot, startToken, token ),
+                                                       false )
                                      {
                                              StartLine = startToken.StartLine,
                                              EndLine = token.StartLine,
-                                             Span = AsSnapshotSpan( newSnapshot, startToken, token )
                                      } );
                     }
                         break;
@@ -161,23 +159,5 @@ namespace PowerStudio.VsExtension.Tagging
             }
             return regions;
         }
-
-        private static SnapshotSpan AsSnapshotSpan( ITextSnapshot snapshot, PSToken startToken, PSToken endToken )
-        {
-            var startSnapshot = new SnapshotSpan( snapshot, new Span( startToken.Start, startToken.Length ) );
-            var endSnapshot = new SnapshotSpan( snapshot, new Span( endToken.Start, endToken.Length ) );
-            return new SnapshotSpan( startSnapshot.Start, endSnapshot.End );
-        }
-
-        #region Nested type: Region
-
-        private class Region
-        {
-            public int EndLine { get; set; }
-            public SnapshotSpan Span { get; set; }
-            public int StartLine { get; set; }
-        }
-
-        #endregion
     }
 }

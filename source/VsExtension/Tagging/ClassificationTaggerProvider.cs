@@ -24,7 +24,7 @@ namespace PowerStudio.VsExtension.Tagging
 {
     [Export( typeof (ITaggerProvider) )]
     [ContentType( LanguageConfiguration.Name )]
-    [TagType( typeof (ClassificationTag) )]
+    [TagType( typeof (TokenClassificationTag) )]
     public class ClassificationTaggerProvider : TaggerProviderBase
     {
         [Import]

@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management.Automation;
 using System.Text;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
@@ -22,11 +23,10 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public class OutliningTag : IOutliningRegionTag
+    public class OutliningTag : IOutliningRegionTag, ISpanningTag
     {
         private readonly bool _IsImplementation;
         private readonly ITextSnapshot _Snapshot;
-        private readonly Span _Span;
 
         /// <summary>
         ///   Initializes a new instance of the <see cref = "OutliningTag" /> class.
@@ -34,12 +34,16 @@ namespace PowerStudio.VsExtension.Tagging
         /// <param name = "snapshot">The snapshot.</param>
         /// <param name = "span">The span.</param>
         /// <param name = "isImplementation">if set to <c>true</c> [is implementation].</param>
-        public OutliningTag( ITextSnapshot snapshot, Span span, bool isImplementation )
+        public OutliningTag( ITextSnapshot snapshot, SnapshotSpan span, bool isImplementation )
         {
             _Snapshot = snapshot;
-            _Span = span;
+            Span = span;
             _IsImplementation = isImplementation;
         }
+
+        public int EndLine { get; set; }
+
+        public int StartLine { get; set; }
 
         #region IOutliningRegionTag Members
 
@@ -60,7 +64,7 @@ namespace PowerStudio.VsExtension.Tagging
         {
             get
             {
-                string collapsedHint = _Snapshot.GetText( _Span );
+                string collapsedHint = _Snapshot.GetText( Span );
 
                 string[] lines = collapsedHint.Split( new[] { Environment.NewLine }, StringSplitOptions.None );
 
@@ -127,5 +131,9 @@ namespace PowerStudio.VsExtension.Tagging
             }
             return minBufferSize;
         }
+
+        public PSTokenType TokenType { get; set; }
+
+        public SnapshotSpan Span { get; set; }
     }
 }
