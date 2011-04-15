@@ -107,11 +107,11 @@ namespace PowerStudio.VsExtension.Tagging
             return tokens;
         }
 
-        protected virtual IEnumerable<PSParseError> GetErrorTokens(ITextSnapshot textSnapshot)
+        protected virtual IEnumerable<PSParseError> GetErrorTokens( ITextSnapshot textSnapshot )
         {
             string text = textSnapshot.GetText();
             Collection<PSParseError> errors;
-            PSParser.Tokenize(text, out errors);
+            PSParser.Tokenize( text, out errors );
             return errors;
         }
 
