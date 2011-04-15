@@ -33,22 +33,17 @@ namespace PowerStudio.VsExtension.Tagging
         {
             ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
 
-            int curLoc = 0;
             string text = newSnapshot.GetText();
             Collection<PSParseError> errors;
             Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
             List<ErrorTokenTag> tags = ( from error in errors
-                                         let tokenSpan =
-                                                 new SnapshotSpan( Snapshot,
-                                                                   new Span( error.Token.Start + curLoc,
-                                                                             error.Token.Length ) )
                                          select
                                                  new ErrorTokenTag( error.Message )
-                                                 { TokenType = error.Token.Type, Span = tokenSpan } ).ToList();
+                                                 { TokenType = error.Token.Type, Span = AsSnapshotSpan( newSnapshot, error.Token ) } ).ToList();
 
             Snapshot = newSnapshot;
             Tags = tags.AsReadOnly();
-            OnTagsChanged( new SnapshotSpanEventArgs( new SnapshotSpan( Snapshot, Span.FromBounds( 0, curLoc ) ) ) );
+            OnTagsChanged( new SnapshotSpanEventArgs( new SnapshotSpan( newSnapshot, Span.FromBounds( 0, newSnapshot.Length ) ) ) );
         }
     }
 }

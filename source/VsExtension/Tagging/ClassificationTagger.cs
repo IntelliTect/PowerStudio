@@ -53,8 +53,7 @@ namespace PowerStudio.VsExtension.Tagging
 
             Snapshot = newSnapshot;
             Tags = tags.AsReadOnly();
-            OnTagsChanged(
-                    new SnapshotSpanEventArgs( new SnapshotSpan( Snapshot, Span.FromBounds( 0, newSnapshot.Length ) ) ) );
+            OnTagsChanged( new SnapshotSpanEventArgs( new SnapshotSpan( newSnapshot, Span.FromBounds( 0, newSnapshot.Length ) ) ) );
         }
 
         #endregion
