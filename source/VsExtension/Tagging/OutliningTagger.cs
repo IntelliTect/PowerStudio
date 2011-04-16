@@ -36,7 +36,7 @@ namespace PowerStudio.VsExtension.Tagging
 
         protected override List<OutliningTag> GetTags( ITextSnapshot snapshot )
         {
-            const int lineThreshold = 2;
+            const int lineThreshold = 2; // TODO: make this a language setting.
             var regions = new List<OutliningTag>();
             var stack = new Stack<PSToken>();
             IEnumerable<PSToken> tokens = GetTokens( snapshot, true );

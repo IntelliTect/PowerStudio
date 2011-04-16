@@ -20,7 +20,7 @@ namespace PowerStudio.VsExtension.Tagging
 {
     /// <summary>
     /// </summary>
-    public interface ITokenClassification
+    public interface ITokenClassifier
     {
         /// <summary>
         ///   Gets the <see cref = "Microsoft.VisualStudio.Text.Classification.IClassificationType" /> with the specified token type.

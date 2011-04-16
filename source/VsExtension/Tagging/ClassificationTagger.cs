@@ -26,23 +26,23 @@ namespace PowerStudio.VsExtension.Tagging
         ///   Initializes a new instance of the <see cref = "ClassificationTagger" /> class.
         /// </summary>
         /// <param name = "buffer">The buffer.</param>
-        /// <param name = "tokenClassification">The token classification.</param>
+        /// <param name = "tokenClassifier">The token classification.</param>
         public ClassificationTagger( ITextBuffer buffer,
-                                     ITokenClassification tokenClassification )
+                                     ITokenClassifier tokenClassifier )
                 : base( buffer )
         {
-            TokenClassification = tokenClassification;
+            TokenClassifier = tokenClassifier;
             Parse();
         }
 
-        public ITokenClassification TokenClassification { get; set; }
+        public ITokenClassifier TokenClassifier { get; set; }
 
         protected override List<TokenClassificationTag> GetTags( ITextSnapshot snapshot )
         {
             IEnumerable<PSToken> tokens = GetTokens( snapshot, true );
 
             List<TokenClassificationTag> tags = ( from token in tokens
-                                                  select new TokenClassificationTag( TokenClassification[token.Type] )
+                                                  select new TokenClassificationTag( TokenClassifier[token.Type] )
                                                          {
                                                                  Token = token,
                                                                  Span = AsSnapshotSpan( snapshot, token )

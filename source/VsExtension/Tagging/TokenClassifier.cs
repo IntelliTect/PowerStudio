@@ -20,17 +20,17 @@ using Microsoft.VisualStudio.Text.Classification;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    public class TokenClassification : ITokenClassification
+    public class TokenClassifier : ITokenClassifier
     {
-        public TokenClassification( IClassificationTypeRegistryService registryService )
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TokenClassifier"/> class.
+        /// </summary>
+        /// <param name="registryService">The classification registry service.</param>
+        public TokenClassifier( IClassificationTypeRegistryService registryService )
         {
-            RegistryService = registryService;
             TokenClassificationMapping = new Dictionary<PSTokenType, IClassificationType>();
-
             LoadTokenClassificationMappings( registryService );
         }
-
-        private IClassificationTypeRegistryService RegistryService { get; set; }
 
         private Dictionary<PSTokenType, IClassificationType> TokenClassificationMapping { get; set; }
 
@@ -97,7 +97,7 @@ namespace PowerStudio.VsExtension.Tagging
                     registryService.GetClassificationType( PredefinedClassificationTypeNames.Other );
         }
 
-        #region Implementation of ITokenClassification
+        #region Implementation of ITokenClassifier
 
         public virtual IClassificationType this[ PSTokenType tokenType ]
         {

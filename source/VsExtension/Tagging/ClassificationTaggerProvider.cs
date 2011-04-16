@@ -32,7 +32,7 @@ namespace PowerStudio.VsExtension.Tagging
 
         protected override Func<ITagger<T>> GetFactory<T>( ITextBuffer buffer )
         {
-            var tokenClassification = new TokenClassification( ClassificationTypeRegistry );
+            var tokenClassification = new TokenClassifier( ClassificationTypeRegistry );
             return () => new ClassificationTagger( buffer, tokenClassification ) as ITagger<T>;
         }
     }
