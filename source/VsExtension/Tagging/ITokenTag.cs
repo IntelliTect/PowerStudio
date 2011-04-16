@@ -23,5 +23,6 @@ namespace PowerStudio.VsExtension.Tagging
     {
         PSToken Token { get; }
         SnapshotSpan Span { get; }
+        TokenClass Class { get; }
     }
 }

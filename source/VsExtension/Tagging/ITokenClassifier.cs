@@ -25,6 +25,6 @@ namespace PowerStudio.VsExtension.Tagging
         /// <summary>
         ///   Gets the <see cref = "Microsoft.VisualStudio.Text.Classification.IClassificationType" /> with the specified token type.
         /// </summary>
-        IClassificationType this[ PSTokenType tokenType ] { get; }
+        IClassificationType this[ TokenClass tokenType ] { get; }
     }
 }

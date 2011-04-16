@@ -42,11 +42,12 @@ namespace PowerStudio.VsExtension.Tagging
             IEnumerable<PSToken> tokens = GetTokens( snapshot, true );
 
             List<TokenClassificationTag> tags = ( from token in tokens
-                                                  select new TokenClassificationTag( TokenClassifier[token.Type] )
-                                                         {
-                                                                 Token = token,
-                                                                 Span = AsSnapshotSpan( snapshot, token )
-                                                         } ).ToList();
+                                                  select new TokenClassificationTag(
+                                                          TokenClassifier[TokenTag.GetTokenClass( token.Type )] )
+                                                          {
+                                                                  Token = token,
+                                                                  Span = AsSnapshotSpan( snapshot, token )
+                                                          } ).ToList();
             return tags;
         }
     }
