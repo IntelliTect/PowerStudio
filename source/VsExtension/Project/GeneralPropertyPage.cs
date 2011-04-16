@@ -21,7 +21,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 namespace PowerStudio.VsExtension.Project
 {
     [ComVisible( true )]
-    [Guid( PsConstants.GeneralPropertyPageGuidString )]
+    [Guid( PsConstants.GeneralPropertyPageGuid )]
     public class GeneralPropertyPage : SettingsPage
     {
         //[ResourcesCategoryAttribute(Resources.AssemblyName)]

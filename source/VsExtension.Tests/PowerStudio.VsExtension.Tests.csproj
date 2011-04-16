@@ -54,7 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PackageTest.cs" />
+    <Compile Include="PackageTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj">

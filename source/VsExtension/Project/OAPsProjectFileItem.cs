@@ -20,7 +20,7 @@ using Microsoft.VisualStudio.Project.Automation;
 namespace PowerStudio.VsExtension.Project
 {
     [ComVisible( true )]
-    [Guid( PsConstants.OAPsProjectFileItemGuidString )]
+    [Guid( PsConstants.ProjectFileItemGuid )]
     public class OAPsProjectFileItem : OAFileItem
     {
         public OAPsProjectFileItem( OAProject project, FileNode node )

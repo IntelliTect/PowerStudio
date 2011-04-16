@@ -20,7 +20,7 @@ using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 namespace PowerStudio.VsExtension.Project
 {
-    [Guid( PsConstants.PsProjectFactoryGuidString )]
+    [Guid( PsConstants.ProjectFactoryGuid )]
     public class PowerShellProjectFactory : ProjectFactory
     {
         private readonly PowerShellPackage _Package;

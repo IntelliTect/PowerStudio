@@ -35,8 +35,8 @@ namespace PowerStudio.VsExtension
     ///</summary>
     [PackageRegistration( UseManagedResourcesOnly = true )]
     [DefaultRegistryRoot( PsConstants.DefaultRegistryRoot )]
-    [ProvideService( typeof (PowerShellLanguageService) )]
-    [ProvideLanguageService( typeof (PowerShellLanguageService), LanguageConfiguration.Name, 0,
+    [ProvideService( typeof (LanguageService) )]
+    [ProvideLanguageService( typeof (LanguageService), LanguageConfiguration.Name, 0,
             CodeSense = true,
             EnableCommenting = true,
             MatchBraces = true,
@@ -58,7 +58,7 @@ namespace PowerStudio.VsExtension
             LanguageVsTemplate = "PowerShell",
             NewProjectRequireNewFolderVsTemplate = false )]
     [ProvideProjectItem( typeof (PowerShellProjectFactory), "PowerShell", @"Templates\ProjectItems\PsProject", 500 )]
-    [Guid( PsConstants.PsProjectPackageGuidString )]
+    [Guid( PsConstants.ProjectPackageGuid )]
     public sealed class PowerShellPackage : ProjectPackage, IOleComponent
     {
         private uint _ComponentId;
@@ -74,8 +74,8 @@ namespace PowerStudio.VsExtension
         {
             // proffer the LanguageService
             const bool promote = true;
-            ( this as IServiceContainer ).AddService( typeof (PowerShellLanguageService),
-                                                      new PowerShellLanguageService(),
+            ( this as IServiceContainer ).AddService( typeof (LanguageService),
+                                                      new LanguageService(),
                                                       promote );
         }
 

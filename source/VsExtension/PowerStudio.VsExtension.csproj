@@ -137,12 +137,12 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Intellisense\PowerShellQuickInfoController.cs" />
-    <Compile Include="Intellisense\PowerShellQuickInfoControllerProvider.cs" />
-    <Compile Include="Intellisense\PowerShellQuickInfoSource.cs" />
-    <Compile Include="Intellisense\PowerShellQuickInfoSourceProvider.cs" />
+    <Compile Include="Intellisense\QuickInfoController.cs" />
+    <Compile Include="Intellisense\QuickInfoControllerProvider.cs" />
+    <Compile Include="Intellisense\QuickInfoErrorSource.cs" />
+    <Compile Include="Intellisense\QuickInfoErrorSourceProvider.cs" />
     <Compile Include="LanguageConfiguration.cs" />
-    <Compile Include="PowerShellLanguageService.cs" />
+    <Compile Include="LanguageService.cs" />
     <Compile Include="PowerShellPackage.cs" />
     <Compile Include="Project\GeneralPropertyPage.cs" />
     <Compile Include="Project\OAPsProject.cs" />

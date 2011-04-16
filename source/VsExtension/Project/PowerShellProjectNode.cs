@@ -26,7 +26,7 @@ using VSLangProj;
 
 namespace PowerStudio.VsExtension.Project
 {
-    [Guid( PsConstants.PsProjectNodeGuidString )]
+    [Guid( PsConstants.ProjectNodeGuid )]
     public class PowerShellProjectNode : ProjectNode
     {
         internal const string ProjectTypeName = "PsProject";
