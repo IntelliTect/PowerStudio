@@ -14,18 +14,23 @@
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
-using Microsoft.VisualStudio.Utilities;
+using Microsoft.VisualStudio.Text.Operations;
+using Microsoft.VisualStudio.Text.Tagging;
 using PowerStudio.VsExtension.Tagging;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense
+namespace PowerStudio.VsExtension.Intellisense.QuickInfo
 {
-    [Export(typeof(IQuickInfoSourceProvider))]
-    [ContentType(LanguageConfiguration.Name)]
-    [Name(LanguageConfiguration.Name + "Error QuickInfo")]
-    public class QuickInfoErrorSourceProvider : QuickInfoSourceProvider<ErrorTokenTag>
+    public abstract class QuickInfoSourceProvider<T> : IQuickInfoSourceProvider
+            where T : ITokenTag
     {
+        [Import]
+        protected IBufferTagAggregatorFactoryService TagAggregatorFactory { get; set; }
+
+        [Import]
+        internal ITextStructureNavigatorSelectorService NavigatorService { get; set; }
+
         #region IQuickInfoSourceProvider Members
 
         /// <summary>
@@ -35,12 +40,7 @@ namespace PowerStudio.VsExtension.Intellisense
         /// <returns>
         ///   A valid <see cref = "T:Microsoft.VisualStudio.Language.Intellisense.IQuickInfoSource" /> instance, or null if none could be created.
         /// </returns>
-        public override IQuickInfoSource TryCreateQuickInfoSource(ITextBuffer textBuffer)
-        {
-            return new QuickInfoErrorSource(textBuffer,
-                                             TagAggregatorFactory.CreateTagAggregator<ErrorTokenTag>(textBuffer),
-                                             this);
-        }
+        public abstract IQuickInfoSource TryCreateQuickInfoSource( ITextBuffer textBuffer );
 
         #endregion
     }

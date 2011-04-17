@@ -138,13 +138,17 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Intellisense\QuickInfoController.cs" />
-    <Compile Include="Intellisense\QuickInfoControllerProvider.cs" />
-    <Compile Include="Intellisense\QuickInfoErrorSource.cs" />
-    <Compile Include="Intellisense\QuickInfoErrorSourceProvider.cs" />
-    <Compile Include="Intellisense\QuickInfoSource.cs" />
-    <Compile Include="Intellisense\QuickInfoSourceProvider.cs" />
-    <Compile Include="Intellisense\QuickInfoTokenSourceProvider.cs" />
+    <Compile Include="Intellisense\Completion\CompletionCommandHandler.cs" />
+    <Compile Include="Intellisense\Completion\CompletionHandlerProvider.cs" />
+    <Compile Include="Intellisense\Completion\CompletionSource.cs" />
+    <Compile Include="Intellisense\Completion\CompletionSourceProvider.cs" />
+    <Compile Include="Intellisense\QuickInfo\QuickInfoController.cs" />
+    <Compile Include="Intellisense\QuickInfo\QuickInfoControllerProvider.cs" />
+    <Compile Include="Intellisense\QuickInfo\QuickInfoErrorSource.cs" />
+    <Compile Include="Intellisense\QuickInfo\QuickInfoErrorSourceProvider.cs" />
+    <Compile Include="Intellisense\QuickInfo\QuickInfoSource.cs" />
+    <Compile Include="Intellisense\QuickInfo\QuickInfoSourceProvider.cs" />
+    <Compile Include="Intellisense\QuickInfo\QuickInfoTokenSourceProvider.cs" />
     <Compile Include="LanguageConfiguration.cs" />
     <Compile Include="LanguageService.cs" />
     <Compile Include="PowerShellPackage.cs" />

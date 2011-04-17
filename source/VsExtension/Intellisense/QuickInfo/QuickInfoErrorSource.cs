@@ -17,7 +17,7 @@ using PowerStudio.VsExtension.Tagging;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense
+namespace PowerStudio.VsExtension.Intellisense.QuickInfo
 {
     public class QuickInfoErrorSource : QuickInfoSource<ErrorTokenTag>
     {

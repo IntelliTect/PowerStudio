@@ -18,7 +18,7 @@ using Microsoft.VisualStudio.Text.Editor;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense
+namespace PowerStudio.VsExtension.Intellisense.QuickInfo
 {
     internal class QuickInfoController : IIntellisenseController
     {

@@ -20,7 +20,7 @@ using Microsoft.VisualStudio.Utilities;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense
+namespace PowerStudio.VsExtension.Intellisense.QuickInfo
 {
     [Export( typeof (IIntellisenseControllerProvider) )]
     [Name( "PowerShell QuickInfo Controller" )]
