@@ -1,4 +1,0 @@
-This is a data test file for IncludeTest.
-#include foobar.lex
-Back in IncludeTest.txt
-
