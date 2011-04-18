@@ -38,5 +38,5 @@ task Clean {
 }
 
 task ? -Description "Helper to display task info" {
-	Write-Documentation
+    Write-Documentation
 }
