@@ -9,6 +9,8 @@
 
 #endregion
 
+#if DEBUG
+
 #region Using Directives
 
 using System.ComponentModel.Composition;
@@ -85,3 +87,5 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
         #endregion
     }
 }
+
+#endif
