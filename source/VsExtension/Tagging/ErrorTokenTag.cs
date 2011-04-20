@@ -13,10 +13,10 @@ namespace PowerStudio.VsExtension.Tagging
         /// Initializes a new instance of a <see cref="T:Microsoft.VisualStudio.Text.Tagging.ErrorTag"/> of the specified type.
         /// 
         /// </summary>
-        /// <param name="errorType">The type of error to use.</param>
         /// <param name="toolTipContent">The tooltip content to display. May be null.</param>
+        /// <param name="errorType">The type of error to use.</param>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="errorType"/> is null.</exception>
-        public ErrorTokenTag( string errorType, string toolTipContent )
+        public ErrorTokenTag( string toolTipContent, string errorType )
         {
             ErrorType = errorType;
             ToolTipContent = toolTipContent;
@@ -28,7 +28,7 @@ namespace PowerStudio.VsExtension.Tagging
         /// </summary>
         /// <param name="toolTipContent">The tooltip content to display. May be null.</param>
         public ErrorTokenTag( string toolTipContent )
-                : this( PredefinedErrorTypeNames.SyntaxError, toolTipContent )
+                : this( toolTipContent, PredefinedErrorTypeNames.SyntaxError )
         {
         }
 

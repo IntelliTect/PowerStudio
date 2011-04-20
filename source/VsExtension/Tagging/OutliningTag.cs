@@ -24,8 +24,15 @@ namespace PowerStudio.VsExtension.Tagging
 {
     public class OutliningTag : TokenTag, IOutliningRegionTag
     {
-        private readonly bool _IsImplementation;
-        private readonly ITextSnapshot _Snapshot;
+        /// <summary>
+        ///   Initializes a new instance of the <see cref = "OutliningTag" /> class.
+        /// </summary>
+        /// <param name = "snapshot">The snapshot.</param>
+        /// <param name = "span">The span.</param>
+        public OutliningTag( ITextSnapshot snapshot, SnapshotSpan span )
+                : this( snapshot, span, false )
+        {
+        }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref = "OutliningTag" /> class.
@@ -35,14 +42,16 @@ namespace PowerStudio.VsExtension.Tagging
         /// <param name = "isImplementation">if set to <c>true</c> [is implementation].</param>
         public OutliningTag( ITextSnapshot snapshot, SnapshotSpan span, bool isImplementation )
         {
-            _Snapshot = snapshot;
+            Snapshot = snapshot;
             Span = span;
-            _IsImplementation = isImplementation;
+            IsImplementation = isImplementation;
         }
 
         public int EndLine { get; set; }
 
         public int StartLine { get; set; }
+
+        public ITextSnapshot Snapshot { get; private set; }
 
         #region IOutliningRegionTag Members
 
@@ -63,7 +72,7 @@ namespace PowerStudio.VsExtension.Tagging
         {
             get
             {
-                string collapsedHint = _Snapshot.GetText( Span );
+                string collapsedHint = Snapshot.GetText( Span );
 
                 string[] lines = collapsedHint.Split( new[] { Environment.NewLine }, StringSplitOptions.None );
 
@@ -84,10 +93,7 @@ namespace PowerStudio.VsExtension.Tagging
         ///   Determines whether the region is collapsed by default.
         /// </summary>
         /// <value></value>
-        public bool IsDefaultCollapsed
-        {
-            get { return false; }
-        }
+        public bool IsDefaultCollapsed { get; private set; }
 
         /// <summary>
         ///   Determines whether a region is an implementation region.
@@ -98,10 +104,7 @@ namespace PowerStudio.VsExtension.Tagging
         ///   They are used for commands such as the Visual Studio Collapse to Definition command,
         ///   which hides the implementation region and leaves only the method definition exposed.
         /// </remarks>
-        public bool IsImplementation
-        {
-            get { return _IsImplementation; }
-        }
+        public bool IsImplementation { get; private set; }
 
         #endregion
 
