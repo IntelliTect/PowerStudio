@@ -5,6 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.VsExtension", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E14428FC-A29D-4393-9854-1F955738C974}"
 	ProjectSection(SolutionItems) = preProject
+		source\GlobalAssemblyInfo.cs = source\GlobalAssemblyInfo.cs
 		HowToBuild.txt = HowToBuild.txt
 		IntegrationTests.testsettings = IntegrationTests.testsettings
 		README.md = README.md
@@ -23,7 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{46504291
 		build-release.cmd = build-release.cmd
 		build.cmd = build.cmd
 		build.ps1 = build.ps1
-		source\GlobalAssemblyInfo.cs = source\GlobalAssemblyInfo.cs
 		HowToBuild.txt = HowToBuild.txt
 	EndProjectSection
 EndProject
