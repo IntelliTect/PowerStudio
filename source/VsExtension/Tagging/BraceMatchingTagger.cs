@@ -95,6 +95,7 @@ namespace PowerStudio.VsExtension.Tagging
                                   };
                         start.Match = end;
                         braces.Add( start );
+                        // TODO: Can we eliminate adding the end as tag? We look for both via the Match property.
                         braces.Add( end );
                     }
                         break;

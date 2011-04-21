@@ -11,6 +11,7 @@
 
 #region Using Directives
 
+using System.Management.Automation;
 using Microsoft.VisualStudio.Language.StandardClassification;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
@@ -21,6 +22,20 @@ namespace PowerStudio.VsExtension.Tagging
 {
     public class TokenClassifier : ITokenClassifier
     {
+        private static readonly TokenClass[] TokenClasses = new[]
+                                                            {
+                                                                    TokenClass.Other, TokenClass.FormalLanguage,
+                                                                    TokenClass.Other, TokenClass.Other,
+                                                                    TokenClass.NumberLiteral, TokenClass.StringLiteral,
+                                                                    TokenClass.Identifier, TokenClass.Identifier,
+                                                                    TokenClass.Literal, TokenClass.SymbolReference,
+                                                                    TokenClass.SymbolReference, TokenClass.Operator,
+                                                                    TokenClass.Operator, TokenClass.Operator,
+                                                                    TokenClass.Keyword, TokenClass.Comment,
+                                                                    TokenClass.Other, TokenClass.Other,
+                                                                    TokenClass.Other, TokenClass.Operator
+                                                            };
+
         private IClassificationType[] _TokenClassifications;
 
         /// <summary>
@@ -43,25 +58,7 @@ namespace PowerStudio.VsExtension.Tagging
         {
             if ( _TokenClassifications == null )
             {
-                _TokenClassifications = new[]
-                                        {
-                                                StandardClassificationService.CharacterLiteral,
-                                                StandardClassificationService.Comment,
-                                                StandardClassificationService.ExcludedCode,
-                                                StandardClassificationService.FormalLanguage,
-                                                StandardClassificationService.Identifier,
-                                                StandardClassificationService.Keyword,
-                                                StandardClassificationService.Literal,
-                                                StandardClassificationService.NaturalLanguage,
-                                                StandardClassificationService.NumberLiteral,
-                                                StandardClassificationService.Operator,
-                                                StandardClassificationService.Other,
-                                                StandardClassificationService.PreprocessorKeyword,
-                                                StandardClassificationService.StringLiteral,
-                                                StandardClassificationService.SymbolDefinition,
-                                                StandardClassificationService.SymbolReference,
-                                                StandardClassificationService.WhiteSpace
-                                        };
+                _TokenClassifications = GetTokenClassifications();
             }
             var index = (int) tokenClass;
             if ( ( index < 0 ) ||
@@ -72,12 +69,50 @@ namespace PowerStudio.VsExtension.Tagging
             return _TokenClassifications[index];
         }
 
+        private IClassificationType[] GetTokenClassifications()
+        {
+            return new[]
+                   {
+                           StandardClassificationService.CharacterLiteral,
+                           StandardClassificationService.Comment,
+                           StandardClassificationService.ExcludedCode,
+                           StandardClassificationService.FormalLanguage,
+                           StandardClassificationService.Identifier,
+                           StandardClassificationService.Keyword,
+                           StandardClassificationService.Literal,
+                           StandardClassificationService.NaturalLanguage,
+                           StandardClassificationService.NumberLiteral,
+                           StandardClassificationService.Operator,
+                           StandardClassificationService.Other,
+                           StandardClassificationService.PreprocessorKeyword,
+                           StandardClassificationService.StringLiteral,
+                           StandardClassificationService.SymbolDefinition,
+                           StandardClassificationService.SymbolReference,
+                           StandardClassificationService.WhiteSpace
+                   };
+        }
+
+        private static TokenClass GetTokenClass( PSTokenType psTokenType )
+        {
+            var index = (int) psTokenType;
+            if ( ( index >= 0 ) &&
+                 ( index < TokenClasses.Length ) )
+            {
+                return TokenClasses[index];
+            }
+            return TokenClass.Other;
+        }
+
         #region Implementation of ITokenClassifier
 
-        public virtual IClassificationType this[ TokenClass tokenClass ]
+        /// <summary>
+        ///   Gets the <see cref = "Microsoft.VisualStudio.Text.Classification.IClassificationType" /> with the specified token type.
+        /// </summary>
+        public virtual IClassificationType this[ PSToken token ]
         {
             get
             {
+                TokenClass tokenClass = GetTokenClass( token.Type );
                 IClassificationType clasificationType = GetTokenTypeClassification( tokenClass );
                 return clasificationType;
             }

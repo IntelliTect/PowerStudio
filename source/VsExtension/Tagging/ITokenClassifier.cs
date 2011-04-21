@@ -11,6 +11,7 @@
 
 #region Using Directives
 
+using System.Management.Automation;
 using Microsoft.VisualStudio.Text.Classification;
 
 #endregion
@@ -24,6 +25,6 @@ namespace PowerStudio.VsExtension.Tagging
         /// <summary>
         ///   Gets the <see cref = "Microsoft.VisualStudio.Text.Classification.IClassificationType" /> with the specified token type.
         /// </summary>
-        IClassificationType this[ TokenClass tokenType ] { get; }
+        IClassificationType this[ PSToken token ] { get; }
     }
 }
