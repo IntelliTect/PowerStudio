@@ -79,12 +79,12 @@ namespace PowerStudio.VsExtension.Tagging
                         PSToken startToken = stack.Pop();
                         var start = new BraceMatchingTag( PredefinedTextMarkerTags.BraceHighlight )
                                     {
-                                            Span = AsSnapshotSpan( snapshot, startToken ),
+                                            Span = CreateSnapshotSpan( snapshot, startToken ),
                                     };
 
                         var end = new BraceMatchingTag( PredefinedTextMarkerTags.BraceHighlight )
                                   {
-                                          Span = AsSnapshotSpan( snapshot, token ),
+                                          Span = CreateSnapshotSpan( snapshot, token ),
                                           Match = start
                                   };
                         start.Match = end;

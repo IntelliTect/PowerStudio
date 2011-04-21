@@ -61,7 +61,7 @@ namespace PowerStudio.VsExtension.Tagging
                             continue;
                         }
                         regions.Add( new OutliningTag( snapshot,
-                                                       AsSnapshotSpan( snapshot, startToken, token ),
+                                                       CreateSnapshotSpan( snapshot, startToken, token ),
                                                        false )
                                      {
                                              StartLine = startToken.StartLine,

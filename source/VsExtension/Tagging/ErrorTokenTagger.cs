@@ -33,7 +33,7 @@ namespace PowerStudio.VsExtension.Tagging
                                          select new ErrorTokenTag( error.Message )
                                                 {
                                                         Token = error.Token,
-                                                        Span = AsSnapshotSpan( snapshot, error.Token )
+                                                        Span = CreateSnapshotSpan( snapshot, error.Token )
                                                 } )
                     .ToList();
             return tags;

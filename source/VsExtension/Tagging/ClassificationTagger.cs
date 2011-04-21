@@ -46,7 +46,7 @@ namespace PowerStudio.VsExtension.Tagging
                                                           TokenClassifier[TokenTag.GetTokenClass( token.Type )] )
                                                           {
                                                                   Token = token,
-                                                                  Span = AsSnapshotSpan( snapshot, token )
+                                                                  Span = CreateSnapshotSpan( snapshot, token )
                                                           } ).ToList();
             return tags;
         }

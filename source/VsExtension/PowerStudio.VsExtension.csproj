@@ -190,6 +190,7 @@
     <Compile Include="Tagging\TokenClassificationTag.cs" />
     <Compile Include="Tagging\TokenTag.cs" />
     <Compile Include="Tagging\TokenClassifier.cs" />
+    <Compile Include="Tagging\TokenTagSpan.cs" />
     <Compile Include="Tagging\ViewTaggerProviderBase.cs" />
   </ItemGroup>
   <ItemGroup>

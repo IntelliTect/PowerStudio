@@ -74,25 +74,37 @@ namespace PowerStudio.VsExtension.Tagging
                                where IsTokenInSpan( tag, currentSnapshot, span )
                                select tag )
             {
-                yield return new TagSpan<T>( tag.Span, tag );
+                yield return new TokenTagSpan<T>( tag );
             }
         }
 
+        /// <summary>
+        ///   Occurs when [tags changed].
+        /// </summary>
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
 
         #endregion
 
+        /// <summary>
+        ///   Occurs when a non-empty text edit is applied. If the snapshot changes then we need to handle it.
+        /// </summary>
+        /// <param name = "sender">The sender.</param>
+        /// <param name = "e">The <see cref = "Microsoft.VisualStudio.Text.TextContentChangedEventArgs" /> instance containing the event data.</param>
         private void BufferChanged( object sender, TextContentChangedEventArgs e )
         {
             // If this isn't the most up-to-date version of the buffer, then ignore it for now (we'll eventually get another change event).
-            if ( e.After !=
-                 Buffer.CurrentSnapshot )
+            if ( Buffer.CurrentSnapshot !=
+                 e.After )
             {
                 return;
             }
             Parse();
         }
 
+        /// <summary>
+        ///   Raises the <see cref = "E:TagsChanged" /> event.
+        /// </summary>
+        /// <param name = "args">The <see cref = "Microsoft.VisualStudio.Text.SnapshotSpanEventArgs" /> instance containing the event data.</param>
         protected void OnTagsChanged( SnapshotSpanEventArgs args )
         {
             EventHandler<SnapshotSpanEventArgs> handler = TagsChanged;
@@ -102,11 +114,31 @@ namespace PowerStudio.VsExtension.Tagging
             }
         }
 
+        /// <summary>
+        ///   Determines whether [is token in span] [the specified tag].
+        /// </summary>
+        /// <param name = "tagSpan">The tagspan.</param>
+        /// <param name = "snapshot">The snapshot.</param>
+        /// <param name = "span">The span.</param>
+        /// <returns>
+        ///   <c>true</c> if [is token in span] [the specified tag]; otherwise, <c>false</c>.
+        /// </returns>
         protected virtual bool IsTokenInSpan( T tag, ITextSnapshot snapshot, SnapshotSpan span )
         {
-            return span.Contains( tag.Span.TranslateTo( snapshot, SpanTrackingMode.EdgeExclusive ) );
+            SnapshotSpan currentTagSpan = tag.Span;
+            if ( snapshot != span.Snapshot )
+            {
+                // need to map to the new snapshot before we can detect overlap
+                currentTagSpan = currentTagSpan.TranslateTo( snapshot, SpanTrackingMode.EdgeExclusive );
+            }
+            return span.Contains( currentTagSpan );
         }
 
+        /// <summary>
+        ///   Parses this instance for the current buffer. All tags are parsed and then any
+        ///   changes are published through the <see cref = "E:TagsChanged" /> event. This also
+        ///   updates the current snapshot for this tagger.
+        /// </summary>
         protected virtual void Parse()
         {
             ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
@@ -114,6 +146,24 @@ namespace PowerStudio.VsExtension.Tagging
             PublishTagChanges( newSnapshot, tags );
         }
 
+        /// <summary>
+        ///   Gets all the tags in the text snapshot.
+        /// </summary>
+        /// <param name = "snapshot">Text snapshot for the new buffer.</param>
+        /// <returns>
+        ///   A <see cref = "T:PowerStudio.VsExtension.Tagging.ITokenTag`1" /> for each tag.
+        /// </returns>
+        /// <remarks>
+        ///   <para>
+        ///     Taggers are not required to return their tags in any specific order.
+        ///   </para>
+        ///   <para>
+        ///     The recommended way to implement this method by returning all tags in the document.
+        ///     It is not recommended that you implement this method by using generators ("yield return"),
+        ///     which allows lazy evaluation of the entire tagging stack; the lazy evaluation is provided
+        ///     by the caller which will also evaluate whether the given tag is in a given span.
+        ///   </para>
+        /// </remarks>
         protected abstract List<T> GetTags( ITextSnapshot snapshot );
 
         protected virtual void PublishTagChanges( ITextSnapshot newSnapshot, List<T> newTags )
@@ -157,6 +207,12 @@ namespace PowerStudio.VsExtension.Tagging
             }
         }
 
+        /// <summary>
+        ///   Gets the tokens by parsing the text snapshot, optionally including any errors.
+        /// </summary>
+        /// <param name = "textSnapshot">The text snapshot.</param>
+        /// <param name = "includeErrors">if set to <c>true</c> [include errors].</param>
+        /// <returns></returns>
         protected virtual IEnumerable<PSToken> GetTokens( ITextSnapshot textSnapshot, bool includeErrors )
         {
             string text = textSnapshot.GetText();
@@ -169,6 +225,11 @@ namespace PowerStudio.VsExtension.Tagging
             return tokens;
         }
 
+        /// <summary>
+        ///   Gets the error tokens by parsing the text snapshot.
+        /// </summary>
+        /// <param name = "textSnapshot">The text snapshot.</param>
+        /// <returns></returns>
         protected virtual IEnumerable<PSParseError> GetErrorTokens( ITextSnapshot textSnapshot )
         {
             string text = textSnapshot.GetText();
@@ -177,15 +238,29 @@ namespace PowerStudio.VsExtension.Tagging
             return errors;
         }
 
-        protected virtual SnapshotSpan AsSnapshotSpan( ITextSnapshot snapshot, PSToken token )
+        /// <summary>
+        ///   Creates a <see cref = "SnapshotSpan" /> for the given text snapshot and token.
+        /// </summary>
+        /// <param name = "snapshot">The snapshot.</param>
+        /// <param name = "token">The token.</param>
+        /// <returns></returns>
+        protected virtual SnapshotSpan CreateSnapshotSpan( ITextSnapshot snapshot, PSToken token )
         {
             return new SnapshotSpan( snapshot, new Span( token.Start, token.Length ) );
         }
 
-        protected virtual SnapshotSpan AsSnapshotSpan( ITextSnapshot snapshot, PSToken startToken, PSToken endToken )
+        /// <summary>
+        ///   Creates a <see cref = "SnapshotSpan" /> for the given text snapshot covering all text between
+        ///   the start and end tokens - (startToken, endToken)
+        /// </summary>
+        /// <param name = "snapshot">The current snapshot.</param>
+        /// <param name = "startToken">The start token of the span.</param>
+        /// <param name = "endToken">The end token of the span.</param>
+        /// <returns></returns>
+        protected virtual SnapshotSpan CreateSnapshotSpan( ITextSnapshot snapshot, PSToken startToken, PSToken endToken )
         {
-            var startSnapshot = new SnapshotSpan( snapshot, new Span( startToken.Start, startToken.Length ) );
-            var endSnapshot = new SnapshotSpan( snapshot, new Span( endToken.Start, endToken.Length ) );
+            SnapshotSpan startSnapshot = CreateSnapshotSpan( snapshot, startToken );
+            SnapshotSpan endSnapshot = CreateSnapshotSpan( snapshot, endToken );
             return new SnapshotSpan( startSnapshot.Start, endSnapshot.End );
         }
     }

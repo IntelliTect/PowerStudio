@@ -24,10 +24,10 @@ namespace PowerStudio.VsExtension.Tagging
         private IClassificationType[] _TokenClassifications;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TokenClassifier"/> class.
+        ///   Initializes a new instance of the <see cref = "TokenClassifier" /> class.
         /// </summary>
-        /// <param name="registryService">The classification registry service.</param>
-        /// <param name="buffer"></param>
+        /// <param name = "registryService">The classification registry service.</param>
+        /// <param name = "buffer"></param>
         public TokenClassifier( IClassificationTypeRegistryService registryService, ITextBuffer buffer )
         {
             RegistryService = registryService;

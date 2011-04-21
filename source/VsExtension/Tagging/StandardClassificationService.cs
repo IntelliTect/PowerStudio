@@ -19,7 +19,7 @@ using Microsoft.VisualStudio.Text.Classification;
 namespace PowerStudio.VsExtension.Tagging
 {
     /// <summary>
-    /// For some reason, this interface isn't imported via MEF - it just comes through null.
+    ///   For some reason, this interface isn't imported via MEF - it just comes through null.
     /// </summary>
     public class StandardClassificationService : IStandardClassificationService
     {
