@@ -1,6 +1,6 @@
 PowerStudio
 =============
-PowerStudio is a Windows PowerShell integration for Visual Studio 2010. We current support
+PowerStudio is a Windows PowerShell integration for Visual Studio 2010. We currently support
 
 1.  Code coloring
 1.  Built-in and declared variable auto-completion IntelliSense
@@ -12,7 +12,7 @@ PowerStudio is a Windows PowerShell integration for Visual Studio 2010. We curre
 
 Prerequisites
 -------
-In order to build and run the code (only needed for contributing to the project), you will need to install a few items.
+In order to build and run the code (only needed for contributing to the project), you will need to install a few items:
 
 * [Visual Studio 2010 SP1](http://www.microsoft.com/downloads/en/details.aspx?FamilyID=75568aa6-8107-475d-948a-ef22627e57a5)
 
