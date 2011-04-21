@@ -42,6 +42,14 @@ namespace PowerStudio.VsExtension.Tagging
         /// <param name = "isImplementation">if set to <c>true</c> [is implementation].</param>
         public OutliningTag( ITextSnapshot snapshot, SnapshotSpan span, bool isImplementation )
         {
+            if ( ReferenceEquals( snapshot, null ) )
+            {
+                throw new ArgumentNullException( "snapshot" );
+            }
+            if ( span == default( SnapshotSpan ) )
+            {
+                throw new ArgumentNullException( "span" );
+            }
             Snapshot = snapshot;
             Span = span;
             IsImplementation = isImplementation;

@@ -18,7 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.Resources", "so
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{46504291-3DE0-4CD4-BB05-5911448BF22E}"
 	ProjectSection(SolutionItems) = preProject
-		build.bat = build.bat
+		build-release.cmd = build-release.cmd
+		build.cmd = build.cmd
 		build.ps1 = build.ps1
 		source\GlobalAssemblyInfo.cs = source\GlobalAssemblyInfo.cs
 	EndProjectSection
