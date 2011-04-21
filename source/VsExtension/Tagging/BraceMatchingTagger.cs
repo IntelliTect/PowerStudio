@@ -34,6 +34,16 @@ namespace PowerStudio.VsExtension.Tagging
         private ITextView View { get; set; }
         private SnapshotPoint? CurrentChar { get; set; }
 
+        /// <summary>
+        ///   Determines whether given token is in the target span translating to the current snaphot
+        ///   if needed.
+        /// </summary>
+        /// <param name = "tag">The tag.</param>
+        /// <param name = "snapshot">The snapshot.</param>
+        /// <param name = "span">The span.</param>
+        /// <returns>
+        ///   <c>true</c> if the tag is in the span for the snapshot; otherwise, <c>false</c>.
+        /// </returns>
         protected override bool IsTokenInSpan( BraceMatchingTag tag, ITextSnapshot snapshot, SnapshotSpan span )
         {
             if ( !CurrentChar.HasValue )
@@ -42,13 +52,9 @@ namespace PowerStudio.VsExtension.Tagging
             }
 
             SnapshotPoint currentChar = CurrentChar.Value;
-            if ( snapshot != currentChar.Snapshot )
-            {
-                currentChar = currentChar.TranslateTo( snapshot, PointTrackingMode.Positive );
-            }
 
-            if ( tag.Span.Contains( currentChar ) ||
-                 tag.Match.Span.Contains( currentChar ) )
+            if ( IsSnapshotPointContainedInSpan( snapshot, currentChar, tag.Span ) ||
+                 IsSnapshotPointContainedInSpan( snapshot, currentChar, tag.Match.Span ) )
             {
                 return base.IsTokenInSpan( tag, snapshot, span ) ||
                        base.IsTokenInSpan( tag.Match, snapshot, span );

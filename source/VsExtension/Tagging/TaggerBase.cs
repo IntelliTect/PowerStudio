@@ -115,23 +115,18 @@ namespace PowerStudio.VsExtension.Tagging
         }
 
         /// <summary>
-        ///   Determines whether [is token in span] [the specified tag].
+        ///   Determines whether given token is in the target span translating to the current snaphot
+        ///   if needed.
         /// </summary>
-        /// <param name = "tagSpan">The tagspan.</param>
+        /// <param name = "tag">The tag.</param>
         /// <param name = "snapshot">The snapshot.</param>
         /// <param name = "span">The span.</param>
         /// <returns>
-        ///   <c>true</c> if [is token in span] [the specified tag]; otherwise, <c>false</c>.
+        ///   <c>true</c> if the tag is in the span for the snapshot; otherwise, <c>false</c>.
         /// </returns>
         protected virtual bool IsTokenInSpan( T tag, ITextSnapshot snapshot, SnapshotSpan span )
         {
-            SnapshotSpan currentTagSpan = tag.Span;
-            if ( snapshot != span.Snapshot )
-            {
-                // need to map to the new snapshot before we can detect overlap
-                currentTagSpan = currentTagSpan.TranslateTo( snapshot, SpanTrackingMode.EdgeExclusive );
-            }
-            return span.Contains( currentTagSpan );
+            return IsSpanContainedInTargetSpan( snapshot, span, tag.Span );
         }
 
         /// <summary>
@@ -166,12 +161,25 @@ namespace PowerStudio.VsExtension.Tagging
         /// </remarks>
         protected abstract List<T> GetTags( ITextSnapshot snapshot );
 
+        /// <summary>
+        ///   Publishes the tag changes.
+        /// </summary>
+        /// <remarks>
+        ///   Once the tags are parsed from the current document, they are passed into this method
+        ///   in order to determine if anything has changed. Once the change detection is done,
+        ///   it replaces <see cref = "Snapshot" /> for the tagger with the parameter passed in as
+        ///   well as the <see cref = "Tags" />. If there were any changes, the <see cref = "E:TagsChanged" />
+        ///   is raised with the combined snapshot of all changes made.
+        /// </remarks>
+        /// <param name = "newSnapshot">The new snapshot.</param>
+        /// <param name = "newTags">The new tags.</param>
         protected virtual void PublishTagChanges( ITextSnapshot newSnapshot, List<T> newTags )
         {
+            ReadOnlyCollection<T> currentTags = Tags;
             var oldSpans =
-                    new List<Span>( Tags.Select( tag => tag.Span.TranslateTo( newSnapshot,
-                                                                              SpanTrackingMode.EdgeExclusive )
-                                                                .Span ) );
+                    new List<Span>( currentTags.Select( tag => tag.Span.TranslateTo( newSnapshot,
+                                                                                     SpanTrackingMode.EdgeExclusive )
+                                                                       .Span ) );
             var newSpans =
                     new List<Span>( newTags.Select( tag => tag.Span.Span ) );
 
@@ -236,6 +244,40 @@ namespace PowerStudio.VsExtension.Tagging
             Collection<PSParseError> errors;
             PSParser.Tokenize( text, out errors );
             return errors;
+        }
+
+        protected bool IsSpanContainedInTargetSpan( ITextSnapshot snapshot,
+                                                    SnapshotSpan sourceSpan,
+                                                    SnapshotSpan targetSpan )
+        {
+            if ( snapshot != sourceSpan.Snapshot )
+            {
+                // need to map to the new snapshot before we can detect overlap
+                sourceSpan = sourceSpan.TranslateTo( snapshot, SpanTrackingMode.EdgeExclusive );
+            }
+            if ( snapshot != targetSpan.Snapshot )
+            {
+                // need to map to the new snapshot before we can detect overlap
+                targetSpan = targetSpan.TranslateTo( snapshot, SpanTrackingMode.EdgeExclusive );
+            }
+            return sourceSpan.Contains( targetSpan );
+        }
+
+        protected bool IsSnapshotPointContainedInSpan( ITextSnapshot snapshot,
+                                                       SnapshotPoint snapshotPoint,
+                                                       SnapshotSpan sourceSpan )
+        {
+            if ( snapshot != sourceSpan.Snapshot )
+            {
+                // need to map to the new snapshot before we can detect overlap
+                sourceSpan = sourceSpan.TranslateTo( snapshot, SpanTrackingMode.EdgeExclusive );
+            }
+            if ( snapshot != snapshotPoint.Snapshot )
+            {
+                // need to map to the new snapshot before we can detect overlap
+                snapshotPoint = snapshotPoint.TranslateTo( snapshot, PointTrackingMode.Positive );
+            }
+            return sourceSpan.Contains( snapshotPoint );
         }
 
         /// <summary>

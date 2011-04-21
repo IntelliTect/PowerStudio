@@ -24,6 +24,8 @@ namespace PowerStudio.VsExtension
 
         public const string BaseDefinitionName = "code";
 
+        public const int OutlineThreshold = 2; // TODO: make this a language setting.
+
         [Export]
         [Name( Name )]
         [BaseDefinition( BaseDefinitionName )]
