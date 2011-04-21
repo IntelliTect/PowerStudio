@@ -1,3 +1,6 @@
+
 If you are not using Visual Studio 2010 to build the VSIX package, you can use the psake build scripts.
 
-Double click on the build.bat file to build a debug VSIX package. Releases are not yet supported.
+If you want to build the VSIX and run the unit tests, Double click on the build-release.cmd file.
+
+If you want to build the VSIX without running the unit tests, Double click on the build.cmd file.
