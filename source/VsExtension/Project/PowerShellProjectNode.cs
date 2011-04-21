@@ -35,13 +35,8 @@ namespace PowerStudio.VsExtension.Project
         private PowerShellPackage _Package;
         private VSProject _VsProject;
 
-
         static PowerShellProjectNode()
         {
-            /*ImageList =
-                    Utilities.GetImageList(
-                            typeof (PowerShellProjectNode).Assembly.GetManifestResourceStream(
-                                    "PowerStudio.VsExtension.Project.Resources.ImageList.bmp" ) );*/
             ImageList = new ImageList();
             ImageList.Images.Add( Resources.ProjectIcon );
         }
@@ -57,39 +52,58 @@ namespace PowerStudio.VsExtension.Project
 
         public static ImageList ImageList { get; private set; }
 
-        protected internal VSProject VSProject
+        protected internal VSProject VsProject
         {
-            get
-            {
-                if ( _VsProject == null )
-                {
-                    _VsProject = new OAVSProject( this );
-                }
-
-                return _VsProject;
-            }
+            get { return _VsProject ?? ( _VsProject = new OAVSProject( this ) ); }
         }
 
+        /// <summary>
+        /// This Guid must match the Guid you registered under
+        /// HKLM\Software\Microsoft\VisualStudio\%version%\Projects.
+        /// Among other things, the Project framework uses this
+        /// guid to find your project and item templates.
+        /// </summary>
+        /// <value></value>
         public override Guid ProjectGuid
         {
             get { return typeof (PowerShellProjectFactory).GUID; }
         }
 
+        /// <summary>
+        /// Returns a caption for VSHPROPID_TypeName.
+        /// </summary>
+        /// <value></value>
+        /// <returns></returns>
         public override string ProjectType
         {
             get { return ProjectTypeName; }
         }
 
+        /// <summary>
+        /// Gets the index of the image.
+        /// </summary>
+        /// <value>The index of the image.</value>
         public override int ImageIndex
         {
             get { return ImageOffset; }
         }
 
+        /// <summary>
+        /// Gets the automation object for the project node.
+        /// </summary>
+        /// <returns>
+        /// An instance of an EnvDTE.Project implementation object representing the automation object for the project.
+        /// </returns>
         public override object GetAutomationObject()
         {
             return new OAPsProject( this );
         }
 
+        /// <summary>
+        /// Create a file node based on an msbuild item.
+        /// </summary>
+        /// <param name="item">msbuild item</param>
+        /// <returns>FileNode added</returns>
         public override FileNode CreateFileNode( ProjectElement item )
         {
             var node = new PowerShellProjectFileNode( this, item );
@@ -105,6 +119,10 @@ namespace PowerStudio.VsExtension.Project
             return node;
         }
 
+        /// <summary>
+        /// List of Guids of the config independent property pages. It is called by the GetProperty for VSHPROPID_PropertyPagesCLSIDList property.
+        /// </summary>
+        /// <returns></returns>
         protected override Guid[] GetConfigurationIndependentPropertyPages()
         {
             var result = new Guid[1];
@@ -112,6 +130,10 @@ namespace PowerStudio.VsExtension.Project
             return result;
         }
 
+        /// <summary>
+        /// An ordered list of guids of the prefered property pages. See <see cref="__VSHPROPID.VSHPROPID_PriorityPropertyPagesCLSIDList"/>
+        /// </summary>
+        /// <returns>An array of guids.</returns>
         protected override Guid[] GetPriorityProjectDesignerPages()
         {
             var result = new Guid[1];
@@ -119,6 +141,12 @@ namespace PowerStudio.VsExtension.Project
             return result;
         }
 
+        /// <summary>
+        /// Called to add a file to the project from a template.
+        /// Override to do it yourself if you want to customize the file
+        /// </summary>
+        /// <param name="source">Full path of template file</param>
+        /// <param name="target">Full path of file once added to the project</param>
         public override void AddFileFromTemplate( string source, string target )
         {
             if ( !File.Exists( source ) )
@@ -159,7 +187,7 @@ namespace PowerStudio.VsExtension.Project
             object service = null;
             if ( typeof (VSProject) == serviceType )
             {
-                service = VSProject;
+                service = VsProject;
             }
             else if ( typeof (EnvDTE.Project) == serviceType )
             {

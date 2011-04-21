@@ -31,11 +31,17 @@ namespace PowerStudio.VsExtension.Project
             _Package = package;
         }
 
+        /// <summary>
+        /// Creates the project.
+        /// </summary>
+        /// <returns></returns>
         protected override ProjectNode CreateProject()
         {
             var project = new PowerShellProjectNode( _Package );
-            project.SetSite(
-                    (IOleServiceProvider) ( (IServiceProvider) _Package ).GetService( typeof (IOleServiceProvider) ) );
+            var oleProvider =
+                    (IOleServiceProvider) ( (IServiceProvider) _Package ).GetService( typeof (IOleServiceProvider) );
+            project.SetSite( oleProvider );
+
             return project;
         }
     }

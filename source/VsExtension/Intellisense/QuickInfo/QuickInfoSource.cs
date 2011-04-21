@@ -26,9 +26,6 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
     public abstract class QuickInfoSource<T> : IQuickInfoSource
             where T : ITokenTag
     {
-        private readonly ITagAggregator<T> _Aggregator;
-        private readonly ITextBuffer _Buffer;
-        private readonly QuickInfoSourceProvider<T> _QuickInfoSourceProvider;
         private bool _Disposed;
 
         /// <summary>
@@ -37,14 +34,18 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
         /// <param name = "buffer">The buffer.</param>
         /// <param name = "aggregator">The aggregator.</param>
         /// <param name = "quickInfoSourceProvider">The quick info source provider.</param>
-        public QuickInfoSource( ITextBuffer buffer,
-                                ITagAggregator<T> aggregator,
-                                QuickInfoSourceProvider<T> quickInfoSourceProvider )
+        protected QuickInfoSource( ITextBuffer buffer,
+                                   ITagAggregator<T> aggregator,
+                                   QuickInfoSourceProvider<T> quickInfoSourceProvider )
         {
-            _Aggregator = aggregator;
-            _QuickInfoSourceProvider = quickInfoSourceProvider;
-            _Buffer = buffer;
+            Aggregator = aggregator;
+            QuickInfoSourceProvider = quickInfoSourceProvider;
+            Buffer = buffer;
         }
+
+        protected ITagAggregator<T> Aggregator { get; private set; }
+        protected ITextBuffer Buffer { get; private set; }
+        protected QuickInfoSourceProvider<T> QuickInfoSourceProvider { get; private set; }
 
         #region IQuickInfoSource Members
 
@@ -69,7 +70,7 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
                 throw new ObjectDisposedException( "QuickInfoErrorSource" );
             }
 
-            ITextSnapshot currentSnapshot = _Buffer.CurrentSnapshot;
+            ITextSnapshot currentSnapshot = Buffer.CurrentSnapshot;
             SnapshotPoint? triggerPoint = session.GetTriggerPoint( currentSnapshot );
 
             if ( !triggerPoint.HasValue )
@@ -79,10 +80,10 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
             }
 
             var bufferSpan = new SnapshotSpan( currentSnapshot, 0, currentSnapshot.Length );
-            foreach ( var tagSpan in _Aggregator.GetTags( bufferSpan ) )
+            foreach ( IMappingTagSpan<T> tagSpan in Aggregator.GetTags( bufferSpan ) )
             {
                 foreach ( SnapshotSpan span in tagSpan.Span
-                        .GetSpans( _Buffer )
+                        .GetSpans( Buffer )
                         .Where( span => span.Contains( triggerPoint.Value ) ) )
                 {
                     applicableToSpan = currentSnapshot.CreateTrackingSpan( span, SpanTrackingMode.EdgeExclusive );
@@ -98,10 +99,28 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
         /// </summary>
         public void Dispose()
         {
-            _Disposed = true;
+            Dispose( true );
+            GC.SuppressFinalize( this );
         }
 
         #endregion
+
+        /// <summary>
+        ///   Releases unmanaged and - optionally - managed resources
+        /// </summary>
+        /// <param name = "disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        protected void Dispose( bool disposing )
+        {
+            if ( !_Disposed && disposing )
+            {
+                if ( Aggregator != null )
+                {
+                    Aggregator.Dispose();
+                }
+            }
+
+            _Disposed = true;
+        }
 
         protected abstract object GetToolTip( T tokenTag );
     }

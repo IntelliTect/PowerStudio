@@ -275,6 +275,7 @@ namespace PowerStudio.VsExtension.Tests.Mocks
         /// </summary>
         public bool EditInProgress { get; private set; }
 
+#pragma warning disable 67
         public event EventHandler<SnapshotSpanEventArgs> ReadOnlyRegionsChanged;
         public event EventHandler<TextContentChangedEventArgs> Changed;
         public event EventHandler<TextContentChangedEventArgs> ChangedLowPriority;
@@ -282,6 +283,7 @@ namespace PowerStudio.VsExtension.Tests.Mocks
         public event EventHandler<TextContentChangingEventArgs> Changing;
         public event EventHandler PostChanged;
         public event EventHandler<ContentTypeChangedEventArgs> ContentTypeChanged;
+#pragma warning restore 67
 
         #endregion
 

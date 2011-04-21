@@ -34,14 +34,16 @@ namespace PowerStudio.VsExtension.Project
             get { return CreateServices; }
         }
 
+        /// <summary>
+        /// Get an instance of the automation object for a FileNode
+        /// </summary>
+        /// <returns>
+        /// An instance of the Automation.OAFileNode if succeeded
+        /// </returns>
         public override object GetAutomationObject()
         {
-            if ( _AutomationObject == null )
-            {
-                _AutomationObject = new OAPsProjectFileItem( ProjectMgr.GetAutomationObject() as OAProject, this );
-            }
-
-            return _AutomationObject;
+            return _AutomationObject ??
+                   ( _AutomationObject = new OAPsProjectFileItem( ProjectMgr.GetAutomationObject() as OAProject, this ) );
         }
 
         private object CreateServices( Type serviceType )
