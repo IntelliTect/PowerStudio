@@ -50,13 +50,13 @@ namespace PowerStudio.VsExtension.Tests.Tagging
         public void WhenAnEmptyStringErrorTypeIsPassedIntoTheCtorForToolTip_ThenAnExceptionIsThrown()
         {
             const string tooltip = "tooltip";
-            new ErrorTokenTag( string.Empty );
+            new ErrorTokenTag( tooltip, string.Empty );
         }
 
         [TestMethod]
         public void WhenAnErrorTypeIsPassedIntoTheCtorForToolTip_ThenTheErrorTypePropertyMatches()
         {
-            string expected = PredefinedErrorTypeNames.SyntaxError;
+            const string expected = PredefinedErrorTypeNames.SyntaxError;
             const string tooltip = "tooltip";
             var tag = new ErrorTokenTag( tooltip, expected );
             Assert.AreEqual( expected, tag.ErrorType );
