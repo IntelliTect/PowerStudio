@@ -14,7 +14,7 @@
 using System;
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Text;
-using Microsoft.VisualStudio.Text.Classification;
+using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 
@@ -22,15 +22,18 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace PowerStudio.VsExtension.Tagging
 {
-    [Export( typeof (ITaggerProvider) )]
+    [Export( typeof (IViewTaggerProvider) )]
+    [TagType( typeof (HighlightWordTag) )]
     [ContentType( LanguageConfiguration.Name )]
-    [TagType( typeof (ErrorTokenTag) )]
-    [Order( Before = Priority.Default )]
-    public class ErrorTokenTaggerProvider : TaggerProviderBase
+    public class HighlightWordTaggerProvider : ViewTaggerProviderBase
     {
-        protected override Func<ITagger<T>> GetFactory<T>( ITextBuffer buffer )
+        #region Overrides of ViewTaggerProviderBase
+
+        protected override Func<ITagger<T>> GetFactory<T>( ITextView textView, ITextBuffer buffer )
         {
-            return () => new ErrorTokenTagger( buffer ) as ITagger<T>;
+            return () => new BraceMatchingTagger( textView, buffer ) as ITagger<T>;
         }
+
+        #endregion
     }
 }

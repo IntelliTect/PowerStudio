@@ -141,6 +141,10 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Editor\GlyphFactoryBase.cs" />
+    <Compile Include="Editor\GlyphFactoryProviderBase.cs" />
+    <Compile Include="Editor\IGlyphFactory.cs" />
+    <Compile Include="Formatting\ParagraphPropertiesFactoryService.cs" />
     <Compile Include="Intellisense\Completion\CompletionCommandHandler.cs" />
     <Compile Include="Intellisense\Completion\CompletionHandlerProvider.cs" />
     <Compile Include="Intellisense\Completion\CompletionSource.cs" />
@@ -174,6 +178,13 @@
     <Compile Include="Tagging\BraceMatchingTagger.cs" />
     <Compile Include="Tagging\BraceMatchingTaggerProvider.cs" />
     <Compile Include="Tagging\ErrorTokenTag.cs" />
+    <Compile Include="Tagging\GlyphTag.cs" />
+    <Compile Include="Tagging\GlyphTokenTagger.cs" />
+    <Compile Include="Tagging\GlyphTokenTaggerProvider.cs" />
+    <Compile Include="Tagging\HighlightWordFormatDefinition.cs" />
+    <Compile Include="Tagging\HighlightWordTag.cs" />
+    <Compile Include="Tagging\HighlightWordTagger.cs" />
+    <Compile Include="Tagging\HighlightWordTaggerProvider.cs" />
     <Compile Include="Tagging\ITokenTag.cs" />
     <Compile Include="Tagging\ITokenClassifier.cs" />
     <Compile Include="Tagging\OutliningTag.cs" />

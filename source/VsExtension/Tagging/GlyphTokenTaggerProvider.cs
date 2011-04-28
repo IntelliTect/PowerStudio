@@ -24,13 +24,13 @@ namespace PowerStudio.VsExtension.Tagging
 {
     [Export( typeof (ITaggerProvider) )]
     [ContentType( LanguageConfiguration.Name )]
-    [TagType( typeof (ErrorTokenTag) )]
+    [TagType( typeof (GlyphTag) )]
     [Order( Before = Priority.Default )]
-    public class ErrorTokenTaggerProvider : TaggerProviderBase
+    public class GlyphTokenTaggerProvider : TaggerProviderBase
     {
         protected override Func<ITagger<T>> GetFactory<T>( ITextBuffer buffer )
         {
-            return () => new ErrorTokenTagger( buffer ) as ITagger<T>;
+            return () => new GlyphTokenTagger( buffer ) as ITagger<T>;
         }
     }
 }
