@@ -60,6 +60,269 @@ namespace PowerStudio.VsExtension {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to ac
+        ///asnp
+        ///cat
+        ///cd
+        ///chdir
+        ///clc
+        ///clear
+        ///clhy
+        ///cli
+        ///clp
+        ///cls
+        ///clv
+        ///compare
+        ///copy
+        ///cp
+        ///cpi
+        ///cpp
+        ///cvpa
+        ///dbp
+        ///del
+        ///diff
+        ///dir
+        ///ebp
+        ///echo
+        ///epal
+        ///epcsv
+        ///epsn
+        ///erase
+        ///etsn
+        ///exsn
+        ///fc
+        ///fl
+        ///foreach
+        ///ft
+        ///fw
+        ///gal
+        ///gbp
+        ///gc
+        ///gci
+        ///gcm
+        ///gcs
+        ///gdr
+        ///ghy
+        ///gi
+        ///gjb
+        ///gl
+        ///gm
+        ///gmo
+        ///gp
+        ///gps
+        ///group
+        ///gsn
+        ///gsnp
+        ///gsv
+        ///gu
+        ///gv
+        ///gwmi
+        ///h
+        ///history
+        ///icm
+        ///iex
+        ///ihy
+        ///ii
+        ///ipal
+        ///ipcsv
+        ///ipmo
+        ///ipsn
+        ///ise
+        ///iwmi
+        ///kill
+        ///lp
+        ///ls
+        ///man
+        ///md
+        ///measure
+        ///mi
+        ///mount
+        ///move
+        ///mp
+        ///mv
+        ///nal
+        ///ndr
+        ///ni
+        ///nmo
+        ///nsn
+        ///nv
+        ///ogv
+        ///oh
+        ///popd
+        ///ps
+        ///pushd
+        ///pwd
+        ///r
+        ///rbp
+        ///rcjb
+        ///rd
+        ///rdr
+        ///ren
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Aliases {
+            get {
+                return ResourceManager.GetString("Aliases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to global:
+        ///local:
+        ///private:
+        ///script:
+        ///$$
+        ///$?
+        ///$_
+        ///$args
+        ///$ConsoleFileName
+        ///$Error
+        ///$Event
+        ///$EventSubscriber
+        ///$ExecutionContext
+        ///$false
+        ///$foreach
+        ///$Home
+        ///$Host
+        ///$input
+        ///$LastExitCode
+        ///$matches
+        ///$MyInvocation
+        ///$NestedPromptLevel
+        ///$null
+        ///$PID
+        ///$PsBoundParameters
+        ///$PsCmdlet
+        ///$PsCulture
+        ///$PsDebugContext
+        ///$PsHome
+        ///$PsScriptRoot
+        ///$PsUICulture
+        ///$PsVersionTable
+        ///$Pwd
+        ///$Sender
+        ///$ShellID
+        ///$SourceArgs
+        ///$SourceEventArgs
+        ///$switch
+        ///$this
+        ///$true.
+        /// </summary>
+        internal static string BuiltInVariables {
+            get {
+                return ResourceManager.GetString("BuiltInVariables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ForEach-Object
+        ///Where-Object
+        ///Add-Content
+        ///Add-PSSnapIn
+        ///Get-Content
+        ///Set-Location
+        ///Set-Location
+        ///Clear-Content
+        ///Clear-Host
+        ///Clear-History
+        ///Clear-Item
+        ///Clear-ItemProperty
+        ///Clear-Host
+        ///Clear-Variable
+        ///Compare-Object
+        ///Copy-Item
+        ///Copy-Item
+        ///Copy-Item
+        ///Copy-ItemProperty
+        ///Convert-Path
+        ///Disable-PSBreakpoint
+        ///Remove-Item
+        ///Compare-Object
+        ///Get-ChildItem
+        ///Enable-PSBreakpoint
+        ///Write-Output
+        ///Export-Alias
+        ///Export-Csv
+        ///Export-PSSession
+        ///Remove-Item
+        ///Enter-PSSession
+        ///Exit-PSSession
+        ///Format-Custom
+        ///Format-List
+        ///ForEach-Obj [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string CmdLets {
+            get {
+                return ResourceManager.GetString("CmdLets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to begin
+        ///break
+        ///catch
+        ///class
+        ///continue
+        ///data
+        ///define
+        ///do
+        ///dynamicparam
+        ///else
+        ///elseif
+        ///end
+        ///exit
+        ///filter
+        ///finally
+        ///for
+        ///foreach
+        ///from
+        ///function
+        ///if
+        ///in
+        ///param
+        ///process
+        ///return
+        ///switch
+        ///throw
+        ///trap
+        ///try
+        ///until
+        ///using
+        ///var
+        ///while.
+        /// </summary>
+        internal static string Keywords {
+            get {
+                return ResourceManager.GetString("Keywords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to $ConfirmPreference
+        ///$DebugPreference
+        ///$ErrorActionPreference
+        ///$ErrorView
+        ///$FormatEnumerationLimit
+        ///$MaximumAliasCount
+        ///$MaximumDriveCount
+        ///$MaximumErrorCount
+        ///$MaximumFunctionCount
+        ///$MaximumHistoryCount
+        ///$MaximumVariableCount
+        ///$OFS
+        ///$OutputEncoding
+        ///$ProgressPreference
+        ///$VerbosePreference
+        ///$WarningPreference
+        ///$WhatIfPreference.
+        /// </summary>
+        internal static string PreferenceVariables {
+            get {
+                return ResourceManager.GetString("PreferenceVariables", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Icon ProjectIcon {
             get {
                 object obj = ResourceManager.GetObject("ProjectIcon", resourceCulture);

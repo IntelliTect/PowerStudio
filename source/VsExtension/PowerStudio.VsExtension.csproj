@@ -145,6 +145,7 @@
     <Compile Include="Intellisense\Completion\CompletionHandlerProvider.cs" />
     <Compile Include="Intellisense\Completion\CompletionSource.cs" />
     <Compile Include="Intellisense\Completion\CompletionSourceProvider.cs" />
+    <Compile Include="Intellisense\Completion\TextViewCreationListenerBase.cs" />
     <Compile Include="Intellisense\QuickInfo\QuickInfoController.cs" />
     <Compile Include="Intellisense\QuickInfo\QuickInfoControllerProvider.cs" />
     <Compile Include="Intellisense\QuickInfo\QuickInfoErrorSource.cs" />

@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Language.Intellisense;
@@ -34,389 +35,20 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
 
         static CompletionSource()
         {
-            var keywords = new List<string>
-                           {
-                                   "begin",
-                                   "break",
-                                   "catch",
-                                   "class",
-                                   "continue",
-                                   "data",
-                                   "define",
-                                   "do",
-                                   "dynamicparam",
-                                   "else",
-                                   "elseif",
-                                   "end",
-                                   "exit",
-                                   "filter",
-                                   "finally",
-                                   "for",
-                                   "foreach",
-                                   "from",
-                                   "function",
-                                   "if",
-                                   "in",
-                                   "param",
-                                   "process",
-                                   "return",
-                                   "switch",
-                                   "throw",
-                                   "trap",
-                                   "try",
-                                   "until",
-                                   "using",
-                                   "var",
-                                   "while"
-                           };
-            var variables = new List<string>
-                            {
-                                    "global:",
-                                    "local:",
-                                    "private:",
-                                    "script:",
-                                    "$$",
-                                    "$?",
-                                    "$_",
-                                    "$args",
-                                    "$ConsoleFileName",
-                                    "$Error",
-                                    "$Event",
-                                    "$EventSubscriber",
-                                    "$ExecutionContext",
-                                    "$false",
-                                    "$foreach",
-                                    "$Home",
-                                    "$Host",
-                                    "$input",
-                                    "$LastExitCode",
-                                    "$matches",
-                                    "$MyInvocation",
-                                    "$NestedPromptLevel",
-                                    "$null",
-                                    "$PID",
-                                    "$PsBoundParameters",
-                                    "$PsCmdlet",
-                                    "$PsCulture",
-                                    "$PsDebugContext",
-                                    "$PsHome",
-                                    "$PsScriptRoot",
-                                    "$PsUICulture",
-                                    "$PsVersionTable",
-                                    "$Pwd",
-                                    "$Sender",
-                                    "$ShellID",
-                                    "$SourceArgs",
-                                    "$SourceEventArgs",
-                                    "$switch",
-                                    "$this",
-                                    "$true"
-                            };
-
-            var preferenceVariables = new List<string>
-                                      {
-                                              "$ConfirmPreference",
-                                              "$DebugPreference",
-                                              "$ErrorActionPreference",
-                                              "$ErrorView",
-                                              "$FormatEnumerationLimit",
-                                              "$MaximumAliasCount",
-                                              "$MaximumDriveCount",
-                                              "$MaximumErrorCount",
-                                              "$MaximumFunctionCount",
-                                              "$MaximumHistoryCount",
-                                              "$MaximumVariableCount",
-                                              "$OFS",
-                                              "$OutputEncoding",
-                                              "$ProgressPreference",
-                                              "$VerbosePreference",
-                                              "$WarningPreference",
-                                              "$WhatIfPreference"
-                                      };
-
-            var cmdlets = new List<string>
-                          {
-                                  "ForEach-Object",
-                                  "Where-Object",
-                                  "Add-Content",
-                                  "Add-PSSnapIn",
-                                  "Get-Content",
-                                  "Set-Location",
-                                  "Set-Location",
-                                  "Clear-Content",
-                                  "Clear-Host",
-                                  "Clear-History",
-                                  "Clear-Item",
-                                  "Clear-ItemProperty",
-                                  "Clear-Host",
-                                  "Clear-Variable",
-                                  "Compare-Object",
-                                  "Copy-Item",
-                                  "Copy-Item",
-                                  "Copy-Item",
-                                  "Copy-ItemProperty",
-                                  "Convert-Path",
-                                  "Disable-PSBreakpoint",
-                                  "Remove-Item",
-                                  "Compare-Object",
-                                  "Get-ChildItem",
-                                  "Enable-PSBreakpoint",
-                                  "Write-Output",
-                                  "Export-Alias",
-                                  "Export-Csv",
-                                  "Export-PSSession",
-                                  "Remove-Item",
-                                  "Enter-PSSession",
-                                  "Exit-PSSession",
-                                  "Format-Custom",
-                                  "Format-List",
-                                  "ForEach-Object",
-                                  "Format-Table",
-                                  "Format-Wide",
-                                  "Get-Alias",
-                                  "Get-PSBreakpoint",
-                                  "Get-Content",
-                                  "Get-ChildItem",
-                                  "Get-Command",
-                                  "Get-PSCallStack",
-                                  "Get-PSDrive",
-                                  "Get-History",
-                                  "Get-Item",
-                                  "Get-Job",
-                                  "Get-Location",
-                                  "Get-Member",
-                                  "Get-Module",
-                                  "Get-ItemProperty",
-                                  "Get-Process",
-                                  "Group-Object",
-                                  "Get-PSSession",
-                                  "Get-PSSnapIn",
-                                  "Get-Service",
-                                  "Get-Unique",
-                                  "Get-Variable",
-                                  "Get-WmiObject",
-                                  "Get-History",
-                                  "Get-History",
-                                  "Invoke-Command",
-                                  "Invoke-Expression",
-                                  "Invoke-History",
-                                  "Invoke-Item",
-                                  "Import-Alias",
-                                  "Import-Csv",
-                                  "Import-Module",
-                                  "Import-PSSession",
-                                  "powershell_ise.exe",
-                                  "Invoke-WMIMethod",
-                                  "Stop-Process",
-                                  "Out-Printer",
-                                  "Get-ChildItem",
-                                  "help",
-                                  "mkdir",
-                                  "Measure-Object",
-                                  "Move-Item",
-                                  "New-PSDrive",
-                                  "Move-Item",
-                                  "Move-ItemProperty",
-                                  "Move-Item",
-                                  "New-Alias",
-                                  "New-PSDrive",
-                                  "New-Item",
-                                  "New-Module",
-                                  "New-PSSession",
-                                  "New-Variable",
-                                  "Out-GridView",
-                                  "Out-Host",
-                                  "Pop-Location",
-                                  "Get-Process",
-                                  "Push-Location",
-                                  "Get-Location",
-                                  "Invoke-History",
-                                  "Remove-PSBreakpoint",
-                                  "Receive-Job",
-                                  "Remove-Item",
-                                  "Remove-PSDrive",
-                                  "Rename-Item",
-                                  "Remove-Item",
-                                  "Remove-Job",
-                                  "Remove-Item",
-                                  "Remove-Item",
-                                  "Remove-Module",
-                                  "Rename-Item",
-                                  "Rename-ItemProperty",
-                                  "Remove-ItemProperty",
-                                  "Remove-PSSession",
-                                  "Remove-PSSnapin",
-                                  "Remove-Variable",
-                                  "Resolve-Path",
-                                  "Remove-WMIObject",
-                                  "Start-Job",
-                                  "Set-Alias",
-                                  "Start-Process",
-                                  "Start-Service",
-                                  "Set-PSBreakpoint",
-                                  "Set-Content",
-                                  "Select-Object",
-                                  "Set-Variable",
-                                  "Set-Item",
-                                  "Set-Location",
-                                  "Start-Sleep",
-                                  "Sort-Object",
-                                  "Set-ItemProperty",
-                                  "Stop-Job",
-                                  "Stop-Process",
-                                  "Stop-Service",
-                                  "Start-Process",
-                                  "Set-Variable",
-                                  "Set-WMIInstance",
-                                  "Tee-Object",
-                                  "Get-Content",
-                                  "Where-Object",
-                                  "Wait-Job",
-                                  "Write-Output"
-                          };
-
-            var aliases = new List<string>
-                          {
-                                  "ac",
-                                  "asnp",
-                                  "cat",
-                                  "cd",
-                                  "chdir",
-                                  "clc",
-                                  "clear",
-                                  "clhy",
-                                  "cli",
-                                  "clp",
-                                  "cls",
-                                  "clv",
-                                  "compare",
-                                  "copy",
-                                  "cp",
-                                  "cpi",
-                                  "cpp",
-                                  "cvpa",
-                                  "dbp",
-                                  "del",
-                                  "diff",
-                                  "dir",
-                                  "ebp",
-                                  "echo",
-                                  "epal",
-                                  "epcsv",
-                                  "epsn",
-                                  "erase",
-                                  "etsn",
-                                  "exsn",
-                                  "fc",
-                                  "fl",
-                                  "foreach",
-                                  "ft",
-                                  "fw",
-                                  "gal",
-                                  "gbp",
-                                  "gc",
-                                  "gci",
-                                  "gcm",
-                                  "gcs",
-                                  "gdr",
-                                  "ghy",
-                                  "gi",
-                                  "gjb",
-                                  "gl",
-                                  "gm",
-                                  "gmo",
-                                  "gp",
-                                  "gps",
-                                  "group",
-                                  "gsn",
-                                  "gsnp",
-                                  "gsv",
-                                  "gu",
-                                  "gv",
-                                  "gwmi",
-                                  "h",
-                                  "history",
-                                  "icm",
-                                  "iex",
-                                  "ihy",
-                                  "ii",
-                                  "ipal",
-                                  "ipcsv",
-                                  "ipmo",
-                                  "ipsn",
-                                  "ise",
-                                  "iwmi",
-                                  "kill",
-                                  "lp",
-                                  "ls",
-                                  "man",
-                                  "md",
-                                  "measure",
-                                  "mi",
-                                  "mount",
-                                  "move",
-                                  "mp",
-                                  "mv",
-                                  "nal",
-                                  "ndr",
-                                  "ni",
-                                  "nmo",
-                                  "nsn",
-                                  "nv",
-                                  "ogv",
-                                  "oh",
-                                  "popd",
-                                  "ps",
-                                  "pushd",
-                                  "pwd",
-                                  "r",
-                                  "rbp",
-                                  "rcjb",
-                                  "rd",
-                                  "rdr",
-                                  "ren",
-                                  "ri",
-                                  "rjb",
-                                  "rm",
-                                  "rmdir",
-                                  "rmo",
-                                  "rni",
-                                  "rnp",
-                                  "rp",
-                                  "rsn",
-                                  "rsnp",
-                                  "rv",
-                                  "rvpa",
-                                  "rwmi",
-                                  "sajb",
-                                  "sal",
-                                  "saps",
-                                  "sasv",
-                                  "sbp",
-                                  "sc",
-                                  "select",
-                                  "set",
-                                  "si",
-                                  "sl",
-                                  "sleep",
-                                  "sort",
-                                  "sp",
-                                  "spjb",
-                                  "spps",
-                                  "spsv",
-                                  "start",
-                                  "sv",
-                                  "swmi",
-                                  "tee",
-                                  "type",
-                                  "where",
-                                  "wjb",
-                                  "write"
-                          };
+            IEnumerable<string> keywords = SplitText( Resources.Keywords );
+            IEnumerable<string> variables = SplitText( Resources.BuiltInVariables );
+            IEnumerable<string> preferenceVariables = SplitText( Resources.PreferenceVariables );
+            IEnumerable<string> cmdlets = SplitText( Resources.CmdLets );
+            IEnumerable<string> aliases = SplitText( Resources.Aliases );
             BuiltInCompletions =
-                    keywords.Union( variables ).Union( preferenceVariables ).Union( cmdlets ).Union( aliases );
+                    keywords.Union( variables ).Union( preferenceVariables ).Union( cmdlets ).Union( aliases ).ToList();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CompletionSource"/> class.
+        /// </summary>
+        /// <param name="sourceProvider">The source provider.</param>
+        /// <param name="textBuffer">The text buffer.</param>
         public CompletionSource( CompletionSourceProvider sourceProvider, ITextBuffer textBuffer )
         {
             _SourceProvider = sourceProvider;
@@ -431,11 +63,12 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
-            if ( !_IsDisposed )
+            if ( _IsDisposed )
             {
-                GC.SuppressFinalize( this );
-                _IsDisposed = true;
+                return;
             }
+            GC.SuppressFinalize( this );
+            _IsDisposed = true;
         }
 
         /// <summary>
@@ -492,7 +125,7 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
                     _Completions.Add( completion );
                 }
             }
-
+            _Completions.Sort( new CompletionComparer() );
             completionSets.Add( new CompletionSet(
                                         "Tokens",
                                         //the non-localized title of the tab
@@ -505,6 +138,12 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
 
         #endregion
 
+        private static IEnumerable<string> SplitText( string text )
+        {
+            return text.Split( new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries )
+                    .ToList();
+        }
+
         private ITrackingSpan FindTokenSpanAtPosition( ITrackingPoint point, ICompletionSession session )
         {
             SnapshotPoint currentPoint = ( session.TextView.Caret.Position.BufferPosition ) - 1;
@@ -516,8 +155,12 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
 
         #region Nested type: CompletionComparer
 
-        private class CompletionComparer : IEqualityComparer<Microsoft.VisualStudio.Language.Intellisense.Completion>
+        private class CompletionComparer : IEqualityComparer<Microsoft.VisualStudio.Language.Intellisense.Completion>,
+                                           IComparer<Microsoft.VisualStudio.Language.Intellisense.Completion>
         {
+            private static readonly IComparer<string> DefaultStringComparer =
+                    StringComparer.Create( CultureInfo.CurrentCulture, false );
+
             #region Implementation of IEqualityComparer<in Completion>
 
             /// <summary>
@@ -543,6 +186,37 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
             public int GetHashCode( Microsoft.VisualStudio.Language.Intellisense.Completion obj )
             {
                 return obj.DisplayText.GetHashCode();
+            }
+
+            #endregion
+
+            #region Implementation of IComparer<in Completion>
+
+            /// <summary>
+            /// Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            /// </summary>
+            /// <returns>
+            /// A signed integer that indicates the relative values of <paramref name="x"/> and <paramref name="y"/>, as shown in the following table.Value Meaning Less than zero<paramref name="x"/> is less than <paramref name="y"/>.Zero<paramref name="x"/> equals <paramref name="y"/>.Greater than zero<paramref name="x"/> is greater than <paramref name="y"/>.
+            /// </returns>
+            /// <param name="x">The first object to compare.</param><param name="y">The second object to compare.</param>
+            public int Compare( Microsoft.VisualStudio.Language.Intellisense.Completion x,
+                                Microsoft.VisualStudio.Language.Intellisense.Completion y )
+            {
+                if ( x == null &&
+                     y == null )
+                {
+                    return 0;
+                }
+                if ( x != null &&
+                     y == null )
+                {
+                    return 1;
+                }
+                if ( x == null )
+                {
+                    return -1;
+                }
+                return DefaultStringComparer.Compare( x.DisplayText, y.DisplayText );
             }
 
             #endregion

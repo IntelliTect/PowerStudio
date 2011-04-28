@@ -14,8 +14,6 @@
 using System;
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Editor;
-using Microsoft.VisualStudio.Language.Intellisense;
-using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.TextManager.Interop;
 using Microsoft.VisualStudio.Utilities;
@@ -28,35 +26,14 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
     [Name( "token completion handler" )]
     [ContentType( LanguageConfiguration.Name )]
     [TextViewRole( PredefinedTextViewRoles.Editable )]
-    internal class CompletionHandlerProvider : IVsTextViewCreationListener
+    internal class CompletionHandlerProvider : TextViewCreationListenerBase<CompletionCommandHandler>
     {
-        [Import]
-        internal IVsEditorAdaptersFactoryService AdapterService;
+        #region Overrides of TextViewCreationListenerBase
 
-        [Import]
-        internal ICompletionBroker CompletionBroker { get; set; }
-
-        [Import]
-        internal SVsServiceProvider ServiceProvider { get; set; }
-
-        #region Implementation of IVsTextViewCreationListener
-
-        /// <summary>
-        /// Called when a <see cref="T:Microsoft.VisualStudio.TextManager.Interop.IVsTextView"/> adapter has been created and initialized.
-        /// </summary>
-        /// <param name="textViewAdapter">The newly created and initialized text view
-        ///             adapter.</param>
-        public void VsTextViewCreated( IVsTextView textViewAdapter )
+        protected override Func<CompletionCommandHandler> GetFactory( IVsTextView textViewAdapter,
+                                                                      IWpfTextView wpfTextView )
         {
-            ITextView textView = AdapterService.GetWpfTextView( textViewAdapter );
-            if ( textView == null )
-            {
-                return;
-            }
-
-            Func<CompletionCommandHandler> createCommandHandler =
-                    delegate { return new CompletionCommandHandler( textViewAdapter, textView, this ); };
-            textView.Properties.GetOrCreateSingletonProperty( createCommandHandler );
+            return () => new CompletionCommandHandler( textViewAdapter, wpfTextView, this );
         }
 
         #endregion

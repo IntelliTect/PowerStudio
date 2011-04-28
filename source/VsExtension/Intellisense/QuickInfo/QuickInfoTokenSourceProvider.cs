@@ -39,10 +39,8 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
         /// </returns>
         public override IQuickInfoSource TryCreateQuickInfoSource( ITextBuffer textBuffer )
         {
-            return new QuickInfoTokenSource( textBuffer,
-                                             TagAggregatorFactory.CreateTagAggregator<TokenClassificationTag>(
-                                                     textBuffer ),
-                                             this );
+            var tagAggregator = TagAggregatorFactory.CreateTagAggregator<TokenClassificationTag>( textBuffer );
+            return new QuickInfoTokenSource( textBuffer, tagAggregator, this );
         }
 
         #region Nested type: QuickInfoTokenSource

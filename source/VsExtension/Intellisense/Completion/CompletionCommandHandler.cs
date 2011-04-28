@@ -29,7 +29,7 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
     {
         private readonly CompletionHandlerProvider _CompletionHandlerProvider;
         private readonly IOleCommandTarget _NextCommandHandler;
-        private readonly ITextView _TextView;
+        private readonly IWpfTextView _TextView;
         private ICompletionSession _Session;
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         /// <param name="textView">The text view.</param>
         /// <param name="provider">The provider.</param>
         internal CompletionCommandHandler( IVsTextView textViewAdapter,
-                                           ITextView textView,
+                                           IWpfTextView textView,
                                            CompletionHandlerProvider provider )
         {
             _TextView = textView;
@@ -57,7 +57,9 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         /// <returns>
         /// This method returns S_OK on success. Other possible return values include the following.Return codeDescriptionE_FAILThe operation failed.E_UNEXPECTEDAn unexpected error has occurred.E_POINTERThe <paramref name="prgCmds"/> argument is null.OLECMDERR_E_UNKNOWNGROUPThe <paramref name="pguidCmdGroup"/> parameter is not null but does not specify a recognized command group.
         /// </returns>
-        /// <param name="pguidCmdGroup">The GUID of the command group.</param><param name="cCmds">The number of commands in <paramref name="prgCmds"/>.</param><param name="prgCmds">An array of <see cref="T:Microsoft.VisualStudio.OLE.Interop.OLECMD"/> structures that indicate the commands for which the caller needs status information. This method fills the <paramref name="cmdf"/> member of each structure with values taken from the <see cref="T:Microsoft.VisualStudio.OLE.Interop.OLECMDF"/> enumeration.</param><param name="pCmdText">An <see cref="T:Microsoft.VisualStudio.OLE.Interop.OLECMDTEXT"/> structure in which to return name and/or status information of a single command. This parameter can be null to indicate that the caller does not need this information.</param>
+        /// <param name="pguidCmdGroup">The GUID of the command group.</param><param name="cCmds">The number of commands in <paramref name="prgCmds"/>.</param>
+        /// <param name="prgCmds">An array of <see cref="T:Microsoft.VisualStudio.OLE.Interop.OLECMD"/> structures that indicate the commands for which the caller needs status information. This method fills the <paramref name="cmdf"/> member of each structure with values taken from the <see cref="T:Microsoft.VisualStudio.OLE.Interop.OLECMDF"/> enumeration.</param>
+        /// <param name="pCmdText">An <see cref="T:Microsoft.VisualStudio.OLE.Interop.OLECMDTEXT"/> structure in which to return name and/or status information of a single command. This parameter can be null to indicate that the caller does not need this information.</param>
         public int QueryStatus( ref Guid pguidCmdGroup, uint cCmds, OLECMD[] prgCmds, IntPtr pCmdText )
         {
             return _NextCommandHandler.QueryStatus( ref pguidCmdGroup, cCmds, prgCmds, pCmdText );
@@ -69,7 +71,10 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         /// <returns>
         /// This method returns S_OK on success. Other possible return values include the following.Return codeDescriptionOLECMDERR_E_UNKNOWNGROUPThe <paramref name="pguidCmdGroup"/> parameter is not null but does not specify a recognized command group.OLECMDERR_E_NOTSUPPORTEDThe <paramref name="nCmdID"/> parameter is not a valid command in the group identified by <paramref name="pguidCmdGroup"/>.OLECMDERR_E_DISABLEDThe command identified by <paramref name="nCmdID"/> is currently disabled and cannot be executed.OLECMDERR_E_NOHELPThe caller has asked for help on the command identified by <paramref name="nCmdID"/>, but no help is available.OLECMDERR_E_CANCELEDThe user canceled the execution of the command.
         /// </returns>
-        /// <param name="pguidCmdGroup">The GUID of the command group.</param><param name="nCmdID">The command ID.</param><param name="nCmdexecopt">Specifies how the object should execute the command. Possible values are taken from the <see cref="T:Microsoft.VisualStudio.OLE.Interop.OLECMDEXECOPT"/> and <see cref="T:Microsoft.VisualStudio.OLE.Interop.OLECMDID_WINDOWSTATE_FLAG"/> enumerations.</param><param name="pvaIn">The input arguments of the command.</param><param name="pvaOut">The output arguments of the command.</param>
+        /// <param name="pguidCmdGroup">The GUID of the command group.</param><param name="nCmdID">The command ID.</param>
+        /// <param name="nCmdexecopt">Specifies how the object should execute the command. Possible values are taken from the <see cref="T:Microsoft.VisualStudio.OLE.Interop.OLECMDEXECOPT"/> and <see cref="T:Microsoft.VisualStudio.OLE.Interop.OLECMDID_WINDOWSTATE_FLAG"/> enumerations.</param>
+        /// <param name="pvaIn">The input arguments of the command.</param>
+        /// <param name="pvaOut">The output arguments of the command.</param>
         public int Exec( ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut )
         {
             if ( VsShellUtilities.IsInAutomationFunction( _CompletionHandlerProvider.ServiceProvider ) )
@@ -90,7 +95,7 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
             if ( nCmdID == (uint) VSConstants.VSStd2KCmdID.RETURN
                  || nCmdID == (uint) VSConstants.VSStd2KCmdID.TAB
                  ||
-                 (char.IsWhiteSpace(typedChar) || (char.IsPunctuation(typedChar) && typedChar != '-')))
+                 ( char.IsWhiteSpace( typedChar ) || ( char.IsPunctuation( typedChar ) && typedChar != '-' ) ) )
             {
                 //check for a a selection
                 if ( _Session != null &&
@@ -103,11 +108,8 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
                         //also, don't add the character to the buffer
                         return VSConstants.S_OK;
                     }
-                    else
-                    {
-                        //if there is no selection, dismiss the session
-                        _Session.Dismiss();
-                    }
+                    //if there is no selection, dismiss the session
+                    _Session.Dismiss();
                 }
             }
 
@@ -115,7 +117,7 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
             int retVal = _NextCommandHandler.Exec( ref pguidCmdGroup, nCmdID, nCmdexecopt, pvaIn, pvaOut );
             bool handled = false;
             if ( !typedChar.Equals( char.MinValue ) &&
-                 (char.IsLetterOrDigit( typedChar ) || typedChar == '$' || typedChar == '-'))
+                 ( char.IsLetterOrDigit( typedChar ) || typedChar == '$' || typedChar == '-' ) )
             {
                 if ( _Session == null ||
                      _Session.IsDismissed ) // If there is no active session, bring up completion
@@ -140,11 +142,7 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
                 }
                 handled = true;
             }
-            if ( handled )
-            {
-                return VSConstants.S_OK;
-            }
-            return retVal;
+            return handled ? VSConstants.S_OK : retVal;
         }
 
         #endregion
@@ -153,9 +151,8 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         {
             //the caret must be in a non-projection location 
             SnapshotPoint? caretPoint =
-                    _TextView.Caret.Position.Point.GetPoint(
-                            textBuffer => ( !textBuffer.ContentType.IsOfType( "projection" ) ),
-                            PositionAffinity.Predecessor );
+                    _TextView.Caret.Position.Point
+                            .GetPoint( textBuffer => !IsProjection( textBuffer ), PositionAffinity.Predecessor );
             if ( !caretPoint.HasValue )
             {
                 return false;
@@ -172,6 +169,11 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
             _Session.Start();
 
             return true;
+        }
+
+        private static bool IsProjection( ITextBuffer match )
+        {
+            return match.ContentType.IsOfType( "projection" );
         }
 
         private void OnSessionDismissed( object sender, EventArgs e )
