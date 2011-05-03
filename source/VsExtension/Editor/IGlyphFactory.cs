@@ -21,7 +21,7 @@ using PowerStudio.VsExtension.Tagging;
 namespace PowerStudio.VsExtension.Editor
 {
     public interface IGlyphFactory<in TToken> : IGlyphFactory
-            where TToken : ITokenTag, IGlyphTag
+            where TToken : GlyphTag
     {
         UIElement CreateGlyph( IWpfTextViewLine line, TToken token );
     }

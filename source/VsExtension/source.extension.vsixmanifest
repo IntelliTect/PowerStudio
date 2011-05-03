@@ -3,17 +3,15 @@
 <Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
   <Identifier Id="f28a7596-8789-4c64-8779-243c014f2787">
     <Name>PowerStudio</Name>
-    <Author>InGenius Software</Author>
+    <Author>IntelliTechture</Author>
     <Version>0.1</Version>
     <Description xml:space="preserve">PowerShell integration for Visual Studio</Description>
     <Locale>1033</Locale>
     <MoreInfoUrl>
-      https://github.com/ingenius/PowerStudio
+      https://github.com/IntelliTechture/PowerStudio
     </MoreInfoUrl>
     <License>LICENSE.txt</License>
-    <GettingStartedGuide>
-      https://github.com/ingenius/PowerStudio/wiki
-    </GettingStartedGuide>
+    <GettingStartedGuide>https://github.com/IntelliTechture/PowerStudio/wiki</GettingStartedGuide>
     <Icon>ProjectIcon.ico</Icon>
     <PreviewImage>ProjectIcon.ico</PreviewImage>
     <InstalledByMsi>false</InstalledByMsi>

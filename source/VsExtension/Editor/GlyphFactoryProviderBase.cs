@@ -20,7 +20,7 @@ using PowerStudio.VsExtension.Tagging;
 namespace PowerStudio.VsExtension.Editor
 {
     internal abstract class GlyphFactoryProviderBase<T> : IGlyphFactoryProvider
-            where T : ITokenTag, IGlyphTag
+            where T : GlyphTag
     {
         #region Implementation of IGlyphFactoryProvider
 

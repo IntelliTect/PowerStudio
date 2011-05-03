@@ -21,7 +21,7 @@ using PowerStudio.VsExtension.Tagging;
 namespace PowerStudio.VsExtension.Editor
 {
     public abstract class GlyphFactoryBase<TToken> : IGlyphFactory<TToken>
-            where TToken : ITokenTag, IGlyphTag
+            where TToken : GlyphTag
     {
         #region Implementation of IGlyphFactory
 

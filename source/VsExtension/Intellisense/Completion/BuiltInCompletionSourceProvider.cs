@@ -14,17 +14,17 @@
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
-using Microsoft.VisualStudio.Text.Operations;
+using Microsoft.VisualStudio.Utilities;
 
 #endregion
 
 namespace PowerStudio.VsExtension.Intellisense.Completion
 {
-    public abstract class CompletionSourceProvider : ICompletionSourceProvider
+    [Export( typeof (ICompletionSourceProvider) )]
+    [ContentType( LanguageConfiguration.Name )]
+    [Name( "built-in completion" )]
+    public class BuiltInCompletionSourceProvider : CompletionSourceProvider
     {
-        [Import]
-        internal ITextStructureNavigatorSelectorService NavigatorService { get; set; }
-
         #region Implementation of ICompletionSourceProvider
 
         /// <summary>
@@ -34,7 +34,10 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         /// <returns>
         ///   A valid <see cref = "T:Microsoft.VisualStudio.Language.Intellisense.ICompletionSource" /> instance, or null if none could be created.
         /// </returns>
-        public abstract ICompletionSource TryCreateCompletionSource( ITextBuffer textBuffer );
+        public override ICompletionSource TryCreateCompletionSource( ITextBuffer textBuffer )
+        {
+            return new BuiltInCompletionSource( this, textBuffer );
+        }
 
         #endregion
     }

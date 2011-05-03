@@ -16,7 +16,7 @@ using System.Resources;
 
 #endregion
 
-[assembly : AssemblyCompany( "Ingenius" )]
+[assembly : AssemblyCompany( "IntelliTechture" )]
 [assembly : AssemblyProduct( "PowerStudio.VsExtension" )]
 [assembly : NeutralResourcesLanguage( "en-US" )]
 

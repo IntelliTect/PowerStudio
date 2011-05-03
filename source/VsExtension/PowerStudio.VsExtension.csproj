@@ -145,10 +145,14 @@
     <Compile Include="Editor\GlyphFactoryProviderBase.cs" />
     <Compile Include="Editor\IGlyphFactory.cs" />
     <Compile Include="Formatting\ParagraphPropertiesFactoryService.cs" />
+    <Compile Include="Intellisense\Completion\BuiltInCompletionSourceProvider.cs" />
     <Compile Include="Intellisense\Completion\CompletionCommandHandler.cs" />
     <Compile Include="Intellisense\Completion\CompletionHandlerProvider.cs" />
-    <Compile Include="Intellisense\Completion\CompletionSource.cs" />
+    <Compile Include="Intellisense\Completion\BuiltInCompletionSource.cs" />
+    <Compile Include="Intellisense\Completion\CompletionSourceBase.cs" />
     <Compile Include="Intellisense\Completion\CompletionSourceProvider.cs" />
+    <Compile Include="Intellisense\Completion\SmartCompletionSource.cs" />
+    <Compile Include="Intellisense\Completion\SmartCompletionSourceProvider.cs" />
     <Compile Include="Intellisense\Completion\TextViewCreationListenerBase.cs" />
     <Compile Include="Intellisense\QuickInfo\QuickInfoController.cs" />
     <Compile Include="Intellisense\QuickInfo\QuickInfoControllerProvider.cs" />
