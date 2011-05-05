@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.VsExtension.Tagging.Tags
 {
     /// <summary>
     ///   An implementation of <see cref = "T:Microsoft.VisualStudio.Text.Tagging.IClassificationTag" />.

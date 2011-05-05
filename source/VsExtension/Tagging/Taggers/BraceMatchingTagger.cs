@@ -15,10 +15,11 @@ using System.Collections.Generic;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
+using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.VsExtension.Tagging.Taggers
 {
     public class BraceMatchingTagger : TaggerBase<BraceMatchingTag>
     {

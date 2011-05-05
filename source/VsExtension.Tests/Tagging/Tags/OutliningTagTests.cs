@@ -14,12 +14,12 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
-using PowerStudio.VsExtension.Tagging;
+using PowerStudio.VsExtension.Tagging.Tags;
 using PowerStudio.VsExtension.Tests.Mocks;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tests.Tagging
+namespace PowerStudio.VsExtension.Tests.Tagging.Tags
 {
     [TestClass]
     public class OutliningTagTests

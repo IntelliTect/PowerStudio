@@ -14,10 +14,11 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PowerStudio.VsExtension.Tagging;
+using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tests.Tagging
+namespace PowerStudio.VsExtension.Tests.Tagging.Tags
 {
     [TestClass]
     public class BraceMatchingTagTests

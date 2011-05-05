@@ -14,10 +14,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.Text;
+using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.VsExtension.Tagging.Taggers
 {
     public class ErrorTokenTagger : TaggerBase<ErrorTokenTag>
     {

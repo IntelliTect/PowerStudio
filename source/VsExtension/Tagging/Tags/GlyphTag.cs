@@ -11,14 +11,13 @@
 
 #region Using Directives
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.Text.Editor;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tests.Tagging
+namespace PowerStudio.VsExtension.Tagging.Tags
 {
-    [TestClass]
-    public class TokenTagTests
+    public class GlyphTag : TokenTag, IGlyphTag
     {
     }
 }

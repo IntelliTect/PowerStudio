@@ -20,6 +20,7 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 using PowerStudio.VsExtension.Tagging;
+using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
 

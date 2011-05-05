@@ -15,6 +15,7 @@ using System.Windows;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Formatting;
 using PowerStudio.VsExtension.Tagging;
+using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
 

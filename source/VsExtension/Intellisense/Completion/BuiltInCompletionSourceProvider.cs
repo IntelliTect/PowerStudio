@@ -25,8 +25,6 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
     [Name( "built-in completion" )]
     public class BuiltInCompletionSourceProvider : CompletionSourceProvider
     {
-        #region Implementation of ICompletionSourceProvider
-
         /// <summary>
         ///   Creates a completion provider for the given context.
         /// </summary>
@@ -38,7 +36,5 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         {
             return new BuiltInCompletionSource( this, textBuffer );
         }
-
-        #endregion
     }
 }

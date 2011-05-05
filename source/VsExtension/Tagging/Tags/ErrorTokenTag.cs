@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.VsExtension.Tagging.Tags
 {
     public class ErrorTokenTag : TokenTag, IErrorTag
     {

@@ -17,23 +17,22 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
+using PowerStudio.VsExtension.Tagging.Taggers;
+using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.VsExtension.Tagging.Providers
 {
     [Export( typeof (ITaggerProvider) )]
     [ContentType( LanguageConfiguration.Name )]
-    [TagType( typeof (TokenClassificationTag) )]
-    public class ClassificationTaggerProvider : TaggerProviderBase
+    [TagType( typeof (ErrorTokenTag) )]
+    [Order( Before = Priority.Default )]
+    public class ErrorTokenTaggerProvider : TaggerProviderBase
     {
-        [Import]
-        internal IClassificationTypeRegistryService ClassificationTypeRegistry;
-
         protected override Func<ITagger<T>> GetFactory<T>( ITextBuffer buffer )
         {
-            var tokenClassification = new TokenClassifier( ClassificationTypeRegistry, buffer );
-            return () => new ClassificationTagger( buffer, tokenClassification ) as ITagger<T>;
+            return () => new ErrorTokenTagger( buffer ) as ITagger<T>;
         }
     }
 }

@@ -18,12 +18,10 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.VsExtension.Tagging.Providers
 {
     public abstract class ViewTaggerProviderBase : IViewTaggerProvider
     {
-        protected abstract Func<ITagger<T>> GetFactory<T>( ITextView textView, ITextBuffer buffer ) where T : ITag;
-
         #region Implementation of IViewTaggerProvider
 
         /// <summary>
@@ -38,5 +36,7 @@ namespace PowerStudio.VsExtension.Tagging
         }
 
         #endregion
+
+        protected abstract Func<ITagger<T>> GetFactory<T>( ITextView textView, ITextBuffer buffer ) where T : ITag;
     }
 }

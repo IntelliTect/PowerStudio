@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.VsExtension.Tagging.Providers
 {
     public abstract class TaggerProviderBase : ITaggerProvider
     {

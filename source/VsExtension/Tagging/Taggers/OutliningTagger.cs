@@ -14,10 +14,11 @@
 using System.Collections.Generic;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
+using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.VsExtension.Tagging.Taggers
 {
     public class OutliningTagger : TaggerBase<OutliningTag>
     {

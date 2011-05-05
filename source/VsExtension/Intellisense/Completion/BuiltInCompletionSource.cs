@@ -28,11 +28,11 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
 
         static BuiltInCompletionSource()
         {
-            IEnumerable<string> keywords = SplitText( Resources.Keywords );
-            IEnumerable<string> variables = SplitText( Resources.BuiltInVariables );
-            IEnumerable<string> preferenceVariables = SplitText( Resources.PreferenceVariables );
-            IEnumerable<string> cmdlets = SplitText( Resources.CmdLets );
-            IEnumerable<string> aliases = SplitText( Resources.Aliases );
+            IEnumerable<string> keywords = SplitMultiLineTextIntoACollectionOfLines( Resources.Keywords );
+            IEnumerable<string> variables = SplitMultiLineTextIntoACollectionOfLines( Resources.BuiltInVariables );
+            IEnumerable<string> preferenceVariables = SplitMultiLineTextIntoACollectionOfLines( Resources.PreferenceVariables );
+            IEnumerable<string> cmdlets = SplitMultiLineTextIntoACollectionOfLines( Resources.CmdLets );
+            IEnumerable<string> aliases = SplitMultiLineTextIntoACollectionOfLines( Resources.Aliases );
             BuiltInCompletions =
                     keywords.Union( variables ).Union( preferenceVariables ).Union( cmdlets ).Union( aliases ).ToList();
         }
@@ -98,7 +98,7 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
                                         null ) );
         }
 
-        private static IEnumerable<string> SplitText( string text )
+        private static IEnumerable<string> SplitMultiLineTextIntoACollectionOfLines( string text )
         {
             return text.Split( new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries )
                     .ToList();

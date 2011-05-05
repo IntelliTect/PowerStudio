@@ -15,18 +15,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
+using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.VsExtension.Tagging.Taggers
 {
     public class ClassificationTagger : TaggerBase<TokenClassificationTag>
     {
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "ClassificationTagger" /> class.
-        /// </summary>
-        /// <param name = "buffer">The buffer.</param>
-        /// <param name = "tokenClassifier">The token classification.</param>
         public ClassificationTagger( ITextBuffer buffer,
                                      ITokenClassifier tokenClassifier )
                 : base( buffer )
