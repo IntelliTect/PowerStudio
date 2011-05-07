@@ -47,8 +47,6 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
         protected ITextBuffer Buffer { get; private set; }
         protected QuickInfoSourceProvider<T> QuickInfoSourceProvider { get; private set; }
 
-        #region IQuickInfoSource Members
-
         /// <summary>
         ///   Determines which pieces of QuickInfo content should be part of the specified <see cref = "T:Microsoft.VisualStudio.Language.Intellisense.IQuickInfoSession" />.
         /// </summary>
@@ -103,7 +101,6 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
             GC.SuppressFinalize( this );
         }
 
-        #endregion
 
         /// <summary>
         ///   Releases unmanaged and - optionally - managed resources

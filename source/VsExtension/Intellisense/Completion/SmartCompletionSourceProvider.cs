@@ -25,8 +25,6 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
     [Name( "smart completion" )]
     public class SmartCompletionSourceProvider : CompletionSourceProvider
     {
-        #region Implementation of ICompletionSourceProvider
-
         /// <summary>
         ///   Creates a completion provider for the given context.
         /// </summary>
@@ -38,7 +36,5 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         {
             return new SmartCompletionSource( this, textBuffer );
         }
-
-        #endregion
     }
 }

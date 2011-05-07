@@ -13,7 +13,6 @@
 
 using System;
 using Microsoft.VisualStudio.Text.Editor;
-using PowerStudio.VsExtension.Tagging;
 using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
@@ -23,8 +22,6 @@ namespace PowerStudio.VsExtension.Editor
     internal abstract class GlyphFactoryProviderBase<T> : IGlyphFactoryProvider
             where T : GlyphTag
     {
-        #region Implementation of IGlyphFactoryProvider
-
         /// <summary>
         ///   Gets the <see cref = "T:Microsoft.VisualStudio.Text.Editor.IGlyphFactory" /> for the given text view and margin.
         /// </summary>
@@ -37,8 +34,6 @@ namespace PowerStudio.VsExtension.Editor
         {
             return view.Properties.GetOrCreateSingletonProperty( GetFactory( view, margin ) );
         }
-
-        #endregion
 
         protected abstract Func<IGlyphFactory<T>> GetFactory( IWpfTextView view, IWpfTextViewMargin margin );
     }

@@ -44,8 +44,6 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
             _TextView.MouseHover += OnTextViewMouseHover;
         }
 
-        #region IIntellisenseController Members
-
         /// <summary>
         ///   Called when a new subject <see cref = "T:Microsoft.VisualStudio.Text.ITextBuffer" /> appears in the graph of buffers associated with
         ///   the <see cref = "T:Microsoft.VisualStudio.Text.Editor.ITextView" />, due to a change in projection or content type.
@@ -80,8 +78,6 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
                 _TextView = null;
             }
         }
-
-        #endregion
 
         /// <summary>
         ///   Called when [text view mouse hover].

@@ -35,8 +35,6 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
             Buffer = textBuffer;
         }
 
-        #region Implementation of IDisposable
-
         /// <summary>
         ///   Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
@@ -56,8 +54,6 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         ///   chain.
         /// </remarks>
         public abstract void AugmentCompletionSession( ICompletionSession session, IList<CompletionSet> completionSets );
-
-        #endregion
 
         protected ITextBuffer Buffer { get; private set; }
         protected CompletionSourceProvider SourceProvider { get; private set; }

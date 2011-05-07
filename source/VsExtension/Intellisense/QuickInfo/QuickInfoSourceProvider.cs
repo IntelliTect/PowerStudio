@@ -31,8 +31,6 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
         [Import]
         internal ITextStructureNavigatorSelectorService NavigatorService { get; set; }
 
-        #region IQuickInfoSourceProvider Members
-
         /// <summary>
         ///   Creates a Quick Info provider for the specified context.
         /// </summary>
@@ -41,7 +39,5 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
         ///   A valid <see cref = "T:Microsoft.VisualStudio.Language.Intellisense.IQuickInfoSource" /> instance, or null if none could be created.
         /// </returns>
         public abstract IQuickInfoSource TryCreateQuickInfoSource( ITextBuffer textBuffer );
-
-        #endregion
     }
 }

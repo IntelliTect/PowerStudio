@@ -25,8 +25,6 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         [Import]
         internal ITextStructureNavigatorSelectorService NavigatorService { get; set; }
 
-        #region Implementation of ICompletionSourceProvider
-
         /// <summary>
         ///   Creates a completion provider for the given context.
         /// </summary>
@@ -35,7 +33,5 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         ///   A valid <see cref = "T:Microsoft.VisualStudio.Language.Intellisense.ICompletionSource" /> instance, or null if none could be created.
         /// </returns>
         public abstract ICompletionSource TryCreateCompletionSource( ITextBuffer textBuffer );
-
-        #endregion
     }
 }

@@ -27,8 +27,6 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
     [Name(LanguageConfiguration.Name + "Error QuickInfo")]
     public class QuickInfoErrorSourceProvider : QuickInfoSourceProvider<ErrorTokenTag>
     {
-        #region IQuickInfoSourceProvider Members
-
         /// <summary>
         ///   Creates a Quick Info provider for the specified context.
         /// </summary>
@@ -42,7 +40,5 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
                                              TagAggregatorFactory.CreateTagAggregator<ErrorTokenTag>(textBuffer),
                                              this);
         }
-
-        #endregion
     }
 }

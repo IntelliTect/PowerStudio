@@ -25,8 +25,6 @@ namespace PowerStudio.VsExtension.Formatting
     [ContentType( LanguageConfiguration.Name )]
     public class ParagraphPropertiesFactoryService : ITextParagraphPropertiesFactoryService
     {
-        #region Implementation of ITextParagraphPropertiesFactoryService
-
         /// <summary>
         ///   Creates a <see cref = "T:System.Windows.Media.TextFormatting.TextParagraphProperties" /> for the provided configuration.
         /// </summary>
@@ -49,7 +47,5 @@ namespace PowerStudio.VsExtension.Formatting
         {
             return new TextFormattingParagraphProperties(textProperties, formattedLineSource.TabSize);
         }
-
-        #endregion
     }
 }

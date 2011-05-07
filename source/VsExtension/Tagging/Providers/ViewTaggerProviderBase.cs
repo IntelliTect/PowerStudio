@@ -22,8 +22,6 @@ namespace PowerStudio.VsExtension.Tagging.Providers
 {
     public abstract class ViewTaggerProviderBase : IViewTaggerProvider
     {
-        #region Implementation of IViewTaggerProvider
-
         /// <summary>
         ///   Creates a tag provider for the specified view and buffer.
         /// </summary>
@@ -34,8 +32,6 @@ namespace PowerStudio.VsExtension.Tagging.Providers
         {
             return buffer.Properties.GetOrCreateSingletonProperty( GetFactory<T>( textView, buffer ) );
         }
-
-        #endregion
 
         protected abstract Func<ITagger<T>> GetFactory<T>( ITextView textView, ITextBuffer buffer ) where T : ITag;
     }

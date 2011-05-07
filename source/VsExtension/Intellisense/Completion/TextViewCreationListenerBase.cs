@@ -35,8 +35,6 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         [Import]
         internal SVsServiceProvider ServiceProvider { get; set; }
 
-        #region Implementation of IVsTextViewCreationListener
-
         /// <summary>
         /// Called when a <see cref="T:Microsoft.VisualStudio.TextManager.Interop.IVsTextView"/> adapter has been created and initialized.
         /// </summary>
@@ -51,8 +49,6 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
             }
             wpfTextView.Properties.GetOrCreateSingletonProperty( GetFactory( textViewAdapter, wpfTextView ) );
         }
-
-        #endregion
 
         protected abstract Func<T> GetFactory( IVsTextView textViewAdapter, IWpfTextView wpfTextView );
     }

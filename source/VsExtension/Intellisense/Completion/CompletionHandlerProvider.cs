@@ -28,14 +28,10 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
     [TextViewRole( PredefinedTextViewRoles.Editable )]
     internal class CompletionHandlerProvider : TextViewCreationListenerBase<CompletionCommandHandler>
     {
-        #region Overrides of TextViewCreationListenerBase
-
         protected override Func<CompletionCommandHandler> GetFactory( IVsTextView textViewAdapter,
                                                                       IWpfTextView wpfTextView )
         {
             return () => new CompletionCommandHandler( textViewAdapter, wpfTextView, this );
         }
-
-        #endregion
     }
 }

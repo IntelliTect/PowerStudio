@@ -14,7 +14,6 @@
 using System.Windows;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Formatting;
-using PowerStudio.VsExtension.Tagging;
 using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
@@ -24,8 +23,6 @@ namespace PowerStudio.VsExtension.Editor
     public abstract class GlyphFactoryBase<TToken> : IGlyphFactory<TToken>
             where TToken : GlyphTag
     {
-        #region Implementation of IGlyphFactory
-
         /// <summary>
         ///   Generates a new glyph visual for the given line.
         /// </summary>
@@ -45,12 +42,14 @@ namespace PowerStudio.VsExtension.Editor
             return CreateGlyph( line, tokenTag );
         }
 
-        #endregion
-
-        #region IGlyphFactory<TToken> Members
-
+        /// <summary>
+        ///   Generates a new glyph visual for the given line and token.
+        /// </summary>
+        /// <param name = "line">The line that this glyph will be placed on.</param>
+        /// <param name = "token">Information about the token glyph for which the visual is being generated.</param>
+        /// <returns>
+        ///   The visual element for the given tag.
+        /// </returns>
         public abstract UIElement CreateGlyph( IWpfTextViewLine line, TToken token );
-
-        #endregion
     }
 }

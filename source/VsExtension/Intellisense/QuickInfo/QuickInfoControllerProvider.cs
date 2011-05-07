@@ -30,8 +30,6 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
         [Import]
         internal IQuickInfoBroker QuickInfoBroker { get; set; }
 
-        #region IIntellisenseControllerProvider Members
-
         /// <summary>
         ///   Attempts to create an IntelliSense controller for a specific text view opened in a specific context.
         /// </summary>
@@ -45,7 +43,5 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
         {
             return new QuickInfoController( textView, subjectBuffers, this );
         }
-
-        #endregion
     }
 }

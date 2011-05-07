@@ -27,13 +27,9 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
         {
         }
 
-        #region Overrides of TaggerBase<HighlightWordTag>
-
         protected override List<HighlightWordTag> GetTags( ITextSnapshot snapshot )
         {
             return Enumerable.Empty<HighlightWordTag>().ToList();
         }
-
-        #endregion
     }
 }

@@ -41,14 +41,10 @@ namespace PowerStudio.VsExtension.Tagging.Tags
             Type = type;
         }
 
-        #region Implementation of ITextMarkerTag
-
         /// <summary>
         ///   Gets the type of adornment to use.
         /// </summary>
         public string Type { get; private set; }
-
-        #endregion
 
         /// <summary>
         ///   Gets or sets the matching tag for the span being represented.

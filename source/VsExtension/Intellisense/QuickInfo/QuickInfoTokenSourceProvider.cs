@@ -19,7 +19,6 @@ using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
-using PowerStudio.VsExtension.Tagging;
 using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
@@ -43,8 +42,6 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
             var tagAggregator = TagAggregatorFactory.CreateTagAggregator<TokenClassificationTag>( textBuffer );
             return new QuickInfoTokenSource( textBuffer, tagAggregator, this );
         }
-
-        #region Nested type: QuickInfoTokenSource
 
         private class QuickInfoTokenSource : QuickInfoSource<TokenClassificationTag>
         {
@@ -82,8 +79,6 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
                 return sb.ToString();
             }
         }
-
-        #endregion
     }
 }
 
