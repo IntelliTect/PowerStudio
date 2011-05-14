@@ -1,3 +1,4 @@
+From the PowerShell console, execute update-dependencies.ps1 to download and install the dependent NuGet packages.
 
 If you are not using Visual Studio 2010 to build the VSIX package, you can use the psake build scripts.
 
