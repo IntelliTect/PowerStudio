@@ -31,9 +31,24 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         /// <param name = "textBuffer">The text buffer.</param>
         protected CompletionSourceBase( CompletionSourceProvider sourceProvider, ITextBuffer textBuffer )
         {
+            if ( sourceProvider == null )
+            {
+                throw new ArgumentNullException( "sourceProvider" );
+            }
+
+            if ( textBuffer == null )
+            {
+                throw new ArgumentNullException( "textBuffer" );
+            }
+
             SourceProvider = sourceProvider;
             Buffer = textBuffer;
         }
+
+        protected ITextBuffer Buffer { get; private set; }
+        protected CompletionSourceProvider SourceProvider { get; private set; }
+
+        #region ICompletionSource Members
 
         /// <summary>
         ///   Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -55,8 +70,7 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
         /// </remarks>
         public abstract void AugmentCompletionSession( ICompletionSession session, IList<CompletionSet> completionSets );
 
-        protected ITextBuffer Buffer { get; private set; }
-        protected CompletionSourceProvider SourceProvider { get; private set; }
+        #endregion
 
         protected ITrackingSpan FindTokenSpanAtPosition( ITrackingPoint point, ICompletionSession session )
         {
