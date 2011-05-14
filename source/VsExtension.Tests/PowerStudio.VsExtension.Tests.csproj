@@ -54,6 +54,9 @@
     <Reference Include="Microsoft.VisualStudio.Text.UI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VSSDK.UnitTestLibrary" />
     <Reference Include="Microsoft.VSSDK.TestHostFramework" />
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\packages\RhinoMocks.3.6\lib\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -67,7 +70,9 @@
     <Compile Include="PackageTests.cs" />
     <Compile Include="Tagging\Tags\ErrorTokenTagTests.cs" />
     <Compile Include="Tagging\Tags\OutliningTagTests.cs" />
+    <Compile Include="Tagging\Tags\TokenClassificationTagTests.cs" />
     <Compile Include="Tagging\Tags\TokenTagTests.cs" />
+    <Compile Include="Tagging\TokenTagSpanTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj">

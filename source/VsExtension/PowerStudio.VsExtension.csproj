@@ -193,7 +193,7 @@
     <Compile Include="Tagging\ITokenClassifier.cs" />
     <Compile Include="Tagging\Tags\OutliningTag.cs" />
     <Compile Include="Tagging\Taggers\OutliningTagger.cs" />
-    <Compile Include="Tagging\OutliningTaggerProvider.cs" />
+    <Compile Include="Tagging\Providers\OutliningTaggerProvider.cs" />
     <Compile Include="Tagging\Taggers\ClassificationTagger.cs" />
     <Compile Include="Tagging\Providers\ClassificationTaggerProvider.cs" />
     <Compile Include="Tagging\Taggers\ErrorTokenTagger.cs" />
