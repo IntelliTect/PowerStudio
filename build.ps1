@@ -6,25 +6,19 @@
 # 
 
 function Test-Is64Bit {
-	$ptrSize = [System.IntPtr]::Size
-	switch ($ptrSize) {
-		4 {
-			return $false
-		}
-		8 {
-			return $true
-		}
-		default {
-            throw ("Unknown pointer size ({0}) returned from System.IntPtr." -f $ptrSize)
-        }
-    }
+	  $ptrSize = [System.IntPtr]::Size
+	  switch ($ptrSize) {
+    4 {		return $false		}
+    8 {		return $true		}
+  	  default { throw ("Unknown pointer size ({0}) returned from System.IntPtr." -f $ptrSize) }
+  }
 }
 
 function Get-ProgramFilesX86 {
-	if(Test-Is64Bit) {
-	    return (Get-Item "env:ProgramFiles(x86)").Value
-	}
-	return (Get-Item "env:ProgramFiles").Value
+  if(Test-Is64Bit) {
+    return (Get-Item "env:ProgramFiles(x86)").Value
+  }
+  return (Get-Item "env:ProgramFiles").Value
 }
 
 properties {
@@ -58,8 +52,8 @@ task IntegrationTest -depends Test {
 }
 
 task Init -depends Clean {
-    new-item $release_directory -itemType directory | Out-Null
-    new-item $build_directory -itemType directory | Out-Null
+  new-item $release_directory -itemType directory | Out-Null
+  new-item $build_directory -itemType directory | Out-Null
 }
 
 task Compile -depends Init {
@@ -72,5 +66,5 @@ task Clean {
 }
 
 task ? -Description "Helper to display task info" {
-    Write-Documentation
+  Write-Documentation
 }
