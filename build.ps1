@@ -6,11 +6,11 @@
 # 
 
 function Test-Is64Bit {
-	  $ptrSize = [System.IntPtr]::Size
-	  switch ($ptrSize) {
-    4 {		return $false		}
-    8 {		return $true		}
-  	  default { throw ("Unknown pointer size ({0}) returned from System.IntPtr." -f $ptrSize) }
+  $ptrSize = [System.IntPtr]::Size
+  switch ($ptrSize) {
+    4 { return $false }
+    8 { return $true }
+    default { throw ("Unknown pointer size ({0}) returned from System.IntPtr." -f $ptrSize) }
   }
 }
 
@@ -40,8 +40,9 @@ properties {
   $mstest = [System.IO.Path]::Combine((Get-ProgramFilesX86), "Microsoft Visual Studio 10.0\Common7\IDE\MSTest.exe")
 }
 
-task build -depends Compile, Test
-task default -depends Release
+task Build -depends Compile
+task Default -depends Build
+task Release -depends Default, Test
 
 task Test -depends Compile { 
   exec { . $mstest /testcontainer:"$build_directory\PowerStudio.VsExtension.Tests.dll" }

@@ -1,1 +1,0 @@
-Get-ChildItem -recurse -include packages.config | % { .\Tools\NuGet\NuGet.exe i $_ -o Packages }

@@ -1,4 +1,4 @@
-From the PowerShell console, execute update-dependencies.ps1 to download and install the dependent NuGet packages.
+From the PowerShell console, execute build.cmd or build-release.cmd to download and install the dependent NuGet packages and build the extension. Once completed, you can open the solution.
 
 If you are not using Visual Studio 2010 to build the VSIX package, you can use the psake build scripts.
 
