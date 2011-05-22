@@ -39,6 +39,9 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
             TextStructureNavigator = textStructureNavigator;
             WordSpans = new NormalizedSnapshotSpanCollection();
             CurrentWord = null;
+
+            // Create an event that will fire when the cursor has been in the 
+            // same positiona for a specified an amount of time.
             Observable.FromEventPattern( View.Caret, "PositionChanged" )
                     .DistinctUntilChanged()
                     .Throttle( WordHighlightDelay )
@@ -69,18 +72,17 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
         protected virtual IEnumerable<SnapshotSpan> FindAllMatches( SnapshotSpan currentWord )
         {
             var findData = new FindData( currentWord.GetText(), currentWord.Snapshot );
-            findData.FindOptions = FindOptions.WholeWord;
+            findData.FindOptions = FindOptions.WholeWord;  // Not case sensitive as PowerShell isn't.
             return TextSearchService.FindAll( findData );
         }
 
-        protected virtual bool GetSelectedWord( SnapshotPoint currentRequest, ref TextExtent word )
+        protected virtual bool TryGetSelectedWord( SnapshotPoint currentRequest, ref TextExtent word )
         {
             if ( WordExtentIsValid( currentRequest, word ) )
             {
                 return true;
             }
 
-            // Before we retry, make sure it is worthwhile
             if ( word.Span.Start != currentRequest ||
                  currentRequest == currentRequest.GetContainingLine().Start ||
                  char.IsWhiteSpace( ( currentRequest - 1 ).GetChar() ) )
@@ -88,16 +90,16 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
                 return false;
             }
 
-            // Try again, one character previous. 
             // If the caret is at the end of a word, pick up the word.
             word = TextStructureNavigator.GetExtentOfWord( currentRequest - 1 );
 
-            //If the word still isn't valid, we're done
             return WordExtentIsValid( currentRequest, word );
         }
 
         protected override bool IsTokenInSpan( HighlightWordTag tag, ITextSnapshot snapshot, SnapshotSpan span )
         {
+            // our tokens are always available as we have the spans cached
+            // and the span does not cover all matches.
             return true;
         }
 
@@ -115,8 +117,9 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
                 return;
             }
 
+            bool isPointWithinCurrentWord = IsPointWithinCurrentWord( current );
             if ( prior != current &&
-                 !IsPointWithinCurrentWord( current ) )
+                 !isPointWithinCurrentWord )
             {
                 // reset to current word, delay will pick up the rest.
                 RequestedPoint = current.Value;
@@ -124,7 +127,7 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
                 return;
             }
 
-            if ( IsPointWithinCurrentWord( current ) )
+            if ( isPointWithinCurrentWord )
             {
                 return;
             }
@@ -139,6 +142,7 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
         {
             return CurrentWord.HasValue &&
                    CurrentWord.Value.Snapshot == View.TextSnapshot &&
+                   current.HasValue &&
                    current.Value >= CurrentWord.Value.Start &&
                    current.Value <= CurrentWord.Value.End;
         }
@@ -148,28 +152,28 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
             SnapshotPoint currentRequest = RequestedPoint;
             var wordSpans = new List<SnapshotSpan>();
 
-            TextExtent word = TextStructureNavigator.GetExtentOfWord( currentRequest );
+            TextExtent selectedWord = TextStructureNavigator.GetExtentOfWord( currentRequest );
 
-            bool foundWord = GetSelectedWord( currentRequest, ref word );
+            bool success = TryGetSelectedWord( currentRequest, ref selectedWord );
 
-            if ( !foundWord )
+            if ( !success )
             {
                 UpdateSelectionState( currentRequest, new NormalizedSnapshotSpanCollection(), null );
                 return;
             }
 
-            SnapshotSpan currentWord = word.Span;
+            SnapshotSpan selectedWordSpan = selectedWord.Span;
 
             if ( CurrentWord.HasValue &&
-                 currentWord == CurrentWord )
+                 CurrentWord == selectedWordSpan)
             {
                 return;
             }
 
-            IEnumerable<SnapshotSpan> matches = FindAllMatches( currentWord );
+            IEnumerable<SnapshotSpan> matches = FindAllMatches( selectedWordSpan );
             wordSpans.AddRange( matches );
 
-            UpdateSelectionState( currentRequest, new NormalizedSnapshotSpanCollection( wordSpans ), currentWord );
+            UpdateSelectionState( currentRequest, new NormalizedSnapshotSpanCollection( wordSpans ), selectedWordSpan );
         }
 
         protected virtual bool WordExtentIsValid( SnapshotPoint currentRequest, TextExtent word )
