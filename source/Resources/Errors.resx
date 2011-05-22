@@ -120,4 +120,7 @@
   <data name="ExpectedDeclaration" xml:space="preserve">
     <value>Expected Declaration</value>
   </data>
+  <data name="FailedToFindSigningCertificate0" xml:space="preserve">
+    <value>Faild to find signing certificate at: {0}.</value>
+  </data>
 </root>

@@ -23,7 +23,7 @@ namespace PowerStudio.VsExtension.Tagging
     [Export( typeof (EditorFormatDefinition) )]
     [Name( Name )]
     [UserVisible( true )]
-    internal class HighlightWordFormatDefinition : MarkerFormatDefinition
+    public class HighlightWordFormatDefinition : MarkerFormatDefinition
     {
         public const string Name = "MarkerFormatDefinition/HighlightWordFormatDefinition";
 

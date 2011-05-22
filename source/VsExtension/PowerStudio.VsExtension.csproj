@@ -67,10 +67,16 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.CoreEx">
+      <HintPath>..\..\packages\Rx-Core.1.0.2856.0\lib\Net4\System.CoreEx.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management.Automation" />
+    <Reference Include="System.Reactive">
+      <HintPath>..\..\packages\Rx-Main.1.1.10425\lib\Net4\System.Reactive.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="VSLangProj, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -164,6 +170,7 @@
     <Compile Include="LanguageConfiguration.cs" />
     <Compile Include="LanguageService.cs" />
     <Compile Include="PowerShellPackage.cs" />
+    <Compile Include="Project\Build\SignScripts.cs" />
     <Compile Include="Project\GeneralPropertyPage.cs" />
     <Compile Include="Project\OAPsProject.cs" />
     <Compile Include="Project\OAPsProjectFileItem.cs" />
@@ -178,6 +185,7 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tagging\Taggers\ViewTaggerBase.cs" />
     <Compile Include="Tagging\Tags\BraceMatchingTag.cs" />
     <Compile Include="Tagging\Taggers\BraceMatchingTagger.cs" />
     <Compile Include="Tagging\Providers\BraceMatchingTaggerProvider.cs" />
@@ -230,6 +238,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <None Include="packages.config" />
+    <None Include="Project\Build\PowerStudio.targets" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -264,6 +274,10 @@
     <ProjectReference Include="..\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj">
       <Project>{CACB60A9-1E76-4F92-8831-B134A658C695}</Project>
       <Name>Microsoft.VisualStudio.Project</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\PowerStudio.Resources.csproj">
+      <Project>{17286D8F-5CB5-4584-A486-F9D00AE4C175}</Project>
+      <Name>PowerStudio.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

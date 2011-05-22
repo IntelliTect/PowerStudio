@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="SignScriptS" AssemblyFile="$(PowerStudioTasks)"/>
+  <ItemGroup>
+    <PowerShellFiles Include="*.ps1" />
+    <PowerShellFiles Include="*.psm1" />
+    <PowerShellFiles Include="*.psd1" />
+  </ItemGroup>
+  <Target Name="Build">
+    <MakeDir Directories="$(OutDir)" Condition="!Exists('$(OutDir)')"/>
+
+    <Copy SourceFiles="@(PowerShellFiles)" DestinationFolder="$(OutDir)" >
+      <Output TaskParameter="CopiedFiles" ItemName="OutputFiles" />
+    </Copy>
+
+    <SignScripts Certificate="$(CodeSigningCert)" Scripts="@(OutputFiles)" Condition="$(SignOutput) == 'true'" />
+  </Target>
+</Project>

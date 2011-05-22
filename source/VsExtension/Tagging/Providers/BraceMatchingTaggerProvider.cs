@@ -11,7 +11,6 @@
 
 #region Using Directives
 
-using System;
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
@@ -29,9 +28,10 @@ namespace PowerStudio.VsExtension.Tagging.Providers
     [ContentType( LanguageConfiguration.Name )]
     public class BraceMatchingTaggerProvider : ViewTaggerProviderBase
     {
-        protected override Func<ITagger<T>> GetFactory<T>( ITextView textView, ITextBuffer buffer )
+        protected override ITagger<T> GetTagger<T>( ITextView textView, ITextBuffer buffer )
         {
-            return () => new BraceMatchingTagger( textView, buffer ) as ITagger<T>;
+            var tagger = new BraceMatchingTagger( textView, buffer ) as ITagger<T>;
+            return tagger;
         }
     }
 }

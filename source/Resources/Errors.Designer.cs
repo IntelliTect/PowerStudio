@@ -68,5 +68,14 @@ namespace PowerStudio.Resources {
                 return ResourceManager.GetString("ExpectedDeclaration", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Faild to find signing certificate at: {0}..
+        /// </summary>
+        public static string FailedToFindSigningCertificate0 {
+            get {
+                return ResourceManager.GetString("FailedToFindSigningCertificate0", resourceCulture);
+            }
+        }
     }
 }

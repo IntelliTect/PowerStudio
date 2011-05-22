@@ -11,7 +11,6 @@
 
 #region Using Directives
 
-using System;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
@@ -22,17 +21,38 @@ namespace PowerStudio.VsExtension.Tagging.Providers
 {
     public abstract class ViewTaggerProviderBase : IViewTaggerProvider
     {
+        #region IViewTaggerProvider Members
+
         /// <summary>
         ///   Creates a tag provider for the specified view and buffer.
         /// </summary>
         /// <param name = "textView">The <see cref = "T:Microsoft.VisualStudio.Text.Editor.ITextView" />.</param>
         /// <param name = "buffer">The <see cref = "T:Microsoft.VisualStudio.Text.ITextBuffer" />.</param>
         /// <typeparam name = "T">The type of the tag.</typeparam>
-        public ITagger<T> CreateTagger<T>( ITextView textView, ITextBuffer buffer ) where T : ITag
+        ITagger<T> IViewTaggerProvider.CreateTagger<T>( ITextView textView, ITextBuffer buffer )
         {
-            return buffer.Properties.GetOrCreateSingletonProperty( GetFactory<T>( textView, buffer ) );
+            if ( !IsTopBuffer( textView, buffer ) )
+            {
+                return null;
+            }
+            return GetTagger<T>( textView, buffer );
         }
 
-        protected abstract Func<ITagger<T>> GetFactory<T>( ITextView textView, ITextBuffer buffer ) where T : ITag;
+        #endregion
+
+        protected abstract ITagger<T> GetTagger<T>( ITextView textView, ITextBuffer buffer ) where T : ITag;
+
+        /// <summary>
+        /// Determines whether the buffer is the top buffer for the specified text view.
+        /// </summary>
+        /// <param name="textView">The text view.</param>
+        /// <param name="buffer">The buffer.</param>
+        /// <returns>
+        ///   <c>true</c> if the buffer is the top buffer for the specified text view; otherwise, <c>false</c>.
+        /// </returns>
+        protected bool IsTopBuffer( ITextView textView, ITextBuffer buffer )
+        {
+            return textView.TextBuffer == buffer;
+        }
     }
 }

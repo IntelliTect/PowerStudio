@@ -21,19 +21,13 @@ using PowerStudio.VsExtension.Tagging.Tags;
 
 namespace PowerStudio.VsExtension.Tagging.Taggers
 {
-    public class BraceMatchingTagger : TaggerBase<BraceMatchingTag>
+    public class BraceMatchingTagger : ViewTaggerBase<BraceMatchingTag>
     {
         public BraceMatchingTagger( ITextView view, ITextBuffer buffer )
-                : base( buffer )
+                : base( view, buffer )
         {
-            View = view;
-            View.Caret.PositionChanged += CaretPositionChanged;
-            View.LayoutChanged += ViewLayoutChanged;
             Parse();
         }
-
-        private ITextView View { get; set; }
-        private SnapshotPoint? CurrentChar { get; set; }
 
         /// <summary>
         ///   Determines whether given token is in the target span translating to the current snaphot
@@ -107,23 +101,9 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
             return braces;
         }
 
-        private void ViewLayoutChanged( object sender, TextViewLayoutChangedEventArgs e )
+        protected override void UpdateAtCaretPosition( CaretPosition caretPosition )
         {
-            if ( e.NewSnapshot !=
-                 e.OldSnapshot ) //make sure that there has really been a change
-            {
-                UpdateAtCaretPosition( View.Caret.Position );
-            }
-        }
-
-        private void CaretPositionChanged( object sender, CaretPositionChangedEventArgs e )
-        {
-            UpdateAtCaretPosition( e.NewPosition );
-        }
-
-        private void UpdateAtCaretPosition( CaretPosition caretPosition )
-        {
-            CurrentChar = caretPosition.Point.GetPoint( Buffer, caretPosition.Affinity );
+            base.UpdateAtCaretPosition( caretPosition );
 
             if ( !CurrentChar.HasValue )
             {

@@ -12,6 +12,8 @@
 #region Using Directives
 
 using System;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Project;
 using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
@@ -29,6 +31,14 @@ namespace PowerStudio.VsExtension.Project
                 : base( package )
         {
             _Package = package;
+            string loc = Assembly.GetExecutingAssembly().Location;
+            var fileInfo = new FileInfo( loc );
+
+            string targetspath = Path.Combine( fileInfo.Directory.FullName, "PowerStudio.Targets" );
+
+            BuildEngine.SetGlobalProperty( "PowerStudioTargets", targetspath );
+
+            BuildEngine.SetGlobalProperty( "PowerStudioTasks", Assembly.GetExecutingAssembly().Location );
         }
 
         /// <summary>

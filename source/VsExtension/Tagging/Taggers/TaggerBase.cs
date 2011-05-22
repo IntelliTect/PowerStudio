@@ -90,7 +90,7 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
         /// </summary>
         /// <param name = "sender">The sender.</param>
         /// <param name = "e">The <see cref = "Microsoft.VisualStudio.Text.TextContentChangedEventArgs" /> instance containing the event data.</param>
-        private void BufferChanged( object sender, TextContentChangedEventArgs e )
+        protected virtual void BufferChanged( object sender, TextContentChangedEventArgs e )
         {
             // If this isn't the most up-to-date version of the buffer, then ignore it for now (we'll eventually get another change event).
             if ( Buffer.CurrentSnapshot !=
@@ -105,7 +105,7 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
         ///   Raises the <see cref = "E:TagsChanged" /> event.
         /// </summary>
         /// <param name = "args">The <see cref = "Microsoft.VisualStudio.Text.SnapshotSpanEventArgs" /> instance containing the event data.</param>
-        protected void OnTagsChanged( SnapshotSpanEventArgs args )
+        protected virtual void OnTagsChanged( SnapshotSpanEventArgs args )
         {
             EventHandler<SnapshotSpanEventArgs> handler = TagsChanged;
             if ( handler != null )
@@ -228,9 +228,9 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
             return errors;
         }
 
-        protected bool IsSpanContainedInTargetSpan( ITextSnapshot snapshot,
-                                                    SnapshotSpan sourceSpan,
-                                                    SnapshotSpan targetSpan )
+        protected virtual bool IsSpanContainedInTargetSpan( ITextSnapshot snapshot,
+                                                            SnapshotSpan sourceSpan,
+                                                            SnapshotSpan targetSpan )
         {
             if ( snapshot != sourceSpan.Snapshot )
             {
@@ -245,9 +245,9 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
             return sourceSpan.Contains( targetSpan );
         }
 
-        protected bool IsSnapshotPointContainedInSpan( ITextSnapshot snapshot,
-                                                       SnapshotPoint snapshotPoint,
-                                                       SnapshotSpan sourceSpan )
+        protected virtual bool IsSnapshotPointContainedInSpan( ITextSnapshot snapshot,
+                                                               SnapshotPoint snapshotPoint,
+                                                               SnapshotSpan sourceSpan )
         {
             if ( snapshot != sourceSpan.Snapshot )
             {

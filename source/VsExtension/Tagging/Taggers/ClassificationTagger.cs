@@ -45,7 +45,7 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
                                                                  Span = CreateSnapshotSpan( snapshot, token )
                                                          } )
                     .ToList();
-            
+
             return tags;
         }
     }

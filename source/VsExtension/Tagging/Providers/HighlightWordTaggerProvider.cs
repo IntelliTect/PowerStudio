@@ -11,10 +11,10 @@
 
 #region Using Directives
 
-using System;
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
+using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 using PowerStudio.VsExtension.Tagging.Taggers;
@@ -29,9 +29,19 @@ namespace PowerStudio.VsExtension.Tagging.Providers
     [ContentType( LanguageConfiguration.Name )]
     public class HighlightWordTaggerProvider : ViewTaggerProviderBase
     {
-        protected override Func<ITagger<T>> GetFactory<T>( ITextView textView, ITextBuffer buffer )
+        [Import]
+        internal ITextSearchService TextSearchService { get; set; }
+
+        [Import]
+        internal ITextStructureNavigatorSelectorService TextStructureNavigatorSelector { get; set; }
+
+        protected override ITagger<T> GetTagger<T>( ITextView textView, ITextBuffer buffer )
         {
-            return () => new BraceMatchingTagger( textView, buffer ) as ITagger<T>;
+            ITextStructureNavigator textStructureNavigator =
+                    TextStructureNavigatorSelector.GetTextStructureNavigator( buffer );
+            var tagger =
+                    new HighlightWordTagger( textView, buffer, TextSearchService, textStructureNavigator ) as ITagger<T>;
+            return tagger;
         }
     }
 }
