@@ -24,7 +24,7 @@ namespace PowerStudio.VsExtension.Tagging.Tags
         /// </summary>
         public HighlightWordTag()
         {
-            Type = HighlightWordFormatDefinition.Name;
+            Type = PredefinedTextMarkerTags.WordHighlight;
         }
 
         /// <summary>

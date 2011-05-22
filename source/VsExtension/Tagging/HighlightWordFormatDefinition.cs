@@ -12,28 +12,90 @@
 #region Using Directives
 
 using System.ComponentModel.Composition;
-using System.Windows.Media;
+using System.Drawing;
+using System.Security;
+using System.Security.AccessControl;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
+using Microsoft.Win32;
+using Color = System.Windows.Media.Color;
 
 #endregion
 
 namespace PowerStudio.VsExtension.Tagging
 {
     [Export( typeof (EditorFormatDefinition) )]
-    [Name( Name )]
+    [Name( PredefinedTextMarkerTags.WordHighlight )]
     [UserVisible( true )]
     public class HighlightWordFormatDefinition : MarkerFormatDefinition
     {
-        public const string Name = "MarkerFormatDefinition/HighlightWordFormatDefinition";
-
         public HighlightWordFormatDefinition()
         {
-            // TODO: Pull from language configuration
-            BackgroundColor = Colors.LightBlue;
-            ForegroundColor = Colors.DarkBlue;
+            LoadDefaultColors();
+            LoadColorsFromRegistry();
             DisplayName = "Highlight Word";
             ZOrder = 5;
+        }
+
+        private void LoadDefaultColors()
+        {
+            const int a = 255;
+            const int r = 173;
+            const int g = 214;
+            const int b = 255;
+            BackgroundColor = Color.FromArgb( a, r, g, b );
+            ForegroundColor = Color.FromArgb( a, r, g, b );
+        }
+
+        public void LoadColorsFromRegistry()
+        {
+            RegistryKey categoryKey;
+            bool success = TryGetCategoryKey( out categoryKey );
+
+            if ( !success )
+            {
+                return;
+            }
+
+            var backgroundColorEntry = (int) categoryKey.GetValue( "SelectedText Background" );
+            var foregroundColorEntry = (int) categoryKey.GetValue( "SelectedText Foreground" );
+
+            System.Drawing.Color backgroundDrawingColor = ColorTranslator.FromWin32( backgroundColorEntry );
+            System.Drawing.Color foregroundDrawingColor = ColorTranslator.FromWin32( foregroundColorEntry );
+
+            BackgroundColor = Color.FromArgb( backgroundDrawingColor.A,
+                                              backgroundDrawingColor.R,
+                                              backgroundDrawingColor.G,
+                                              backgroundDrawingColor.B );
+            ForegroundColor = Color.FromArgb( foregroundDrawingColor.A,
+                                              foregroundDrawingColor.R,
+                                              foregroundDrawingColor.G,
+                                              foregroundDrawingColor.B );
+        }
+
+        private static bool TryGetCategoryKey( out RegistryKey registryKey )
+        {
+            const string keyName =
+                    PsConstants.DefaultRegistryRoot + @"\\FontAndColors\\{358463D0-D084-400F-997E-A34FC570BC72}";
+
+            try
+            {
+                const RegistryKeyPermissionCheck keyPermissionCheck = RegistryKeyPermissionCheck.ReadSubTree;
+                const RegistryRights registryRights = RegistryRights.QueryValues | RegistryRights.ReadKey;
+                registryKey = Registry.CurrentUser.OpenSubKey( keyName, keyPermissionCheck, registryRights );
+                if ( registryKey != null )
+                {
+                    return true;
+                }
+                registryKey = Registry.LocalMachine.OpenSubKey( keyName, keyPermissionCheck, registryRights );
+                return registryKey != null;
+            }
+            catch ( SecurityException )
+            {
+                // nothing I can do
+                registryKey = null;
+                return false;
+            }
         }
     }
 }

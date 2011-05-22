@@ -14,5 +14,6 @@ namespace PowerStudio.VsExtension.Tagging
     public class PredefinedTextMarkerTags
     {
         public const string BraceHighlight = "bracehighlight";
+        public const string WordHighlight = "wordhighlight";
     }
 }
