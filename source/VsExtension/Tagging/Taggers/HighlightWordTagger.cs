@@ -40,16 +40,10 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
             WordSpans = new NormalizedSnapshotSpanCollection();
             CurrentWord = null;
 
-            // Create an event that will fire when the cursor has been in the 
-            // same positiona for a specified an amount of time.
             Observable.FromEventPattern( View.Caret, "PositionChanged" )
-                    .DistinctUntilChanged()
                     .Throttle( WordHighlightDelay )
-                    .Subscribe(
-                            eventPattern =>
-                            UpdateAtCaretPosition(
-                                    ( (CaretPositionChangedEventArgs) eventPattern.EventArgs ).NewPosition ) );
-            Parse();
+                    .Select( eventPattern => (CaretPositionChangedEventArgs) eventPattern.EventArgs )
+                    .Subscribe( eventArgs => UpdateAtCaretPosition( eventArgs.NewPosition ) );
         }
 
         private ITextSearchService TextSearchService { get; set; }
@@ -72,7 +66,7 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
         protected virtual IEnumerable<SnapshotSpan> FindAllMatches( SnapshotSpan currentWord )
         {
             var findData = new FindData( currentWord.GetText(), currentWord.Snapshot );
-            findData.FindOptions = FindOptions.WholeWord;  // Not case sensitive as PowerShell isn't.
+            findData.FindOptions = FindOptions.WholeWord; // Not case sensitive as PowerShell isn't.
             return TextSearchService.FindAll( findData );
         }
 
@@ -138,13 +132,13 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
             OnTagsChanged( new SnapshotSpanEventArgs( span ) );
         }
 
-        protected virtual bool IsPointWithinCurrentWord( SnapshotPoint? current )
+        protected virtual bool IsPointWithinCurrentWord( SnapshotPoint? point )
         {
             return CurrentWord.HasValue &&
+                   point.HasValue &&
                    CurrentWord.Value.Snapshot == View.TextSnapshot &&
-                   current.HasValue &&
-                   current.Value >= CurrentWord.Value.Start &&
-                   current.Value <= CurrentWord.Value.End;
+                   point.Value >= CurrentWord.Value.Start &&
+                   point.Value <= CurrentWord.Value.End;
         }
 
         protected virtual void UpdateWordSelection()
@@ -165,7 +159,7 @@ namespace PowerStudio.VsExtension.Tagging.Taggers
             SnapshotSpan selectedWordSpan = selectedWord.Span;
 
             if ( CurrentWord.HasValue &&
-                 CurrentWord == selectedWordSpan)
+                 CurrentWord == selectedWordSpan )
             {
                 return;
             }
