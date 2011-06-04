@@ -17,7 +17,7 @@ using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Editor
+namespace PowerStudio.LanguageService.Editor
 {
     internal abstract class GlyphFactoryProviderBase<T> : IGlyphFactoryProvider
             where T : GlyphTag

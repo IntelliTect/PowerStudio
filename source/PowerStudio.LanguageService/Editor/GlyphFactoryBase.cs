@@ -18,7 +18,7 @@ using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Editor
+namespace PowerStudio.LanguageService.Editor
 {
     public abstract class GlyphFactoryBase<TToken> : IGlyphFactory<TToken>
             where TToken : GlyphTag

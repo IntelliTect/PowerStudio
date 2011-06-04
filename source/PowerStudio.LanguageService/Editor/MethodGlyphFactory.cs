@@ -19,7 +19,7 @@ using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Editor
+namespace PowerStudio.LanguageService.Editor
 {
     internal class MethodGlyphFactory : GlyphFactoryBase<MethodTag>
     {
