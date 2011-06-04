@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VSSDK.Tools.VsIdeTesting;
+using PowerStudio.LanguageService;
 
 namespace PowerStudio.VsExtension.IntegrationTests
 {

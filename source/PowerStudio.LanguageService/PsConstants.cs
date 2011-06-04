@@ -9,7 +9,7 @@
 
 #endregion
 
-namespace PowerStudio.VsExtension
+namespace PowerStudio.LanguageService
 {
     public static class PsConstants
     {
