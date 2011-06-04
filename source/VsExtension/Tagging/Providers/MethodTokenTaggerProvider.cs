@@ -26,13 +26,13 @@ namespace PowerStudio.VsExtension.Tagging.Providers
 {
     [Export( typeof (ITaggerProvider) )]
     [ContentType( LanguageConfiguration.Name )]
-    [TagType( typeof (GlyphTag) )]
+    [TagType( typeof (MethodTag) )]
     [Order( Before = Priority.Default )]
-    public class GlyphTokenTaggerProvider : TaggerProviderBase
+    public class MethodTokenTaggerProvider : TaggerProviderBase
     {
         protected override Func<ITagger<T>> GetFactory<T>( ITextBuffer buffer )
         {
-            return () => new GlyphTokenTagger( buffer ) as ITagger<T>;
+            return () => new MethodTokenTagger( buffer ) as ITagger<T>;
         }
     }
 }

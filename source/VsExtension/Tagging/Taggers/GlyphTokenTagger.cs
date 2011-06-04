@@ -11,8 +11,6 @@
 
 #region Using Directives
 
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.Text;
 using PowerStudio.VsExtension.Tagging.Tags;
 
@@ -20,16 +18,12 @@ using PowerStudio.VsExtension.Tagging.Tags;
 
 namespace PowerStudio.VsExtension.Tagging.Taggers
 {
-    public class GlyphTokenTagger : TaggerBase<GlyphTag>
+    public abstract class GlyphTokenTagger<TTokenTag> : TaggerBase<TTokenTag>
+            where TTokenTag : GlyphTag
     {
-        public GlyphTokenTagger( ITextBuffer buffer )
+        protected GlyphTokenTagger( ITextBuffer buffer )
                 : base( buffer )
         {
-        }
-
-        protected override List<GlyphTag> GetTags( ITextSnapshot snapshot )
-        {
-            return Enumerable.Empty<GlyphTag>().ToList();
         }
     }
 }
