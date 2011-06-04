@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
 using PowerStudio.LanguageService;
-using PowerStudio.VsExtension.Project;
+using PowerStudio.LanguageService.Project;
 
 #endregion
 

@@ -21,7 +21,7 @@ using PowerStudio.Resources;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Project.Build
+namespace PowerStudio.LanguageService.Project.Build
 {
     public class SignScripts : Task
     {

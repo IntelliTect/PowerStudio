@@ -20,12 +20,12 @@ using System.Windows.Forms;
 using EnvDTE;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
-using PowerStudio.LanguageService;
+using PowerStudio.VsExtension;
 using VSLangProj;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Project
+namespace PowerStudio.LanguageService.Project
 {
     [Guid( PsConstants.ProjectNodeGuid )]
     public class PowerShellProjectNode : ProjectNode

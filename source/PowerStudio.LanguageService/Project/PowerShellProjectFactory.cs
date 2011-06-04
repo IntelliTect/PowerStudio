@@ -11,17 +11,16 @@
 
 #region Using Directives
 
-using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Project;
-using PowerStudio.LanguageService;
-using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
+using PowerStudio.VsExtension;
+using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Project
+namespace PowerStudio.LanguageService.Project
 {
     [Guid( PsConstants.ProjectFactoryGuid )]
     public class PowerShellProjectFactory : ProjectFactory
@@ -50,7 +49,7 @@ namespace PowerStudio.VsExtension.Project
         {
             var project = new PowerShellProjectNode( _Package );
             var oleProvider =
-                    (IOleServiceProvider) ( (IServiceProvider) _Package ).GetService( typeof (IOleServiceProvider) );
+                    (IServiceProvider) ( (System.IServiceProvider) _Package ).GetService( typeof (IServiceProvider) );
             project.SetSite( oleProvider );
 
             return project;

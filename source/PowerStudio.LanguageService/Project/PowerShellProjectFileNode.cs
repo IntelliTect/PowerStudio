@@ -18,7 +18,7 @@ using Microsoft.VisualStudio.Project.Automation;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Project
+namespace PowerStudio.LanguageService.Project
 {
     public class PowerShellProjectFileNode : FileNode
     {

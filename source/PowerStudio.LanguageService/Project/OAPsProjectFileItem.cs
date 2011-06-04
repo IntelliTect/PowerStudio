@@ -14,10 +14,11 @@
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
+using PowerStudio.VsExtension;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Project
+namespace PowerStudio.LanguageService.Project
 {
     [ComVisible( true )]
     [Guid( PsConstants.ProjectFileItemGuid )]

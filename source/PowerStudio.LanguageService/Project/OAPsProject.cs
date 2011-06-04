@@ -16,7 +16,7 @@ using Microsoft.VisualStudio.Project.Automation;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Project
+namespace PowerStudio.LanguageService.Project
 {
     [ComVisible( true )]
     public class OAPsProject : OAProject
