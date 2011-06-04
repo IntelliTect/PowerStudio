@@ -20,7 +20,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging.Tags
+namespace PowerStudio.LanguageService.Tagging.Tags
 {
     public class OutliningTag : TokenTag, IOutliningRegionTag
     {

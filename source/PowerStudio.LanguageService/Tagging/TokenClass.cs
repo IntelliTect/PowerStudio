@@ -9,7 +9,7 @@
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.LanguageService.Tagging
 {
     public enum TokenClass
     {

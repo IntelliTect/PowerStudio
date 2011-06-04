@@ -18,11 +18,12 @@ using System.Security.AccessControl;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 using Microsoft.Win32;
+using PowerStudio.VsExtension;
 using Color = System.Windows.Media.Color;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.LanguageService.Tagging
 {
     [Export( typeof (EditorFormatDefinition) )]
     [Name( PredefinedTextMarkerTags.WordHighlight )]

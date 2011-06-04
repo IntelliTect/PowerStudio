@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.LanguageService.Tagging
 {
     public interface ITokenTag : ITag
     {

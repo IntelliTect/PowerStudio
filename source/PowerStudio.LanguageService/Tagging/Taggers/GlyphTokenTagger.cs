@@ -12,11 +12,11 @@
 #region Using Directives
 
 using Microsoft.VisualStudio.Text;
-using PowerStudio.VsExtension.Tagging.Tags;
+using PowerStudio.LanguageService.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging.Taggers
+namespace PowerStudio.LanguageService.Tagging.Taggers
 {
     public abstract class GlyphTokenTagger<TTokenTag> : TaggerBase<TTokenTag>
             where TTokenTag : GlyphTag

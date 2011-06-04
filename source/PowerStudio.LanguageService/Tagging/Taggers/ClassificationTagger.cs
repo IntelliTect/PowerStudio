@@ -15,11 +15,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
-using PowerStudio.VsExtension.Tagging.Tags;
+using PowerStudio.LanguageService.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging.Taggers
+namespace PowerStudio.LanguageService.Tagging.Taggers
 {
     public class ClassificationTagger : TaggerBase<TokenClassificationTag>
     {

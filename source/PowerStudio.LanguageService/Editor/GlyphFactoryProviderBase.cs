@@ -13,7 +13,7 @@
 
 using System;
 using Microsoft.VisualStudio.Text.Editor;
-using PowerStudio.VsExtension.Tagging.Tags;
+using PowerStudio.LanguageService.Tagging.Tags;
 
 #endregion
 

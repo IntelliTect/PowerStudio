@@ -14,8 +14,8 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
-using PowerStudio.VsExtension.Tagging;
-using PowerStudio.VsExtension.Tagging.Tags;
+using PowerStudio.LanguageService.Tagging;
+using PowerStudio.LanguageService.Tagging.Tags;
 
 #endregion
 

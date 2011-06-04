@@ -16,7 +16,7 @@ using Microsoft.VisualStudio.Text.Editor;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging.Taggers
+namespace PowerStudio.LanguageService.Tagging.Taggers
 {
     public abstract class ViewTaggerBase<T> : TaggerBase<T>
             where T : ITokenTag

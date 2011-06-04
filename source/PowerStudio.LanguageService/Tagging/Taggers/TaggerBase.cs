@@ -21,7 +21,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging.Taggers
+namespace PowerStudio.LanguageService.Tagging.Taggers
 {
     public abstract class TaggerBase<T> : ITagger<T>
             where T : ITokenTag

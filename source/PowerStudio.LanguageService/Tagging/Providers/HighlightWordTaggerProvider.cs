@@ -17,12 +17,13 @@ using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
-using PowerStudio.VsExtension.Tagging.Taggers;
-using PowerStudio.VsExtension.Tagging.Tags;
+using PowerStudio.LanguageService.Tagging.Taggers;
+using PowerStudio.LanguageService.Tagging.Tags;
+using PowerStudio.VsExtension;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging.Providers
+namespace PowerStudio.LanguageService.Tagging.Providers
 {
     [Export( typeof (IViewTaggerProvider) )]
     [TagType( typeof (HighlightWordTag) )]

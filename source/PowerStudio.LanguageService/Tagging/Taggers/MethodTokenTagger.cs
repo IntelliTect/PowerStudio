@@ -14,11 +14,11 @@
 using System.Collections.Generic;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
-using PowerStudio.VsExtension.Tagging.Tags;
+using PowerStudio.LanguageService.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging.Taggers
+namespace PowerStudio.LanguageService.Tagging.Taggers
 {
     public class MethodTokenTagger : GlyphTokenTagger<MethodTag>
     {

@@ -15,7 +15,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging.Tags
+namespace PowerStudio.LanguageService.Tagging.Tags
 {
     public class HighlightWordTag : TokenTag, ITextMarkerTag
     {

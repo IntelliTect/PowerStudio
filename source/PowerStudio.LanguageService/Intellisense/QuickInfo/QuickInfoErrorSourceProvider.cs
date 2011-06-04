@@ -15,8 +15,8 @@ using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
+using PowerStudio.LanguageService.Tagging.Tags;
 using PowerStudio.VsExtension;
-using PowerStudio.VsExtension.Tagging.Tags;
 
 #endregion
 

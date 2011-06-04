@@ -18,7 +18,7 @@ using Microsoft.VisualStudio.Text.Classification;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.LanguageService.Tagging
 {
     public class TokenClassifier : ITokenClassifier
     {

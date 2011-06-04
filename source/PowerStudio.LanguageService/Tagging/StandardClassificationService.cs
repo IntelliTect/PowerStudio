@@ -16,7 +16,7 @@ using Microsoft.VisualStudio.Text.Classification;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging
+namespace PowerStudio.LanguageService.Tagging
 {
     /// <summary>
     ///   For some reason, this interface isn't imported via MEF - it just comes through null.

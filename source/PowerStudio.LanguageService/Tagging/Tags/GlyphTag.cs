@@ -15,7 +15,7 @@ using Microsoft.VisualStudio.Text.Editor;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Tagging.Tags
+namespace PowerStudio.LanguageService.Tagging.Tags
 {
     public class GlyphTag : TokenTag, IGlyphTag
     {
