@@ -20,7 +20,7 @@ using PowerStudio.VsExtension.Tagging;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense.QuickInfo
+namespace PowerStudio.LanguageService.Intellisense.QuickInfo
 {
     public abstract class QuickInfoSourceProvider<T> : IQuickInfoSourceProvider
             where T : ITokenTag

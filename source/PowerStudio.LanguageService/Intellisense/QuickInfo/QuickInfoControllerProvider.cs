@@ -17,10 +17,11 @@ using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Utilities;
+using PowerStudio.VsExtension;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense.QuickInfo
+namespace PowerStudio.LanguageService.Intellisense.QuickInfo
 {
     [Export( typeof (IIntellisenseControllerProvider) )]
     [Name( "PowerShell QuickInfo Controller" )]

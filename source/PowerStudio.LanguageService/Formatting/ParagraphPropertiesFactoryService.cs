@@ -16,10 +16,11 @@ using System.Windows.Media.TextFormatting;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Formatting;
 using Microsoft.VisualStudio.Utilities;
+using PowerStudio.VsExtension;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Formatting
+namespace PowerStudio.LanguageService.Formatting
 {
     [Export( typeof (ITextParagraphPropertiesFactoryService) )]
     [ContentType( LanguageConfiguration.Name )]

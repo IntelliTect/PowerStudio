@@ -21,7 +21,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense.Completion
+namespace PowerStudio.LanguageService.Intellisense.Completion
 {
     public abstract class TextViewCreationListenerBase<T> : IVsTextViewCreationListener
             where T : class

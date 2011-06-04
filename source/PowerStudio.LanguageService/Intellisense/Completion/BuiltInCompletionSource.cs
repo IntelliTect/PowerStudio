@@ -19,7 +19,7 @@ using Microsoft.VisualStudio.Text;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense.Completion
+namespace PowerStudio.LanguageService.Intellisense.Completion
 {
     internal class BuiltInCompletionSource : CompletionSourceBase
     {

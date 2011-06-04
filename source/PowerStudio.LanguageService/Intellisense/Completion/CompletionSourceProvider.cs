@@ -18,7 +18,7 @@ using Microsoft.VisualStudio.Text.Operations;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense.Completion
+namespace PowerStudio.LanguageService.Intellisense.Completion
 {
     public abstract class CompletionSourceProvider : ICompletionSourceProvider
     {

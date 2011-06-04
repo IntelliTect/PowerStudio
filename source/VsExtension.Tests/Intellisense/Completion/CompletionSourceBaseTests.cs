@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
-using PowerStudio.VsExtension.Intellisense.Completion;
+using PowerStudio.LanguageService.Intellisense.Completion;
 using PowerStudio.VsExtension.Tests.Mocks;
 using Rhino.Mocks;
 

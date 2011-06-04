@@ -15,10 +15,11 @@ using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
+using PowerStudio.VsExtension;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense.Completion
+namespace PowerStudio.LanguageService.Intellisense.Completion
 {
     [Export( typeof (ICompletionSourceProvider) )]
     [ContentType( LanguageConfiguration.Name )]

@@ -23,7 +23,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense.Completion
+namespace PowerStudio.LanguageService.Intellisense.Completion
 {
     internal class CompletionCommandHandler : IOleCommandTarget
     {

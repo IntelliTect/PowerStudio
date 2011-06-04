@@ -17,10 +17,11 @@ using Microsoft.VisualStudio.Editor;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.TextManager.Interop;
 using Microsoft.VisualStudio.Utilities;
+using PowerStudio.VsExtension;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense.Completion
+namespace PowerStudio.LanguageService.Intellisense.Completion
 {
     [Export( typeof (IVsTextViewCreationListener) )]
     [Name( "token completion handler" )]

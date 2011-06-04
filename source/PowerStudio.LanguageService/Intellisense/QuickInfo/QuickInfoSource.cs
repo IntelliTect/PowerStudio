@@ -21,7 +21,7 @@ using PowerStudio.VsExtension.Tagging;
 
 #endregion
 
-namespace PowerStudio.VsExtension.Intellisense.QuickInfo
+namespace PowerStudio.LanguageService.Intellisense.QuickInfo
 {
     public abstract class QuickInfoSource<T> : IQuickInfoSource
             where T : ITokenTag
