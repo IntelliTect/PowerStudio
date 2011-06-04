@@ -17,8 +17,9 @@ using System.Resources;
 #endregion
 
 [assembly : AssemblyCompany( "IntelliTechture" )]
-[assembly : AssemblyProduct( "PowerStudio.VsExtension" )]
+[assembly : AssemblyProduct( "PowerStudio" )]
 [assembly : NeutralResourcesLanguage( "en-US" )]
+[assembly: AssemblyCopyright("Copyright © IntelliTechture 2011")]
 
 // Version information for an assembly consists of the following four values:
 //

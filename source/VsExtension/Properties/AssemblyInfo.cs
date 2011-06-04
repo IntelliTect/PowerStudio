@@ -15,8 +15,6 @@ using System.Runtime.InteropServices;
 [assembly : AssemblyTitle( "PowerStudio.VsExtension" )]
 [assembly : AssemblyDescription( "" )]
 [assembly : AssemblyConfiguration( "" )]
-
-[assembly : AssemblyCopyright( "" )]
 [assembly : AssemblyTrademark( "" )]
 [assembly : AssemblyCulture( "" )]
 [assembly : ComVisible( false )]
