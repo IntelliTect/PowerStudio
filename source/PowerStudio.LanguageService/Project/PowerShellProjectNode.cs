@@ -20,6 +20,7 @@ using System.Windows.Forms;
 using EnvDTE;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
+using PowerStudio.LanguageService;
 using VSLangProj;
 
 #endregion
@@ -32,16 +33,16 @@ namespace PowerStudio.VsExtension.Project
         internal const string ProjectTypeName = "PsProject";
 
         internal static int ImageOffset;
-        private PowerShellPackage _Package;
+        private PowerShellPackageBase _Package;
         private VSProject _VsProject;
 
         static PowerShellProjectNode()
         {
             ImageList = new ImageList();
-            ImageList.Images.Add( Resources.ProjectIcon );
+            ImageList.Images.Add( LanguageService.Resources.ProjectIcon );
         }
 
-        public PowerShellProjectNode( PowerShellPackage package )
+        public PowerShellProjectNode( PowerShellPackageBase package )
         {
             _Package = package;
 

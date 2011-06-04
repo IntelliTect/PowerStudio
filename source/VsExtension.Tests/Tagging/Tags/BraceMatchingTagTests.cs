@@ -12,6 +12,7 @@
 #region Using Directives
 
 using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PowerStudio.VsExtension.Tagging;
 using PowerStudio.VsExtension.Tagging.Tags;
@@ -20,7 +21,22 @@ using PowerStudio.VsExtension.Tagging.Tags;
 
 namespace PowerStudio.VsExtension.Tests.Tagging.Tags
 {
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    public sealed class DescribeAttribute : TestCategoryBaseAttribute
+    {
+        private readonly IList<string> _TestCategories;
+
+        public DescribeAttribute(string testCategory)
+        {
+            var list = new List<string>(1) { testCategory };
+            _TestCategories = list.AsReadOnly();
+        }
+
+        public override IList<string> TestCategories { get { return _TestCategories; } }
+    }
+
     [TestClass]
+    [Describe("BraceMatchingTag")]
     public class BraceMatchingTagTests
     {
         [TestMethod]

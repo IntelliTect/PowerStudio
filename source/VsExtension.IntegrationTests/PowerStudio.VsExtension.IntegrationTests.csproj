@@ -65,6 +65,10 @@
     <Compile Include="SignOff-Tests\VBProjectTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PowerStudio.LanguageService\PowerStudio.LanguageService.csproj">
+      <Project>{FF615B2F-BAEF-4671-9279-BD291244F2FB}</Project>
+      <Name>PowerStudio.LanguageService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VsExtension\PowerStudio.VsExtension.csproj">
       <Project>{AF6CE392-FFA9-49CB-AA08-E361A7352D55}</Project>
       <Name>PowerStudio.VsExtension</Name>

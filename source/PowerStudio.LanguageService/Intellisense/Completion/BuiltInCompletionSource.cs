@@ -28,11 +28,13 @@ namespace PowerStudio.VsExtension.Intellisense.Completion
 
         static BuiltInCompletionSource()
         {
-            IEnumerable<string> keywords = SplitMultiLineTextIntoACollectionOfLines( Resources.Keywords );
-            IEnumerable<string> variables = SplitMultiLineTextIntoACollectionOfLines( Resources.BuiltInVariables );
-            IEnumerable<string> preferenceVariables = SplitMultiLineTextIntoACollectionOfLines( Resources.PreferenceVariables );
-            IEnumerable<string> cmdlets = SplitMultiLineTextIntoACollectionOfLines( Resources.CmdLets );
-            IEnumerable<string> aliases = SplitMultiLineTextIntoACollectionOfLines( Resources.Aliases );
+            IEnumerable<string> keywords = SplitMultiLineTextIntoACollectionOfLines( LanguageService.Resources.Keywords );
+            IEnumerable<string> variables =
+                    SplitMultiLineTextIntoACollectionOfLines( LanguageService.Resources.BuiltInVariables );
+            IEnumerable<string> preferenceVariables =
+                    SplitMultiLineTextIntoACollectionOfLines( LanguageService.Resources.PreferenceVariables );
+            IEnumerable<string> cmdlets = SplitMultiLineTextIntoACollectionOfLines( LanguageService.Resources.CmdLets );
+            IEnumerable<string> aliases = SplitMultiLineTextIntoACollectionOfLines( LanguageService.Resources.Aliases );
             BuiltInCompletions =
                     keywords.Union( variables ).Union( preferenceVariables ).Union( cmdlets ).Union( aliases ).ToList();
         }

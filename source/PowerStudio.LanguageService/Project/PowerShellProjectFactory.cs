@@ -16,6 +16,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Project;
+using PowerStudio.LanguageService;
 using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 #endregion
@@ -25,9 +26,9 @@ namespace PowerStudio.VsExtension.Project
     [Guid( PsConstants.ProjectFactoryGuid )]
     public class PowerShellProjectFactory : ProjectFactory
     {
-        private readonly PowerShellPackage _Package;
+        private readonly PowerShellPackageBase _Package;
 
-        public PowerShellProjectFactory( PowerShellPackage package )
+        public PowerShellProjectFactory( PowerShellPackageBase package )
                 : base( package )
         {
             _Package = package;

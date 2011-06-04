@@ -15,8 +15,8 @@ using System;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.OLE.Interop;
-using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Shell;
+using PowerStudio.LanguageService;
 using PowerStudio.VsExtension.Project;
 
 #endregion
@@ -59,7 +59,7 @@ namespace PowerStudio.VsExtension
             NewProjectRequireNewFolderVsTemplate = false )]
     [ProvideProjectItem( typeof (PowerShellProjectFactory), "PowerShell", @"Templates\ProjectItems\PsProject", 500 )]
     [Guid( PsConstants.ProjectPackageGuid )]
-    public sealed class PowerShellPackage : ProjectPackage, IOleComponent
+    public sealed class PowerShellPackage : PowerShellPackageBase
     {
         private uint _ComponentId;
 
@@ -84,64 +84,60 @@ namespace PowerStudio.VsExtension
             get { return "PowerShellProj"; }
         }
 
-        #region IOleComponent Members
-
-        public int FContinueMessageLoop( uint uReason, IntPtr pvLoopData, MSG[] pMsgPeeked )
+        public override int FContinueMessageLoop( uint uReason, IntPtr pvLoopData, MSG[] pMsgPeeked )
         {
             return 1;
         }
 
-        public int FDoIdle( uint grfidlef )
+        public override int FDoIdle( uint grfidlef )
         {
             return 0;
         }
 
-        public int FPreTranslateMessage( MSG[] pMsg )
+        public override int FPreTranslateMessage( MSG[] pMsg )
         {
             return 0;
         }
 
-        public int FQueryTerminate( int fPromptUser )
+        public override int FQueryTerminate( int fPromptUser )
         {
             return 1;
         }
 
-        public int FReserved1( uint dwReserved, uint message, IntPtr wParam, IntPtr lParam )
+        public override int FReserved1( uint dwReserved, uint message, IntPtr wParam, IntPtr lParam )
         {
             return 1;
         }
 
-        public IntPtr HwndGetWindow( uint dwWhich, uint dwReserved )
+        public override IntPtr HwndGetWindow( uint dwWhich, uint dwReserved )
         {
             return IntPtr.Zero;
         }
 
-        public void OnActivationChange( IOleComponent pic,
-                                        int fSameComponent,
-                                        OLECRINFO[] pcrinfo,
-                                        int fHostIsActivating,
-                                        OLECHOSTINFO[] pchostinfo,
-                                        uint dwReserved )
+        public override void OnActivationChange( IOleComponent pic,
+                                                 int fSameComponent,
+                                                 OLECRINFO[] pcrinfo,
+                                                 int fHostIsActivating,
+                                                 OLECHOSTINFO[] pchostinfo,
+                                                 uint dwReserved )
         {
         }
 
-        public void OnAppActivate( int fActive, uint dwOtherThreadID )
+        public override void OnAppActivate( int fActive, uint dwOtherThreadID )
         {
         }
 
-        public void OnEnterState( uint uStateID, int fEnter )
+        public override void OnEnterState( uint uStateID, int fEnter )
         {
         }
 
-        public void OnLoseActivation()
+        public override void OnLoseActivation()
         {
         }
 
-        public void Terminate()
+        public override void Terminate()
         {
         }
-
-        #endregion
 
         /// <summary>
         ///   Initialization of the package; this method is called right after the package is sited, so this is the place

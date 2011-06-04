@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PowerStudio.VsExtension {
+namespace PowerStudio.LanguageService {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace PowerStudio.VsExtension {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace PowerStudio.VsExtension {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PowerStudio.VsExtension.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PowerStudio.LanguageService.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace PowerStudio.VsExtension {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -161,7 +161,7 @@ namespace PowerStudio.VsExtension {
         ///ren
         /// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Aliases {
+        public static string Aliases {
             get {
                 return ResourceManager.GetString("Aliases", resourceCulture);
             }
@@ -209,7 +209,7 @@ namespace PowerStudio.VsExtension {
         ///$this
         ///$true.
         /// </summary>
-        internal static string BuiltInVariables {
+        public static string BuiltInVariables {
             get {
                 return ResourceManager.GetString("BuiltInVariables", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace PowerStudio.VsExtension {
         ///Format-List
         ///ForEach-Obj [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string CmdLets {
+        public static string CmdLets {
             get {
                 return ResourceManager.GetString("CmdLets", resourceCulture);
             }
@@ -292,7 +292,7 @@ namespace PowerStudio.VsExtension {
         ///var
         ///while.
         /// </summary>
-        internal static string Keywords {
+        public static string Keywords {
             get {
                 return ResourceManager.GetString("Keywords", resourceCulture);
             }
@@ -317,13 +317,13 @@ namespace PowerStudio.VsExtension {
         ///$WarningPreference
         ///$WhatIfPreference.
         /// </summary>
-        internal static string PreferenceVariables {
+        public static string PreferenceVariables {
             get {
                 return ResourceManager.GetString("PreferenceVariables", resourceCulture);
             }
         }
         
-        internal static System.Drawing.Icon ProjectIcon {
+        public static System.Drawing.Icon ProjectIcon {
             get {
                 object obj = ResourceManager.GetObject("ProjectIcon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
