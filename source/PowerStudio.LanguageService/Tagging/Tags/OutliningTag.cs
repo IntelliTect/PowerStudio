@@ -61,6 +61,8 @@ namespace PowerStudio.LanguageService.Tagging.Tags
 
         public ITextSnapshot Snapshot { get; private set; }
 
+        #region IOutliningRegionTag Members
+
         /// <summary>
         ///   Gets the data object for the collapsed UI. If the default is set, returns null.
         /// </summary>
@@ -111,6 +113,8 @@ namespace PowerStudio.LanguageService.Tagging.Tags
         ///   which hides the implementation region and leaves only the method definition exposed.
         /// </remarks>
         public bool IsImplementation { get; private set; }
+
+        #endregion
 
         private static string RemoveWhiteSpaceBufferFromText( IEnumerable<string> lines, int whiteSpaceBufferSize )
         {

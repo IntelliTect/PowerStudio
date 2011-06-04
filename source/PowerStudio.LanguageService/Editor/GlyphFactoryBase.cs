@@ -23,6 +23,8 @@ namespace PowerStudio.LanguageService.Editor
     public abstract class GlyphFactoryBase<TToken> : IGlyphFactory<TToken>
             where TToken : GlyphTag
     {
+        #region IGlyphFactory<TToken> Members
+
         /// <summary>
         ///   Generates a new glyph visual for the given line.
         /// </summary>
@@ -51,5 +53,7 @@ namespace PowerStudio.LanguageService.Editor
         ///   The visual element for the given tag.
         /// </returns>
         public abstract UIElement CreateGlyph( IWpfTextViewLine line, TToken token );
+
+        #endregion
     }
 }

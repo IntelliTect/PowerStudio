@@ -14,9 +14,8 @@
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Project;
-using PowerStudio.VsExtension;
-using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 #endregion
 

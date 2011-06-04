@@ -14,6 +14,7 @@
 #region Using Directives
 
 using System.ComponentModel.Composition;
+using System.Management.Automation;
 using System.Text;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
@@ -41,9 +42,12 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
         /// </returns>
         public override IQuickInfoSource TryCreateQuickInfoSource( ITextBuffer textBuffer )
         {
-            var tagAggregator = TagAggregatorFactory.CreateTagAggregator<TokenClassificationTag>( textBuffer );
+            ITagAggregator<TokenClassificationTag> tagAggregator =
+                    TagAggregatorFactory.CreateTagAggregator<TokenClassificationTag>( textBuffer );
             return new QuickInfoTokenSource( textBuffer, tagAggregator, this );
         }
+
+        #region Nested type: QuickInfoTokenSource
 
         private class QuickInfoTokenSource : QuickInfoSource<TokenClassificationTag>
         {
@@ -56,31 +60,33 @@ namespace PowerStudio.VsExtension.Intellisense.QuickInfo
 
             protected override object GetToolTip( TokenClassificationTag tokenTag )
             {
-                var token = tokenTag.Token;
-                StringBuilder sb = new StringBuilder();
+                PSToken token = tokenTag.Token;
+                var sb = new StringBuilder();
                 sb.AppendFormat( "Content: {0}", token.Content );
                 sb.AppendLine();
-                sb.AppendFormat("Length: {0}", token.Length);
+                sb.AppendFormat( "Length: {0}", token.Length );
                 sb.AppendLine();
-                sb.AppendFormat("Type: {0}", token.Type);
+                sb.AppendFormat( "Type: {0}", token.Type );
                 sb.AppendLine();
-                sb.AppendFormat("StartLine: {0}", token.StartLine);
+                sb.AppendFormat( "StartLine: {0}", token.StartLine );
                 sb.AppendLine();
-                sb.AppendFormat("EndLine: {0}", token.EndLine);
+                sb.AppendFormat( "EndLine: {0}", token.EndLine );
                 sb.AppendLine();
-                sb.AppendFormat("Start: {0}", token.Start);
+                sb.AppendFormat( "Start: {0}", token.Start );
                 sb.AppendLine();
-                sb.AppendFormat("StartLine: {0}", token.StartLine);
+                sb.AppendFormat( "StartLine: {0}", token.StartLine );
                 sb.AppendLine();
-                sb.AppendFormat("StartColumn: {0}", token.StartColumn);
+                sb.AppendFormat( "StartColumn: {0}", token.StartColumn );
                 sb.AppendLine();
-                sb.AppendFormat("EndLine: {0}", token.EndLine);
+                sb.AppendFormat( "EndLine: {0}", token.EndLine );
                 sb.AppendLine();
-                sb.AppendFormat("EndColumn: {0}", token.EndColumn);
+                sb.AppendFormat( "EndColumn: {0}", token.EndColumn );
 
                 return sb.ToString();
             }
         }
+
+        #endregion
     }
 }
 

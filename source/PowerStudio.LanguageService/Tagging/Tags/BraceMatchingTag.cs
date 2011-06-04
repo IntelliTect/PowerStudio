@@ -42,11 +42,6 @@ namespace PowerStudio.LanguageService.Tagging.Tags
         }
 
         /// <summary>
-        ///   Gets the type of adornment to use.
-        /// </summary>
-        public string Type { get; private set; }
-
-        /// <summary>
         ///   Gets or sets the matching tag for the span being represented.
         /// </summary>
         /// <remarks>
@@ -57,5 +52,14 @@ namespace PowerStudio.LanguageService.Tagging.Tags
         /// </remarks>
         /// <value>The match.</value>
         public BraceMatchingTag Match { get; set; }
+
+        #region ITextMarkerTag Members
+
+        /// <summary>
+        ///   Gets the type of adornment to use.
+        /// </summary>
+        public string Type { get; private set; }
+
+        #endregion
     }
 }

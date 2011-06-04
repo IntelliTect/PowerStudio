@@ -23,7 +23,6 @@ namespace PowerStudio.LanguageService.Editor
     public interface IGlyphFactory<in TToken> : IGlyphFactory
             where TToken : GlyphTag
     {
-
         /// <summary>
         ///   Generates a new glyph visual for the given line and token.
         /// </summary>

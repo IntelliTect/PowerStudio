@@ -20,7 +20,11 @@ namespace PowerStudio.LanguageService.Tagging.Tags
 {
     public class TokenTag : ITokenTag
     {
+        #region ITokenTag Members
+
         public PSToken Token { get; set; }
         public SnapshotSpan Span { get; set; }
+
+        #endregion
     }
 }

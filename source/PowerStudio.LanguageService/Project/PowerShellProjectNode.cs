@@ -20,7 +20,6 @@ using System.Windows.Forms;
 using EnvDTE;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
-using PowerStudio.VsExtension;
 using VSLangProj;
 
 #endregion
@@ -39,7 +38,7 @@ namespace PowerStudio.LanguageService.Project
         static PowerShellProjectNode()
         {
             ImageList = new ImageList();
-            ImageList.Images.Add( LanguageService.Resources.ProjectIcon );
+            ImageList.Images.Add( Resources.ProjectIcon );
         }
 
         public PowerShellProjectNode( PowerShellPackageBase package )

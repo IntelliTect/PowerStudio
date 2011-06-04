@@ -39,6 +39,8 @@ namespace PowerStudio.LanguageService.Tagging.Tags
         {
         }
 
+        #region IErrorTag Members
+
         /// <summary>
         ///   Gets the type of error to use.
         /// </summary>
@@ -49,5 +51,7 @@ namespace PowerStudio.LanguageService.Tagging.Tags
         ///   This property may be null.
         /// </summary>
         public object ToolTipContent { get; private set; }
+
+        #endregion
     }
 }

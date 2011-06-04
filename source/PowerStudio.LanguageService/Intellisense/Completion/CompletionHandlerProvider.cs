@@ -17,7 +17,6 @@ using Microsoft.VisualStudio.Editor;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.TextManager.Interop;
 using Microsoft.VisualStudio.Utilities;
-using PowerStudio.VsExtension;
 
 #endregion
 

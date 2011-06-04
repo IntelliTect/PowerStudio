@@ -18,7 +18,6 @@ using System.Security.AccessControl;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 using Microsoft.Win32;
-using PowerStudio.VsExtension;
 using Color = System.Windows.Media.Color;
 
 #endregion

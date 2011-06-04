@@ -27,9 +27,13 @@ namespace PowerStudio.LanguageService.Tagging.Tags
             Type = PredefinedTextMarkerTags.WordHighlight;
         }
 
+        #region ITextMarkerTag Members
+
         /// <summary>
         ///   Gets the type of adornment to use.
         /// </summary>
         public string Type { get; private set; }
+
+        #endregion
     }
 }

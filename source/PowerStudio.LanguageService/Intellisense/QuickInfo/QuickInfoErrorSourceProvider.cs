@@ -16,15 +16,14 @@ using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
 using PowerStudio.LanguageService.Tagging.Tags;
-using PowerStudio.VsExtension;
 
 #endregion
 
 namespace PowerStudio.LanguageService.Intellisense.QuickInfo
 {
-    [Export(typeof(IQuickInfoSourceProvider))]
-    [ContentType(LanguageConfiguration.Name)]
-    [Name(LanguageConfiguration.Name + "Error QuickInfo")]
+    [Export( typeof (IQuickInfoSourceProvider) )]
+    [ContentType( LanguageConfiguration.Name )]
+    [Name( LanguageConfiguration.Name + "Error QuickInfo" )]
     public class QuickInfoErrorSourceProvider : QuickInfoSourceProvider<ErrorTokenTag>
     {
         /// <summary>
@@ -34,11 +33,11 @@ namespace PowerStudio.LanguageService.Intellisense.QuickInfo
         /// <returns>
         ///   A valid <see cref = "T:Microsoft.VisualStudio.Language.Intellisense.IQuickInfoSource" /> instance, or null if none could be created.
         /// </returns>
-        public override IQuickInfoSource TryCreateQuickInfoSource(ITextBuffer textBuffer)
+        public override IQuickInfoSource TryCreateQuickInfoSource( ITextBuffer textBuffer )
         {
-            return new QuickInfoErrorSource(textBuffer,
-                                             TagAggregatorFactory.CreateTagAggregator<ErrorTokenTag>(textBuffer),
-                                             this);
+            return new QuickInfoErrorSource( textBuffer,
+                                             TagAggregatorFactory.CreateTagAggregator<ErrorTokenTag>( textBuffer ),
+                                             this );
         }
     }
 }

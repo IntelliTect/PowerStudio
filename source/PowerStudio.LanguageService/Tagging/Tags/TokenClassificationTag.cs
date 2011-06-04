@@ -38,9 +38,13 @@ namespace PowerStudio.LanguageService.Tagging.Tags
             ClassificationType = type;
         }
 
+        #region IClassificationTag Members
+
         /// <summary>
         ///   The classification type associated with this tag.
         /// </summary>
         public IClassificationType ClassificationType { get; private set; }
+
+        #endregion
     }
 }

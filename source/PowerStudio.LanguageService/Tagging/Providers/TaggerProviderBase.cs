@@ -21,6 +21,8 @@ namespace PowerStudio.LanguageService.Tagging.Providers
 {
     public abstract class TaggerProviderBase : ITaggerProvider
     {
+        #region ITaggerProvider Members
+
         /// <summary>
         ///   Creates a tag provider for the specified buffer.
         /// </summary>
@@ -30,6 +32,8 @@ namespace PowerStudio.LanguageService.Tagging.Providers
         {
             return buffer.Properties.GetOrCreateSingletonProperty( GetFactory<T>( buffer ) );
         }
+
+        #endregion
 
         protected abstract Func<ITagger<T>> GetFactory<T>( ITextBuffer buffer ) where T : ITag;
     }

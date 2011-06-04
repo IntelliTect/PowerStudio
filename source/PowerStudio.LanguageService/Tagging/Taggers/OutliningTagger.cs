@@ -15,7 +15,6 @@ using System.Collections.Generic;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using PowerStudio.LanguageService.Tagging.Tags;
-using PowerStudio.VsExtension;
 
 #endregion
 

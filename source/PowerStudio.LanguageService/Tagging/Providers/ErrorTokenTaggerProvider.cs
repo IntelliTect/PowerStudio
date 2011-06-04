@@ -19,7 +19,6 @@ using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 using PowerStudio.LanguageService.Tagging.Taggers;
 using PowerStudio.LanguageService.Tagging.Tags;
-using PowerStudio.VsExtension;
 
 #endregion
 

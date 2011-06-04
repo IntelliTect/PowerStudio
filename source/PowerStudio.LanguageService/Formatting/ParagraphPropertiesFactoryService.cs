@@ -16,7 +16,6 @@ using System.Windows.Media.TextFormatting;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Formatting;
 using Microsoft.VisualStudio.Utilities;
-using PowerStudio.VsExtension;
 
 #endregion
 
@@ -26,6 +25,8 @@ namespace PowerStudio.LanguageService.Formatting
     [ContentType( LanguageConfiguration.Name )]
     public class ParagraphPropertiesFactoryService : ITextParagraphPropertiesFactoryService
     {
+        #region ITextParagraphPropertiesFactoryService Members
+
         /// <summary>
         ///   Creates a <see cref = "T:System.Windows.Media.TextFormatting.TextParagraphProperties" /> for the provided configuration.
         /// </summary>
@@ -46,7 +47,9 @@ namespace PowerStudio.LanguageService.Formatting
                                                IMappingPoint lineStart,
                                                int lineSegment )
         {
-            return new TextFormattingParagraphProperties(textProperties, formattedLineSource.TabSize);
+            return new TextFormattingParagraphProperties( textProperties, formattedLineSource.TabSize );
         }
+
+        #endregion
     }
 }
