@@ -20,6 +20,7 @@ using System.Windows.Forms;
 using EnvDTE;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
+using PowerStudio.Resources;
 using VSLangProj;
 
 #endregion

@@ -14,6 +14,7 @@
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
+using PowerStudio.Resources;
 
 #endregion
 

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VSSDK.Tools.VsIdeTesting;
 using PowerStudio.LanguageService;
+using PowerStudio.Resources;
 
 namespace PowerStudio.VsExtension.IntegrationTests
 {

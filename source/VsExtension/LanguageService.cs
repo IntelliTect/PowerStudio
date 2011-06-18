@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.TextManager.Interop;
 using PowerStudio.LanguageService;
+using PowerStudio.Resources;
 
 #endregion
 

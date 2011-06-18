@@ -9,7 +9,7 @@
 
 #endregion
 
-namespace PowerStudio.LanguageService
+namespace PowerStudio.Resources
 {
     public static class PsConstants
     {
@@ -28,5 +28,7 @@ namespace PowerStudio.LanguageService
         public const string ProjectFileItemGuid = "4D54A87D-7103-4215-BB93-FFBBBF503730";
 
         public const string GeneralPropertyPageGuid = "45AF33B3-2533-4780-AB68-6A48368B097E";
+
+        public const string DebugEngineGuid = "462BC237-17AA-4626-9949-E7DD8C790681";
     } ;
 }
