@@ -13,31 +13,33 @@
 
 using System;
 using System.Runtime.InteropServices;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Debugger.Interop;
-using PowerStudio.Resources;
 
 #endregion
 
-namespace PowerStudio.Debugger
+namespace DebugEngine
 {
     [ComVisible( true )]
-    [Guid( PsConstants.DebugEngineGuid )]
-    public class Engine : IDebugEngine2, IDebugEngineLaunch2
+    public abstract class DebugEngineBase : IDebugEngine2, IDebugEngineLaunch2
     {
+        private DebugEngineEventSource EngineEventSource;
+
         #region Implementation of IDebugEngine2
 
         /// <summary>
-        /// Retrieves a list of all programs being debugged by a debug engine (DE).
+        /// Retrieves a list of all programs being debugged by a debug DebugEngine (DE).
         /// </summary>
         /// <param name="ppEnum">Returns an IEnumDebugPrograms2 object that contains a list of all programs being debugged by a DE.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        public int EnumPrograms( out IEnumDebugPrograms2 ppEnum )
+        public virtual int EnumPrograms( out IEnumDebugPrograms2 ppEnum )
         {
-            throw new NotImplementedException();
+            ppEnum = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
-        /// Attaches a debug engine (DE) to a program or programs. Called by the session debug manager (SDM) when the DE is running in-process to the SDM.
+        /// Attaches a debug DebugEngine (DE) to a program or programs. Called by the session debug manager (SDM) when the DE is running in-process to the SDM.
         /// </summary>
         /// <param name="rgpPrograms">An array of IDebugProgram2 objects that represent programs to be attached to. These are port programs.</param>
         /// <param name="rgpProgramNodes">An array of IDebugProgramNode2 objects that represent program nodes, one for each program. The program nodes in this array represent the same programs as in pProgram. The program nodes are given so that the DE can identify the programs to attach to.</param>
@@ -52,7 +54,7 @@ namespace PowerStudio.Debugger
         ///     ATTACH_REASON_AUTO indicates the DE is attaching to a particular program because it is already debugging other programs in a particular process. This is also called auto-attach
         /// 
         /// When this method is called, the DE needs to send these events in sequence:
-        ///     IDebugEngineCreateEvent2 (if it has not already been sent for a particular instance of the debug engine)
+        ///     IDebugEngineCreateEvent2 (if it has not already been sent for a particular instance of the debug DebugEngine)
         ///     IDebugProgramCreateEvent2
         ///     IDebugLoadCompleteEvent2
         /// 
@@ -60,17 +62,17 @@ namespace PowerStudio.Debugger
         /// Once the DE gets the IDebugProgramNode2 object corresponding to the program being debugged, it can be queried for any private interface.
         /// Before calling the methods of a program node in the array given by pProgram or rgpProgramNodes, impersonation, if required, should be enabled on the IDebugProgram2 interface that represents the program node. Normally, however, this step is not necessary. For more information, see Security Issues.
         /// </remarks>
-        public int Attach( IDebugProgram2[] rgpPrograms,
-                           IDebugProgramNode2[] rgpProgramNodes,
-                           uint celtPrograms,
-                           IDebugEventCallback2 pCallback,
-                           enum_ATTACH_REASON dwReason )
+        public virtual int Attach( IDebugProgram2[] rgpPrograms,
+                                   IDebugProgramNode2[] rgpProgramNodes,
+                                   uint celtPrograms,
+                                   IDebugEventCallback2 pCallback,
+                                   enum_ATTACH_REASON dwReason )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
-        /// Creates a pending breakpoint in the debug engine (DE).
+        /// Creates a pending breakpoint in the debug DebugEngine (DE).
         /// </summary>
         /// <param name="pBPRequest">An IDebugBreakpointRequest2 object that describes the pending breakpoint to create.</param>
         /// <param name="ppPendingBP">Returns an IDebugPendingBreakpoint2 object that represents the pending breakpoint.</param>
@@ -82,25 +84,26 @@ namespace PowerStudio.Debugger
         /// 
         /// When the user sets a breakpoint on a line of code, the DE is free to bind the breakpoint to the closest line in the document that corresponds to this code. This makes it possible for the user to set a breakpoint on the first line of a multi-line statement, but bind it on the last line (where all the code is attributed in the debug information).
         /// </remarks>
-        public int CreatePendingBreakpoint( IDebugBreakpointRequest2 pBPRequest,
-                                            out IDebugPendingBreakpoint2 ppPendingBP )
+        public virtual int CreatePendingBreakpoint( IDebugBreakpointRequest2 pBPRequest,
+                                                    out IDebugPendingBreakpoint2 ppPendingBP )
         {
-            throw new NotImplementedException();
+            ppPendingBP = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
-        /// Specifies how the debug engine (DE) should handle a given exception.
+        /// Specifies how the debug DebugEngine (DE) should handle a given exception.
         /// </summary>
         /// <param name="pException">An EXCEPTION_INFO structure that describes the exception and how to debug it.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>A DE could be instructed to stop the program generating an exception at first chance, second chance, or not at all.</remarks>
-        public int SetException( EXCEPTION_INFO[] pException )
+        public virtual int SetException( EXCEPTION_INFO[] pException )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
-        /// Removes the specified exception so it is no longer handled by the debug engine.
+        /// Removes the specified exception so it is no longer handled by the debug DebugEngine.
         /// </summary>
         /// <param name="pException">An EXCEPTION_INFO structure that describes the exception to be removed.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
@@ -108,38 +111,39 @@ namespace PowerStudio.Debugger
         /// The exception being removed must have been previously set by an earlier call to the IDebugEngine2::SetException method.
         /// To remove all set exceptions at once, call the IDebugEngine2::RemoveAllSetExceptions method.
         /// </remarks>
-        public int RemoveSetException( EXCEPTION_INFO[] pException )
+        public virtual int RemoveSetException( EXCEPTION_INFO[] pException )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
         /// Removes the list of exceptions the IDE has set for a particular run-time architecture or language.
         /// </summary>
-        /// <param name="guidType">Either the GUID for the language or the GUID for the debug engine that is specific to a run-time architecture.</param>
+        /// <param name="guidType">Either the GUID for the language or the GUID for the debug DebugEngine that is specific to a run-time architecture.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>
         /// The exceptions removed by this method were set by earlier calls to the IDebugEngine2::SetException method.
         /// To remove a specific exception, call the IDebugEngine2::RemoveSetException method.
         /// </remarks>
-        public int RemoveAllSetExceptions( ref Guid guidType )
+        public virtual int RemoveAllSetExceptions( ref Guid guidType )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
-        /// Gets the GUID of the debug engine (DE).
+        /// Gets the GUID of the debug DebugEngine (DE).
         /// </summary>
         /// <param name="pguidEngine">Returns the GUID of the DE.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>Some examples of typical GUIDs are guidScriptEng, guidNativeEng, or guidSQLEng. New debug engines will create their own GUID for identification.</remarks>
-        public int GetEngineId( out Guid pguidEngine )
+        public virtual int GetEngineId( out Guid pguidEngine )
         {
-            throw new NotImplementedException();
+            pguidEngine = default( Guid );
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
-        /// Informs a debug engine (DE) that the program specified has been atypically terminated and that the DE should clean up all references to the program and send a program destroy event.
+        /// Informs a debug DebugEngine (DE) that the program specified has been atypically terminated and that the DE should clean up all references to the program and send a program destroy event.
         /// </summary>
         /// <param name="pProgram">An IDebugProgram2 object that represents the program that has been atypically terminated.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
@@ -147,42 +151,42 @@ namespace PowerStudio.Debugger
         /// After this method is called, the DE subsequently sends an IDebugProgramDestroyEvent2 event back to the session debug manager (SDM).
         /// This method is not implemented (returns E_NOTIMPL) if the DE runs in the same process as the program being debugged. This method is implemented only if the DE runs in the same process as the SDM.
         /// </remarks>
-        public int DestroyProgram( IDebugProgram2 pProgram )
+        public virtual int DestroyProgram( IDebugProgram2 pProgram )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
-        /// Called by the session debug manager (SDM) to indicate that a synchronous debug event, previously sent by the debug engine (DE) to the SDM, was received and processed.
+        /// Called by the session debug manager (SDM) to indicate that a synchronous debug event, previously sent by the debug DebugEngine (DE) to the SDM, was received and processed.
         /// </summary>
         /// <param name="pEvent">An IDebugEvent2 object that represents the previously sent synchronous event from which the debugger should now continue.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>The DE must verify that it was the source of the event represented by the pEvent parameter.</remarks>
-        public int ContinueFromSynchronousEvent( IDebugEvent2 pEvent )
+        public virtual int ContinueFromSynchronousEvent( IDebugEvent2 pEvent )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
-        /// Sets the locale of the debug engine (DE).
+        /// Sets the locale of the debug DebugEngine (DE).
         /// </summary>
         /// <param name="wLangID">Specifies the language locale. For example, 1033 for English.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>This method is called by the session debug manager (SDM) to propagate the locale settings of the IDE so that strings returned by the DE are properly localized.</remarks>
-        public int SetLocale( ushort wLangID )
+        public virtual int SetLocale( ushort wLangID )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
-        /// Sets the registry root for the debug engine (DE).
+        /// Sets the registry root for the debug DebugEngine (DE).
         /// </summary>
         /// <param name="pszRegistryRoot">The registry root to use.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>This method allows Visual Studio to specify an alternate registry root that the DE should use to obtain registry settings; for example, "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\8.0Exp".</remarks>
-        public int SetRegistryRoot( string pszRegistryRoot )
+        public virtual int SetRegistryRoot( string pszRegistryRoot )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -191,20 +195,20 @@ namespace PowerStudio.Debugger
         /// <param name="pszMetric">The metric name.</param>
         /// <param name="varValue">Specifies the metric value.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        /// <remarks>A metric is a registry value used to change a debug engine's behavior or to advertise supported functionality. This method can forward the call to the appropriate form of the SDK Helpers for Debugging function, SetMetric.</remarks>
-        public int SetMetric( string pszMetric, object varValue )
+        /// <remarks>A metric is a registry value used to change a debug DebugEngine's behavior or to advertise supported functionality. This method can forward the call to the appropriate form of the SDK Helpers for Debugging function, SetMetric.</remarks>
+        public virtual int SetMetric( string pszMetric, object varValue )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
-        /// Requests that all programs being debugged by this debug engine (DE) to stop execution the next time one of their threads attempts to run.
+        /// Requests that all programs being debugged by this debug DebugEngine (DE) to stop execution the next time one of their threads attempts to run.
         /// </summary>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>This method is asynchronous: an IDebugBreakEvent2 event is sent when the program next attempts to execute after this method is called.</remarks>
-        public int CauseBreak()
+        public virtual int CauseBreak()
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         #endregion
@@ -212,7 +216,7 @@ namespace PowerStudio.Debugger
         #region Implementation of IDebugEngineLaunch2
 
         /// <summary>
-        /// This method launches a process by means of the debug engine (DE).
+        /// This method launches a process by means of the debug DebugEngine (DE).
         /// </summary>
         /// <param name="pszServer">The name of the machine in which to launch the process. Use a null value to specify the local machine.</param>
         /// <param name="pPort">The IDebugPort2 interface representing the port that the program will run in.</param>
@@ -229,25 +233,26 @@ namespace PowerStudio.Debugger
         /// <param name="ppProcess">Returns the resulting IDebugProcess2 object that represents the launched process.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>
-        /// Normally, Visual Studio launches a program using the IDebugPortEx2::LaunchSuspended method and then attaches the debugger to the suspended program. However, there are circumstances in which the debug engine may need to launch a program (for example, if the debug engine is part of an interpreter and the program being debugged is an interpreted language), in which case Visual Studio uses the IDebugEngineLaunch2::LaunchSuspended method.
+        /// Normally, Visual Studio launches a program using the IDebugPortEx2::LaunchSuspended method and then attaches the debugger to the suspended program. However, there are circumstances in which the debug DebugEngine may need to launch a program (for example, if the debug DebugEngine is part of an interpreter and the program being debugged is an interpreted language), in which case Visual Studio uses the IDebugEngineLaunch2::LaunchSuspended method.
         /// 
         /// The IDebugEngineLaunch2::ResumeProcess method is called to start the process after the process has been successfully launched in a suspended state.
         /// </remarks>
-        public int LaunchSuspended( string pszServer,
-                                    IDebugPort2 pPort,
-                                    string pszExe,
-                                    string pszArgs,
-                                    string pszDir,
-                                    string bstrEnv,
-                                    string pszOptions,
-                                    enum_LAUNCH_FLAGS dwLaunchFlags,
-                                    uint hStdInput,
-                                    uint hStdOutput,
-                                    uint hStdError,
-                                    IDebugEventCallback2 pCallback,
-                                    out IDebugProcess2 ppProcess )
+        public virtual int LaunchSuspended( string pszServer,
+                                            IDebugPort2 pPort,
+                                            string pszExe,
+                                            string pszArgs,
+                                            string pszDir,
+                                            string bstrEnv,
+                                            string pszOptions,
+                                            enum_LAUNCH_FLAGS dwLaunchFlags,
+                                            uint hStdInput,
+                                            uint hStdOutput,
+                                            uint hStdError,
+                                            IDebugEventCallback2 pCallback,
+                                            out IDebugProcess2 ppProcess )
         {
-            throw new NotImplementedException();
+            ppProcess = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -256,20 +261,20 @@ namespace PowerStudio.Debugger
         /// <param name="pProcess">An IDebugProcess2 object that represents the process to be resumed.</param>
         /// <returns>If successful, returns S_OK; otherwise returns an error code.</returns>
         /// <remarks>This method is called after a process has been launched with a call to the IDebugEngineLaunch2::LaunchSuspended method.</remarks>
-        public int ResumeProcess( IDebugProcess2 pProcess )
+        public virtual int ResumeProcess( IDebugProcess2 pProcess )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
         /// Determines if a process can be terminated.
         /// </summary>
         /// <param name="pProcess">An IDebugProcess2 object that represents the process to be terminated.</param>
-        /// <returns>If successful, returns S_OK; otherwise returns an error code. Returns S_FALSE if the engine cannot terminate the process, for example, because access is denied.</returns>
+        /// <returns>If successful, returns S_OK; otherwise returns an error code. Returns S_FALSE if the DebugEngine cannot terminate the process, for example, because access is denied.</returns>
         /// <remarks>If this method returns S_OK, then it the IDebugEngineLaunch2::TerminateProcess method can be called to actually terminate the process.</remarks>
-        public int CanTerminateProcess( IDebugProcess2 pProcess )
+        public virtual int CanTerminateProcess( IDebugProcess2 pProcess )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -278,9 +283,9 @@ namespace PowerStudio.Debugger
         /// <param name="pProcess">An IDebugProcess2 object that represents the process to be terminated.</param>
         /// <returns>If successful, returns S_OK; otherwise returns an error code.</returns>
         /// <remarks>Call the IDebugEngineLaunch2::CanTerminateProcess method before calling this method.</remarks>
-        public int TerminateProcess( IDebugProcess2 pProcess )
+        public virtual int TerminateProcess( IDebugProcess2 pProcess )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         #endregion

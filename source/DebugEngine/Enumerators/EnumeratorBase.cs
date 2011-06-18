@@ -11,27 +11,34 @@
 
 #region Using Directives
 
-using System;
-using Microsoft.VisualStudio.Debugger.Interop;
+using Microsoft.VisualStudio;
 
 #endregion
 
-namespace PowerStudio.Debugger
+namespace DebugEngine.Enumerators
 {
-    public class StackFrameCollection : IEnumDebugFrameInfo2
+    public abstract class EnumeratorBase<TItem, TEnumerator>
+            where TEnumerator : class
     {
-        #region Implementation of IEnumDebugFrameInfo2
+        protected EnumeratorBase( TItem[] data )
+        {
+            Data = data;
+            Position = 0;
+        }
+
+        protected TItem[] Data { get; private set; }
+        private uint Position { get; set; }
 
         /// <summary>
         /// Returns the next set of elements from the enumeration.
         /// </summary>
         /// <param name="celt">The number of elements to retrieve. Also specifies the maximum size of the rgelt array.</param>
-        /// <param name="rgelt">Array of FRAMEINFO elements to be filled in.</param>
-        /// <param name="pceltFetched">Returns the number of elements actually returned in rgelt.</param>
+        /// <param name="rgelt">Array of T elements to be filled in.</param>
+        /// <param name="celtFetched">Returns the number of elements actually returned in rgelt.</param>
         /// <returns>If successful, returns S_OK. Returns S_FALSE if fewer than the requested number of elements could be returned; otherwise, returns an error code.</returns>
-        public int Next( uint celt, FRAMEINFO[] rgelt, ref uint pceltFetched )
+        public virtual int Next( uint celt, TItem[] rgelt, out uint celtFetched )
         {
-            throw new NotImplementedException();
+            return Move( celt, rgelt, out celtFetched );
         }
 
         /// <summary>
@@ -40,19 +47,26 @@ namespace PowerStudio.Debugger
         /// <param name="celt">Number of elements to skip.</param>
         /// <returns>If successful, returns S_OK. Returns S_FALSE if celt is greater than the number of remaining elements; otherwise, returns an error code.</returns>
         /// <remarks>If celt specifies a value greater than the number of remaining elements, the enumeration is set to the end and S_FALSE is returned.</remarks>
-        public int Skip( uint celt )
+        public virtual int Skip( uint celt )
         {
-            throw new NotImplementedException();
+            uint celtFetched;
+
+            return Move( celt, null, out celtFetched );
         }
 
         /// <summary>
         /// Resets the enumeration to the first element.
         /// </summary>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        /// <remarks>After this method is called, the next call to the IEnumDebugFrameInfo2::Next method returns the first element of the enumeration.</remarks>
-        public int Reset()
+        /// <remarks>After this method is called, the next call to the ::Next method returns the first element of the enumeration.</remarks>
+        public virtual int Reset()
         {
-            throw new NotImplementedException();
+            lock ( this )
+            {
+                Position = 0;
+
+                return VSConstants.S_OK;
+            }
         }
 
         /// <summary>
@@ -61,22 +75,52 @@ namespace PowerStudio.Debugger
         /// <param name="ppEnum">Returns a copy of this enumeration as a separate object.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>The copy of the enumeration has the same state as the original at the time this method is called. However, the copy's and the original's states are separate and can be changed individually.</remarks>
-        public int Clone( out IEnumDebugFrameInfo2 ppEnum )
+        public virtual int Clone( out TEnumerator ppEnum )
         {
-            throw new NotImplementedException();
+            ppEnum = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
         /// Returns the number of elements in the enumeration.
         /// </summary>
         /// <param name="pcelt">Returns the number of elements in the enumeration.</param>
-        /// <returns>If successful, returns S_OK; otherwise, returns an error code.If successful, returns S_OK; otherwise, returns an error code.</returns>
+        /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>This method is not part of the customary COM enumeration interface which specifies that only the Next, Clone, Skip, and Reset methods need to be implemented.</remarks>
-        public int GetCount( out uint pcelt )
+        public virtual int GetCount( out uint pcelt )
         {
-            throw new NotImplementedException();
+            pcelt = (uint) Data.Length;
+            return VSConstants.S_OK;
         }
 
-        #endregion
+        private int Move( uint celt, TItem[] rgelt, out uint celtFetched )
+        {
+            lock ( this )
+            {
+                int hr = VSConstants.S_OK;
+                celtFetched = (uint) Data.Length - Position;
+
+                if ( celt > celtFetched )
+                {
+                    hr = VSConstants.S_FALSE;
+                }
+                else if ( celt < celtFetched )
+                {
+                    celtFetched = celt;
+                }
+
+                if ( rgelt != null )
+                {
+                    for ( int c = 0; c < celtFetched; c++ )
+                    {
+                        rgelt[c] = Data[Position + c];
+                    }
+                }
+
+                Position += celtFetched;
+
+                return hr;
+            }
+        }
     }
 }

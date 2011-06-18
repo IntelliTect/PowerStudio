@@ -12,11 +12,12 @@
 #region Using Directives
 
 using System;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Debugger.Interop;
 
 #endregion
 
-namespace PowerStudio.Debugger
+namespace DebugEngine
 {
     public class CodeDocumentContext : IDebugDocumentContext2,
                                        IDebugCodeContext2,
@@ -31,9 +32,10 @@ namespace PowerStudio.Debugger
         /// <param name="pbstrName">Returns the name of the memory context.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>The name of a memory context is not normally used.</remarks>
-        public int GetName( out string pbstrName )
+        public virtual int GetName( out string pbstrName )
         {
-            throw new NotImplementedException();
+            pbstrName = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -42,9 +44,9 @@ namespace PowerStudio.Debugger
         /// <param name="dwFields"> A combination of flags from the CONTEXT_INFO_FIELDS enumeration that indicate which fields of the CONTEXT_INFO structure are to be fill in.</param>
         /// <param name="pinfo">The CONTEXT_INFO structure that is filled in.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        public int GetInfo( enum_CONTEXT_INFO_FIELDS dwFields, CONTEXT_INFO[] pinfo )
+        public virtual int GetInfo( enum_CONTEXT_INFO_FIELDS dwFields, CONTEXT_INFO[] pinfo )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -58,9 +60,10 @@ namespace PowerStudio.Debugger
         /// 
         /// This method must always produce a new context, even if the resulting address is outside the memory space associated with this context. The only exception to this is if no memory can be allocated for the new context or if ppMemCxt is a null value (which is an error).
         /// </remarks>
-        public int Add( ulong dwCount, out IDebugMemoryContext2 ppMemCxt )
+        public virtual int Add( ulong dwCount, out IDebugMemoryContext2 ppMemCxt )
         {
-            throw new NotImplementedException();
+            ppMemCxt = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -74,9 +77,10 @@ namespace PowerStudio.Debugger
         /// 
         /// This method must always produce a new context, even if the resulting address is outside the memory space associated with this context. The only exception to this is if no memory can be allocated for the new context or if ppMemCxt is a null value (which is an error).
         /// </remarks>
-        public int Subtract( ulong dwCount, out IDebugMemoryContext2 ppMemCxt )
+        public virtual int Subtract( ulong dwCount, out IDebugMemoryContext2 ppMemCxt )
         {
-            throw new NotImplementedException();
+            ppMemCxt = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -88,12 +92,13 @@ namespace PowerStudio.Debugger
         /// <param name="pdwMemoryContext">Returns the index of the first memory context that satisfies the comparison.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code. Returns E_COMPARE_CANNOT_COMPARE if the two contexts cannot be compared.</returns>
         /// <remarks>A debug engine (DE) does not have to support all types of comparisons, but it must support at least CONTEXT_EQUAL, CONTEXT_LESS_THAN, CONTEXT_GREATER_THAN and CONTEXT_SAME_SCOPE.</remarks>
-        public int Compare( enum_CONTEXT_COMPARE Compare,
-                            IDebugMemoryContext2[] rgpMemoryContextSet,
-                            uint dwMemoryContextSetLen,
-                            out uint pdwMemoryContext )
+        public virtual int Compare( enum_CONTEXT_COMPARE Compare,
+                                    IDebugMemoryContext2[] rgpMemoryContextSet,
+                                    uint dwMemoryContextSetLen,
+                                    out uint pdwMemoryContext )
         {
-            throw new NotImplementedException();
+            pdwMemoryContext = 0;
+            return VSConstants.E_NOTIMPL;
         }
 
         #endregion
@@ -106,9 +111,10 @@ namespace PowerStudio.Debugger
         /// <param name="ppSrcCxt">Returns the IDebugDocumentContext2 object that corresponds to the code context.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>Generally, the document context can be thought of as a position in a source file while the code context is a position of a code instruction in an execution stream.</remarks>
-        public int GetDocumentContext( out IDebugDocumentContext2 ppSrcCxt )
+        public virtual int GetDocumentContext( out IDebugDocumentContext2 ppSrcCxt )
         {
-            throw new NotImplementedException();
+            ppSrcCxt = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         #endregion
@@ -122,9 +128,9 @@ namespace PowerStudio.Debugger
         /// <param name="pguidLanguage">Returns the GUID for the language of the code context, for example, guidCPPLang.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>At least one of the parameters must return a non-null value.</remarks>
-        public int GetLanguageInfo( ref string pbstrLanguage, ref Guid pguidLanguage )
+        public virtual int GetLanguageInfo( ref string pbstrLanguage, ref Guid pguidLanguage )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         #endregion
@@ -136,9 +142,10 @@ namespace PowerStudio.Debugger
         /// </summary>
         /// <param name="ppDocument">Returns an IDebugDocument2 object that represents the document that contains this document context.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        public int GetDocument( out IDebugDocument2 ppDocument )
+        public virtual int GetDocument( out IDebugDocument2 ppDocument )
         {
-            throw new NotImplementedException();
+            ppDocument = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -148,9 +155,10 @@ namespace PowerStudio.Debugger
         /// <param name="pbstrFileName">Returns the name of the file.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>This method typically forwards the call to the IDebugDocument2::GetName method, unless the document context is written to store the document name itself.</remarks>
-        public int GetName( enum_GETNAME_TYPE gnType, out string pbstrFileName )
+        public virtual int GetName( enum_GETNAME_TYPE gnType, out string pbstrFileName )
         {
-            throw new NotImplementedException();
+            pbstrFileName = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -159,9 +167,10 @@ namespace PowerStudio.Debugger
         /// <param name="ppEnumCodeCxts">Returns an IEnumDebugCodeContexts2 object that contains a list of code contexts.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>A single document context can generate multiple code contexts when the document is using templates or include files.</remarks>
-        public int EnumCodeContexts( out IEnumDebugCodeContexts2 ppEnumCodeCxts )
+        public virtual int EnumCodeContexts( out IEnumDebugCodeContexts2 ppEnumCodeCxts )
         {
-            throw new NotImplementedException();
+            ppEnumCodeCxts = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -175,9 +184,9 @@ namespace PowerStudio.Debugger
         /// 
         /// To obtain the range of source code (including comments) within this document context, call the IDebugDocumentContext2::GetSourceRange method.
         /// </remarks>
-        public int GetStatementRange( TEXT_POSITION[] pBegPosition, TEXT_POSITION[] pEndPosition )
+        public virtual int GetStatementRange( TEXT_POSITION[] pBegPosition, TEXT_POSITION[] pEndPosition )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -191,9 +200,9 @@ namespace PowerStudio.Debugger
         /// 
         /// To get the range for just the code statements contained within this document context, call the IDebugDocumentContext2::GetStatementRange method.
         /// </remarks>
-        public int GetSourceRange( TEXT_POSITION[] pBegPosition, TEXT_POSITION[] pEndPosition )
+        public virtual int GetSourceRange( TEXT_POSITION[] pBegPosition, TEXT_POSITION[] pEndPosition )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -207,12 +216,13 @@ namespace PowerStudio.Debugger
         /// <remarks>
         /// The IDebugDocumentContext2 objects that are passed in the array must be implemented by the same debug engine that implements the IDebugDocumentContext2 object being called on; otherwise, the comparison is not valid.
         /// </remarks>
-        public int Compare( enum_DOCCONTEXT_COMPARE Compare,
-                            IDebugDocumentContext2[] rgpDocContextSet,
-                            uint dwDocContextSetLen,
-                            out uint pdwDocContext )
+        public virtual int Compare( enum_DOCCONTEXT_COMPARE Compare,
+                                    IDebugDocumentContext2[] rgpDocContextSet,
+                                    uint dwDocContextSetLen,
+                                    out uint pdwDocContext )
         {
-            throw new NotImplementedException();
+            pdwDocContext = 0;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -221,9 +231,10 @@ namespace PowerStudio.Debugger
         /// <param name="nCount">The number of statements or lines to move ahead, depending on the document context.</param>
         /// <param name="ppDocContext">Returns a new IDebugDocumentContext2 object with the new position.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        public int Seek( int nCount, out IDebugDocumentContext2 ppDocContext )
+        public virtual int Seek( int nCount, out IDebugDocumentContext2 ppDocContext )
         {
-            throw new NotImplementedException();
+            ppDocContext = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         #endregion
@@ -237,9 +248,9 @@ namespace PowerStudio.Debugger
         /// <param name="rgelt">Array of IDebugCodeContext2 elements to be filled in.</param>
         /// <param name="pceltFetched">Returns the number of elements actually returned in rgelt.</param>
         /// <returns>If successful, returns S_OK. Returns S_FALSE if fewer than the requested number of elements could be returned; otherwise, returns an error code.</returns>
-        public int Next( uint celt, IDebugCodeContext2[] rgelt, ref uint pceltFetched )
+        public virtual int Next( uint celt, IDebugCodeContext2[] rgelt, ref uint pceltFetched )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -250,9 +261,9 @@ namespace PowerStudio.Debugger
         /// <remarks>
         /// If celt specifies a value greater than the number of remaining elements, the enumeration is set to the end and S_FALSE is returned.
         /// </remarks>
-        public int Skip( uint celt )
+        public virtual int Skip( uint celt )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -260,9 +271,9 @@ namespace PowerStudio.Debugger
         /// </summary>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>After this method is called, the next call to the IEnumDebugCodeContexts2::Next method returns the first element of the enumeration.</remarks>
-        public int Reset()
+        public virtual int Reset()
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -271,9 +282,10 @@ namespace PowerStudio.Debugger
         /// <param name="ppEnum">Returns a copy of this enumeration as a separate object.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>The copy of the enumeration has the same state as the original at the time this method is called. However, the copy's and the original's states are separate and can be changed individually.</remarks>
-        public int Clone( out IEnumDebugCodeContexts2 ppEnum )
+        public virtual int Clone( out IEnumDebugCodeContexts2 ppEnum )
         {
-            throw new NotImplementedException();
+            ppEnum = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -282,9 +294,10 @@ namespace PowerStudio.Debugger
         /// <param name="pcelt">Returns the number of elements in the enumeration.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>This method is not part of the customary COM enumeration interface which specifies that only the Next, Clone, Skip, and Reset methods need to be implemented.</remarks>
-        public int GetCount( out uint pcelt )
+        public virtual int GetCount( out uint pcelt )
         {
-            throw new NotImplementedException();
+            pcelt = 0;
+            return VSConstants.E_NOTIMPL;
         }
 
         #endregion

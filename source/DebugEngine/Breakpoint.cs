@@ -12,11 +12,12 @@
 #region Using Directives
 
 using System;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Debugger.Interop;
 
 #endregion
 
-namespace PowerStudio.Debugger
+namespace DebugEngine
 {
     public class Breakpoint : IDebugBreakpointResolution2,
                               IDebugBoundBreakpoint2,
@@ -31,9 +32,9 @@ namespace PowerStudio.Debugger
         /// <param name="pBPType">Returns a value from the BP_TYPE enumeration that specifies the type of this breakpoint.</param>
         /// <returns>If successful, returns S_OK; otherwise returns an error code. Returns E_FAIL if the bpResLocation field in the associated BP_RESOLUTION_INFO structure is not valid.</returns>
         /// <remarks>The breakpoint may be a code or a data breakpoint, for example.</remarks>
-        public int GetBreakpointType( enum_BP_TYPE[] pBPType )
+        public virtual int GetBreakpointType( enum_BP_TYPE[] pBPType )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -42,9 +43,9 @@ namespace PowerStudio.Debugger
         /// <param name="dwFields">A combination of flags from the BPRESI_FIELDS enumeration that determine which fields of the pBPResolutionInfo parameter are to be filled out.</param>
         /// <param name="pBPResolutionInfo">The BP_RESOLUTION_INFO structure to be filled in with information about this breakpoint.</param>
         /// <returns>If successful, returns S_OK; otherwise returns an error code.</returns>
-        public int GetResolutionInfo( enum_BPRESI_FIELDS dwFields, BP_RESOLUTION_INFO[] pBPResolutionInfo )
+        public virtual int GetResolutionInfo( enum_BPRESI_FIELDS dwFields, BP_RESOLUTION_INFO[] pBPResolutionInfo )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         #endregion
@@ -57,9 +58,10 @@ namespace PowerStudio.Debugger
         /// <param name="ppErrorEnum">Returns an IEnumDebugErrorBreakpoints2 object that contains a list of IDebugErrorBreakpoint2 objects if there could be errors.</param>
         /// <returns>If successful, returns S_OK. Returns S_FALSE if the breakpoint cannot bind, in which case the errors are returned by the ppErrorEnum parameter. Otherwise, returns an error code. Returns E_BP_DELETED if the breakpoint has been deleted.</returns>
         /// <remarks>This method is called to determine what would happen if this pending breakpoint was bound. Call the IDebugPendingBreakpoint2::Bind method to actually bind the pending breakpoint.</remarks>
-        public int CanBind( out IEnumDebugErrorBreakpoints2 ppErrorEnum )
+        public virtual int CanBind( out IEnumDebugErrorBreakpoints2 ppErrorEnum )
         {
-            throw new NotImplementedException();
+            ppErrorEnum = null;
+            return VSConstants.S_FALSE;
         }
 
         /// <summary>
@@ -71,9 +73,9 @@ namespace PowerStudio.Debugger
         /// 
         /// After this method returns, the caller needs to wait for events indicating that the pending breakpoint has bound or is in error before assuming that calls to the IDebugPendingBreakpoint2::EnumBoundBreakpoints or IDebugPendingBreakpoint2::EnumErrorBreakpoints.methods will enumerate all bound or error breakpoints, respectively.
         /// </remarks>
-        public int Bind()
+        public virtual int Bind()
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -81,9 +83,9 @@ namespace PowerStudio.Debugger
         /// </summary>
         /// <param name="pState">A PENDING_BP_STATE_INFO structure that is filled in with a description of this pending breakpoint.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        public int GetState( PENDING_BP_STATE_INFO[] pState )
+        public virtual int GetState( PENDING_BP_STATE_INFO[] pState )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -91,9 +93,10 @@ namespace PowerStudio.Debugger
         /// </summary>
         /// <param name="ppBPRequest">Returns an IDebugBreakpointRequest2 object representing the breakpoint request that was used to create this pending breakpoint.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code. Returns E_BP_DELETED if the breakpoint has been deleted.</returns>
-        public int GetBreakpointRequest( out IDebugBreakpointRequest2 ppBPRequest )
+        public virtual int GetBreakpointRequest( out IDebugBreakpointRequest2 ppBPRequest )
         {
-            throw new NotImplementedException();
+            ppBPRequest = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -102,9 +105,9 @@ namespace PowerStudio.Debugger
         /// <param name="fVirtualize">Set to nonzero (TRUE) to virtualize the pending breakpoint, or to zero (FALSE) to turn off virtualization.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code. Returns E_BP_DELETED if the breakpoint has been deleted.</returns>
         /// <remarks>A virtualized breakpoint is bound every time code is loaded.</remarks>
-        public int Virtualize( int fVirtualize )
+        public virtual int Virtualize( int fVirtualize )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -112,9 +115,10 @@ namespace PowerStudio.Debugger
         /// </summary>
         /// <param name="ppEnum">Returns an IEnumDebugBoundBreakpoints2 object that enumerates the bound breakpoints.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code. Returns E_BP_DELETED if the breakpoint has been deleted.</returns>
-        public int EnumBoundBreakpoints( out IEnumDebugBoundBreakpoints2 ppEnum )
+        public virtual int EnumBoundBreakpoints( out IEnumDebugBoundBreakpoints2 ppEnum )
         {
-            throw new NotImplementedException();
+            ppEnum = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -123,9 +127,10 @@ namespace PowerStudio.Debugger
         /// <param name="bpErrorType">A combination of values from the BP_ERROR_TYPE enumeration that selects the type of errors to enumerate.</param>
         /// <param name="ppEnum">Returns an IEnumDebugErrorBreakpoints2 object that contains a list of IDebugErrorBreakpoint2 objects.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code. Returns E_BP_DELETED if the breakpoint has been deleted.</returns>
-        public int EnumErrorBreakpoints( enum_BP_ERROR_TYPE bpErrorType, out IEnumDebugErrorBreakpoints2 ppEnum )
+        public virtual int EnumErrorBreakpoints( enum_BP_ERROR_TYPE bpErrorType, out IEnumDebugErrorBreakpoints2 ppEnum )
         {
-            throw new NotImplementedException();
+            ppEnum = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         #endregion
@@ -139,9 +144,9 @@ namespace PowerStudio.Debugger
         /// <param name="rgelt">Array of IDebugBoundBreakpoint2 elements to be filled in.</param>
         /// <param name="pceltFetched">Returns the number of elements actually returned in rgelt.</param>
         /// <returns>If successful, returns S_OK. Returns S_FALSE if fewer than the requested number of elements could be returned; otherwise, returns an error code.</returns>
-        public int Next( uint celt, IDebugBoundBreakpoint2[] rgelt, ref uint pceltFetched )
+        public virtual int Next( uint celt, IDebugBoundBreakpoint2[] rgelt, ref uint pceltFetched )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -150,9 +155,9 @@ namespace PowerStudio.Debugger
         /// <param name="celt">Number of elements to skip.</param>
         /// <returns>If successful, returns S_OK. Returns S_FALSE if celt is greater than the number of remaining elements; otherwise, returns an error code.</returns>
         /// <remarks>If celt specifies a value greater than the number of remaining elements, the enumeration is set to the end and S_FALSE is returned.</remarks>
-        public int Skip( uint celt )
+        public virtual int Skip( uint celt )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -160,9 +165,9 @@ namespace PowerStudio.Debugger
         /// </summary>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>After this method is called, the next call to the IEnumDebugBoundBreakpoints2::Next method returns the first element of the enumeration.</remarks>
-        public int Reset()
+        public virtual int Reset()
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -171,9 +176,10 @@ namespace PowerStudio.Debugger
         /// <param name="ppEnum">Returns a copy of this enumeration as a separate object.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>The copy of the enumeration has the same state as the original at the time this method is called. However, the copy's and the original's states are separate and can be changed individually.</remarks>
-        public int Clone( out IEnumDebugBoundBreakpoints2 ppEnum )
+        public virtual int Clone( out IEnumDebugBoundBreakpoints2 ppEnum )
         {
-            throw new NotImplementedException();
+            ppEnum = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -182,9 +188,10 @@ namespace PowerStudio.Debugger
         /// <param name="pcelt">Returns the number of elements in the enumeration.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>This method is not part of the customary COM enumeration interface which specifies that only the Next, Clone, Skip, and Reset methods need to be implemented.</remarks>
-        public int GetCount( out uint pcelt )
+        public virtual int GetCount( out uint pcelt )
         {
-            throw new NotImplementedException();
+            pcelt = 0;
+            return VSConstants.E_NOTIMPL;
         }
 
         #endregion
@@ -197,9 +204,10 @@ namespace PowerStudio.Debugger
         /// <param name="ppPendingBreakpoint">Returns the IDebugPendingBreakpoint2 object that represents the pending breakpoint that was used to create this bound breakpoint.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>A pending breakpoint can be thought of as a collection of all the necessary information needed to bind a breakpoint to code that can be applied to one or many programs.</remarks>
-        public int GetPendingBreakpoint( out IDebugPendingBreakpoint2 ppPendingBreakpoint )
+        public virtual int GetPendingBreakpoint( out IDebugPendingBreakpoint2 ppPendingBreakpoint )
         {
-            throw new NotImplementedException();
+            ppPendingBreakpoint = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -207,9 +215,9 @@ namespace PowerStudio.Debugger
         /// </summary>
         /// <param name="pState">Returns a value from the BP_STATE enumeration that describes the state of the breakpoint.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        public int GetState( enum_BP_STATE[] pState )
+        public virtual int GetState( enum_BP_STATE[] pState )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -217,9 +225,10 @@ namespace PowerStudio.Debugger
         /// </summary>
         /// <param name="pdwHitCount">Returns the hit count.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code. Returns E_BP_DELETED if the state of the bound breakpoint object is set to BPS_DELETED (part of the BP_STATE enumeration).</returns>
-        public int GetHitCount( out uint pdwHitCount )
+        public virtual int GetHitCount( out uint pdwHitCount )
         {
-            throw new NotImplementedException();
+            pdwHitCount = 0;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -228,9 +237,10 @@ namespace PowerStudio.Debugger
         /// <param name="ppBPResolution">Returns the IDebugPendingBreakpoint2 object that represents the pending breakpoint that was used to create this bound breakpoint.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>A pending breakpoint can be thought of as a collection of all the necessary information needed to bind a breakpoint to code that can be applied to one or many programs.</remarks>
-        public int GetBreakpointResolution( out IDebugBreakpointResolution2 ppBPResolution )
+        public virtual int GetBreakpointResolution( out IDebugBreakpointResolution2 ppBPResolution )
         {
-            throw new NotImplementedException();
+            ppBPResolution = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -242,9 +252,9 @@ namespace PowerStudio.Debugger
         /// When a pending breakpoint is enabled or disabled, all breakpoints bound from it are set to the same state.
         /// This method may be called as many times as necessary, even if the breakpoint is already enabled or disabled.
         /// </remarks>
-        public int Enable( int fEnable )
+        public virtual int Enable( int fEnable )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -252,9 +262,9 @@ namespace PowerStudio.Debugger
         /// </summary>
         /// <param name="dwHitCount">The hit count to set.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code. Returns E_BP_DELETED if the state of the bound breakpoint object is set to BPS_DELETED (part of the BP_STATE enumeration).</returns>
-        public int SetHitCount( uint dwHitCount )
+        public virtual int SetHitCount( uint dwHitCount )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -263,9 +273,9 @@ namespace PowerStudio.Debugger
         /// <param name="bpCondition"> A BP_CONDITION structure that specifies the condition to set.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>Any condition that was previously associated with the pending breakpoint is lost. All breakpoints bound from this pending breakpoint are called to set their condition to the value specified in the bpCondition parameter.</remarks>
-        public int SetCondition( BP_CONDITION bpCondition )
+        public virtual int SetCondition( BP_CONDITION bpCondition )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -274,18 +284,18 @@ namespace PowerStudio.Debugger
         /// <param name="bpPassCount">A BP_PASSCOUNT structure that contains the pass count.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code. Returns E_BP_DELETED if the breakpoint has been deleted.</returns>
         /// <remarks>Any pass count that was previously associated with the pending breakpoint is lost. All breakpoints bound from this pending breakpoint are called to set their pass count to the bpPassCount parameter.</remarks>
-        public int SetPassCount( BP_PASSCOUNT bpPassCount )
+        public virtual int SetPassCount( BP_PASSCOUNT bpPassCount )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
         /// Deletes this pending breakpoint and all breakpoints bound from it.
         /// </summary>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code. Returns E_BP_DELETED if the breakpoint has been deleted.</returns>
-        public int Delete()
+        public virtual int Delete()
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         #endregion

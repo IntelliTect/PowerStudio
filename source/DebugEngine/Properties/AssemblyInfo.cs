@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly : AssemblyTitle( "PowerStudio.Debugger" )]
+[assembly : AssemblyTitle( "DebugEngine" )]
 [assembly : AssemblyDescription( "" )]
 [assembly : AssemblyConfiguration( "" )]
 [assembly : AssemblyTrademark( "" )]
@@ -19,4 +19,4 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
-[assembly : Guid( "409d589b-d62d-42ae-b775-e7607c4ae558" )]
+[assembly : Guid( "436ca1be-b4aa-4c84-96e4-330de5d1035a" )]

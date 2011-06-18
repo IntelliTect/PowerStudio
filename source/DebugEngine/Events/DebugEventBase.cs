@@ -11,15 +11,17 @@
 
 #region Using Directives
 
-using System;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Debugger.Interop;
 
 #endregion
 
-namespace PowerStudio.Debugger.Events
+namespace DebugEngine.Events
 {
-    public class DebugEventBase : IDebugEvent2
+    public abstract class DebugEventBase : IDebugEvent2
     {
+        public enum_EVENTATTRIBUTES Attributes { get; protected set; }
+
         #region Implementation of IDebugEvent2
 
         /// <summary>
@@ -27,10 +29,14 @@ namespace PowerStudio.Debugger.Events
         /// </summary>
         /// <param name="pdwAttrib">A combination of flags from the EVENTATTRIBUTES enumeration.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        /// <remarks>The IDebugEvent2 interface is common to all events. This method describes the type of event; for example, is the event synchronous or asynchronous and is it a stopping event.</remarks>
-        public int GetAttributes( out uint pdwAttrib )
+        /// <remarks>
+        /// The IDebugEvent2 interface is common to all events. This method describes the type of event; for example,
+        /// is the event synchronous or asynchronous and is it a stopping event.
+        /// </remarks>
+        public virtual int GetAttributes( out uint pdwAttrib )
         {
-            throw new NotImplementedException();
+            pdwAttrib = (uint) Attributes;
+            return VSConstants.S_OK;
         }
 
         #endregion

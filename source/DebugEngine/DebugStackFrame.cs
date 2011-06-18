@@ -12,11 +12,12 @@
 #region Using Directives
 
 using System;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Debugger.Interop;
 
 #endregion
 
-namespace PowerStudio.Debugger
+namespace DebugEngine
 {
     internal class DebugStackFrame : IDebugStackFrame2
     {
@@ -27,9 +28,10 @@ namespace PowerStudio.Debugger
         /// </summary>
         /// <param name="ppCodeCxt">Returns an IDebugCodeContext2 object that represents the current instruction pointer in this stack frame.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        public int GetCodeContext( out IDebugCodeContext2 ppCodeCxt )
+        public virtual int GetCodeContext( out IDebugCodeContext2 ppCodeCxt )
         {
-            throw new NotImplementedException();
+            ppCodeCxt = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -40,9 +42,10 @@ namespace PowerStudio.Debugger
         /// <remarks>
         /// This method is faster than calling the IDebugStackFrame2::GetCodeContext method and then calling the IDebugCodeContext2::GetDocumentContext method on the code context. However, it is not guaranteed that every debug engine (DE) will implement this method.
         /// </remarks>
-        public int GetDocumentContext( out IDebugDocumentContext2 ppCxt )
+        public virtual int GetDocumentContext( out IDebugDocumentContext2 ppCxt )
         {
-            throw new NotImplementedException();
+            ppCxt = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -51,9 +54,10 @@ namespace PowerStudio.Debugger
         /// <param name="pbstrName">Returns the name of the stack frame.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>The name of a stack frame is typically the name of the method being executed.</remarks>
-        public int GetName( out string pbstrName )
+        public virtual int GetName( out string pbstrName )
         {
-            throw new NotImplementedException();
+            pbstrName = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -63,9 +67,9 @@ namespace PowerStudio.Debugger
         /// <param name="nRadix">The radix to be used in formatting any numerical information.</param>
         /// <param name="pFrameInfo">A FRAMEINFO structure that is filled in with the description of the stack frame.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        public int GetInfo( enum_FRAMEINFO_FLAGS dwFieldSpec, uint nRadix, FRAMEINFO[] pFrameInfo )
+        public virtual int GetInfo( enum_FRAMEINFO_FLAGS dwFieldSpec, uint nRadix, FRAMEINFO[] pFrameInfo )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -79,9 +83,11 @@ namespace PowerStudio.Debugger
         /// 
         /// It is assumed that the call stack grows down, that is, that new stack frames are added at increasingly lower memory addresses. A run-time architecture must provide physical stack ranges that match this assumption.
         /// </remarks>
-        public int GetPhysicalStackRange( out ulong paddrMin, out ulong paddrMax )
+        public virtual int GetPhysicalStackRange( out ulong paddrMin, out ulong paddrMax )
         {
-            throw new NotImplementedException();
+            paddrMin = 0;
+            paddrMax = 0;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -90,9 +96,10 @@ namespace PowerStudio.Debugger
         /// <param name="ppExprCxt">Returns an IDebugExpressionContext2 object that represents a context for expression evaluation.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>Generally, an expression evaluation context can be thought of as a scope for performing expression evaluation. Call the IDebugExpressionContext2::ParseText method to parse an expression and then call the resulting IDebugExpression2::EvaluateSync or IDebugExpression2::EvaluateAsync methods to evaluate the parsed expression.</remarks>
-        public int GetExpressionContext( out IDebugExpressionContext2 ppExprCxt )
+        public virtual int GetExpressionContext( out IDebugExpressionContext2 ppExprCxt )
         {
-            throw new NotImplementedException();
+            ppExprCxt = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -101,9 +108,9 @@ namespace PowerStudio.Debugger
         /// <param name="pbstrLanguage">Returns the name of the language that implements the method associated with this stack frame.</param>
         /// <param name="pguidLanguage">Returns the GUID of the language.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        public int GetLanguageInfo( ref string pbstrLanguage, ref Guid pguidLanguage )
+        public virtual int GetLanguageInfo( ref string pbstrLanguage, ref Guid pguidLanguage )
         {
-            throw new NotImplementedException();
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -112,9 +119,10 @@ namespace PowerStudio.Debugger
         /// <param name="ppProperty">Returns an IDebugProperty2 object that describes the properties of this stack frame.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>Calling the IDebugProperty2::EnumChildren method with appropriate filters can retrieve the local variables, method parameters, registers, and "this" pointer associated with the stack frame.</remarks>
-        public int GetDebugProperty( out IDebugProperty2 ppProperty )
+        public virtual int GetDebugProperty( out IDebugProperty2 ppProperty )
         {
-            throw new NotImplementedException();
+            ppProperty = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -128,14 +136,16 @@ namespace PowerStudio.Debugger
         /// <param name="ppEnum">Returns an IEnumDebugPropertyInfo2 object containing a list of the desired properties.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
         /// <remarks>Because this method allows all selected properties to be retrieved with a single call, it is faster than sequentially calling the IDebugStackFrame2::GetDebugProperty and IDebugProperty2::EnumChildren methods.</remarks>
-        public int EnumProperties( enum_DEBUGPROP_INFO_FLAGS dwFields,
-                                   uint nRadix,
-                                   ref Guid guidFilter,
-                                   uint dwTimeout,
-                                   out uint pcelt,
-                                   out IEnumDebugPropertyInfo2 ppEnum )
+        public virtual int EnumProperties( enum_DEBUGPROP_INFO_FLAGS dwFields,
+                                           uint nRadix,
+                                           ref Guid guidFilter,
+                                           uint dwTimeout,
+                                           out uint pcelt,
+                                           out IEnumDebugPropertyInfo2 ppEnum )
         {
-            throw new NotImplementedException();
+            pcelt = 0;
+            ppEnum = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         /// <summary>
@@ -143,9 +153,10 @@ namespace PowerStudio.Debugger
         /// </summary>
         /// <param name="ppThread">Returns an IDebugThread2 object that represents the thread.</param>
         /// <returns>If successful, returns S_OK; otherwise, returns an error code.</returns>
-        public int GetThread( out IDebugThread2 ppThread )
+        public virtual int GetThread( out IDebugThread2 ppThread )
         {
-            throw new NotImplementedException();
+            ppThread = null;
+            return VSConstants.E_NOTIMPL;
         }
 
         #endregion
