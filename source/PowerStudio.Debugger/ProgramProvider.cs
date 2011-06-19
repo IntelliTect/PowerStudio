@@ -12,7 +12,7 @@
 #region Using Directives
 
 using System.Runtime.InteropServices;
-using DebugEngine;
+using IntelliTect.DebugEngine;
 using PowerStudio.Resources;
 
 #endregion

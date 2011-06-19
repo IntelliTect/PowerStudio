@@ -204,9 +204,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DebugEngine\DebugEngine.csproj">
+    <ProjectReference Include="..\..\..\IntelliTect.DebugEngine\source\IntelliTect.DebugEngine\IntelliTect.DebugEngine.csproj">
       <Project>{F4C49383-D9E0-41F6-AC24-9FE4759F2A86}</Project>
-      <Name>DebugEngine</Name>
+      <Name>IntelliTect.DebugEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj">
       <Project>{CACB60A9-1E76-4F92-8831-B134A658C695}</Project>

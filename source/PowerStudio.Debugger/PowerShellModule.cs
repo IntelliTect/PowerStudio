@@ -11,7 +11,7 @@
 
 #region Using Directives
 
-using DebugEngine;
+using IntelliTect.DebugEngine;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Debugger.Interop;
 

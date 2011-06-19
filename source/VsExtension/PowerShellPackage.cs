@@ -14,7 +14,7 @@
 using System;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
-using DebugEngine.Attributes;
+using IntelliTect.DebugEngine.Attributes;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
 using PowerStudio.Debugger;
@@ -53,7 +53,7 @@ namespace PowerStudio.VsExtension
     [InstalledProductRegistration( "#110", "#112", "1.0", IconResourceID = 400 )]
     //[ProvideLanguageEditorOptionPage( typeof (PowerShellOptionsPage), LanguageConfiguration.Name, "Advanced", "", "113" )]
     [ProvideType( typeof (GeneralPropertyPage) )]
-    [ProvideDebugEngine( typeof (Debugger.DebugEngine) )]
+    [ProvideDebugEngine( typeof (DebugEngine) )]
     [ProvideProjectFactory( typeof (PowerShellProjectFactory),
             "PowerShell Project",
             "PowerShell Project Files (*.psproj);*.psproj",
