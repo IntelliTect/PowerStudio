@@ -11,17 +11,17 @@
 
 #region Using Directives
 
-using Microsoft.VisualStudio.Debugger.Interop;
+using System.Runtime.InteropServices;
+using DebugEngine;
+using PowerStudio.Resources;
 
 #endregion
 
-namespace DebugEngine.Events
+namespace PowerStudio.Debugger
 {
-    public abstract class AsynchronousEvent : DebugEventBase
+    [ComVisible( true )]
+    [Guid( PsConstants.ProgramProviderGuid )]
+    public class ProgramProvider : DebugProgramProvider
     {
-        protected AsynchronousEvent()
-        {
-            Attributes = enum_EVENTATTRIBUTES.EVENT_ASYNCHRONOUS;
-        }
     }
 }

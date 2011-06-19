@@ -11,17 +11,17 @@
 
 #region Using Directives
 
-using Microsoft.VisualStudio.Debugger.Interop;
+using System.Runtime.InteropServices;
+using DebugEngine;
+using PowerStudio.Resources;
 
 #endregion
 
-namespace DebugEngine.Events
+namespace PowerStudio.Debugger
 {
-    public abstract class SynchronousEvent : DebugEventBase
+    [ComVisible( true )]
+    [Guid( PsConstants.PortSupplierGuid )]
+    public class PortSupplier : DebugPortSupplier
     {
-        protected SynchronousEvent()
-        {
-            Attributes = enum_EVENTATTRIBUTES.EVENT_SYNCHRONOUS;
-        }
     }
 }

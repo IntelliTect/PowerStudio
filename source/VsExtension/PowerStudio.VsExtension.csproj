@@ -48,6 +48,7 @@
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Debugger.InteropA, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Designer.Interfaces, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Editor, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.Language.Intellisense, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -203,9 +204,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DebugEngine\DebugEngine.csproj">
+      <Project>{F4C49383-D9E0-41F6-AC24-9FE4759F2A86}</Project>
+      <Name>DebugEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj">
       <Project>{CACB60A9-1E76-4F92-8831-B134A658C695}</Project>
       <Name>Microsoft.VisualStudio.Project</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PowerStudio.Debugger\PowerStudio.Debugger.csproj">
+      <Project>{F3F718BC-ED9E-492A-A80A-F2DC2501F45A}</Project>
+      <Name>PowerStudio.Debugger</Name>
     </ProjectReference>
     <ProjectReference Include="..\PowerStudio.LanguageService\PowerStudio.LanguageService.csproj">
       <Project>{FF615B2F-BAEF-4671-9279-BD291244F2FB}</Project>

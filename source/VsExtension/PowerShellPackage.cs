@@ -14,8 +14,10 @@
 using System;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
+using DebugEngine.Attributes;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
+using PowerStudio.Debugger;
 using PowerStudio.LanguageService;
 using PowerStudio.LanguageService.Project;
 using PowerStudio.Resources;
@@ -50,7 +52,8 @@ namespace PowerStudio.VsExtension
     // in the Help/About dialog of Visual Studio.
     [InstalledProductRegistration( "#110", "#112", "1.0", IconResourceID = 400 )]
     //[ProvideLanguageEditorOptionPage( typeof (PowerShellOptionsPage), LanguageConfiguration.Name, "Advanced", "", "113" )]
-    [ProvideObject( typeof (GeneralPropertyPage) )]
+    [ProvideType( typeof (GeneralPropertyPage) )]
+    [ProvideDebugEngine( typeof (Debugger.DebugEngine) )]
     [ProvideProjectFactory( typeof (PowerShellProjectFactory),
             "PowerShell Project",
             "PowerShell Project Files (*.psproj);*.psproj",
@@ -60,6 +63,8 @@ namespace PowerStudio.VsExtension
             LanguageVsTemplate = "PowerShell",
             NewProjectRequireNewFolderVsTemplate = false )]
     [ProvideProjectItem( typeof (PowerShellProjectFactory), "PowerShell", @"Templates\ProjectItems\PsProject", 500 )]
+    [ProvideProgramProvider( typeof (ProgramProvider) )]
+    [ProvidePortSupplier( typeof (PortSupplier) )]
     [Guid( PsConstants.ProjectPackageGuid )]
     public sealed class PowerShellPackage : PowerShellPackageBase
     {
@@ -118,50 +123,50 @@ namespace PowerStudio.VsExtension
 
         #region Implementation of IOleComponent
 
-        public override int FContinueMessageLoop(uint uReason, IntPtr pvLoopData, MSG[] pMsgPeeked)
+        public override int FContinueMessageLoop( uint uReason, IntPtr pvLoopData, MSG[] pMsgPeeked )
         {
             return 1;
         }
 
-        public override int FDoIdle(uint grfidlef)
+        public override int FDoIdle( uint grfidlef )
         {
             return 0;
         }
 
-        public override int FPreTranslateMessage(MSG[] pMsg)
+        public override int FPreTranslateMessage( MSG[] pMsg )
         {
             return 0;
         }
 
-        public override int FQueryTerminate(int fPromptUser)
+        public override int FQueryTerminate( int fPromptUser )
         {
             return 1;
         }
 
-        public override int FReserved1(uint dwReserved, uint message, IntPtr wParam, IntPtr lParam)
+        public override int FReserved1( uint dwReserved, uint message, IntPtr wParam, IntPtr lParam )
         {
             return 1;
         }
 
-        public override IntPtr HwndGetWindow(uint dwWhich, uint dwReserved)
+        public override IntPtr HwndGetWindow( uint dwWhich, uint dwReserved )
         {
             return IntPtr.Zero;
         }
 
-        public override void OnActivationChange(IOleComponent pic,
+        public override void OnActivationChange( IOleComponent pic,
                                                  int fSameComponent,
                                                  OLECRINFO[] pcrinfo,
                                                  int fHostIsActivating,
                                                  OLECHOSTINFO[] pchostinfo,
-                                                 uint dwReserved)
+                                                 uint dwReserved )
         {
         }
 
-        public override void OnAppActivate(int fActive, uint dwOtherThreadID)
+        public override void OnAppActivate( int fActive, uint dwOtherThreadID )
         {
         }
 
-        public override void OnEnterState(uint uStateID, int fEnter)
+        public override void OnEnterState( uint uStateID, int fEnter )
         {
         }
 
