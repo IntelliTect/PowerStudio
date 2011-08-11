@@ -15,6 +15,7 @@ using System;
 using EnvDTE;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
+using NLog;
 
 #endregion
 
@@ -22,6 +23,8 @@ namespace PowerStudio.LanguageService.Project
 {
     public class PowerShellProjectFileNode : FileNode
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private OAPsProjectFileItem _AutomationObject;
 
         internal PowerShellProjectFileNode( ProjectNode root, ProjectElement e )

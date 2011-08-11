@@ -123,7 +123,7 @@ namespace PowerStudio.LanguageService.Intellisense.Completion
                      _Session.IsDismissed ) // If there is no active session, bring up completion
                 {
                     TriggerCompletion();
-                    _Session.Filter();
+                    //_Session.Filter();
                 }
                 else //the completion session is already active, so just filter
                 {

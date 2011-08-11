@@ -14,6 +14,7 @@
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
+using NLog;
 using PowerStudio.Resources;
 
 #endregion
@@ -24,6 +25,8 @@ namespace PowerStudio.LanguageService.Project
     [Guid( PsConstants.ProjectFileItemGuid )]
     public class OAPsProjectFileItem : OAFileItem
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public OAPsProjectFileItem( OAProject project, FileNode node )
                 : base( project, node )
         {

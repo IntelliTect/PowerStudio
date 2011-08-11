@@ -35,6 +35,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IntelliTect.DebugEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fb17f1436bedd1a, processorArchitecture=MSIL">
+      <HintPath>..\..\References\IntelliTect.DebugEngine.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Engine" />
     <Reference Include="Microsoft.Build.Framework" />
@@ -42,6 +45,7 @@
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Debugger.InteropA, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Designer.Interfaces, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Editor, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.Language.Intellisense, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -60,6 +64,9 @@
     <Reference Include="Microsoft.VisualStudio.Shell.10.0" />
     <Reference Include="Microsoft.VisualStudio.Package.LanguageService.10.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0" />
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -170,10 +177,11 @@
     <Compile Include="Intellisense\QuickInfo\QuickInfoTokenSourceProvider.cs" />
     <Compile Include="LanguageConfiguration.cs" />
     <Compile Include="PowerShellPackageBase.cs" />
-    <Compile Include="Project\Build\SignScripts.cs" />
     <Compile Include="Project\GeneralPropertyPage.cs" />
     <Compile Include="Project\OAPsProject.cs" />
     <Compile Include="Project\OAPsProjectFileItem.cs" />
+    <Compile Include="Project\PowerShellConfigProvider.cs" />
+    <Compile Include="Project\PowerShellProjectConfig.cs" />
     <Compile Include="Project\PowerShellProjectFactory.cs" />
     <Compile Include="Project\PowerShellProjectFileNode.cs" />
     <Compile Include="Project\PowerShellProjectNode.cs" />
@@ -225,6 +233,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="ProjectIcon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -235,10 +244,17 @@
       <Project>{CACB60A9-1E76-4F92-8831-B134A658C695}</Project>
       <Name>Microsoft.VisualStudio.Project</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PowerStudio.Debugger\PowerStudio.Debugger.csproj">
+      <Project>{F3F718BC-ED9E-492A-A80A-F2DC2501F45A}</Project>
+      <Name>PowerStudio.Debugger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Resources\PowerStudio.Resources.csproj">
       <Project>{17286D8F-5CB5-4584-A486-F9D00AE4C175}</Project>
       <Name>PowerStudio.Resources</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Project\Build\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

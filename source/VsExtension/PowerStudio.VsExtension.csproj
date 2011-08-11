@@ -41,6 +41,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IntelliTect.DebugEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fb17f1436bedd1a, processorArchitecture=MSIL">
+      <HintPath>..\..\References\IntelliTect.DebugEngine.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Engine" />
     <Reference Include="Microsoft.Build.Framework" />
@@ -67,6 +70,9 @@
     <Reference Include="Microsoft.VisualStudio.Shell.10.0" />
     <Reference Include="Microsoft.VisualStudio.Package.LanguageService.10.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0" />
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -174,6 +180,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="NLog.dll.nlog">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="packages.config" />
     <None Include="Project\Build\PowerStudio.targets" />
     <None Include="source.extension.vsixmanifest">
@@ -204,10 +215,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\IntelliTect.DebugEngine\source\IntelliTect.DebugEngine\IntelliTect.DebugEngine.csproj">
-      <Project>{F4C49383-D9E0-41F6-AC24-9FE4759F2A86}</Project>
-      <Name>IntelliTect.DebugEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj">
       <Project>{CACB60A9-1E76-4F92-8831-B134A658C695}</Project>
       <Name>Microsoft.VisualStudio.Project</Name>

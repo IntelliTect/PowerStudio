@@ -16,10 +16,10 @@ using System.Resources;
 
 #endregion
 
-[assembly : AssemblyCompany( "IntelliTechture" )]
+[assembly : AssemblyCompany( "IntelliTect" )]
 [assembly : AssemblyProduct( "PowerStudio" )]
 [assembly : NeutralResourcesLanguage( "en-US" )]
-[assembly: AssemblyCopyright("Copyright © IntelliTechture 2011")]
+[assembly: AssemblyCopyright("Copyright © IntelliTect 2011")]
 
 // Version information for an assembly consists of the following four values:
 //

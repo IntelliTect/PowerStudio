@@ -11,18 +11,24 @@
 
 #region Using Directives
 
+using System.Runtime.InteropServices;
 using IntelliTect.DebugEngine;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Debugger.Interop;
+using NLog;
 
 #endregion
 
 namespace PowerStudio.Debugger
 {
+    [ComVisible( true )]
     public class PowerShellModule : DebugModuleBase
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public PowerShellModule( string fileName )
         {
+            Logger.Debug( string.Empty );
             FileName = fileName;
         }
 
@@ -30,9 +36,16 @@ namespace PowerStudio.Debugger
 
         #region Overrides of DebugModuleBase
 
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
         public override string Name
         {
-            get { return FileName; }
+            get
+            {
+                Logger.Debug( string.Empty );
+                return FileName;
+            }
         }
 
         /// <summary>
@@ -45,6 +58,7 @@ namespace PowerStudio.Debugger
         /// </returns>
         public override int GetInfo( enum_MODULE_INFO_FIELDS dwFields, MODULE_INFO[] pinfo )
         {
+            Logger.Debug( string.Empty );
             var info = new MODULE_INFO();
 
             if ( ( dwFields & enum_MODULE_INFO_FIELDS.MIF_NAME ) != 0 )
@@ -83,8 +97,9 @@ namespace PowerStudio.Debugger
         /// <returns>
         /// If successful, returns S_OK; otherwise, returns error code.
         /// </returns>
-        public override int IsUserCode(out int pfUser)
+        public override int IsUserCode( out int pfUser )
         {
+            Logger.Debug( string.Empty );
             pfUser = 1;
             return VSConstants.S_OK;
         }

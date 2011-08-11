@@ -16,6 +16,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Project;
+using NLog;
 using PowerStudio.Resources;
 
 #endregion
@@ -25,6 +26,8 @@ namespace PowerStudio.LanguageService.Project
     [Guid( PsConstants.ProjectFactoryGuid )]
     public class PowerShellProjectFactory : ProjectFactory
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private readonly PowerShellPackageBase _Package;
 
         public PowerShellProjectFactory( PowerShellPackageBase package )

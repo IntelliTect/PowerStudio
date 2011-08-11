@@ -20,6 +20,7 @@ using System.Windows.Forms;
 using EnvDTE;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
+using NLog;
 using PowerStudio.Resources;
 using VSLangProj;
 
@@ -30,6 +31,8 @@ namespace PowerStudio.LanguageService.Project
     [Guid( PsConstants.ProjectNodeGuid )]
     public class PowerShellProjectNode : ProjectNode
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         internal const string ProjectTypeName = "PsProject";
 
         internal static int ImageOffset;
@@ -195,6 +198,11 @@ namespace PowerStudio.LanguageService.Project
                 service = GetAutomationObject();
             }
             return service;
+        }
+
+        protected override ConfigProvider CreateConfigProvider()
+        {
+            return new PowerShellConfigProvider( this );
         }
     }
 }

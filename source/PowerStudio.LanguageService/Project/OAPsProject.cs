@@ -13,6 +13,7 @@
 
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Project.Automation;
+using NLog;
 
 #endregion
 
@@ -21,6 +22,8 @@ namespace PowerStudio.LanguageService.Project
     [ComVisible( true )]
     public class OAPsProject : OAProject
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public OAPsProject( PowerShellProjectNode project )
                 : base( project )
         {

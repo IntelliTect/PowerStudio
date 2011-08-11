@@ -12,6 +12,7 @@
 #region Using Directives
 
 using System;
+using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 using IntelliTect.DebugEngine.Attributes;
@@ -48,12 +49,15 @@ namespace PowerStudio.VsExtension
             AutoOutlining = true,
             EnableAsyncCompletion = true,
             CodeSenseDelay = 0 )]
-    // This attribute is used to register the informations needed to show the this package
+    // This attribute is used to register the information needed to show the this package
     // in the Help/About dialog of Visual Studio.
     [InstalledProductRegistration( "#110", "#112", "1.0", IconResourceID = 400 )]
-    //[ProvideLanguageEditorOptionPage( typeof (PowerShellOptionsPage), LanguageConfiguration.Name, "Advanced", "", "113" )]
     [ProvideType( typeof (GeneralPropertyPage) )]
-    [ProvideDebugEngine( typeof (DebugEngine) )]
+    [ProvideType(typeof(PowerShellDebugEngine))]
+    [DisplayName(LanguageConfiguration.Name)]
+    //[ProvideDebugEngine(typeof(PowerShellDebugEngine), ClsIdType = typeof(PowerShellDebugEngine), Attach = true, ProgramProviderType = typeof(PowerShellProgramProvider), PortSupplierType = typeof(DefaultPortSupplier))]
+    //[ProvideDebugEngine(typeof(PowerShellPackage), ClsIdType = typeof(PowerShellDebugEngine), Attach = true, ProgramProviderType = typeof(PowerShellProgramProvider), PortSupplierType = typeof(PowerShellPortSupplier))]
+    [ProvideDebugEngine(typeof(PowerShellPackage), ClsIdType = typeof(PowerShellDebugEngine), Attach = true, ProgramProviderType = typeof(PowerShellProgramProvider), PortSupplierType = typeof(IntelliTect.DebugEngine.PortSuppliers.DefaultPortSupplier))]
     [ProvideProjectFactory( typeof (PowerShellProjectFactory),
             "PowerShell Project",
             "PowerShell Project Files (*.psproj);*.psproj",
@@ -63,8 +67,11 @@ namespace PowerStudio.VsExtension
             LanguageVsTemplate = "PowerShell",
             NewProjectRequireNewFolderVsTemplate = false )]
     [ProvideProjectItem( typeof (PowerShellProjectFactory), "PowerShell", @"Templates\ProjectItems\PsProject", 500 )]
-    [ProvideProgramProvider( typeof (ProgramProvider) )]
-    [ProvidePortSupplier( typeof (PortSupplier) )]
+    [ProvideProgramProvider(typeof(PowerShellProgramProvider), RegisterUsing = RegistrationMethod.Assembly)]
+    //[ProvidePortSupplier(typeof(PowerShellPortSupplier), RegisterUsing = RegistrationMethod.Assembly)]
+    [IncompatibleWithComPlusNativeEngine]
+    [IncompatibleWithScriptEngine]
+    [IncompatibleWithPowerGUIEngine]
     [Guid( PsConstants.ProjectPackageGuid )]
     public sealed class PowerShellPackage : PowerShellPackageBase
     {

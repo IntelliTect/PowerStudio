@@ -47,12 +47,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PowerStudio.Debugger\PowerStudio.Debugger.csproj">
-      <Project>{F3F718BC-ED9E-492A-A80A-F2DC2501F45A}</Project>
-      <Name>PowerStudio.Debugger</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
