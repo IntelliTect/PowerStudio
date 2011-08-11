@@ -1,0 +1,36 @@
+2011-08-10 19:39:20.9283|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Setting description to PowerStudio.VsExtension.PowerShellPackage, PowerStudio.VsExtension, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fb17f1436bedd1a
+2011-08-10 19:39:21.0202|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Display Name attribute found. Setting name to PowerShell
+2011-08-10 19:39:21.0329|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|ClsIdType found. Setting CLSID to 462bc237-17aa-4626-9949-e7dd8c790681
+2011-08-10 19:39:21.0329|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Setting CLSID to {462bc237-17aa-4626-9949-e7dd8c790681}.
+2011-08-10 19:39:21.0329|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Entry for CLSID found, set to PowerStudio.Debugger.PowerShellDebugEngine.
+2011-08-10 19:39:21.0329|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Setting root [$RootKey$\AD7Metrics\Engine\{4c20d2c8-5c4a-4d5d-a662-ef636aed49b5}]
+@="PowerStudio.VsExtension.PowerShellPackage, PowerStudio.VsExtension, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fb17f1436bedd1a"
+"Name"="PowerShell"
+"CLSID"="{462bc237-17aa-4626-9949-e7dd8c790681}"
+ entry for CLSID found, set to {462bc237-17aa-4626-9949-e7dd8c790681}.
+2011-08-10 19:39:21.0329|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Entry for Attach found, set to True.
+2011-08-10 19:39:21.0329|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Setting root [$RootKey$\AD7Metrics\Engine\{4c20d2c8-5c4a-4d5d-a662-ef636aed49b5}]
+@="PowerStudio.VsExtension.PowerShellPackage, PowerStudio.VsExtension, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fb17f1436bedd1a"
+"Name"="PowerShell"
+"CLSID"="{462bc237-17aa-4626-9949-e7dd8c790681}"
+ entry for Attach found, set to 1.
+2011-08-10 19:39:21.0495|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Entry for ProgramProvider found, set to PowerStudio.Debugger.PowerShellProgramProvider.
+2011-08-10 19:39:21.0495|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Setting root [$RootKey$\AD7Metrics\Engine\{4c20d2c8-5c4a-4d5d-a662-ef636aed49b5}]
+@="PowerStudio.VsExtension.PowerShellPackage, PowerStudio.VsExtension, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fb17f1436bedd1a"
+"Name"="PowerShell"
+"CLSID"="{462bc237-17aa-4626-9949-e7dd8c790681}"
+"Attach"=dword:00000001
+ entry for ProgramProvider found, set to {456e86aa-0434-4014-9a0c-92b9a5f6df04}.
+2011-08-10 19:39:21.0495|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Entry for PortSupplier found, set to IntelliTect.DebugEngine.PortSuppliers.DefaultPortSupplier.
+2011-08-10 19:39:21.0495|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Setting root [$RootKey$\AD7Metrics\Engine\{4c20d2c8-5c4a-4d5d-a662-ef636aed49b5}]
+@="PowerStudio.VsExtension.PowerShellPackage, PowerStudio.VsExtension, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fb17f1436bedd1a"
+"Name"="PowerShell"
+"CLSID"="{462bc237-17aa-4626-9949-e7dd8c790681}"
+"Attach"=dword:00000001
+"ProgramProvider"="{456e86aa-0434-4014-9a0c-92b9a5f6df04}"
+ entry for PortSupplier found, set to {708c1eca-ff48-11d2-904f-00c04fa302a1}.
+2011-08-10 19:39:21.0662|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|No port supplier attributes found.
+2011-08-10 19:39:21.2148|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Adding incompatible debug engine guidCOMPlusNativeEng to list 'IncompatibleList' with Guid {92ef0900-2251-11d2-b72e-0000f87572ef}.
+2011-08-10 19:39:21.2148|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Adding incompatible debug engine guidScriptEng to list 'IncompatibleList' with Guid {f200a7e7-dea5-11d0-b854-00a0244a1de2}.
+2011-08-10 19:39:21.2148|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|Adding incompatible debug engine PowerShell to list 'IncompatibleList' with Guid {c7f9f131-53ab-4fd0-8517-e54d124ea392}.
+2011-08-10 19:39:21.2206|DEBUG|IntelliTect.DebugEngine.Attributes.ProvideDebugEngineAttribute|No incompatible engines specified.
