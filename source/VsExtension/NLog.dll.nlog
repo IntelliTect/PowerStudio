@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <targets>
+    <target name="file" xsi:type="File" fileName="PowerStudio.log"/>
+  </targets>
+  <rules>
+    <logger name="*" minlevel="Warn" writeTo="file" />
+  </rules>
+  <!--
+  <targets>
     <target name="file" xsi:type="File" fileName="PowerStudio.txt"/>
     <target name="debugstring" xsi:type="OutputDebugString"/>
     <target name="console" xsi:type="Console" layout="${longdate} ${callsite} ${level} ${message}"/>
@@ -10,4 +17,5 @@
     <logger name="*" minlevel="Debug" writeTo="debugstring" />
     <logger name="*" minlevel="Debug" writeTo="console" />
   </rules>
+  -->
 </nlog>

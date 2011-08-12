@@ -37,6 +37,7 @@ namespace PowerStudio.LanguageService.Project
             Logger.Debug( string.Empty );
         }
 
+#if DEBUG
         public override int DebugLaunch( uint grfLaunch )
         {
             Logger.Debug( string.Empty );
@@ -96,6 +97,7 @@ namespace PowerStudio.LanguageService.Project
 
             return VSConstants.S_OK;
         }
+#endif
 
         /// <summary>
         /// Determines whether the debugger can be launched, given the state of the launch flags.
