@@ -4,7 +4,7 @@
   <Identifier Id="f28a7596-8789-4c64-8779-243c014f2787">
     <Name>PowerStudio</Name>
     <Author>IntelliTect</Author>
-    <Version>1.0</Version>
+    <Version>1.0.0</Version>
     <Description xml:space="preserve">PowerShell integration for Visual Studio</Description>
     <Locale>1033</Locale>
     <MoreInfoUrl>https://github.com/IntelliTect/PowerStudio</MoreInfoUrl>
