@@ -14,6 +14,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Management.Automation;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Operations;
@@ -79,6 +81,43 @@ namespace PowerStudio.LanguageService.Intellisense.Completion
                     SourceProvider.NavigatorService.GetTextStructureNavigator( Buffer );
             TextExtent extent = navigator.GetExtentOfWord( currentPoint );
             return currentPoint.Snapshot.CreateTrackingSpan( extent.Span, SpanTrackingMode.EdgeInclusive );
+        }
+
+        protected virtual void UpdateDefaultCompletionSet( ICompletionSession session,
+                                                           IList<CompletionSet> completionSets,
+                                                           IEnumerable<
+                                                                   Microsoft.VisualStudio.Language.Intellisense.
+                                                                   Completion> completions )
+        {
+            const string DefaultCompletionSetName = "Default";
+            if ( completionSets.Count == 0 ||
+                 !completionSets.Any( item => item.DisplayName == DefaultCompletionSetName ) )
+            {
+                var completionSet = new CompletionSet(
+                        DefaultCompletionSetName,
+                        //the non-localized title of the tab
+                        DefaultCompletionSetName,
+                        //the display title of the tab
+                        FindTokenSpanAtPosition( session.GetTriggerPoint( Buffer ), session ),
+                        completions,
+                        null );
+                completionSets.Add( completionSet );
+            }
+            else
+            {
+                CompletionSet completionSet =
+                        completionSets.Where( item => item.DisplayName == DefaultCompletionSetName ).First();
+                completionSets.Remove( completionSet );
+                List<Microsoft.VisualStudio.Language.Intellisense.Completion> allCompletions =
+                        completions.Union( completionSet.Completions ).ToList();
+                UpdateDefaultCompletionSet( session, completionSets, allCompletions );
+            }
+        }
+
+        protected static Microsoft.VisualStudio.Language.Intellisense.Completion CreateCompletion( string content )
+        {
+            return new Microsoft.VisualStudio.Language.Intellisense.Completion(
+                    content, content, content, null, null);
         }
 
         #region Nested type: CompletionComparer

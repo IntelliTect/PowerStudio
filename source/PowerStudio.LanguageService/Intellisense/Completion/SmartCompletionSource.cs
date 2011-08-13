@@ -65,23 +65,18 @@ namespace PowerStudio.LanguageService.Intellisense.Completion
         /// </remarks>
         public override void AugmentCompletionSession( ICompletionSession session, IList<CompletionSet> completionSets )
         {
-            completionSets.Clear();
-
-            var completions = new List<Microsoft.VisualStudio.Language.Intellisense.Completion>();
-
             // TODO: This declaration set is a quick impl. It does not take scope or order in file into consideration
             string text = Buffer.CurrentSnapshot.GetText();
             Collection<PSParseError> errors;
             Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
             bool nextIsMethodName = false;
+            var completionsToAdd = new List<string>();
             foreach ( PSToken psToken in tokens )
             {
                 if ( nextIsMethodName )
                 {
                     nextIsMethodName = false;
-                    var completion = new Microsoft.VisualStudio.Language.Intellisense.Completion(
-                            psToken.Content, psToken.Content, null, null, null );
-                    completions.Add( completion );
+                    completionsToAdd.Add( psToken.Content );
                     continue;
                 }
 
@@ -93,20 +88,17 @@ namespace PowerStudio.LanguageService.Intellisense.Completion
                 if ( psToken.Type ==
                      PSTokenType.Variable )
                 {
-                    var completion = new Microsoft.VisualStudio.Language.Intellisense.Completion(
-                            "$" + psToken.Content, "$" + psToken.Content, null, null, null );
-                    completions.Add( completion );
+                    completionsToAdd.Add( "$" + psToken.Content );
                 }
             }
-            completions.Sort( new CompletionComparer() );
-            completionSets.Add( new CompletionSet(
-                                        "Tokens",
-                                        //the non-localized title of the tab
-                                        "Tokens",
-                                        //the display title of the tab
-                                        FindTokenSpanAtPosition( session.GetTriggerPoint( Buffer ), session ),
-                                        completions.Distinct( new CompletionComparer() ),
-                                        null ) );
+
+            completionsToAdd = completionsToAdd.Distinct( StringComparer.OrdinalIgnoreCase ).ToList();
+            completionsToAdd.Sort();
+            List<Microsoft.VisualStudio.Language.Intellisense.Completion> completions =
+                    completionsToAdd.Select( CreateCompletion )
+                            .ToList();
+
+            UpdateDefaultCompletionSet( session, completionSets, completions );
         }
     }
 }

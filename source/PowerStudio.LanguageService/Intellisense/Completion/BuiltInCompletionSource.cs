@@ -24,6 +24,7 @@ namespace PowerStudio.LanguageService.Intellisense.Completion
     internal class BuiltInCompletionSource : CompletionSourceBase
     {
         private static readonly IEnumerable<string> BuiltInCompletions;
+        private static readonly List<Microsoft.VisualStudio.Language.Intellisense.Completion> Completions;
         private bool _IsDisposed;
 
         static BuiltInCompletionSource()
@@ -36,7 +37,14 @@ namespace PowerStudio.LanguageService.Intellisense.Completion
             IEnumerable<string> cmdlets = SplitMultiLineTextIntoACollectionOfLines( Resources.CmdLets );
             IEnumerable<string> aliases = SplitMultiLineTextIntoACollectionOfLines( Resources.Aliases );
             BuiltInCompletions =
-                    keywords.Union( variables ).Union( preferenceVariables ).Union( cmdlets ).Union( aliases ).ToList();
+                    ( keywords.Union( variables ).Union( preferenceVariables ).Union( cmdlets ).Union( aliases ) ).
+                            ToList();
+
+            Completions = BuiltInCompletions
+                    .Select( CreateCompletion )
+                    .ToList();
+
+            Completions.Sort( new CompletionComparer() );
         }
 
         /// <summary>
@@ -77,33 +85,14 @@ namespace PowerStudio.LanguageService.Intellisense.Completion
         /// </remarks>
         public override void AugmentCompletionSession( ICompletionSession session, IList<CompletionSet> completionSets )
         {
-            completionSets.Clear();
-
-            List<Microsoft.VisualStudio.Language.Intellisense.Completion> completions = BuiltInCompletions
-                    .Select(
-                            completion =>
-                            new Microsoft.VisualStudio.Language.Intellisense.Completion( completion,
-                                                                                         completion,
-                                                                                         null,
-                                                                                         null,
-                                                                                         null ) )
-                    .ToList();
-
-            completions.Sort( new CompletionComparer() );
-            completionSets.Add( new CompletionSet(
-                                        "Tokens",
-                                        //the non-localized title of the tab
-                                        "Tokens",
-                                        //the display title of the tab
-                                        FindTokenSpanAtPosition( session.GetTriggerPoint( Buffer ), session ),
-                                        completions.Distinct( new CompletionComparer() ),
-                                        null ) );
+            UpdateDefaultCompletionSet( session, completionSets, Completions );
         }
 
         private static IEnumerable<string> SplitMultiLineTextIntoACollectionOfLines( string text )
         {
-            return text.Split( new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries )
+            List<string> items = text.Split( new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries )
                     .ToList();
+            return items;
         }
     }
 }
