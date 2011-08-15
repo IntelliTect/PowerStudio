@@ -61,120 +61,10 @@ namespace PowerStudio.LanguageService {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ac
-        ///asnp
-        ///cat
-        ///cd
-        ///chdir
-        ///clc
-        ///clear
-        ///clhy
-        ///cli
-        ///clp
-        ///cls
-        ///clv
-        ///compare
-        ///copy
-        ///cp
-        ///cpi
-        ///cpp
-        ///cvpa
-        ///dbp
-        ///del
-        ///diff
-        ///dir
-        ///ebp
-        ///echo
-        ///epal
-        ///epcsv
-        ///epsn
-        ///erase
-        ///etsn
-        ///exsn
-        ///fc
-        ///fl
-        ///foreach
-        ///ft
-        ///fw
-        ///gal
-        ///gbp
-        ///gc
-        ///gci
-        ///gcm
-        ///gcs
-        ///gdr
-        ///ghy
-        ///gi
-        ///gjb
-        ///gl
-        ///gm
-        ///gmo
-        ///gp
-        ///gps
-        ///group
-        ///gsn
-        ///gsnp
-        ///gsv
-        ///gu
-        ///gv
-        ///gwmi
-        ///h
-        ///history
-        ///icm
-        ///iex
-        ///ihy
-        ///ii
-        ///ipal
-        ///ipcsv
-        ///ipmo
-        ///ipsn
-        ///ise
-        ///iwmi
-        ///kill
-        ///lp
-        ///ls
-        ///man
-        ///md
-        ///measure
-        ///mi
-        ///mount
-        ///move
-        ///mp
-        ///mv
-        ///nal
-        ///ndr
-        ///ni
-        ///nmo
-        ///nsn
-        ///nv
-        ///ogv
-        ///oh
-        ///popd
-        ///ps
-        ///pushd
-        ///pwd
-        ///r
-        ///rbp
-        ///rcjb
-        ///rd
-        ///rdr
-        ///ren
-        /// [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Aliases {
-            get {
-                return ResourceManager.GetString("Aliases", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to global:
         ///local:
         ///private:
         ///script:
-        ///$$
-        ///$?
-        ///$_
         ///$args
         ///$ConsoleFileName
         ///$Error
@@ -266,30 +156,23 @@ namespace PowerStudio.LanguageService {
         ///continue
         ///data
         ///define
-        ///do
         ///dynamicparam
         ///else
         ///elseif
-        ///end
         ///exit
         ///filter
         ///finally
-        ///for
         ///foreach
         ///from
         ///function
-        ///if
-        ///in
         ///param
         ///process
         ///return
         ///switch
         ///throw
         ///trap
-        ///try
         ///until
         ///using
-        ///var
         ///while.
         /// </summary>
         public static string Keywords {

@@ -35,9 +35,8 @@ namespace PowerStudio.LanguageService.Intellisense.Completion
             IEnumerable<string> preferenceVariables =
                     SplitMultiLineTextIntoACollectionOfLines( Resources.PreferenceVariables );
             IEnumerable<string> cmdlets = SplitMultiLineTextIntoACollectionOfLines( Resources.CmdLets );
-            IEnumerable<string> aliases = SplitMultiLineTextIntoACollectionOfLines( Resources.Aliases );
             BuiltInCompletions =
-                    ( keywords.Union( variables ).Union( preferenceVariables ).Union( cmdlets ).Union( aliases ) ).
+                    ( keywords.Union( variables ).Union( preferenceVariables ).Union( cmdlets ) ).
                             ToList();
 
             Completions = BuiltInCompletions
