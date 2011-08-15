@@ -65,6 +65,7 @@ namespace PowerStudio.LanguageService.Intellisense.Completion
         /// </remarks>
         public override void AugmentCompletionSession( ICompletionSession session, IList<CompletionSet> completionSets )
         {
+            /*
             // TODO: This declaration set is a quick impl. It does not take scope or order in file into consideration
             string text = Buffer.CurrentSnapshot.GetText();
             Collection<PSParseError> errors;
@@ -99,6 +100,8 @@ namespace PowerStudio.LanguageService.Intellisense.Completion
                             .ToList();
 
             UpdateDefaultCompletionSet( session, completionSets, completions );
+             * */
         }
+            
     }
 }
