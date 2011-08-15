@@ -84,7 +84,7 @@ namespace PowerStudio.LanguageService.Intellisense.Completion
         /// </remarks>
         public override void AugmentCompletionSession( ICompletionSession session, IList<CompletionSet> completionSets )
         {
-            UpdateDefaultCompletionSet( session, completionSets, Completions );
+            //UpdateDefaultCompletionSet( session, completionSets, Completions );
         }
 
         private static IEnumerable<string> SplitMultiLineTextIntoACollectionOfLines( string text )
