@@ -159,6 +159,7 @@
     <Compile Include="Editor\MethodGlyphFactory.cs" />
     <Compile Include="Editor\MethodGlyphFactoryProvider.cs" />
     <Compile Include="Formatting\ParagraphPropertiesFactoryService.cs" />
+    <Compile Include="Formatting\PowerShellTextFormattingParagraphProperties.cs" />
     <Compile Include="Intellisense\Completion\BuiltInCompletionSource.cs" />
     <Compile Include="Intellisense\Completion\BuiltInCompletionSourceProvider.cs" />
     <Compile Include="Intellisense\Completion\CompletionCommandHandler.cs" />
@@ -177,7 +178,10 @@
     <Compile Include="Intellisense\QuickInfo\QuickInfoTokenSourceProvider.cs" />
     <Compile Include="LanguageConfiguration.cs" />
     <Compile Include="PowerShellPackageBase.cs" />
-    <Compile Include="Project\GeneralPropertyPage.cs" />
+    <Compile Include="Project\GeneralProjectPropertiesPage.cs" />
+    <Compile Include="Project\GeneralSettingsPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Project\OAPsProject.cs" />
     <Compile Include="Project\OAPsProjectFileItem.cs" />
     <Compile Include="Project\PowerShellConfigProvider.cs" />

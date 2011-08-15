@@ -26,8 +26,9 @@ namespace PowerStudio.Resources
         public const string ProjectFactoryGuid = "445B713D-FB48-43BA-AC8D-40C1F6ADBCD0";
         public const string ProjectNodeGuid = "4B6B1A2B-8D86-4734-A9E9-69C55C6274C1";
         public const string ProjectFileItemGuid = "4D54A87D-7103-4215-BB93-FFBBBF503730";
-
-        public const string GeneralPropertyPageGuid = "45AF33B3-2533-4780-AB68-6A48368B097E";
+       
+        public const string GeneralProjectPropertiesPage = "45AF33B3-2533-4780-AB68-6A48368B097E";
+        public const string GeneralSettingsPage = "4FDC38D0-8709-41B9-BE4D-C802E5611A66";
         public const string ProgramProviderGuid = "456E86AA-0434-4014-9A0C-92B9A5F6DF04";
         public const string PortSupplierGuid = "45488C3B-17CA-4B64-B3DE-AF25E1D53644";
         public const string PortGuid = "46A72263-D468-40C1-AD37-D3EA24C9F931";

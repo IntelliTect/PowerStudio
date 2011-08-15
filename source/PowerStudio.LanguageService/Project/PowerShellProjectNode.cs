@@ -20,6 +20,7 @@ using System.Windows.Forms;
 using EnvDTE;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
+using Microsoft.VisualStudio.Shell.Interop;
 using NLog;
 using PowerStudio.Resources;
 using VSLangProj;
@@ -31,9 +32,8 @@ namespace PowerStudio.LanguageService.Project
     [Guid( PsConstants.ProjectNodeGuid )]
     public class PowerShellProjectNode : ProjectNode
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
         internal const string ProjectTypeName = "PsProject";
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         internal static int ImageOffset;
         private PowerShellPackageBase _Package;
@@ -129,9 +129,10 @@ namespace PowerStudio.LanguageService.Project
         /// <returns></returns>
         protected override Guid[] GetConfigurationIndependentPropertyPages()
         {
-            var result = new Guid[1];
-            result[0] = typeof (GeneralPropertyPage).GUID;
-            return result;
+            //var result = new Guid[0];
+            //result[0] = typeof (GeneralProjectPropertiesPage).GUID;
+            //return result;
+            return base.GetConfigurationIndependentPropertyPages();
         }
 
         /// <summary>
@@ -140,9 +141,10 @@ namespace PowerStudio.LanguageService.Project
         /// <returns>An array of guids.</returns>
         protected override Guid[] GetPriorityProjectDesignerPages()
         {
-            var result = new Guid[1];
-            result[0] = typeof (GeneralPropertyPage).GUID;
-            return result;
+            //var result = new Guid[0];
+            //result[0] = typeof (GeneralProjectPropertiesPage).GUID;
+            //return result;
+            return base.GetPriorityProjectDesignerPages();
         }
 
         /// <summary>

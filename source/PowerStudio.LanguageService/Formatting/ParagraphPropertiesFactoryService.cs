@@ -11,8 +11,10 @@
 
 #region Using Directives
 
+using System;
 using System.ComponentModel.Composition;
 using System.Windows.Media.TextFormatting;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Formatting;
 using Microsoft.VisualStudio.Utilities;
@@ -25,6 +27,9 @@ namespace PowerStudio.LanguageService.Formatting
     [ContentType( LanguageConfiguration.Name )]
     public class ParagraphPropertiesFactoryService : ITextParagraphPropertiesFactoryService
     {
+        [Import( typeof (SVsServiceProvider) )]
+        public IServiceProvider ServiceProvider { get; set; }
+
         #region ITextParagraphPropertiesFactoryService Members
 
         /// <summary>
@@ -47,7 +52,7 @@ namespace PowerStudio.LanguageService.Formatting
                                                IMappingPoint lineStart,
                                                int lineSegment )
         {
-            return new TextFormattingParagraphProperties( textProperties, formattedLineSource.TabSize );
+            return new PowerShellTextFormattingParagraphProperties( textProperties, formattedLineSource, ServiceProvider );
         }
 
         #endregion

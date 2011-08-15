@@ -209,6 +209,11 @@ namespace Microsoft.VisualStudio.Project
 					pages[0] = new CAUUID();
 					pages[0].cElems = 0;
 				}
+                else if (guidsList == Guid.Empty.ToString("B"))
+                {
+                    pages[0] = new CAUUID();
+					pages[0].cElems = 0;
+                }
 				else
 				{
 					pages[0] = PackageUtilities.CreateCAUUIDFromGuidArray(guids);

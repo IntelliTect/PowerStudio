@@ -52,7 +52,8 @@ namespace PowerStudio.VsExtension
     // This attribute is used to register the information needed to show the this package
     // in the Help/About dialog of Visual Studio.
     [InstalledProductRegistration( "#110", "#112", "1.0", IconResourceID = 400 )]
-    [ProvideType( typeof (GeneralPropertyPage) )]
+    [ProvideOptionPage(typeof(GeneralSettingsPage), LanguageConfiguration.Name, "PowerStudio", 0, 0, true)]
+    [ProvideType(typeof(GeneralProjectPropertiesPage))]
     [ProvideType(typeof(PowerShellDebugEngine))]
     [DisplayName(LanguageConfiguration.Name)]
     //[ProvideDebugEngine(typeof(PowerShellDebugEngine), ClsIdType = typeof(PowerShellDebugEngine), Attach = true, ProgramProviderType = typeof(PowerShellProgramProvider), PortSupplierType = typeof(DefaultPortSupplier))]
@@ -67,7 +68,7 @@ namespace PowerStudio.VsExtension
             LanguageVsTemplate = "PowerShell",
             NewProjectRequireNewFolderVsTemplate = false )]
     [ProvideProjectItem( typeof (PowerShellProjectFactory), "PowerShell", @"Templates\ProjectItems\PsProject", 500 )]
-    [ProvideProgramProvider(typeof(PowerShellProgramProvider), RegisterUsing = RegistrationMethod.Assembly)]
+    //[ProvideProgramProvider(typeof(PowerShellProgramProvider), RegisterUsing = RegistrationMethod.Assembly)]
     //[ProvidePortSupplier(typeof(PowerShellPortSupplier), RegisterUsing = RegistrationMethod.Assembly)]
     [IncompatibleWithComPlusNativeEngine]
     [IncompatibleWithScriptEngine]
