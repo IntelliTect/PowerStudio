@@ -30,6 +30,17 @@ namespace PowerStudio.LanguageService.Formatting
         [Import( typeof (SVsServiceProvider) )]
         public IServiceProvider ServiceProvider { get; set; }
 
+        private TextParagraphProperties     _TextParagraphProperties;
+        public TextParagraphProperties TextParagraphProperties
+        {
+            get
+            {
+                
+                return _TextParagraphProperties;
+            }
+            protected set { _TextParagraphProperties = value; }
+        }
+
         #region ITextParagraphPropertiesFactoryService Members
 
         /// <summary>
@@ -52,7 +63,13 @@ namespace PowerStudio.LanguageService.Formatting
                                                IMappingPoint lineStart,
                                                int lineSegment )
         {
-            return new PowerShellTextFormattingParagraphProperties( textProperties, formattedLineSource, ServiceProvider );
+            if (_TextParagraphProperties == null)
+            {
+                _TextParagraphProperties = new PowerShellTextFormattingParagraphProperties( textProperties,
+                                                                                            formattedLineSource,
+                                                                                            ServiceProvider );
+            }
+            return TextParagraphProperties;
         }
 
         #endregion
