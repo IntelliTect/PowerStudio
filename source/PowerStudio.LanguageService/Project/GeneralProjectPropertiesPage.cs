@@ -11,7 +11,6 @@
 
 #region Using Directives
 
-using System;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Project;
@@ -21,7 +20,6 @@ using PowerStudio.Resources;
 
 namespace PowerStudio.LanguageService.Project
 {
-    [CLSCompliant( false )]
     [ComVisible( true )]
     [Guid( PsConstants.GeneralProjectPropertiesPage )]
     public class GeneralProjectPropertiesPage : SettingsPage

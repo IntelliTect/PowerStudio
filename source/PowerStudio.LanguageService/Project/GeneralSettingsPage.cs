@@ -11,7 +11,6 @@
 
 #region Using Directives
 
-using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Shell;
@@ -22,7 +21,6 @@ using PowerStudio.Resources;
 namespace PowerStudio.LanguageService.Project
 {
     [ClassInterface( ClassInterfaceType.AutoDual )]
-    [CLSCompliant( false )]
     [ComVisible( true )]
     [Guid( PsConstants.GeneralSettingsPage )]
     public class GeneralSettingsPage : DialogPage
