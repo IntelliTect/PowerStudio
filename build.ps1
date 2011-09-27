@@ -30,7 +30,7 @@ properties {
   $solution_file = "$base_directory\$solution_name.sln"
   $release_directory = "$base_directory\release"
   $build_number = if($env:BUILD_NUMBER) {$env:BUILD_NUMBER.Split('.')[2] } else { "0" }
-  $version = if($env:BUILD_NUMBER) {$env:BUILD_NUMBER} else { "1.0.0.0" }
+  $version = if($env:BUILD_NUMBER) {$env:BUILD_NUMBER} else { "1.0.0" }
   $testMessage = 'Executed Test!'
   $compileMessage = 'Executed Compile!'
   $cleanMessage = 'Executed Clean!'
