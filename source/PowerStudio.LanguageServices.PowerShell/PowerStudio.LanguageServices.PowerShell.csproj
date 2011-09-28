@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4D142791-B828-4DEE-8079-20933E0F64D8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PowerStudio.LanguageServices.PowerShell</RootNamespace>
+    <AssemblyName>PowerStudio.LanguageServices.PowerShell</AssemblyName>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Key.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="IntelliTect.DebugEngine">
+      <HintPath>..\..\References\IntelliTect.DebugEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build" />
+    <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Debugger.InteropA, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Editor, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Language.Intellisense, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.9.0, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Text.Data, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Text.Logic, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Text.UI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Text.UI.Wpf, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="NLog">
+      <HintPath>..\..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive">
+      <HintPath>..\..\packages\Rx-Main.1.0.10621\lib\Net4\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="VSLangProj, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="VSLangProj80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Editor\MethodGlyphFactory.cs" />
+    <Compile Include="Editor\MethodGlyphFactoryProvider.cs" />
+    <Compile Include="Formatting\ParagraphPropertiesFactoryService.cs" />
+    <Compile Include="Formatting\PowerShellTextFormattingParagraphProperties.cs" />
+    <Compile Include="Intellisense\Completion\BuiltInCompletionSource.cs" />
+    <Compile Include="Intellisense\Completion\BuiltInCompletionSourceProvider.cs" />
+    <Compile Include="Intellisense\Completion\CompletionCommandHandler.cs" />
+    <Compile Include="Intellisense\Completion\CompletionHandlerProvider.cs" />
+    <Compile Include="Intellisense\Completion\SmartCompletionSource.cs" />
+    <Compile Include="Intellisense\Completion\SmartCompletionSourceProvider.cs" />
+    <Compile Include="Intellisense\QuickInfo\QuickInfoController.cs" />
+    <Compile Include="Intellisense\QuickInfo\QuickInfoControllerProvider.cs" />
+    <Compile Include="Intellisense\QuickInfo\QuickInfoErrorSourceProvider.cs" />
+    <Compile Include="Intellisense\QuickInfo\QuickInfoTokenSourceProvider.cs" />
+    <Compile Include="LanguageConfiguration.cs" />
+    <Compile Include="PowerShellPackageBase.cs" />
+    <Compile Include="Project\GeneralProjectPropertiesPage.cs" />
+    <Compile Include="Project\GeneralSettingsPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Project\OAPsProject.cs" />
+    <Compile Include="Project\OAPsProjectFileItem.cs" />
+    <Compile Include="Project\PowerShellConfigProvider.cs" />
+    <Compile Include="Project\PowerShellProjectConfig.cs" />
+    <Compile Include="Project\PowerShellProjectFactory.cs" />
+    <Compile Include="Project\PowerShellProjectFileNode.cs" />
+    <Compile Include="Project\PowerShellProjectNode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Tagging\Providers\BraceMatchingTaggerProvider.cs" />
+    <Compile Include="Tagging\Providers\ClassificationTaggerProvider.cs" />
+    <Compile Include="Tagging\Providers\ErrorTokenTaggerProvider.cs" />
+    <Compile Include="Tagging\Providers\HighlightWordTaggerProvider.cs" />
+    <Compile Include="Tagging\Providers\MethodTokenTaggerProvider.cs" />
+    <Compile Include="Tagging\Providers\OutliningTaggerProvider.cs" />
+    <Compile Include="Tagging\Taggers\BraceMatchingTagger.cs" />
+    <Compile Include="Tagging\Taggers\ClassificationTagger.cs" />
+    <Compile Include="Tagging\Taggers\ErrorTokenTagger.cs" />
+    <Compile Include="Tagging\Taggers\GlyphTokenTagger.cs" />
+    <Compile Include="Tagging\Taggers\HighlightWordTagger.cs" />
+    <Compile Include="Tagging\Taggers\MethodTokenTagger.cs" />
+    <Compile Include="Tagging\Taggers\OutliningTagger.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj">
+      <Project>{CACB60A9-1E76-4F92-8831-B134A658C695}</Project>
+      <Name>Microsoft.VisualStudio.Project</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PowerStudio.Debugger\PowerStudio.Debugger.csproj">
+      <Project>{F3F718BC-ED9E-492A-A80A-F2DC2501F45A}</Project>
+      <Name>PowerStudio.Debugger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PowerStudio.LanguageServices\PowerStudio.LanguageServices.csproj">
+      <Project>{FF615B2F-BAEF-4671-9279-BD291244F2FB}</Project>
+      <Name>PowerStudio.LanguageServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\PowerStudio.Resources.csproj">
+      <Project>{17286D8F-5CB5-4584-A486-F9D00AE4C175}</Project>
+      <Name>PowerStudio.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Project\TODO.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Project\Build\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ProjectIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

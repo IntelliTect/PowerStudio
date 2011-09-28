@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="f28a7596-8789-4c64-8779-243c014f2787">
+    <Name>PowerStudio</Name>
+    <Author>IntelliTect</Author>
+    <Version>1.0.8</Version>
+    <Description xml:space="preserve">PowerShell integration for Visual Studio</Description>
+    <Locale>1033</Locale>
+    <MoreInfoUrl>http://intellitect.com</MoreInfoUrl>
+    <License>LICENSE.txt</License>
+    <GettingStartedGuide>https://github.com/IntelliTect/PowerStudio/wiki</GettingStartedGuide>
+    <Icon>ProjectIcon.ico</Icon>
+    <PreviewImage>ProjectIcon.ico</PreviewImage>
+    <InstalledByMsi>false</InstalledByMsi>
+    <SupportedProducts>
+      <VisualStudio Version="10.0">
+        <Edition>Ultimate</Edition>
+        <Edition>Premium</Edition>
+        <Edition>Pro</Edition>
+        <Edition>IntegratedShell</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.0" />
+  </Identifier>
+  <References>
+    <Reference Id="Microsoft.VisualStudio.MPF" MinVersion="10.0">
+      <Name>Visual Studio MPF</Name>
+    </Reference>
+  </References>
+  <Content>
+    <VsPackage>
+      |%CurrentProject%;PkgdefProjectOutputGroup|
+    </VsPackage>
+    <MefComponent>|%CurrentProject%|</MefComponent>
+    <MefComponent>|PowerStudio.LanguageServices.PowerShell|</MefComponent>
+    <ProjectTemplate>ProjectTemplates</ProjectTemplate>
+  </Content>
+</Vsix>

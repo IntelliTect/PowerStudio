@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.VsExtension", "source\VsExtension\PowerStudio.VsExtension.csproj", "{AF6CE392-FFA9-49CB-AA08-E361A7352D55}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E14428FC-A29D-4393-9854-1F955738C974}"
 	ProjectSection(SolutionItems) = preProject
 		source\GlobalAssemblyInfo.cs = source\GlobalAssemblyInfo.cs
@@ -11,10 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		UnitTests.testsettings = UnitTests.testsettings
 		VisualStudio.PowerShell.vsmdi = VisualStudio.PowerShell.vsmdi
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.VsExtension.IntegrationTests", "source\VsExtension.IntegrationTests\PowerStudio.VsExtension.IntegrationTests.csproj", "{EECD9955-26E0-42CA-8ADD-9FA07C174300}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.VsExtension.Tests", "source\VsExtension.Tests\PowerStudio.VsExtension.Tests.csproj", "{36ED8968-0211-4222-96AA-710EA353C9A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.Resources", "source\Resources\PowerStudio.Resources.csproj", "{17286D8F-5CB5-4584-A486-F9D00AE4C175}"
 EndProject
@@ -41,13 +35,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NestedProject", "source\Mic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extension", "Extension", "{35ADF278-F225-4ABA-B64A-9F8C4181D62A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.LanguageService", "source\PowerStudio.LanguageService\PowerStudio.LanguageService.csproj", "{FF615B2F-BAEF-4671-9279-BD291244F2FB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.Debugger.Tests", "source\PowerStudio.Debugger.Tests\PowerStudio.Debugger.Tests.csproj", "{ACD0AFCD-89A2-4AA8-9ECD-5912D58E0A9E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debugger", "Debugger", "{01CA9926-ABDB-4A1D-A2AD-38B446E94E28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.Debugger", "source\PowerStudio.Debugger\PowerStudio.Debugger.csproj", "{F3F718BC-ED9E-492A-A80A-F2DC2501F45A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio", "source\PowerStudio\PowerStudio.csproj", "{AF6CE392-FFA9-49CB-AA08-E361A7352D55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.LanguageServices.Tests", "source\PowerStudio.LanguageServices.Tests\PowerStudio.LanguageServices.Tests.csproj", "{36ED8968-0211-4222-96AA-710EA353C9A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.LanguageServices", "source\PowerStudio.LanguageServices\PowerStudio.LanguageServices.csproj", "{FF615B2F-BAEF-4671-9279-BD291244F2FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.Integration.Tests", "source\PowerStudio.Integration.Tests\PowerStudio.Integration.Tests.csproj", "{EECD9955-26E0-42CA-8ADD-9FA07C174300}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LanguageServices", "LanguageServices", "{C259369A-1012-4F77-8E83-F2E53E9AD3A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.LanguageServices.PowerShell", "source\PowerStudio.LanguageServices.PowerShell\PowerStudio.LanguageServices.PowerShell.csproj", "{4D142791-B828-4DEE-8079-20933E0F64D8}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -58,18 +62,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AF6CE392-FFA9-49CB-AA08-E361A7352D55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF6CE392-FFA9-49CB-AA08-E361A7352D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF6CE392-FFA9-49CB-AA08-E361A7352D55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF6CE392-FFA9-49CB-AA08-E361A7352D55}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EECD9955-26E0-42CA-8ADD-9FA07C174300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EECD9955-26E0-42CA-8ADD-9FA07C174300}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EECD9955-26E0-42CA-8ADD-9FA07C174300}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EECD9955-26E0-42CA-8ADD-9FA07C174300}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36ED8968-0211-4222-96AA-710EA353C9A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36ED8968-0211-4222-96AA-710EA353C9A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36ED8968-0211-4222-96AA-710EA353C9A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36ED8968-0211-4222-96AA-710EA353C9A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{17286D8F-5CB5-4584-A486-F9D00AE4C175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{17286D8F-5CB5-4584-A486-F9D00AE4C175}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17286D8F-5CB5-4584-A486-F9D00AE4C175}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -90,10 +82,6 @@ Global
 		{E9B43C9E-60AA-4387-A955-CAFB7EFA8C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9B43C9E-60AA-4387-A955-CAFB7EFA8C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9B43C9E-60AA-4387-A955-CAFB7EFA8C27}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF615B2F-BAEF-4671-9279-BD291244F2FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF615B2F-BAEF-4671-9279-BD291244F2FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF615B2F-BAEF-4671-9279-BD291244F2FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF615B2F-BAEF-4671-9279-BD291244F2FB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ACD0AFCD-89A2-4AA8-9ECD-5912D58E0A9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ACD0AFCD-89A2-4AA8-9ECD-5912D58E0A9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACD0AFCD-89A2-4AA8-9ECD-5912D58E0A9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -102,20 +90,41 @@ Global
 		{F3F718BC-ED9E-492A-A80A-F2DC2501F45A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3F718BC-ED9E-492A-A80A-F2DC2501F45A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3F718BC-ED9E-492A-A80A-F2DC2501F45A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF6CE392-FFA9-49CB-AA08-E361A7352D55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF6CE392-FFA9-49CB-AA08-E361A7352D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF6CE392-FFA9-49CB-AA08-E361A7352D55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF6CE392-FFA9-49CB-AA08-E361A7352D55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36ED8968-0211-4222-96AA-710EA353C9A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36ED8968-0211-4222-96AA-710EA353C9A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36ED8968-0211-4222-96AA-710EA353C9A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36ED8968-0211-4222-96AA-710EA353C9A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF615B2F-BAEF-4671-9279-BD291244F2FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF615B2F-BAEF-4671-9279-BD291244F2FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF615B2F-BAEF-4671-9279-BD291244F2FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF615B2F-BAEF-4671-9279-BD291244F2FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EECD9955-26E0-42CA-8ADD-9FA07C174300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EECD9955-26E0-42CA-8ADD-9FA07C174300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EECD9955-26E0-42CA-8ADD-9FA07C174300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EECD9955-26E0-42CA-8ADD-9FA07C174300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D142791-B828-4DEE-8079-20933E0F64D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D142791-B828-4DEE-8079-20933E0F64D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D142791-B828-4DEE-8079-20933E0F64D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D142791-B828-4DEE-8079-20933E0F64D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{EECD9955-26E0-42CA-8ADD-9FA07C174300} = {35ADF278-F225-4ABA-B64A-9F8C4181D62A}
-		{36ED8968-0211-4222-96AA-710EA353C9A2} = {35ADF278-F225-4ABA-B64A-9F8C4181D62A}
 		{AF6CE392-FFA9-49CB-AA08-E361A7352D55} = {35ADF278-F225-4ABA-B64A-9F8C4181D62A}
-		{FF615B2F-BAEF-4671-9279-BD291244F2FB} = {35ADF278-F225-4ABA-B64A-9F8C4181D62A}
+		{EECD9955-26E0-42CA-8ADD-9FA07C174300} = {35ADF278-F225-4ABA-B64A-9F8C4181D62A}
 		{7301F66C-FF21-4DC6-8EEE-2BA88186DC16} = {74EE9A91-BBF7-4BED-81A6-98BF4B900B25}
 		{0A29E2CA-F59D-4467-8FBC-6CA686CAAA3B} = {74EE9A91-BBF7-4BED-81A6-98BF4B900B25}
 		{CACB60A9-1E76-4F92-8831-B134A658C695} = {74EE9A91-BBF7-4BED-81A6-98BF4B900B25}
 		{E9B43C9E-60AA-4387-A955-CAFB7EFA8C27} = {74EE9A91-BBF7-4BED-81A6-98BF4B900B25}
 		{ACD0AFCD-89A2-4AA8-9ECD-5912D58E0A9E} = {01CA9926-ABDB-4A1D-A2AD-38B446E94E28}
 		{F3F718BC-ED9E-492A-A80A-F2DC2501F45A} = {01CA9926-ABDB-4A1D-A2AD-38B446E94E28}
+		{36ED8968-0211-4222-96AA-710EA353C9A2} = {C259369A-1012-4F77-8E83-F2E53E9AD3A5}
+		{FF615B2F-BAEF-4671-9279-BD291244F2FB} = {C259369A-1012-4F77-8E83-F2E53E9AD3A5}
+		{4D142791-B828-4DEE-8079-20933E0F64D8} = {C259369A-1012-4F77-8E83-F2E53E9AD3A5}
 	EndGlobalSection
 EndGlobal
