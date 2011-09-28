@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace PowerStudio.LanguageServices.Tagging.Tags
 {
-    public class GlyphTag : TokenTag, IGlyphTag
+    public class GlyphTag<TToken> : TokenTag<TToken>, IGlyphTag
     {
     }
 }

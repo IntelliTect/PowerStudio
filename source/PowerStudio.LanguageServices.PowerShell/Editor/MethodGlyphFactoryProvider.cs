@@ -13,11 +13,12 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.Management.Automation;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 using PowerStudio.LanguageServices.Editor;
-using PowerStudio.LanguageServices.Tagging.Tags;
+using PowerStudio.LanguageServices.PowerShell.Tagging.Tags;
 
 #endregion
 
@@ -28,11 +29,12 @@ namespace PowerStudio.LanguageServices.PowerShell.Editor
     [Order( After = "VsTextMarker" )]
     [ContentType( LanguageConfiguration.Name )]
     [TagType( typeof (MethodTag) )]
-    internal sealed class MethodGlyphFactoryProvider : GlyphFactoryProviderBase<MethodTag>
+    internal sealed class MethodGlyphFactoryProvider : GlyphFactoryProviderBase<MethodTag, PSToken>
     {
-        protected override Func<IGlyphFactory<MethodTag>> GetFactory( IWpfTextView view, IWpfTextViewMargin margin )
+        protected override Func<IGlyphFactory<MethodTag, PSToken>> GetFactory( IWpfTextView view,
+                                                                               IWpfTextViewMargin margin )
         {
-            return () => new MethodGlyphFactory() as IGlyphFactory<MethodTag>;
+            return () => new MethodGlyphFactory() as IGlyphFactory<MethodTag, PSToken>;
         }
     }
 }

@@ -13,6 +13,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
@@ -25,7 +26,7 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Providers
 {
     [Export( typeof (ITaggerProvider) )]
-    [TagType( typeof (OutliningTag) )]
+    [TagType(typeof(OutliningTag<PSToken>))]
     [ContentType( LanguageConfiguration.Name )]
     public class OutliningTaggerProvider : TaggerProviderBase
     {

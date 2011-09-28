@@ -23,8 +23,8 @@ using PowerStudio.LanguageServices.Tagging;
 
 namespace PowerStudio.LanguageServices.Intellisense.QuickInfo
 {
-    public abstract class QuickInfoSource<T> : IQuickInfoSource
-            where T : ITokenTag
+    public abstract class QuickInfoSource<TTokenTag,TToken> : IQuickInfoSource
+            where TTokenTag : ITokenTag<TToken>
     {
         private bool _Disposed;
 
@@ -35,17 +35,17 @@ namespace PowerStudio.LanguageServices.Intellisense.QuickInfo
         /// <param name = "aggregator">The aggregator.</param>
         /// <param name = "quickInfoSourceProvider">The quick info source provider.</param>
         protected QuickInfoSource( ITextBuffer buffer,
-                                   ITagAggregator<T> aggregator,
-                                   QuickInfoSourceProvider<T> quickInfoSourceProvider )
+                                   ITagAggregator<TTokenTag> aggregator,
+                                   QuickInfoSourceProvider<TTokenTag,TToken> quickInfoSourceProvider)
         {
             Aggregator = aggregator;
             QuickInfoSourceProvider = quickInfoSourceProvider;
             Buffer = buffer;
         }
 
-        protected ITagAggregator<T> Aggregator { get; private set; }
+        protected ITagAggregator<TTokenTag> Aggregator { get; private set; }
         protected ITextBuffer Buffer { get; private set; }
-        protected QuickInfoSourceProvider<T> QuickInfoSourceProvider { get; private set; }
+        protected QuickInfoSourceProvider<TTokenTag,TToken> QuickInfoSourceProvider { get; private set; }
 
         #region IQuickInfoSource Members
 
@@ -122,6 +122,6 @@ namespace PowerStudio.LanguageServices.Intellisense.QuickInfo
             _Disposed = true;
         }
 
-        protected abstract object GetToolTip( T tokenTag );
+        protected abstract object GetToolTip( TTokenTag tokenTag );
     }
 }

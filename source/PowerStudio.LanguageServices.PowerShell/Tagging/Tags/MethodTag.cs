@@ -12,13 +12,13 @@
 #region Using Directives
 
 using System.Management.Automation;
+using PowerStudio.LanguageServices.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.LanguageService.Tagging.Tags
+namespace PowerStudio.LanguageServices.PowerShell.Tagging.Tags
 {
-    public class PsTokenTag : TokenTag<PSToken>
+    public class MethodTag : GlyphTag<PSToken>
     {
-        
     }
 }

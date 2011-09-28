@@ -18,6 +18,7 @@ using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 using PowerStudio.LanguageServices.PowerShell.Tagging.Taggers;
+using PowerStudio.LanguageServices.PowerShell.Tagging.Tags;
 using PowerStudio.LanguageServices.Tagging.Providers;
 using PowerStudio.LanguageServices.Tagging.Tags;
 

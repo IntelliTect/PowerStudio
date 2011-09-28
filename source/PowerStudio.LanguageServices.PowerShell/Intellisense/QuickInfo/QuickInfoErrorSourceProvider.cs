@@ -12,6 +12,7 @@
 #region Using Directives
 
 using System.ComponentModel.Composition;
+using System.Management.Automation;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
@@ -25,7 +26,7 @@ namespace PowerStudio.LanguageServices.PowerShell.Intellisense.QuickInfo
     [Export( typeof (IQuickInfoSourceProvider) )]
     [ContentType( LanguageConfiguration.Name )]
     [Name( LanguageConfiguration.Name + "Error QuickInfo" )]
-    public class QuickInfoErrorSourceProvider : QuickInfoSourceProvider<ErrorTokenTag>
+    public class QuickInfoErrorSourceProvider : QuickInfoSourceProvider<ErrorTokenTag<PSToken>,PSToken>
     {
         /// <summary>
         ///   Creates a Quick Info provider for the specified context.
@@ -36,9 +37,10 @@ namespace PowerStudio.LanguageServices.PowerShell.Intellisense.QuickInfo
         /// </returns>
         public override IQuickInfoSource TryCreateQuickInfoSource( ITextBuffer textBuffer )
         {
-            return new QuickInfoErrorSource( textBuffer,
-                                             TagAggregatorFactory.CreateTagAggregator<ErrorTokenTag>( textBuffer ),
-                                             this );
+            return new QuickInfoErrorSource<PSToken>( textBuffer,
+                                                      TagAggregatorFactory.CreateTagAggregator<ErrorTokenTag<PSToken>>(
+                                                              textBuffer ),
+                                                      this );
         }
     }
 }

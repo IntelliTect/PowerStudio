@@ -23,7 +23,7 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public class BraceMatchingTagger : ViewTaggerBase<BraceMatchingTag>
+    public class BraceMatchingTagger : ViewTaggerBase<BraceMatchingTag<PSToken>, PSToken>
     {
         public BraceMatchingTagger( ITextView view, ITextBuffer buffer )
                 : base( view, buffer )
@@ -41,7 +41,7 @@ namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
         /// <returns>
         ///   <c>true</c> if the tag is in the span for the snapshot; otherwise, <c>false</c>.
         /// </returns>
-        protected override bool IsTokenInSpan( BraceMatchingTag tag, ITextSnapshot snapshot, SnapshotSpan span )
+        protected override bool IsTokenInSpan( BraceMatchingTag<PSToken> tag, ITextSnapshot snapshot, SnapshotSpan span )
         {
             if ( !CurrentChar.HasValue )
             {
@@ -59,9 +59,9 @@ namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
             return false;
         }
 
-        protected override List<BraceMatchingTag> GetTags( ITextSnapshot snapshot )
+        protected override List<BraceMatchingTag<PSToken>> GetTags( ITextSnapshot snapshot )
         {
-            var braces = new List<BraceMatchingTag>();
+            var braces = new List<BraceMatchingTag<PSToken>>();
             var stack = new Stack<PSToken>();
             IEnumerable<PSToken> tokens = GetTokens( snapshot, true );
             foreach ( PSToken token in tokens )
@@ -80,12 +80,12 @@ namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
                             continue;
                         }
                         PSToken startToken = stack.Pop();
-                        var start = new BraceMatchingTag( PredefinedTextMarkerTags.BraceHighlight )
+                        var start = new BraceMatchingTag<PSToken>( PredefinedTextMarkerTags.BraceHighlight )
                                     {
                                             Span = CreateSnapshotSpan( snapshot, startToken ),
                                     };
 
-                        var end = new BraceMatchingTag( PredefinedTextMarkerTags.BraceHighlight )
+                        var end = new BraceMatchingTag<PSToken>( PredefinedTextMarkerTags.BraceHighlight )
                                   {
                                           Span = CreateSnapshotSpan( snapshot, token ),
                                           Match = start

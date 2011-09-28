@@ -22,14 +22,14 @@ namespace PowerStudio.LanguageServices.Tagging
     /// <summary>
     /// </summary>
     /// <typeparam name = "T"></typeparam>
-    public class TokenTagSpan<T> : ITagSpan<T>
-            where T : ITokenTag
+    public class TokenTagSpan<TTokenTag, TToken> : ITagSpan<TTokenTag>
+            where TTokenTag : ITokenTag<TToken>
     {
         /// <summary>
         ///   Initializes a new instance of the <see cref = "TokenTagSpan&lt;T&gt;" /> class.
         /// </summary>
         /// <param name = "tag">The tag.</param>
-        public TokenTagSpan( T tag )
+        public TokenTagSpan( TTokenTag tag )
         {
             if ( ReferenceEquals( tag, null ) )
             {
@@ -43,7 +43,7 @@ namespace PowerStudio.LanguageServices.Tagging
         /// <summary>
         ///   Gets the tag located in this span.
         /// </summary>
-        public T Tag { get; private set; }
+        public TTokenTag Tag { get; private set; }
 
         /// <summary>
         ///   Gets the snapshot span for this tag.

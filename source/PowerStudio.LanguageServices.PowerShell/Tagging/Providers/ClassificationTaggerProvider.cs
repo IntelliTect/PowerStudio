@@ -13,12 +13,12 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 using PowerStudio.LanguageServices.PowerShell.Tagging.Taggers;
-using PowerStudio.LanguageServices.Tagging;
 using PowerStudio.LanguageServices.Tagging.Providers;
 using PowerStudio.LanguageServices.Tagging.Tags;
 
@@ -28,7 +28,7 @@ namespace PowerStudio.LanguageServices.PowerShell.Tagging.Providers
 {
     [Export( typeof (ITaggerProvider) )]
     [ContentType( LanguageConfiguration.Name )]
-    [TagType( typeof (TokenClassificationTag) )]
+    [TagType( typeof (TokenClassificationTag<PSToken>) )]
     public class ClassificationTaggerProvider : TaggerProviderBase
     {
         [Import]

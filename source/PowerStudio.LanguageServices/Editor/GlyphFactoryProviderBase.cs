@@ -19,8 +19,8 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.Editor
 {
-    public abstract class GlyphFactoryProviderBase<T> : IGlyphFactoryProvider
-            where T : GlyphTag
+    public abstract class GlyphFactoryProviderBase<TTokenTag,TToken> : IGlyphFactoryProvider
+            where TTokenTag : GlyphTag<TToken>
     {
         #region IGlyphFactoryProvider Members
 
@@ -39,6 +39,7 @@ namespace PowerStudio.LanguageServices.Editor
 
         #endregion
 
-        protected abstract Func<IGlyphFactory<T>> GetFactory( IWpfTextView view, IWpfTextViewMargin margin );
+        protected abstract Func<IGlyphFactory<TTokenTag, TToken>> GetFactory( IWpfTextView view,
+                                                                              IWpfTextViewMargin margin );
     }
 }

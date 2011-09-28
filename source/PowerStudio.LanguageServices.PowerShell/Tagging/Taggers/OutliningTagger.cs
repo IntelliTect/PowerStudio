@@ -21,7 +21,7 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public class OutliningTagger : TaggerBase<OutliningTag>
+    public class OutliningTagger : TaggerBase<OutliningTag<PSToken>, PSToken>
     {
         public OutliningTagger( ITextBuffer buffer )
                 : base( buffer )
@@ -29,16 +29,16 @@ namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
             Parse();
         }
 
-        protected override bool IsTokenInSpan( OutliningTag tag, ITextSnapshot snapshot, SnapshotSpan span )
+        protected override bool IsTokenInSpan( OutliningTag<PSToken> tag, ITextSnapshot snapshot, SnapshotSpan span )
         {
             int startLineNumber = span.Start.GetContainingLine().LineNumber;
             int endLineNumber = span.End.GetContainingLine().LineNumber;
             return tag.StartLine <= endLineNumber && tag.EndLine >= startLineNumber;
         }
 
-        protected override List<OutliningTag> GetTags( ITextSnapshot snapshot )
+        protected override List<OutliningTag<PSToken>> GetTags( ITextSnapshot snapshot )
         {
-            var regions = new List<OutliningTag>();
+            var regions = new List<OutliningTag<PSToken>>();
             var stack = new Stack<PSToken>();
             IEnumerable<PSToken> tokens = GetTokens( snapshot, true );
             foreach ( PSToken token in tokens )
@@ -62,9 +62,9 @@ namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
                         {
                             continue;
                         }
-                        regions.Add( new OutliningTag( snapshot,
-                                                       CreateSnapshotSpan( snapshot, startToken, token ),
-                                                       false )
+                        regions.Add( new OutliningTag<PSToken>( snapshot,
+                                                                CreateSnapshotSpan( snapshot, startToken, token ),
+                                                                false )
                                      {
                                              StartLine = startToken.StartLine,
                                              EndLine = token.StartLine,

@@ -19,9 +19,9 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.LanguageServices.Tagging
 {
-    public interface ITokenTag : ITag
+    public interface ITokenTag<out TToken> : ITag
     {
-        PSToken Token { get; }
+        TToken Token { get; }
         SnapshotSpan Span { get; }
     }
 }

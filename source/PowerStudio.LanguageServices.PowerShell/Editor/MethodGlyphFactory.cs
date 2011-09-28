@@ -11,18 +11,19 @@
 
 #region Using Directives
 
+using System.Management.Automation;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Microsoft.VisualStudio.Text.Formatting;
 using PowerStudio.LanguageServices.Editor;
-using PowerStudio.LanguageServices.Tagging.Tags;
+using PowerStudio.LanguageServices.PowerShell.Tagging.Tags;
 
 #endregion
 
 namespace PowerStudio.LanguageServices.PowerShell.Editor
 {
-    internal class MethodGlyphFactory : GlyphFactoryBase<MethodTag>
+    internal class MethodGlyphFactory : GlyphFactoryBase<MethodTag, PSToken>
     {
         public override UIElement CreateGlyph( IWpfTextViewLine line, MethodTag token )
         {

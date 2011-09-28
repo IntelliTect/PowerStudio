@@ -20,10 +20,10 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.Editor
 {
-    public abstract class GlyphFactoryBase<TToken> : IGlyphFactory<TToken>
-            where TToken : GlyphTag
+    public abstract class GlyphFactoryBase<TTokenTag, TToken> : IGlyphFactory<TTokenTag, TToken>
+            where TTokenTag : GlyphTag<TToken>
     {
-        #region IGlyphFactory<TToken> Members
+        #region IGlyphFactory<TTokenTag,TToken> Members
 
         /// <summary>
         ///   Generates a new glyph visual for the given line.
@@ -36,11 +36,11 @@ namespace PowerStudio.LanguageServices.Editor
         public UIElement GenerateGlyph( IWpfTextViewLine line, IGlyphTag tag )
         {
             if ( tag == null ||
-                 !( tag is TToken ) )
+                 !( tag is TTokenTag ) )
             {
                 return null;
             }
-            var tokenTag = (TToken) tag;
+            var tokenTag = (TTokenTag) tag;
             return CreateGlyph( line, tokenTag );
         }
 
@@ -52,7 +52,7 @@ namespace PowerStudio.LanguageServices.Editor
         /// <returns>
         ///   The visual element for the given tag.
         /// </returns>
-        public abstract UIElement CreateGlyph( IWpfTextViewLine line, TToken token );
+        public abstract UIElement CreateGlyph( IWpfTextViewLine line, TTokenTag token );
 
         #endregion
     }

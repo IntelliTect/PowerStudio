@@ -25,7 +25,7 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public class HighlightWordTagger : ViewTaggerBase<HighlightWordTag>
+    public class HighlightWordTagger : ViewTaggerBase<HighlightWordTag,string>
     {
         private static readonly TimeSpan WordHighlightDelay = TimeSpan.FromMilliseconds( 500 );
         private readonly object _UpdateLock = new object();

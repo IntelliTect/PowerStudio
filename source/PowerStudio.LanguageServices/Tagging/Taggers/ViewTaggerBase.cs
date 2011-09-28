@@ -18,8 +18,8 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace PowerStudio.LanguageServices.Tagging.Taggers
 {
-    public abstract class ViewTaggerBase<T> : TaggerBase<T>
-            where T : ITokenTag
+    public abstract class ViewTaggerBase<TTokenTag,TToken> : TaggerBase<TTokenTag,TToken>
+            where TTokenTag : ITokenTag<TToken>
     {
         protected ViewTaggerBase( ITextView view, ITextBuffer buffer )
                 : base( buffer )

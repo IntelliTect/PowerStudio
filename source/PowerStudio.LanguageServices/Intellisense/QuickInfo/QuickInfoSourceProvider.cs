@@ -22,8 +22,8 @@ using PowerStudio.LanguageServices.Tagging;
 
 namespace PowerStudio.LanguageServices.Intellisense.QuickInfo
 {
-    public abstract class QuickInfoSourceProvider<T> : IQuickInfoSourceProvider
-            where T : ITokenTag
+    public abstract class QuickInfoSourceProvider<TTokenTag,TToken> : IQuickInfoSourceProvider
+            where TTokenTag : ITokenTag<TToken>
     {
         [Import]
         protected IBufferTagAggregatorFactoryService TagAggregatorFactory { get; set; }

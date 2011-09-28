@@ -9,9 +9,17 @@
 
 #endregion
 
-namespace PowerStudio.LanguageServices.Tagging.Tags
+#region Using Directives
+
+using System.Management.Automation;
+using PowerStudio.LanguageServices.Tagging.Tags;
+
+#endregion
+
+namespace PowerStudio.LanguageServices.PowerShell.Tagging.Tags
 {
-    public class MethodTag : GlyphTag
+    public class PsTokenTag : TokenTag<PSToken>
     {
+        
     }
 }

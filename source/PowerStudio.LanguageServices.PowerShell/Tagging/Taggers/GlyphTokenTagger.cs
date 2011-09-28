@@ -19,8 +19,8 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public abstract class GlyphTokenTagger<TTokenTag> : TaggerBase<TTokenTag>
-            where TTokenTag : GlyphTag
+    public abstract class GlyphTokenTagger<TTokenTag,TToken> : TaggerBase<TTokenTag,TToken>
+            where TTokenTag : GlyphTag<TToken>
     {
         protected GlyphTokenTagger( ITextBuffer buffer )
                 : base( buffer )

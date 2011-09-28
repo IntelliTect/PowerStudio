@@ -53,6 +53,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LanguageServices", "Languag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.LanguageServices.PowerShell", "source\PowerStudio.LanguageServices.PowerShell\PowerStudio.LanguageServices.PowerShell.csproj", "{4D142791-B828-4DEE-8079-20933E0F64D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerStudio.LanguageServices.Batch", "source\PowerStudio.LanguageServices.Batch\PowerStudio.LanguageServices.Batch.csproj", "{4084BD9D-C218-4D3C-AE63-A59B76C5964E}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = VisualStudio.PowerShell.vsmdi
@@ -110,6 +112,10 @@ Global
 		{4D142791-B828-4DEE-8079-20933E0F64D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D142791-B828-4DEE-8079-20933E0F64D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D142791-B828-4DEE-8079-20933E0F64D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4084BD9D-C218-4D3C-AE63-A59B76C5964E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4084BD9D-C218-4D3C-AE63-A59B76C5964E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4084BD9D-C218-4D3C-AE63-A59B76C5964E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4084BD9D-C218-4D3C-AE63-A59B76C5964E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,5 +132,6 @@ Global
 		{36ED8968-0211-4222-96AA-710EA353C9A2} = {C259369A-1012-4F77-8E83-F2E53E9AD3A5}
 		{FF615B2F-BAEF-4671-9279-BD291244F2FB} = {C259369A-1012-4F77-8E83-F2E53E9AD3A5}
 		{4D142791-B828-4DEE-8079-20933E0F64D8} = {C259369A-1012-4F77-8E83-F2E53E9AD3A5}
+		{4084BD9D-C218-4D3C-AE63-A59B76C5964E} = {C259369A-1012-4F77-8E83-F2E53E9AD3A5}
 	EndGlobalSection
 EndGlobal

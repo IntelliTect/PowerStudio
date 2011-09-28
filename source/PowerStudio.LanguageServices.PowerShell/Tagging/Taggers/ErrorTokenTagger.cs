@@ -13,6 +13,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using PowerStudio.LanguageServices.Tagging.Taggers;
 using PowerStudio.LanguageServices.Tagging.Tags;
@@ -21,7 +22,7 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public class ErrorTokenTagger : TaggerBase<ErrorTokenTag>
+    public class ErrorTokenTagger : TaggerBase<ErrorTokenTag<PSToken>, PSToken>
     {
         public ErrorTokenTagger( ITextBuffer buffer )
                 : base( buffer )
@@ -29,14 +30,14 @@ namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
             Parse();
         }
 
-        protected override List<ErrorTokenTag> GetTags( ITextSnapshot snapshot )
+        protected override List<ErrorTokenTag<PSToken>> GetTags( ITextSnapshot snapshot )
         {
-            List<ErrorTokenTag> tags = ( from error in GetErrorTokens( snapshot )
-                                         select new ErrorTokenTag( error.Message )
-                                                {
-                                                        Token = error.Token,
-                                                        Span = CreateSnapshotSpan( snapshot, error.Token )
-                                                } )
+            List<ErrorTokenTag<PSToken>> tags = ( from error in GetErrorTokens( snapshot )
+                                                  select new ErrorTokenTag<PSToken>( error.Message )
+                                                         {
+                                                                 Token = error.Token,
+                                                                 Span = CreateSnapshotSpan( snapshot, error.Token )
+                                                         } )
                     .ToList();
             return tags;
         }

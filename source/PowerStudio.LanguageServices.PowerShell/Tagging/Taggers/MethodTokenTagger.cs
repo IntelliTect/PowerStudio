@@ -14,13 +14,14 @@
 using System.Collections.Generic;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
+using PowerStudio.LanguageServices.PowerShell.Tagging.Tags;
 using PowerStudio.LanguageServices.Tagging.Tags;
 
 #endregion
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public class MethodTokenTagger : GlyphTokenTagger<MethodTag>
+    public class MethodTokenTagger : GlyphTokenTagger<MethodTag,PSToken>
     {
         public MethodTokenTagger( ITextBuffer buffer )
                 : base( buffer )
@@ -28,7 +29,7 @@ namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
             Parse();
         }
 
-        protected override List<MethodTag> GetTags( ITextSnapshot snapshot )
+        protected override List<MethodTag> GetTags(ITextSnapshot snapshot)
         {
             var methods = new List<MethodTag>();
             IEnumerable<PSToken> tokens = base.GetTokens( snapshot, false );
@@ -38,7 +39,8 @@ namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
                 if ( nextIsMethodName )
                 {
                     nextIsMethodName = false;
-                    methods.Add( new MethodTag { Token = psToken, Span = CreateSnapshotSpan( snapshot, psToken ) } );
+                    methods.Add( new MethodTag
+                                 { Token = psToken, Span = CreateSnapshotSpan( snapshot, psToken ) } );
                     continue;
                 }
 

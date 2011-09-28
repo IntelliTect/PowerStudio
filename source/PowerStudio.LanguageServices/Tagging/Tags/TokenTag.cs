@@ -11,18 +11,17 @@
 
 #region Using Directives
 
-using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 
 #endregion
 
 namespace PowerStudio.LanguageServices.Tagging.Tags
 {
-    public class TokenTag : ITokenTag
+    public class TokenTag<TTokenTag> : ITokenTag<TTokenTag>
     {
         #region ITokenTag Members
 
-        public PSToken Token { get; set; }
+        public TTokenTag Token { get; set; }
         public SnapshotSpan Span { get; set; }
 
         #endregion

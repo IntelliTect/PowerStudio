@@ -18,7 +18,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.LanguageServices.Tagging.Tags
 {
-    public class BraceMatchingTag : TokenTag, ITextMarkerTag
+    public class BraceMatchingTag<TToken> : TokenTag<TToken>, ITextMarkerTag
     {
         /// <summary>
         ///   Initializes a new instance of the <see cref = "BraceMatchingTag" /> class.
@@ -51,7 +51,7 @@ namespace PowerStudio.LanguageServices.Tagging.Tags
         ///   cursor and whether either tag is in the currently updating span.
         /// </remarks>
         /// <value>The match.</value>
-        public BraceMatchingTag Match { get; set; }
+        public BraceMatchingTag<TToken> Match { get; set; }
 
         #region ITextMarkerTag Members
 

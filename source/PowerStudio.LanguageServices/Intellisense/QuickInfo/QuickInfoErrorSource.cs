@@ -19,16 +19,16 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.Intellisense.QuickInfo
 {
-    public class QuickInfoErrorSource : QuickInfoSource<ErrorTokenTag>
+    public class QuickInfoErrorSource<TToken> : QuickInfoSource<ErrorTokenTag<TToken>, TToken>
     {
         public QuickInfoErrorSource( ITextBuffer buffer,
-                                     ITagAggregator<ErrorTokenTag> aggregator,
-                                     QuickInfoSourceProvider<ErrorTokenTag> quickInfoErrorSourceProvider )
+                                     ITagAggregator<ErrorTokenTag<TToken>> aggregator,
+                                     QuickInfoSourceProvider<ErrorTokenTag<TToken>, TToken> quickInfoErrorSourceProvider )
                 : base( buffer, aggregator, quickInfoErrorSourceProvider )
         {
         }
 
-        protected override object GetToolTip( ErrorTokenTag tokenTag )
+        protected override object GetToolTip( ErrorTokenTag<TToken> tokenTag )
         {
             return tokenTag.ToolTipContent;
         }

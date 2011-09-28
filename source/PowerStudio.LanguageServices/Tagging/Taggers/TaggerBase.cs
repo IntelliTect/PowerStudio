@@ -23,22 +23,22 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.LanguageServices.Tagging.Taggers
 {
-    public abstract class TaggerBase<T> : ITagger<T>
-            where T : ITokenTag
+    public abstract class TaggerBase<TTokenTag, TToken> : ITagger<TTokenTag>
+            where TTokenTag : ITokenTag<TToken>
     {
         protected TaggerBase( ITextBuffer buffer )
         {
             Buffer = buffer;
             Snapshot = Buffer.CurrentSnapshot;
             Buffer.Changed += BufferChanged;
-            Tags = Enumerable.Empty<T>().ToList().AsReadOnly();
+            Tags = Enumerable.Empty<TTokenTag>().ToList().AsReadOnly();
         }
 
         protected ITextBuffer Buffer { get; private set; }
         protected ITextSnapshot Snapshot { get; set; }
-        protected ReadOnlyCollection<T> Tags { get; set; }
+        protected ReadOnlyCollection<TTokenTag> Tags { get; set; }
 
-        #region ITagger<T> Members
+        #region ITagger<TTokenTag> Members
 
         /// <summary>
         ///   Gets all the tags that overlap the <paramref name = "spans" />.
@@ -56,7 +56,7 @@ namespace PowerStudio.LanguageServices.Tagging.Taggers
         ///     which allows lazy evaluation of the entire tagging stack.
         ///   </para>
         /// </remarks>
-        public virtual IEnumerable<ITagSpan<T>> GetTags( NormalizedSnapshotSpanCollection spans )
+        public virtual IEnumerable<ITagSpan<TTokenTag>> GetTags( NormalizedSnapshotSpanCollection spans )
         {
             if ( spans.Count == 0 ||
                  Buffer.CurrentSnapshot.Length == 0 )
@@ -64,17 +64,17 @@ namespace PowerStudio.LanguageServices.Tagging.Taggers
                 //there is no content in the buffer
                 yield break;
             }
-            ReadOnlyCollection<T> tags = Tags;
+            ReadOnlyCollection<TTokenTag> tags = Tags;
             ITextSnapshot currentSnapshot = Snapshot;
             SnapshotSpan span =
                     new SnapshotSpan( spans[0].Start, spans[spans.Count - 1].End )
                             .TranslateTo( currentSnapshot, SpanTrackingMode.EdgeExclusive );
 
-            foreach ( T tag in from tag in tags
-                               where IsTokenInSpan( tag, currentSnapshot, span )
-                               select tag )
+            foreach ( TTokenTag tag in from tag in tags
+                                       where IsTokenInSpan( tag, currentSnapshot, span )
+                                       select tag )
             {
-                yield return new TokenTagSpan<T>( tag );
+                yield return new TokenTagSpan<TTokenTag, TToken>( tag );
             }
         }
 
@@ -124,7 +124,7 @@ namespace PowerStudio.LanguageServices.Tagging.Taggers
         /// <returns>
         ///   <c>true</c> if the tag is in the span for the snapshot; otherwise, <c>false</c>.
         /// </returns>
-        protected virtual bool IsTokenInSpan( T tag, ITextSnapshot snapshot, SnapshotSpan span )
+        protected virtual bool IsTokenInSpan( TTokenTag tag, ITextSnapshot snapshot, SnapshotSpan span )
         {
             return IsSpanContainedInTargetSpan( snapshot, span, tag.Span );
         }
@@ -137,11 +137,11 @@ namespace PowerStudio.LanguageServices.Tagging.Taggers
         protected virtual void Parse()
         {
             ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
-            List<T> tags = GetTags( newSnapshot );
+            List<TTokenTag> tags = GetTags( newSnapshot );
             PublishTagChanges( newSnapshot, tags );
         }
 
-        protected abstract List<T> GetTags( ITextSnapshot snapshot );
+        protected abstract List<TTokenTag> GetTags( ITextSnapshot snapshot );
 
         /// <summary>
         ///   Publishes the tag changes.
@@ -155,9 +155,9 @@ namespace PowerStudio.LanguageServices.Tagging.Taggers
         /// </remarks>
         /// <param name = "newSnapshot">The new snapshot.</param>
         /// <param name = "newTags">The new tags.</param>
-        protected virtual void PublishTagChanges( ITextSnapshot newSnapshot, List<T> newTags )
+        protected virtual void PublishTagChanges( ITextSnapshot newSnapshot, List<TTokenTag> newTags )
         {
-            ReadOnlyCollection<T> currentTags = Tags;
+            ReadOnlyCollection<TTokenTag> currentTags = Tags;
             var oldSpans =
                     new List<Span>( currentTags.Select( tag => tag.Span.TranslateTo( newSnapshot,
                                                                                      SpanTrackingMode.EdgeExclusive )

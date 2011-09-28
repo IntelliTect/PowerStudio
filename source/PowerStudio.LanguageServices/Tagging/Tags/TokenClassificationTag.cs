@@ -22,7 +22,7 @@ namespace PowerStudio.LanguageServices.Tagging.Tags
     /// <summary>
     ///   An implementation of <see cref = "T:Microsoft.VisualStudio.Text.Tagging.IClassificationTag" />.
     /// </summary>
-    public class TokenClassificationTag : TokenTag, IClassificationTag
+    public class TokenClassificationTag<TToken> : TokenTag<TToken>, IClassificationTag
     {
         /// <summary>
         ///   Create a new tag associated with the given type of classification.

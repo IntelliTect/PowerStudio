@@ -20,11 +20,11 @@ namespace PowerStudio.LanguageServices.Tagging
 {
     /// <summary>
     /// </summary>
-    public interface ITokenClassifier
+    public interface ITokenClassifier<TToken>
     {
         /// <summary>
         ///   Gets the <see cref = "Microsoft.VisualStudio.Text.Classification.IClassificationType" /> with the specified token type.
         /// </summary>
-        IClassificationType this[ PSToken token ] { get; }
+        IClassificationType this[ TToken token ] { get; }
     }
 }

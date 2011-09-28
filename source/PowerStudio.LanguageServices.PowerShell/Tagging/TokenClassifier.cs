@@ -15,12 +15,13 @@ using System.Management.Automation;
 using Microsoft.VisualStudio.Language.StandardClassification;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
+using PowerStudio.LanguageServices.Tagging;
 
 #endregion
 
-namespace PowerStudio.LanguageServices.Tagging
+namespace PowerStudio.LanguageServices.PowerShell.Tagging
 {
-    public class TokenClassifier : ITokenClassifier
+    public class TokenClassifier : ITokenClassifier<PSToken>
     {
         private static readonly TokenClass[] TokenClasses = new[]
                                                             {

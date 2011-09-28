@@ -13,6 +13,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Tagging;
@@ -27,7 +28,7 @@ namespace PowerStudio.LanguageServices.PowerShell.Tagging.Providers
 {
     [Export( typeof (ITaggerProvider) )]
     [ContentType( LanguageConfiguration.Name )]
-    [TagType( typeof (ErrorTokenTag) )]
+    [TagType(typeof(ErrorTokenTag<PSToken>))]
     [Order( Before = Priority.Default )]
     public class ErrorTokenTaggerProvider : TaggerProviderBase
     {

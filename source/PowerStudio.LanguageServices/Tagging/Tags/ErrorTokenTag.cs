@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.LanguageServices.Tagging.Tags
 {
-    public class ErrorTokenTag : TokenTag, IErrorTag
+    public class ErrorTokenTag<TToken> : TokenTag<TToken>, IErrorTag
     {
         /// <summary>
         ///   Initializes a new instance of a <see cref = "T:Microsoft.VisualStudio.Text.Tagging.ErrorTag" /> of the specified type.

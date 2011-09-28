@@ -20,8 +20,8 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.Editor
 {
-    public interface IGlyphFactory<in TToken> : IGlyphFactory
-            where TToken : GlyphTag
+    public interface IGlyphFactory<in TTokenTag, in TToken> : IGlyphFactory
+            where TTokenTag : GlyphTag<TToken>
     {
         /// <summary>
         ///   Generates a new glyph visual for the given line and token.
@@ -31,6 +31,6 @@ namespace PowerStudio.LanguageServices.Editor
         /// <returns>
         ///   The visual element for the given tag.
         /// </returns>
-        UIElement CreateGlyph( IWpfTextViewLine line, TToken token );
+        UIElement CreateGlyph( IWpfTextViewLine line, TTokenTag token );
     }
 }

@@ -30,7 +30,7 @@ namespace PowerStudio.LanguageServices.PowerShell.Intellisense.QuickInfo
     [Export( typeof (IQuickInfoSourceProvider) )]
     [ContentType( LanguageConfiguration.Name )]
     [Name( LanguageConfiguration.Name + "TokenTag QuickInfo" )]
-    public class QuickInfoTokenSourceProvider : QuickInfoSourceProvider<TokenClassificationTag>
+    public class QuickInfoTokenSourceProvider : QuickInfoSourceProvider<TokenClassificationTag<PSToken>, PSToken>
     {
         /// <summary>
         ///   Creates a Quick Info provider for the specified context.
@@ -41,23 +41,24 @@ namespace PowerStudio.LanguageServices.PowerShell.Intellisense.QuickInfo
         /// </returns>
         public override IQuickInfoSource TryCreateQuickInfoSource( ITextBuffer textBuffer )
         {
-            ITagAggregator<TokenClassificationTag> tagAggregator =
-                    TagAggregatorFactory.CreateTagAggregator<TokenClassificationTag>( textBuffer );
+            ITagAggregator<TokenClassificationTag<PSToken>> tagAggregator =
+                    TagAggregatorFactory.CreateTagAggregator<TokenClassificationTag<PSToken>>( textBuffer );
             return new QuickInfoTokenSource( textBuffer, tagAggregator, this );
         }
 
         #region Nested type: QuickInfoTokenSource
 
-        private class QuickInfoTokenSource : QuickInfoSource<TokenClassificationTag>
+        private class QuickInfoTokenSource : QuickInfoSource<TokenClassificationTag<PSToken>, PSToken>
         {
             public QuickInfoTokenSource( ITextBuffer buffer,
-                                         ITagAggregator<TokenClassificationTag> aggregator,
-                                         QuickInfoSourceProvider<TokenClassificationTag> quickInfoErrorSourceProvider )
+                                         ITagAggregator<TokenClassificationTag<PSToken>> aggregator,
+                                         QuickInfoSourceProvider<TokenClassificationTag<PSToken>, PSToken>
+                                                 quickInfoErrorSourceProvider )
                     : base( buffer, aggregator, quickInfoErrorSourceProvider )
             {
             }
 
-            protected override object GetToolTip( TokenClassificationTag tokenTag )
+            protected override object GetToolTip( TokenClassificationTag<PSToken> tokenTag )
             {
                 PSToken token = tokenTag.Token;
                 var sb = new StringBuilder();

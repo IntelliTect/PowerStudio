@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.LanguageServices.Tagging.Tags
 {
-    public class HighlightWordTag : TokenTag, ITextMarkerTag
+    public class HighlightWordTag : TokenTag<string>, ITextMarkerTag
     {
         /// <summary>
         ///   Initializes a new instance of the <see cref = "HighlightWordTag" /> class.

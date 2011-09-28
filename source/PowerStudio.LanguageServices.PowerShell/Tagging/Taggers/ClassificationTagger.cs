@@ -23,29 +23,29 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public class ClassificationTagger : TaggerBase<TokenClassificationTag>
+    public class ClassificationTagger : TaggerBase<TokenClassificationTag<PSToken>, PSToken>
     {
         public ClassificationTagger( ITextBuffer buffer,
-                                     ITokenClassifier tokenClassifier )
+                                     ITokenClassifier<PSToken> tokenClassifier )
                 : base( buffer )
         {
             TokenClassifier = tokenClassifier;
             Parse();
         }
 
-        public ITokenClassifier TokenClassifier { get; set; }
+        public ITokenClassifier<PSToken> TokenClassifier { get; set; }
 
-        protected override List<TokenClassificationTag> GetTags( ITextSnapshot snapshot )
+        protected override List<TokenClassificationTag<PSToken>> GetTags( ITextSnapshot snapshot )
         {
             IEnumerable<PSToken> tokens = GetTokens( snapshot, true );
 
-            List<TokenClassificationTag> tags = ( from token in tokens
-                                                  let tokenClassifier = TokenClassifier[token]
-                                                  select new TokenClassificationTag( tokenClassifier )
-                                                         {
-                                                                 Token = token,
-                                                                 Span = CreateSnapshotSpan( snapshot, token )
-                                                         } )
+            List<TokenClassificationTag<PSToken>> tags = ( from token in tokens
+                                                           let tokenClassifier = TokenClassifier[token]
+                                                           select new TokenClassificationTag<PSToken>( tokenClassifier )
+                                                                  {
+                                                                          Token = token,
+                                                                          Span = CreateSnapshotSpan( snapshot, token )
+                                                                  } )
                     .ToList();
 
             return tags;

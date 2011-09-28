@@ -22,7 +22,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace PowerStudio.LanguageServices.Tagging.Tags
 {
-    public class OutliningTag : TokenTag, IOutliningRegionTag
+    public class OutliningTag<TToken> : TokenTag<TToken>, IOutliningRegionTag
     {
         /// <summary>
         ///   Initializes a new instance of the <see cref = "OutliningTag" /> class.

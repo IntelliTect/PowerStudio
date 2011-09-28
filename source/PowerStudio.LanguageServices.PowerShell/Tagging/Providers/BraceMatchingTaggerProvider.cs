@@ -12,6 +12,7 @@
 #region Using Directives
 
 using System.ComponentModel.Composition;
+using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
@@ -25,7 +26,7 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Providers
 {
     [Export( typeof (IViewTaggerProvider) )]
-    [TagType( typeof (BraceMatchingTag) )]
+    [TagType( typeof (BraceMatchingTag<PSToken>) )]
     [ContentType( LanguageConfiguration.Name )]
     public class BraceMatchingTaggerProvider : ViewTaggerProviderBase
     {
