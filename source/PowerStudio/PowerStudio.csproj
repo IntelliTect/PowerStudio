@@ -223,6 +223,12 @@
       <Project>{F3F718BC-ED9E-492A-A80A-F2DC2501F45A}</Project>
       <Name>PowerStudio.Debugger</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PowerStudio.LanguageServices.Ini\PowerStudio.LanguageServices.Ini.csproj">
+      <Project>{660215F1-B7E1-49CE-A6C5-2374A73816EB}</Project>
+      <Name>PowerStudio.LanguageServices.Ini</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
     <ProjectReference Include="..\PowerStudio.LanguageServices.PowerShell\PowerStudio.LanguageServices.PowerShell.csproj">
       <Project>{4D142791-B828-4DEE-8079-20933E0F64D8}</Project>
       <Name>PowerStudio.LanguageServices.PowerShell</Name>

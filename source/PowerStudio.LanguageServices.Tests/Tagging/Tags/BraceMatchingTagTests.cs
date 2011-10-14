@@ -43,21 +43,21 @@ namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
         [ExpectedException( typeof (ArgumentNullException) )]
         public void WhenNullIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new BraceMatchingTag( null );
+            new BraceMatchingTag<object>(null);
         }
 
         [TestMethod]
         [ExpectedException( typeof (ArgumentNullException) )]
         public void WhenAnEmptyStringIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new BraceMatchingTag( string.Empty );
+            new BraceMatchingTag<object>(string.Empty);
         }
 
         [TestMethod]
         public void WhenAValueIsPassedIntoTheCtor_ThenTheTypeParameterMatches()
         {
             const string expected = PredefinedTextMarkerTags.BraceHighlight;
-            var tag = new BraceMatchingTag( expected );
+            var tag = new BraceMatchingTag<object>(expected);
             Assert.AreEqual( expected, tag.Type );
         }
     }

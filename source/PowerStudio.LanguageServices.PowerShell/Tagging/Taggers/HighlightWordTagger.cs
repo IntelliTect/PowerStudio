@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management.Automation;
 using System.Reactive.Linq;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
@@ -25,7 +26,7 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public class HighlightWordTagger : ViewTaggerBase<HighlightWordTag,string>
+    public class HighlightWordTagger : PsViewTokenTagger<HighlightWordTag<PSToken>>
     {
         private static readonly TimeSpan WordHighlightDelay = TimeSpan.FromMilliseconds( 500 );
         private readonly object _UpdateLock = new object();
@@ -53,15 +54,15 @@ namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
         private SnapshotSpan? CurrentWord { get; set; }
         private SnapshotPoint RequestedPoint { get; set; }
 
-        protected override List<HighlightWordTag> GetTags( ITextSnapshot snapshot )
+        protected override List<HighlightWordTag<PSToken>> GetTags(ITextSnapshot snapshot)
         {
             if ( CurrentWord == null )
             {
-                return new List<HighlightWordTag>();
+                return new List<HighlightWordTag<PSToken>>();
             }
 
             NormalizedSnapshotSpanCollection currentSpans = WordSpans;
-            return currentSpans.Select( span => new HighlightWordTag { Span = span } ).ToList();
+            return currentSpans.Select( span => new HighlightWordTag<PSToken> { Span = span } ).ToList();
         }
 
         protected virtual IEnumerable<SnapshotSpan> FindAllMatches( SnapshotSpan currentWord )
@@ -91,7 +92,7 @@ namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
             return WordExtentIsValid( currentRequest, word );
         }
 
-        protected override bool IsTokenInSpan( HighlightWordTag tag, ITextSnapshot snapshot, SnapshotSpan span )
+        protected override bool IsTokenInSpan(HighlightWordTag<PSToken> tag, ITextSnapshot snapshot, SnapshotSpan span)
         {
             // our tokens are always available as we have the spans cached
             // and the span does not cover all matches.

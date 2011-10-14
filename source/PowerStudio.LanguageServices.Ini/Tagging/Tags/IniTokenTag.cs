@@ -11,16 +11,17 @@
 
 #region Using Directives
 
-using Microsoft.VisualStudio.Text;
-using Microsoft.VisualStudio.Text.Tagging;
+using PowerStudio.LanguageServices.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.LanguageServices.Tagging
+namespace PowerStudio.LanguageServices.Ini.Tagging.Tags
 {
-    public interface ITokenTag<out TToken> : ITag
+    public class IniTokenTag : TokenTag<IniToken>
     {
-        TToken Token { get; }
-        SnapshotSpan Span { get; }
+        public IniTokenTag( IniToken token )
+        {
+            Token = token;
+        }
     }
 }

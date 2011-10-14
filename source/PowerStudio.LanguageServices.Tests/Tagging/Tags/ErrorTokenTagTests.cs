@@ -27,14 +27,14 @@ namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
         [ExpectedException( typeof (ArgumentNullException) )]
         public void WhenNullToolTipIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new ErrorTokenTag( null );
+            new ErrorTokenTag<object>( null );
         }
 
         [TestMethod]
         [ExpectedException( typeof (ArgumentNullException) )]
         public void WhenAnEmptyStringToolTipIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new ErrorTokenTag( string.Empty );
+            new ErrorTokenTag<object>(string.Empty);
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
         public void WhenNullErrorTypeIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
             const string tooltip = "tooltip";
-            new ErrorTokenTag( tooltip, null );
+            new ErrorTokenTag<object>(tooltip, null);
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
         public void WhenAnEmptyStringErrorTypeIsPassedIntoTheCtorForToolTip_ThenAnExceptionIsThrown()
         {
             const string tooltip = "tooltip";
-            new ErrorTokenTag( tooltip, string.Empty );
+            new ErrorTokenTag<object>(tooltip, string.Empty);
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
         {
             const string expected = PredefinedErrorTypeNames.SyntaxError;
             const string tooltip = "tooltip";
-            var tag = new ErrorTokenTag( tooltip, expected );
+            var tag = new ErrorTokenTag<object>(tooltip, expected);
             Assert.AreEqual( expected, tag.ErrorType );
         }
 
@@ -67,7 +67,7 @@ namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
         {
             const string errorType = PredefinedErrorTypeNames.SyntaxError;
             const string expected = "tooltip";
-            var tag = new ErrorTokenTag( expected, errorType );
+            var tag = new ErrorTokenTag<object>(expected, errorType);
             Assert.AreEqual( expected, tag.ToolTipContent );
         }
     }

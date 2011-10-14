@@ -29,7 +29,7 @@ namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
         public void WhenNullSnapShotIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
             var textSnapshot = new TextSnapshotMock( new TextBufferMock( string.Empty ) );
-            new OutliningTag( null, new SnapshotSpan( textSnapshot, new Span() ) );
+            new OutliningTag<object>(null, new SnapshotSpan(textSnapshot, new Span()));
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
         public void WhenADefaultSnapshotSpanIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
             var textSnapshot = new TextSnapshotMock( new TextBufferMock( string.Empty ) );
-            new OutliningTag( textSnapshot, default( SnapshotSpan ) );
+            new OutliningTag<object>( textSnapshot, default( SnapshotSpan ) );
         }
     }
 }

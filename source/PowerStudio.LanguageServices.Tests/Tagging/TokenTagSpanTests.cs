@@ -28,14 +28,14 @@ namespace PowerStudio.LanguageServices.Tests.Tagging
         [ExpectedException( typeof (ArgumentNullException) )]
         public void WhenNullIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new TokenTagSpan<ITokenTag>( null );
+            new TokenTagSpan<ITokenTag<object>, object>(null);
         }
 
         [TestMethod]
         public void WhenAClassificationTypeIsPassedIntoTheCtor_ThenTheCorrespondingPropertiesAreSetProperly()
         {
-            var tag = new ErrorTokenTag( "Error" ) { Span = new SnapshotSpan() };
-            var tagSpan = new TokenTagSpan<ITokenTag>( tag );
+            var tag = new ErrorTokenTag<object>("Error") { Span = new SnapshotSpan() };
+            var tagSpan = new TokenTagSpan<ITokenTag<object>, object>(tag);
             Assert.AreEqual( tag.Span, tagSpan.Span );
             Assert.AreEqual( tag, tagSpan.Tag );
         }

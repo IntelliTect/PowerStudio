@@ -16,14 +16,13 @@ using System.Linq;
 using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using PowerStudio.LanguageServices.Tagging;
-using PowerStudio.LanguageServices.Tagging.Taggers;
 using PowerStudio.LanguageServices.Tagging.Tags;
 
 #endregion
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public class ClassificationTagger : TaggerBase<TokenClassificationTag<PSToken>, PSToken>
+    public class ClassificationTagger : PsTokenTagger<TokenClassificationTag<PSToken>>
     {
         public ClassificationTagger( ITextBuffer buffer,
                                      ITokenClassifier<PSToken> tokenClassifier )

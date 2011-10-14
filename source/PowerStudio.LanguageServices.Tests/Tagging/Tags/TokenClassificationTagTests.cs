@@ -28,14 +28,14 @@ namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
         [ExpectedException( typeof (ArgumentNullException) )]
         public void WhenNullIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new TokenClassificationTag( null );
+            new TokenClassificationTag<object>(null);
         }
 
         [TestMethod]
         public void WhenAClassificationTypeIsPassedIntoTheCtor_ThenTheCorrespondingPropertyIsSetProperly()
         {
             var classificationType = MockRepository.GenerateMock<IClassificationType>();
-            var tag = new TokenClassificationTag( classificationType );
+            var tag = new TokenClassificationTag<object>(classificationType);
             Assert.AreEqual( classificationType, tag.ClassificationType );
         }
     }

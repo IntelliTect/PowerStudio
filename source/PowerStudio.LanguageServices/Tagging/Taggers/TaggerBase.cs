@@ -15,7 +15,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
 
@@ -203,30 +202,7 @@ namespace PowerStudio.LanguageServices.Tagging.Taggers
         /// <param name = "textSnapshot">The text snapshot.</param>
         /// <param name = "includeErrors">if set to <c>true</c> [include errors].</param>
         /// <returns></returns>
-        protected virtual IEnumerable<PSToken> GetTokens( ITextSnapshot textSnapshot, bool includeErrors )
-        {
-            string text = textSnapshot.GetText();
-            Collection<PSParseError> errors;
-            Collection<PSToken> tokens = PSParser.Tokenize( text, out errors );
-            if ( includeErrors )
-            {
-                return tokens.Union( errors.Select( error => error.Token ) ).ToList();
-            }
-            return tokens;
-        }
-
-        /// <summary>
-        ///   Gets the error tokens by parsing the text snapshot.
-        /// </summary>
-        /// <param name = "textSnapshot">The text snapshot.</param>
-        /// <returns></returns>
-        protected virtual IEnumerable<PSParseError> GetErrorTokens( ITextSnapshot textSnapshot )
-        {
-            string text = textSnapshot.GetText();
-            Collection<PSParseError> errors;
-            PSParser.Tokenize( text, out errors );
-            return errors;
-        }
+        protected abstract IEnumerable<TToken> GetTokens( ITextSnapshot textSnapshot, bool includeErrors );
 
         protected virtual bool IsSpanContainedInTargetSpan( ITextSnapshot snapshot,
                                                             SnapshotSpan sourceSpan,
@@ -268,10 +244,7 @@ namespace PowerStudio.LanguageServices.Tagging.Taggers
         /// <param name = "snapshot">The snapshot.</param>
         /// <param name = "token">The token.</param>
         /// <returns></returns>
-        protected virtual SnapshotSpan CreateSnapshotSpan( ITextSnapshot snapshot, PSToken token )
-        {
-            return new SnapshotSpan( snapshot, new Span( token.Start, token.Length ) );
-        }
+        protected abstract SnapshotSpan CreateSnapshotSpan( ITextSnapshot snapshot, TToken token );
 
         /// <summary>
         ///   Creates a <see cref = "SnapshotSpan" /> for the given text snapshot covering all text between
@@ -281,11 +254,6 @@ namespace PowerStudio.LanguageServices.Tagging.Taggers
         /// <param name = "startToken">The start token of the span.</param>
         /// <param name = "endToken">The end token of the span.</param>
         /// <returns></returns>
-        protected virtual SnapshotSpan CreateSnapshotSpan( ITextSnapshot snapshot, PSToken startToken, PSToken endToken )
-        {
-            SnapshotSpan startSnapshot = CreateSnapshotSpan( snapshot, startToken );
-            SnapshotSpan endSnapshot = CreateSnapshotSpan( snapshot, endToken );
-            return new SnapshotSpan( startSnapshot.Start, endSnapshot.End );
-        }
+        protected abstract SnapshotSpan CreateSnapshotSpan( ITextSnapshot snapshot, TToken startToken, TToken endToken );
     }
 }

@@ -21,7 +21,7 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public class OutliningTagger : TaggerBase<OutliningTag<PSToken>, PSToken>
+    public class OutliningTagger : PsTokenTagger<OutliningTag<PSToken>>
     {
         public OutliningTagger( ITextBuffer buffer )
                 : base( buffer )

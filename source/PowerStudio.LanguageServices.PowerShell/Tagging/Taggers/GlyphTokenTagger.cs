@@ -11,6 +11,7 @@
 
 #region Using Directives
 
+using System.Management.Automation;
 using Microsoft.VisualStudio.Text;
 using PowerStudio.LanguageServices.Tagging.Taggers;
 using PowerStudio.LanguageServices.Tagging.Tags;
@@ -19,8 +20,8 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public abstract class GlyphTokenTagger<TTokenTag,TToken> : TaggerBase<TTokenTag,TToken>
-            where TTokenTag : GlyphTag<TToken>
+    public abstract class GlyphTokenTagger<TTokenTag> : PsTokenTagger<TTokenTag>
+            where TTokenTag : GlyphTag<PSToken>
     {
         protected GlyphTokenTagger( ITextBuffer buffer )
                 : base( buffer )

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4084BD9D-C218-4D3C-AE63-A59B76C5964E}</ProjectGuid>
+    <ProjectGuid>{38BB0A0A-A07D-443E-9C32-924C9BEEEB3E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PowerStudio.LanguageServices.Batch</RootNamespace>
-    <AssemblyName>PowerStudio.LanguageServices.Batch</AssemblyName>
+    <RootNamespace>PowerStudio.LanguageServices.Ini.Tests</RootNamespace>
+    <AssemblyName>PowerStudio.LanguageServices.Ini.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,7 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.Text.Logic, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,17 +38,24 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="xunit">
+      <HintPath>..\..\packages\xunit.1.8.0.1549\lib\xunit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tagging\BatchToken.cs" />
-    <Compile Include="Tagging\Tags\BatchTokenTag.cs" />
-    <Compile Include="Tagging\BatchTokenType.cs" />
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="IniParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PowerStudio.LanguageServices\PowerStudio.LanguageServices.csproj">
-      <Project>{FF615B2F-BAEF-4671-9279-BD291244F2FB}</Project>
-      <Name>PowerStudio.LanguageServices</Name>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PowerStudio.LanguageServices.Ini\PowerStudio.LanguageServices.Ini.csproj">
+      <Project>{660215F1-B7E1-49CE-A6C5-2374A73816EB}</Project>
+      <Name>PowerStudio.LanguageServices.Ini</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

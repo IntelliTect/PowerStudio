@@ -11,15 +11,17 @@
 
 #region Using Directives
 
-using System.Management.Automation;
 using PowerStudio.LanguageServices.Tagging.Tags;
 
 #endregion
 
-namespace PowerStudio.LanguageServices.PowerShell.Tagging.Tags
+namespace PowerStudio.LanguageServices.Batch.Tagging.Tags
 {
-    public class PsTokenTag : TokenTag<PSToken>
+    public class BatchTokenTag : TokenTag<BatchToken>
     {
-        
+        public BatchTokenTag( BatchToken token )
+        {
+            Token = token;
+        }
     }
 }

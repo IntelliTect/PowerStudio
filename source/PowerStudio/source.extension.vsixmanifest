@@ -4,12 +4,12 @@
   <Identifier Id="f28a7596-8789-4c64-8779-243c014f2787">
     <Name>PowerStudio</Name>
     <Author>IntelliTect</Author>
-    <Version>1.0.8</Version>
+    <Version>1.1.0</Version>
     <Description xml:space="preserve">PowerShell integration for Visual Studio</Description>
     <Locale>1033</Locale>
-    <MoreInfoUrl>http://intellitect.com</MoreInfoUrl>
+    <MoreInfoUrl>https://github.com/IntelliTect/PowerStudio/wiki</MoreInfoUrl>
     <License>LICENSE.txt</License>
-    <GettingStartedGuide>https://github.com/IntelliTect/PowerStudio/wiki</GettingStartedGuide>
+    <GettingStartedGuide>http://intellitect.com</GettingStartedGuide>
     <Icon>ProjectIcon.ico</Icon>
     <PreviewImage>ProjectIcon.ico</PreviewImage>
     <InstalledByMsi>false</InstalledByMsi>
@@ -34,6 +34,7 @@
     </VsPackage>
     <MefComponent>|%CurrentProject%|</MefComponent>
     <MefComponent>|PowerStudio.LanguageServices.PowerShell|</MefComponent>
+    <MefComponent>|PowerStudio.LanguageServices.Ini|</MefComponent>
     <ProjectTemplate>ProjectTemplates</ProjectTemplate>
   </Content>
 </Vsix>

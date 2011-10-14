@@ -23,7 +23,7 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public class BraceMatchingTagger : ViewTaggerBase<BraceMatchingTag<PSToken>, PSToken>
+    public class BraceMatchingTagger : PsViewTokenTagger<BraceMatchingTag<PSToken>>
     {
         public BraceMatchingTagger( ITextView view, ITextBuffer buffer )
                 : base( view, buffer )

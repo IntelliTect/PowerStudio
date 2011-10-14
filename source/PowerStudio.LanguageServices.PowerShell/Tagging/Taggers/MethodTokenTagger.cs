@@ -21,7 +21,7 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public class MethodTokenTagger : GlyphTokenTagger<MethodTag,PSToken>
+    public class MethodTokenTagger : GlyphTokenTagger<MethodTag>
     {
         public MethodTokenTagger( ITextBuffer buffer )
                 : base( buffer )

@@ -22,7 +22,7 @@ using PowerStudio.LanguageServices.Tagging.Tags;
 
 namespace PowerStudio.LanguageServices.PowerShell.Tagging.Taggers
 {
-    public class ErrorTokenTagger : TaggerBase<ErrorTokenTag<PSToken>, PSToken>
+    public class ErrorTokenTagger : PsTokenTagger<ErrorTokenTag<PSToken>>
     {
         public ErrorTokenTagger( ITextBuffer buffer )
                 : base( buffer )
