@@ -17,10 +17,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{46504291
 		build-release.cmd = build-release.cmd
 		build.cmd = build.cmd
 		build.ps1 = build.ps1
+		default.ps1 = default.ps1
 		dotnet.watchr.rb = dotnet.watchr.rb
 		HowToBuild.txt = HowToBuild.txt
-		update-dependencies.ps1 = update-dependencies.ps1
+		utilities.ps1 = utilities.ps1
+		VS2010.ps1 = VS2010.ps1
 		watcher_dot_net.rb = watcher_dot_net.rb
+		xunit.ps1 = xunit.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Project", "source\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj", "{CACB60A9-1E76-4F92-8831-B134A658C695}"

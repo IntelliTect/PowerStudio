@@ -14,8 +14,8 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text.Classification;
+using Moq;
 using PowerStudio.LanguageServices.Tagging.Tags;
-using Rhino.Mocks;
 
 #endregion
 
@@ -28,14 +28,14 @@ namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
         [ExpectedException( typeof (ArgumentNullException) )]
         public void WhenNullIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new TokenClassificationTag<object>(null);
+            new TokenClassificationTag<object>( null );
         }
 
         [TestMethod]
         public void WhenAClassificationTypeIsPassedIntoTheCtor_ThenTheCorrespondingPropertyIsSetProperly()
         {
-            var classificationType = MockRepository.GenerateMock<IClassificationType>();
-            var tag = new TokenClassificationTag<object>(classificationType);
+            IClassificationType classificationType = new Mock<IClassificationType>().Object;
+            var tag = new TokenClassificationTag<object>( classificationType );
             Assert.AreEqual( classificationType, tag.ClassificationType );
         }
     }

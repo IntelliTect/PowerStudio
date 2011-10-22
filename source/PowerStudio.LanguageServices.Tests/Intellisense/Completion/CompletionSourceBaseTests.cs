@@ -16,9 +16,9 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
+using Moq;
 using PowerStudio.LanguageServices.Intellisense.Completion;
 using PowerStudio.LanguageServices.Tests.Mocks;
-using Rhino.Mocks;
 
 #endregion
 
@@ -38,7 +38,7 @@ namespace PowerStudio.LanguageServices.Tests.Intellisense.Completion
         [ExpectedException( typeof (ArgumentNullException) )]
         public void WhenNullIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new CompletionSourceImpl( MockRepository.GenerateMock<CompletionSourceProvider>(), null );
+            new CompletionSourceImpl( new Mock<CompletionSourceProvider>().Object, null );
         }
 
         #region Nested type: CompletionSourceImpl
