@@ -9,15 +9,8 @@
 
 #endregion
 
-#region Using Directives
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#endregion
-
 namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
 {
-    [TestClass]
     public class TokenTagTests
     {
     }

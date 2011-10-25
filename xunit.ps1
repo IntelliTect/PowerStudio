@@ -1,14 +1,15 @@
 properties {
-  $xunitrunner = (Get-ChildItem .\Packages\* -recurse -include xunit.exe).FullName
+  $xunit = @{}
+  $xunit.runner = (Resolve-Path .\tools\xunit\xunit.console.clr4.exe)
+  $xunit.logfile = "xunit.log.xml"
+  if(($xunit.runner -eq $null) -or ($xunit.runner -eq "")) {Assert $false "Could not find xunit runner"}
 }
 
 function Invoke-xUnitTestRunner {
-param(
-  [Parameter(Position=0,Mandatory=0)]
-  [string[]]$dlls = @()
+  param(
+    [Parameter(Position=0,Mandatory=0)]
+    [string[]]$dlls = @()
   )
-  [System.String[]] $arguments = @()
-  $argument_string = [string]::join(" ",$arguments)
-  Write-Output "Executing `"$xunitrunner $argument_string`""
-  #exec { & $xunitrunner $argument_string }
+  # TODO: This only keeps the last log file. Need to output many and merge.
+  $dlls | % { exec { Invoke-Expression "& `"$($xunit.runner)`" `"$_`" /xml `"$build_directory\$($xunit.logfile)`" /noshadow" }}
 }

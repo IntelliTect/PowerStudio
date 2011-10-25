@@ -1,0 +1,8 @@
+install_to 'Packages'
+chew 'Moq' '4.0.10827'
+chew 'Rx-Main' '1.0.10621'
+chew 'NLog' '2.0.0.2000'
+chew 'xunit' '1.8.0.1549'
+chew 'Pester' '1.0.1'
+chew 'psake' '4.0.1.0'
+chew 'Giles' '0.1.1.3'

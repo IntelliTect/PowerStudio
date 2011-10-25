@@ -12,63 +12,58 @@
 #region Using Directives
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text.Adornments;
 using PowerStudio.LanguageServices.Tagging.Tags;
+using Xunit;
 
 #endregion
 
 namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
 {
-    [TestClass]
     public class ErrorTokenTagTests
     {
-        [TestMethod]
-        [ExpectedException( typeof (ArgumentNullException) )]
+        [Fact]
         public void WhenNullToolTipIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new ErrorTokenTag<object>( null );
+            Assert.Throws<ArgumentNullException>( () => new ErrorTokenTag<object>( null ) );
         }
 
-        [TestMethod]
-        [ExpectedException( typeof (ArgumentNullException) )]
+        [Fact]
         public void WhenAnEmptyStringToolTipIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new ErrorTokenTag<object>(string.Empty);
+            Assert.Throws<ArgumentNullException>( () => new ErrorTokenTag<object>( string.Empty ) );
         }
 
-        [TestMethod]
-        [ExpectedException( typeof (ArgumentNullException) )]
+        [Fact]
         public void WhenNullErrorTypeIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
             const string tooltip = "tooltip";
-            new ErrorTokenTag<object>(tooltip, null);
+            Assert.Throws<ArgumentNullException>( () => new ErrorTokenTag<object>( tooltip, null ) );
         }
 
-        [TestMethod]
-        [ExpectedException( typeof (ArgumentNullException) )]
+        [Fact]
         public void WhenAnEmptyStringErrorTypeIsPassedIntoTheCtorForToolTip_ThenAnExceptionIsThrown()
         {
             const string tooltip = "tooltip";
-            new ErrorTokenTag<object>(tooltip, string.Empty);
+            Assert.Throws<ArgumentNullException>( () => new ErrorTokenTag<object>( tooltip, string.Empty ) );
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenAnErrorTypeIsPassedIntoTheCtorForToolTip_ThenTheErrorTypePropertyMatches()
         {
             const string expected = PredefinedErrorTypeNames.SyntaxError;
             const string tooltip = "tooltip";
-            var tag = new ErrorTokenTag<object>(tooltip, expected);
-            Assert.AreEqual( expected, tag.ErrorType );
+            var tag = new ErrorTokenTag<object>( tooltip, expected );
+            Assert.Equal( expected, tag.ErrorType );
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenAToolTipIsPassedIntoTheCtorForToolTip_ThenTheToolTipContentMatches()
         {
             const string errorType = PredefinedErrorTypeNames.SyntaxError;
             const string expected = "tooltip";
-            var tag = new ErrorTokenTag<object>(expected, errorType);
-            Assert.AreEqual( expected, tag.ToolTipContent );
+            var tag = new ErrorTokenTag<object>( expected, errorType );
+            Assert.Equal( expected, tag.ToolTipContent );
         }
     }
 }

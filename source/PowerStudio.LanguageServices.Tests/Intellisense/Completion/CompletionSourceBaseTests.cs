@@ -14,31 +14,32 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.Language.Intellisense;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 using Moq;
 using PowerStudio.LanguageServices.Intellisense.Completion;
 using PowerStudio.LanguageServices.Tests.Mocks;
+using Xunit;
 
 #endregion
 
 namespace PowerStudio.LanguageServices.Tests.Intellisense.Completion
 {
-    [TestClass]
     public class CompletionSourceBaseTests
     {
-        [TestMethod]
-        [ExpectedException( typeof (ArgumentNullException) )]
+        [Fact]
         public void WhenANullSourceProviderIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new CompletionSourceImpl( null, new TextBufferMock( string.Empty ) );
+            Assert.Throws<ArgumentNullException>(
+                    () => new CompletionSourceImpl( null, new TextBufferMock( string.Empty ) )
+                    );
         }
 
-        [TestMethod]
-        [ExpectedException( typeof (ArgumentNullException) )]
+        [Fact]
         public void WhenNullIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new CompletionSourceImpl( new Mock<CompletionSourceProvider>().Object, null );
+            Assert.Throws<ArgumentNullException>(
+                    () => new CompletionSourceImpl( new Mock<CompletionSourceProvider>().Object, null )
+                    );
         }
 
         #region Nested type: CompletionSourceImpl

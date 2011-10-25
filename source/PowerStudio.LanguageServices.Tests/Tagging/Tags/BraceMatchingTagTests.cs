@@ -12,53 +12,34 @@
 #region Using Directives
 
 using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PowerStudio.LanguageServices.Tagging;
 using PowerStudio.LanguageServices.Tagging.Tags;
+using Xunit;
 
 #endregion
 
 namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public sealed class DescribeAttribute : TestCategoryBaseAttribute
-    {
-        private readonly IList<string> _TestCategories;
-
-        public DescribeAttribute(string testCategory)
-        {
-            var list = new List<string>(1) { testCategory };
-            _TestCategories = list.AsReadOnly();
-        }
-
-        public override IList<string> TestCategories { get { return _TestCategories; } }
-    }
-
-    [TestClass]
-    [Describe("BraceMatchingTag")]
     public class BraceMatchingTagTests
     {
-        [TestMethod]
-        [ExpectedException( typeof (ArgumentNullException) )]
+        [Fact]
         public void WhenNullIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new BraceMatchingTag<object>(null);
+            Assert.Throws<ArgumentNullException>( () => new BraceMatchingTag<object>( null ) );
         }
 
-        [TestMethod]
-        [ExpectedException( typeof (ArgumentNullException) )]
+        [Fact]
         public void WhenAnEmptyStringIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new BraceMatchingTag<object>(string.Empty);
+            Assert.Throws<ArgumentNullException>( () => new BraceMatchingTag<object>( string.Empty ) );
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenAValueIsPassedIntoTheCtor_ThenTheTypeParameterMatches()
         {
             const string expected = PredefinedTextMarkerTags.BraceHighlight;
-            var tag = new BraceMatchingTag<object>(expected);
-            Assert.AreEqual( expected, tag.Type );
+            var tag = new BraceMatchingTag<object>( expected );
+            Assert.Equal( expected, tag.Type );
         }
     }
 }

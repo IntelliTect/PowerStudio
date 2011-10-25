@@ -12,32 +12,30 @@
 #region Using Directives
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 using PowerStudio.LanguageServices.Tagging;
 using PowerStudio.LanguageServices.Tagging.Tags;
+using Xunit;
 
 #endregion
 
 namespace PowerStudio.LanguageServices.Tests.Tagging
 {
-    [TestClass]
     public class TokenTagSpanTests
     {
-        [TestMethod]
-        [ExpectedException( typeof (ArgumentNullException) )]
+        [Fact]
         public void WhenNullIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new TokenTagSpan<ITokenTag<object>, object>(null);
+            Assert.Throws<ArgumentNullException>( () => new TokenTagSpan<ITokenTag<object>, object>( null ) );
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenAClassificationTypeIsPassedIntoTheCtor_ThenTheCorrespondingPropertiesAreSetProperly()
         {
-            var tag = new ErrorTokenTag<object>("Error") { Span = new SnapshotSpan() };
-            var tagSpan = new TokenTagSpan<ITokenTag<object>, object>(tag);
-            Assert.AreEqual( tag.Span, tagSpan.Span );
-            Assert.AreEqual( tag, tagSpan.Tag );
+            var tag = new ErrorTokenTag<object>( "Error" ) { Span = new SnapshotSpan() };
+            var tagSpan = new TokenTagSpan<ITokenTag<object>, object>( tag );
+            Assert.Equal( tag.Span, tagSpan.Span );
+            Assert.Equal( tag, tagSpan.Tag );
         }
     }
 }

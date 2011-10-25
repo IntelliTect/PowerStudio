@@ -12,31 +12,29 @@
 #region Using Directives
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text.Classification;
-using Moq;
 using PowerStudio.LanguageServices.Tagging.Tags;
+using Moq;
+using Xunit;
 
 #endregion
 
 namespace PowerStudio.LanguageServices.Tests.Tagging.Tags
 {
-    [TestClass]
     public class TokenClassificationTagTests
     {
-        [TestMethod]
-        [ExpectedException( typeof (ArgumentNullException) )]
+        [Fact]
         public void WhenNullIsPassedIntoTheCtor_ThenAnExceptionIsThrown()
         {
-            new TokenClassificationTag<object>( null );
+            Assert.Throws<ArgumentNullException>( () => new TokenClassificationTag<object>( null ) );
         }
 
-        [TestMethod]
+        [Fact]
         public void WhenAClassificationTypeIsPassedIntoTheCtor_ThenTheCorrespondingPropertyIsSetProperly()
         {
             IClassificationType classificationType = new Mock<IClassificationType>().Object;
             var tag = new TokenClassificationTag<object>( classificationType );
-            Assert.AreEqual( classificationType, tag.ClassificationType );
+            Assert.Equal( classificationType, tag.ClassificationType );
         }
     }
 }

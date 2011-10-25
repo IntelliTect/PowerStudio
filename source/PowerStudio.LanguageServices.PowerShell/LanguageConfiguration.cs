@@ -55,5 +55,10 @@ namespace PowerStudio.LanguageServices.PowerShell
         [FileExtension( ".psm1xml" )]
         [ContentType( Name )]
         internal static FileExtensionToContentTypeDefinition PowerShellXmlFileExtensionDefinition;
+
+        [Export]
+        [FileExtension(".NugetFile")]
+        [ContentType(Name)]
+        internal static FileExtensionToContentTypeDefinition ChewieNugetFileExtensionDefinition;
     }
 }
