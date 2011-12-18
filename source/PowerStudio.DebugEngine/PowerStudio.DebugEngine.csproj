@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F4C49383-D9E0-41F6-AC24-9FE4759F2A86}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PowerStudio.DebugEngine</RootNamespace>
+    <AssemblyName>PowerStudio.DebugEngine</AssemblyName>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Key.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.Debugger.Interop.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Debugger.InteropA, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NLog">
+      <HintPath>..\..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Attributes\IncompatibleWithPowerStudioEngine.cs" />
+    <Compile Include="ComThreadingModel.cs" />
+    <Compile Include="Attributes\IncompatibleDebugEngineAttribute.cs" />
+    <Compile Include="Attributes\IncompatibleWithComPlusNativeEngine.cs" />
+    <Compile Include="Attributes\IncompatibleWithComPlusOnlyEngine.cs" />
+    <Compile Include="Attributes\IncompatibleWithComPlusOnlyEngine2.cs" />
+    <Compile Include="Attributes\IncompatibleWithComPlusOnlyEngine4.cs" />
+    <Compile Include="Attributes\IncompatibleWithComPlusSqlLocalEngine.cs" />
+    <Compile Include="Attributes\IncompatibleWithNativeOnlyEngine.cs" />
+    <Compile Include="Attributes\IncompatibleWithPowerGUIEngine.cs" />
+    <Compile Include="Attributes\IncompatibleWithProteusEngine.cs" />
+    <Compile Include="Attributes\IncompatibleWithScriptEngine.cs" />
+    <Compile Include="Attributes\IncompatibleWithSilverlightEngine.cs" />
+    <Compile Include="Attributes\IncompatibleWithSqlEngine2.cs" />
+    <Compile Include="Attributes\IncompatibleWithWorkflowDebugEngine.cs" />
+    <Compile Include="Attributes\ProvideDebugEngineAttribute.cs" />
+    <Compile Include="Attributes\ProvidePortSupplierAttribute.cs" />
+    <Compile Include="Attributes\ProvideProgramProviderAttribute.cs" />
+    <Compile Include="Attributes\ProvideTypeAttribute.cs" />
+    <Compile Include="Breakpoint.cs" />
+    <Compile Include="CodeDocumentContext.cs" />
+    <Compile Include="DebugEngineEventSource.cs" />
+    <Compile Include="DebugExpression.cs" />
+    <Compile Include="DebugModuleBase.cs" />
+    <Compile Include="DebugPort.cs" />
+    <Compile Include="DebugPortNotify.cs" />
+    <Compile Include="DebugPortSupplier.cs" />
+    <Compile Include="DebugProcess.cs" />
+    <Compile Include="DebugProgramNode.cs" />
+    <Compile Include="DebugProgramProvider.cs" />
+    <Compile Include="DebugProperty.cs" />
+    <Compile Include="DebugStackFrame.cs" />
+    <Compile Include="DebugEngineBase.cs" />
+    <Compile Include="DebugThread.cs" />
+    <Compile Include="EngineGuids.cs" />
+    <Compile Include="Enumerators\BoundBreakpointsEnumerator.cs" />
+    <Compile Include="Enumerators\CodeContextEnumerator.cs" />
+    <Compile Include="Enumerators\EnumeratorBase.cs" />
+    <Compile Include="Enumerators\FrameInfoEnumerator.cs" />
+    <Compile Include="Enumerators\ModuleEnumerator.cs" />
+    <Compile Include="Enumerators\PendingBreakpointsEnumerator.cs" />
+    <Compile Include="Enumerators\ProgramEnumerator.cs" />
+    <Compile Include="Enumerators\PropertyEnumerator.cs" />
+    <Compile Include="Enumerators\PropertyInfoEnumerator.cs" />
+    <Compile Include="Enumerators\ThreadEnumerator.cs" />
+    <Compile Include="Events\ActivateDocumentEvent.cs" />
+    <Compile Include="Events\AsyncBreakCompleteEvent.cs" />
+    <Compile Include="Events\AsynchronousEvent.cs" />
+    <Compile Include="Events\BeforeSymbolSearchEvent.cs" />
+    <Compile Include="Events\BreakpointBoundEvent.cs" />
+    <Compile Include="Events\BreakpointEvent.cs" />
+    <Compile Include="Events\DebugEventBase.cs" />
+    <Compile Include="Events\DebugEngineCreateEvent.cs" />
+    <Compile Include="Events\LoadCompleteEvent.cs" />
+    <Compile Include="Events\ModuleLoadEvent.cs" />
+    <Compile Include="Events\OutputDebugStringEvent.cs" />
+    <Compile Include="Events\ProgramCreateEvent.cs" />
+    <Compile Include="Events\ProgramDestroyEvent.cs" />
+    <Compile Include="Events\StoppingEvent.cs" />
+    <Compile Include="Events\SymbolSearchEvent.cs" />
+    <Compile Include="Events\SynchronousEvent.cs" />
+    <Compile Include="Events\SynchronousStoppingEvent.cs" />
+    <Compile Include="Events\ThreadCreateEvent.cs" />
+    <Compile Include="Events\ThreadDestroyEvent.cs" />
+    <Compile Include="Guids.cs" />
+    <Compile Include="InterfaceGuids.cs" />
+    <Compile Include="HResult.cs" />
+    <Compile Include="IDebugEngineEventSource.cs" />
+    <Compile Include="PortSuppliers\DefaultPortProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ProgramProviders\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -11,6 +11,7 @@
 
 #region Using Directives
 
+using System;
 using Microsoft.VisualStudio.Language.StandardClassification;
 using Microsoft.VisualStudio.Text.Classification;
 
@@ -27,6 +28,10 @@ namespace PowerStudio.LanguageServices.Tagging
 
         public StandardClassificationService( IClassificationTypeRegistryService classificationTypeRegistryService )
         {
+            if ( classificationTypeRegistryService == null )
+            {
+                throw new ArgumentNullException( "classificationTypeRegistryService" );
+            }
             ClassificationTypeRegistry = classificationTypeRegistryService;
         }
 

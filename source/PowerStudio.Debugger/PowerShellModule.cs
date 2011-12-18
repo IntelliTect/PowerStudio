@@ -12,7 +12,7 @@
 #region Using Directives
 
 using System.Runtime.InteropServices;
-using IntelliTect.DebugEngine;
+using PowerStudio.DebugEngine;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Debugger.Interop;
 using NLog;

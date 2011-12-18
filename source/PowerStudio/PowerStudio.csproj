@@ -41,9 +41,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IntelliTect.DebugEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fb17f1436bedd1a, processorArchitecture=MSIL">
-      <HintPath>..\..\References\IntelliTect.DebugEngine.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Engine" />
     <Reference Include="Microsoft.Build.Framework" />
@@ -218,6 +215,10 @@
     <ProjectReference Include="..\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj">
       <Project>{CACB60A9-1E76-4F92-8831-B134A658C695}</Project>
       <Name>Microsoft.VisualStudio.Project</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PowerStudio.DebugEngine\PowerStudio.DebugEngine.csproj">
+      <Project>{F4C49383-D9E0-41F6-AC24-9FE4759F2A86}</Project>
+      <Name>PowerStudio.DebugEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\PowerStudio.Debugger\PowerStudio.Debugger.csproj">
       <Project>{F3F718BC-ED9E-492A-A80A-F2DC2501F45A}</Project>

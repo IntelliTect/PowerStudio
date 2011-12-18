@@ -13,7 +13,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-using IntelliTect.DebugEngine;
+using PowerStudio.DebugEngine;
 using Microsoft.VisualStudio;
 using NLog;
 using PowerStudio.Resources;

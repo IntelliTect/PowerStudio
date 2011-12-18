@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IntelliTect.DebugEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fb17f1436bedd1a, processorArchitecture=MSIL">
-      <HintPath>..\..\References\IntelliTect.DebugEngine.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.Debugger.InteropA, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Shell.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -67,6 +64,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PowerStudio.DebugEngine\PowerStudio.DebugEngine.csproj">
+      <Project>{F4C49383-D9E0-41F6-AC24-9FE4759F2A86}</Project>
+      <Name>PowerStudio.DebugEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Resources\PowerStudio.Resources.csproj">
       <Project>{17286D8F-5CB5-4584-A486-F9D00AE4C175}</Project>
       <Name>PowerStudio.Resources</Name>

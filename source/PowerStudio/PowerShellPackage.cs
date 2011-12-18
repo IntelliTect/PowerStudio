@@ -15,7 +15,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
-using IntelliTect.DebugEngine.Attributes;
+using PowerStudio.DebugEngine.Attributes;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
 using PowerStudio.Debugger;
@@ -58,7 +58,7 @@ namespace PowerStudio
     [DisplayName(LanguageConfiguration.Name)]
     //[ProvideDebugEngine(typeof(PowerShellDebugEngine), ClsIdType = typeof(PowerShellDebugEngine), Attach = true, ProgramProviderType = typeof(PowerShellProgramProvider), PortSupplierType = typeof(DefaultPortSupplier))]
     //[ProvideDebugEngine(typeof(PowerShellPackage), ClsIdType = typeof(PowerShellDebugEngine), Attach = true, ProgramProviderType = typeof(PowerShellProgramProvider), PortSupplierType = typeof(PowerShellPortSupplier))]
-    [ProvideDebugEngine(typeof(PowerShellPackage), ClsIdType = typeof(PowerShellDebugEngine), Attach = true, ProgramProviderType = typeof(PowerShellProgramProvider), PortSupplierType = typeof(IntelliTect.DebugEngine.PortSuppliers.DefaultPortSupplier))]
+    [ProvideDebugEngine(typeof(PowerShellPackage), ClsIdType = typeof(PowerShellDebugEngine), Attach = true, ProgramProviderType = typeof(PowerShellProgramProvider), PortSupplierType = typeof(PowerStudio.DebugEngine.PortSuppliers.DefaultPortSupplier))]
     [ProvideProjectFactory( typeof (PowerShellProjectFactory),
             "PowerShell Project",
             "PowerShell Project Files (*.psproj);*.psproj",

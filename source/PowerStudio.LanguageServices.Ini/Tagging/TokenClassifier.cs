@@ -11,6 +11,7 @@
 
 #region Using Directives
 
+using System;
 using Microsoft.VisualStudio.Language.StandardClassification;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
@@ -22,7 +23,7 @@ namespace PowerStudio.LanguageServices.Ini.Tagging
 {
     public class TokenClassifier : ITokenClassifier<IniToken>
     {
-        private IClassificationType[] _TokenClassifications;
+        private readonly IClassificationType[] _TokenClassifications;
 
         /// <summary>
         ///   Initializes a new instance of the <see cref = "TokenClassifier" /> class.
@@ -30,29 +31,57 @@ namespace PowerStudio.LanguageServices.Ini.Tagging
         /// <param name = "registryService">The classification registry service.</param>
         /// <param name = "buffer"></param>
         public TokenClassifier( IClassificationTypeRegistryService registryService, ITextBuffer buffer )
+                : this( registryService, buffer, new StandardClassificationService( registryService ) )
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TokenClassifier"/> class.
+        /// </summary>
+        /// <param name="registryService">The registry service.</param>
+        /// <param name="buffer">The buffer.</param>
+        /// <param name="classificationService">The classification service.</param>
+        public TokenClassifier( IClassificationTypeRegistryService registryService,
+                                ITextBuffer buffer,
+                                IStandardClassificationService classificationService )
+        {
+            if ( registryService == null )
+            {
+                throw new ArgumentNullException( "registryService" );
+            }
+            if ( buffer == null )
+            {
+                throw new ArgumentNullException( "buffer" );
+            }
+            if ( classificationService == null )
+            {
+                throw new ArgumentNullException( "classificationService" );
+            }
             RegistryService = registryService;
             Buffer = buffer;
-            StandardClassificationService = new StandardClassificationService( registryService );
+            StandardClassificationService = classificationService;
+            _TokenClassifications = GetTokenClassifications();
         }
 
         public ITextBuffer Buffer { get; set; }
         public IClassificationTypeRegistryService RegistryService { get; set; }
-        internal IStandardClassificationService StandardClassificationService { get; set; }
+        public IStandardClassificationService StandardClassificationService { get; set; }
 
         public IClassificationType GetTokenTypeClassification( IniTokenType tokenType )
         {
-            if ( _TokenClassifications == null )
-            {
-                _TokenClassifications = GetTokenClassifications();
-            }
+            int index = GetTokenIndex( tokenType );
+            return _TokenClassifications[index];
+        }
+
+        private int GetTokenIndex( IniTokenType tokenType )
+        {
             var index = (int) tokenType;
             if ( ( index < 0 ) ||
                  ( index >= _TokenClassifications.Length ) )
             {
                 index = 0;
             }
-            return _TokenClassifications[index];
+            return index;
         }
 
         private IClassificationType[] GetTokenClassifications()

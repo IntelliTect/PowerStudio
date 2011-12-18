@@ -53,7 +53,6 @@
     <Compile Include="Tagging\Taggers\ClassificationTagger.cs" />
     <Compile Include="IniParser.cs" />
     <Compile Include="Tagging\Taggers\IniTokenTagger.cs" />
-    <Compile Include="Tagging\Tags\IniTokenTag.cs" />
     <Compile Include="Tagging\TokenClassifier.cs" />
   </ItemGroup>
   <ItemGroup>

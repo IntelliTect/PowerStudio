@@ -39,8 +39,8 @@ namespace PowerStudio.LanguageServices.Ini.Tagging.Taggers
 
             List<TokenClassificationTag<IniToken>> tags
                     = ( from token in tokens
-                        let tokenClassifier = TokenClassifier[token]
-                        select new TokenClassificationTag<IniToken>( tokenClassifier )
+                        let classificationType = TokenClassifier[token]
+                        select new TokenClassificationTag<IniToken>( classificationType )
                                {
                                        Token = token,
                                        Span = CreateSnapshotSpan( snapshot, token )

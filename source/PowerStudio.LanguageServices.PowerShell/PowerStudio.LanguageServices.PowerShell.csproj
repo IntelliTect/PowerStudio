@@ -36,9 +36,6 @@
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="IntelliTect.DebugEngine">
-      <HintPath>..\..\References\IntelliTect.DebugEngine.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.Debugger.InteropA, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -142,6 +139,10 @@
     <ProjectReference Include="..\Microsoft.VisualStudio.Project\Dev10\Src\CSharp\Microsoft.VisualStudio.Project.csproj">
       <Project>{CACB60A9-1E76-4F92-8831-B134A658C695}</Project>
       <Name>Microsoft.VisualStudio.Project</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PowerStudio.DebugEngine\PowerStudio.DebugEngine.csproj">
+      <Project>{F4C49383-D9E0-41F6-AC24-9FE4759F2A86}</Project>
+      <Name>PowerStudio.DebugEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\PowerStudio.Debugger\PowerStudio.Debugger.csproj">
       <Project>{F3F718BC-ED9E-492A-A80A-F2DC2501F45A}</Project>

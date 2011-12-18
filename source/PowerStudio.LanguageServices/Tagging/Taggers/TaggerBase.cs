@@ -27,6 +27,10 @@ namespace PowerStudio.LanguageServices.Tagging.Taggers
     {
         protected TaggerBase( ITextBuffer buffer )
         {
+            if ( buffer == null )
+            {
+                throw new ArgumentNullException( "buffer" );
+            }
             Buffer = buffer;
             Snapshot = Buffer.CurrentSnapshot;
             Buffer.Changed += BufferChanged;
@@ -57,6 +61,10 @@ namespace PowerStudio.LanguageServices.Tagging.Taggers
         /// </remarks>
         public virtual IEnumerable<ITagSpan<TTokenTag>> GetTags( NormalizedSnapshotSpanCollection spans )
         {
+            if ( spans == null )
+            {
+                throw new ArgumentNullException( "spans" );
+            }
             if ( spans.Count == 0 ||
                  Buffer.CurrentSnapshot.Length == 0 )
             {

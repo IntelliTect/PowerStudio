@@ -22,7 +22,7 @@ namespace PowerStudio.LanguageServices.Ini
     {
         public const string Name = "ini";
 
-        public const string BaseDefinitionName = "code";
+        public const string BaseDefinitionName = "text";
 
         [Export]
         [Name( Name )]
