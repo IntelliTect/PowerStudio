@@ -7,9 +7,9 @@
 
 Include settings.ps1
 Include xunit.ps1
-#Include nunit.ps1
 Include msbuild.ps1
 Include assemblyinfo.ps1
+Include vsixmanifest.ps1
 
 properties {
   Write-Output "Loading build properties"
@@ -36,7 +36,7 @@ Task Init -depends Clean {
   new-item $build.dir -itemType directory | Out-Null
 }
 
-Task Compile -depends Version-AssemblyInfo, Init, Invoke-MsBuild
+Task Compile -depends Version-AssemblyInfo, Version-VsixManifest, Init, Invoke-MsBuild
 
 Task Clean { 
   remove-item -force -recurse $build.dir -ErrorAction SilentlyContinue | Out-Null

@@ -20,7 +20,7 @@ properties {
   $build = @{}
   $build.dir = "$($base.dir)\bin"
   $build.configuration = "Release"
-  $build.version = if($env:BUILD_NUMBER) {$env:BUILD_NUMBER} else { "1.1.0" }
+  $build.version = if($env:BUILD_NUMBER) {$env:BUILD_NUMBER} else { "1.1.1" }
   
   $tools = @{}
   $tools.dir = "$($base.dir)\tools"

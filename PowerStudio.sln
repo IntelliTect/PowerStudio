@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{46504291
 		HowToBuild.txt = HowToBuild.txt
 		build\msbuild.ps1 = build\msbuild.ps1
 		build\settings.ps1 = build\settings.ps1
+		build\vsixmanifest.ps1 = build\vsixmanifest.ps1
 		build\xunit.ps1 = build\xunit.ps1
 	EndProjectSection
 EndProject
