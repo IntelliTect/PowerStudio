@@ -24,6 +24,8 @@ namespace PowerStudio.LanguageServices.Ini
 
         public const string BaseDefinitionName = "text";
 
+#pragma warning disable 0649
+
         [Export]
         [Name( Name )]
         [BaseDefinition( BaseDefinitionName )]
@@ -33,5 +35,7 @@ namespace PowerStudio.LanguageServices.Ini
         [FileExtension( ".ini" )]
         [ContentType( Name )]
         internal static FileExtensionToContentTypeDefinition IniFileExtensionDefinition;
+
+#pragma warning restore 0649
     }
 }

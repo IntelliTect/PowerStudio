@@ -26,6 +26,8 @@ namespace PowerStudio.LanguageServices.PowerShell
 
         public const int OutlineThreshold = 2; // TODO: make this a language setting.
 
+#pragma warning disable 0649
+
         [Export]
         [Name( Name )]
         [BaseDefinition( BaseDefinitionName )]
@@ -60,5 +62,7 @@ namespace PowerStudio.LanguageServices.PowerShell
         [FileExtension(".NugetFile")]
         [ContentType(Name)]
         internal static FileExtensionToContentTypeDefinition ChewieNugetFileExtensionDefinition;
+
+#pragma warning restore 0649
     }
 }

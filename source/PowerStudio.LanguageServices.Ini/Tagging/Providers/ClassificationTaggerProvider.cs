@@ -30,8 +30,10 @@ namespace PowerStudio.LanguageServices.Ini.Tagging.Providers
     [TagType( typeof (TokenClassificationTag<IniToken>) )]
     public class ClassificationTaggerProvider : TaggerProviderBase
     {
+#pragma warning disable 0649
         [Import]
         internal IClassificationTypeRegistryService ClassificationTypeRegistry;
+#pragma warning restore 0649
 
         protected override Func<ITagger<T>> GetFactory<T>( ITextBuffer buffer )
         {

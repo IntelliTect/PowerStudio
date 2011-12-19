@@ -35,9 +35,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IntelliTect.DebugEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fb17f1436bedd1a, processorArchitecture=MSIL">
-      <HintPath>..\..\References\IntelliTect.DebugEngine.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Engine" />
     <Reference Include="Microsoft.Build.Framework" />

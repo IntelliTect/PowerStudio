@@ -1,8 +1,9 @@
 _ReSharper.*
 bin
 obj
-build
 dist
+debug
+release
 *.suo
 *resharper*
 *.user
