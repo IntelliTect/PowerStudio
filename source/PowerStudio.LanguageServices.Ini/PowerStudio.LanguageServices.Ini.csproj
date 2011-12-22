@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LanguageConfiguration.cs" />
+    <Compile Include="NumberIdenifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tagging\IniToken.cs" />
     <Compile Include="Tagging\IniTokenType.cs" />

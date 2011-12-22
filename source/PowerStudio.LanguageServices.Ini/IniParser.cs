@@ -132,8 +132,8 @@ namespace PowerStudio.LanguageServices.Ini
         public IniTokenType GetAttributeTokenType( string value )
         {
             IniTokenType tokenType = IniTokenType.AttributeValue;
-            long ignored;
-            if ( long.TryParse( value, out ignored ) )
+
+            if ( NumberIdenifier.IsNumber(value ) )
             {
                 tokenType = IniTokenType.AttributeValueNumber;
             }

@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
+using NLog;
 
 #endregion
 
@@ -25,6 +26,8 @@ namespace PowerStudio.LanguageServices.Tagging.Taggers
     public abstract class TaggerBase<TTokenTag, TToken> : ITagger<TTokenTag>
             where TTokenTag : ITokenTag<TToken>
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         protected TaggerBase( ITextBuffer buffer )
         {
             if ( buffer == null )
@@ -144,7 +147,16 @@ namespace PowerStudio.LanguageServices.Tagging.Taggers
         protected virtual void Parse()
         {
             ITextSnapshot newSnapshot = Buffer.CurrentSnapshot;
-            List<TTokenTag> tags = GetTags( newSnapshot );
+            List<TTokenTag> tags;
+            try
+            {
+                tags = GetTags( newSnapshot );
+            }
+            catch ( Exception ex )
+            {
+                Logger.ErrorException( "Failed to parse buffer.", ex );
+                tags = Enumerable.Empty<TTokenTag>().ToList();
+            }
             PublishTagChanges( newSnapshot, tags );
         }
 
