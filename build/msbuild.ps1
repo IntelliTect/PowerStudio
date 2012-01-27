@@ -9,7 +9,7 @@ properties {
   Write-Output "Loading msbuild properties"
   $msbuild = @{}
   $msbuild.logfile = "$($build.dir)\MSBuildOutput.txt"
-  $msbuild.max_cpu_count = ([System.Environment]::ProcessorCount / 2)
+  $msbuild.max_cpu_count = [System.Math]::Ceiling(([System.Environment]::ProcessorCount / 2))
   $msbuild.build_in_parralel = $true
   $msbuild.logger = "FileLogger,Microsoft.Build.Engine"
   $msbuild.platform = "Any CPU"
