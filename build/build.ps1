@@ -6,6 +6,7 @@
 # 
 
 Include settings.ps1
+Include chewie.ps1
 Include xunit.ps1
 Include msbuild.ps1
 Include assemblyinfo.ps1

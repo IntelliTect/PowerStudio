@@ -1,0 +1,1 @@
+call build.cmd -framework 4.0x86 -t Release

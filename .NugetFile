@@ -1,5 +1,6 @@
 install_to 'Packages'
 chew 'Moq' '4.0.10827'
+chew 'RhinoMocks' '3.6'
 chew 'Rx-Main' '1.0.10621'
 chew 'NLog' '2.0.0.2000'
 chew 'xunit' '1.8.0.1549'
