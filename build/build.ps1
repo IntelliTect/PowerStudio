@@ -31,10 +31,17 @@ Task IntegrationTest -depends Test {
   Invoke-TestRunner $test_dlls
 }
 
-Task Init -depends Clean {
+Task Init -depends Clean, Get-Packages {
   #Bootstrap-NuGet
   new-item $release.dir -itemType directory | Out-Null
   new-item $build.dir -itemType directory | Out-Null
+}
+
+Task Get-Packages {
+  pushd $pwd
+  cd "$($base.dir)"
+  Invoke-Chewie
+  popd
 }
 
 Task Compile -depends Version-AssemblyInfo, Version-VsixManifest, Init, Invoke-MsBuild
