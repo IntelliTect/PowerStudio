@@ -12,6 +12,6 @@ MSBuildOutput.txt
 TestResults
 parser.lst
 parser.report.html
-PowerStudio.1.1.dotCover
+*.dotCover
 Packages/
 build/psake/
